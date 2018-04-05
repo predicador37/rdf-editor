@@ -1,26 +1,94 @@
 
 
 <template>
-  <v-container fluid>
+  <v-container fluid grid-list-xl>
+
+      <v-layout row wrap pb-3>
+      <v-flex d-flex xs12 sm12 md12>
+        <v-layout column>
+        <h1>Colección de términos</h1>
+
+        <v-select tags multiple chips deletable-chips :items="selectedTags" :value="selectedTags"
+                  v-model="selectedTags">
+
+
+        </v-select>
+        </v-layout>
+
+      </v-flex>
+
+    </v-layout>
+
+
+      <v-layout row wrap>
+
+      <v-flex d-flex xs12 sm6 md6>
+        <v-layout row wrap>
+          <v-flex d-flex>
+            <v-layout column>
+            <v-select autocomplete :items="selectedTags" v-model="selectedSubject">
+            </v-select>
+              <v-select :items="rdfProperties" v-model="selectedPredicate">
+              </v-select>
+              <v-select :items="owlClasses" v-model="selectedObject">
+              </v-select>
+            </v-layout>
+              </v-flex>
+            </v-layout>
+          </v-flex>
+
+        <v-flex d-flex xs12 sm6 md6>
+          <v-layout row wrap>
+            <v-flex d-flex offset-xs1>
+              <v-layout column>
+                <v-flex d-flex >
+             <h4>Tu tripleta</h4>
+                </v-flex>
+                <v-flex d-flex >
+              Subject: {{qualifiedSubject}}
+                </v-flex>
+                <v-flex d-flex >
+              Predicate: {{selectedPredicate}}
+                </v-flex>
+                <v-flex d-flex >
+              Object: {{qualifiedObject}}
+                </v-flex>
+              </v-layout>
+            </v-flex>
+          </v-layout>
+        </v-flex>
+
+        </v-layout>
+
+
+
+  </v-container>
+  <!--<v-container fluid>
     <v-slide-y-transition mode="out-in">
       <v-layout column>
-        <h1>Terms collection</h1>
+        <h1>Colección de términos</h1>
 
-        <v-select tags multiple chips deletable-chips :items="selectedTags" :value="selectedTags" v-model="selectedTags">
+        <v-select tags multiple chips deletable-chips :items="selectedTags" :value="selectedTags"
+                  v-model="selectedTags">
 
 
         </v-select>
 
         <v-select autocomplete :items="selectedTags" v-model="selectedSubject">
+        </v-select>
+        <v-select :items="rdfProperties" v-model="selectedOPredicate">
+
+
+        </v-select>
+        <v-select :items="owlClasses" v-model="selectedObject">
 
 
         </v-select>
 
 
-
       </v-layout>
     </v-slide-y-transition>
-  </v-container>
+  </v-container>-->
 </template>
 
 <script>
@@ -28,8 +96,9 @@
     name: 'app',
     data () {
       return {
+        lorem: `Lorem ipsum dolor sit amet, mel at clita quando. Te sit oratio vituperatoribus, nam ad ipsum posidonium mediocritatem, explicari dissentiunt cu mea. Repudiare disputationi vim in, mollis iriure nec cu, alienum argumentum ius ad. Pri eu justo aeque torquatos.`,
         msg: 'RDF editor proof of concept',
-        rdfProperties: this.getPredicates(),
+        // rdfProperties: this.getPredicates(),
         selectedPredicate: null,
         selectedObject: null,
         show: true,
@@ -46,7 +115,22 @@
         },
         selectedTags: ['analisis', 'pruebas', 'fase', 'metodologia', 'analista', 'usuario', 'producto', 'artefacto', 'especificacion funcional'],
         terms: ['analisis', 'pruebas', 'fase', 'metodologia', 'analista', 'usuario', 'producto', 'artefacto', 'especificacion funcional'],
-        selectedSubject: null
+        selectedSubject: null,
+        rdfProperties: [
+          {text: 'rdf:type', value: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type'},
+          {text: 'rdfs:subClassOf', value: 'http://www.w3.org/2000/01/rdf-schema#subClassOf'},
+          {text: 'rdfs:subPropertyOf', value: 'http://www.w3.org/2000/01/rdf-schema#subPropertyOf'},
+          {text: 'rdfs:domain', value: 'http://www.w3.org/2000/01/rdf-schema#domain'},
+          {text: 'rdfs:range', value: 'http://www.w3.org/2000/01/rdf-schema#range'}
+
+        ],
+        owlClasses: [
+          {text: 'owl:Thing', value: 'https://www.w3.org/2002/07/owl#Thing'},
+          {text: 'owl:Class', value: 'https://www.w3.org/2002/07/owl#Class'},
+      {text: 'owl:DatatypeProperty', value: 'https://www.w3.org/2002/07/owl#DatatypeProperty'},
+  {text: 'owl:ObjectProperty', value: 'https://www.w3.org/2002/07/owl#ObjectProperty'},
+  {text: 'rdf:XMLLiteral', value: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral'}
+        ]
       }
     },
     computed: {
