@@ -6,13 +6,9 @@ import 'vuetify/dist/vuetify.min.css'
 import rdfFetch from 'rdf-fetch-lite'
 import Parser from 'rdf-parser-n3'
 import DataFactory from 'rdf-ext'
-import TagsInput from '@voerro/vue-tagsinput'
-import vSelect from 'vue-select'
 import Readable from 'readable-stream'
 import Serializer from 'rdf-serializer-jsonld-ext'
 
-Vue.component('tags-input', TagsInput)
-Vue.component('v-select', vSelect)
 Object.defineProperty(Vue.prototype, '$rdfFetch', { value: rdfFetch })
 Object.defineProperty(Vue.prototype, '$N3Parser', { value: Parser })
 Object.defineProperty(Vue.prototype, '$rdf', { value: DataFactory })

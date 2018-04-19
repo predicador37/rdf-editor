@@ -1,0 +1,70 @@
+ <v-layout row wrap pb-3>
+      <v-flex d-flex xs12 sm12 md12>
+        <v-layout column>
+        <h1>Colección de términos</h1>
+
+        <v-select tags multiple chips deletable-chips :items="selectedTags" :value="selectedTags"
+                  v-model="selectedTags">
+
+
+        </v-select>
+        </v-layout>
+
+      </v-flex>
+
+    </v-layout>
+
+
+      <v-layout row wrap>
+
+      <v-flex d-flex xs12 sm4 md4>
+        <v-layout row wrap>
+
+          <v-flex d-flex xs12 sm10 md10>
+            <v-layout column>
+              <v-flex d-flex >
+                <h4>Construye tu modelo</h4>
+              </v-flex>
+              <v-flex >
+            <v-select autocomplete :items="selectedTags" v-model="selectedSubject">
+            </v-select>
+              </v-flex>
+              <v-flex d-flex >
+              <v-select :items="rdfProperties" v-model="selectedPredicate">
+              </v-select>
+              </v-flex>
+                <v-flex d-flex >
+              <v-select :items="owlClasses" v-model="selectedObject">
+              </v-select>
+                </v-flex>
+            </v-layout>
+              </v-flex>
+            </v-layout>
+          </v-flex>
+
+        <v-flex d-flex xs12 sm6 md6>
+          <v-layout row wrap>
+            <v-flex d-flex>
+              <v-layout column>
+                <v-flex d-flex >
+             <h4>Revisa tu asociación</h4>
+                </v-flex>
+                <v-flex d-flex >
+              Concepto a asociar: {{qualifiedSubject}}
+                </v-flex>
+                <v-flex d-flex >
+              Tipo de asociación: {{selectedPredicate}}
+                </v-flex>
+                <v-flex d-flex >
+              Concepto con el que se asocia: {{selectedObject}}
+                </v-flex>
+                <v-flex x1 pt-3>
+                <v-btn @click="addToGraph">Añadir al modelo</v-btn>
+                  <v-btn @click="exportJsonLD">Exportar el modelo</v-btn>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+          </v-layout>
+        </v-flex>
+
+        </v-layout>
