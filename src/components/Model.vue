@@ -7,11 +7,11 @@
     </v-tab>
     <v-tab href="#tab-2">
       Relaciones
-      <v-icon>mdi-xbox-controller</v-icon>
+      <v-icon>mdi-human-male-female</v-icon>
     </v-tab>
     <v-tab href="#tab-3">
       Atributos
-      <v-icon>account_box</v-icon>
+      <v-icon>mdi-format-list-bulleted-type</v-icon>
     </v-tab>
     <v-tab-item
       v-for="i in 3"
@@ -37,6 +37,6 @@
 </script>
 
 <style scoped>
-  @import '../assets/materialdesignicons.min.css';
+
 
 </style>

@@ -8,7 +8,7 @@ import Parser from 'rdf-parser-n3'
 import DataFactory from 'rdf-ext'
 import Readable from 'readable-stream'
 import Serializer from 'rdf-serializer-jsonld-ext'
-
+import '@mdi/font/css/materialdesignicons.css'
 Object.defineProperty(Vue.prototype, '$rdfFetch', { value: rdfFetch })
 Object.defineProperty(Vue.prototype, '$N3Parser', { value: Parser })
 Object.defineProperty(Vue.prototype, '$rdf', { value: DataFactory })
