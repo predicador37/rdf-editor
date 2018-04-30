@@ -23,17 +23,26 @@
 </template>
 
 <script>
-export default {
-  data () {
-    return {
-      drawer: true,
-      items: [{
-        icon: 'bubble_chart',
-        title: 'Inspire'
-      }],
-      title: 'RDF editor'
-    }
-  },
-  name: 'App'
-}
+  import {mapMutations} from 'vuex'
+
+  export default {
+
+    data () {
+      return {
+        drawer: true,
+        items: [{
+          icon: 'bubble_chart',
+          title: 'Inspire'
+        }],
+        dataset: this.$rdf.dataset([this.$rdf.quad(this.$rdf.namedNode('http://uned.es/analista'), this.$rdf.namedNode('http://www.w3.org/2000/01/rdf-schema#subClassOf'),
+          this.$rdf.namedNode('https://www.w3.org/2002/07/owl#Class'))]),
+        title: 'RDF editor'
+      }
+    },
+    methods: mapMutations(['initializeDataset']),
+    beforeMount () {
+      this.initializeDataset(this.dataset)
+    },
+    name: 'App'
+  }
 </script>
