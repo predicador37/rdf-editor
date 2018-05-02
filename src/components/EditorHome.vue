@@ -76,22 +76,7 @@
         },
         selectedTags: ['analisis', 'pruebas', 'fase', 'metodologia', 'analista', 'usuario', 'producto', 'artefacto', 'especificacion funcional'],
         terms: ['analisis', 'pruebas', 'fase', 'metodologia', 'analista', 'usuario', 'producto', 'artefacto', 'especificacion funcional'],
-        selectedSubject: null,
-        rdfProperties: [
-          {text: 'rdf:type', value: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type'},
-          {text: 'rdfs:subClassOf', value: 'http://www.w3.org/2000/01/rdf-schema#subClassOf'},
-          {text: 'rdfs:subPropertyOf', value: 'http://www.w3.org/2000/01/rdf-schema#subPropertyOf'},
-          {text: 'rdfs:domain', value: 'http://www.w3.org/2000/01/rdf-schema#domain'},
-          {text: 'rdfs:range', value: 'http://www.w3.org/2000/01/rdf-schema#range'}
-
-        ],
-        owlClasses: [
-          {text: 'owl:Thing', value: 'https://www.w3.org/2002/07/owl#Thing'},
-          {text: 'owl:Class', value: 'https://www.w3.org/2002/07/owl#Class'},
-      {text: 'owl:DatatypeProperty', value: 'https://www.w3.org/2002/07/owl#DatatypeProperty'},
-  {text: 'owl:ObjectProperty', value: 'https://www.w3.org/2002/07/owl#ObjectProperty'},
-  {text: 'rdf:XMLLiteral', value: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral'}
-        ]
+        selectedSubject: null
       }
     },
     computed: {
@@ -103,51 +88,9 @@
         } else {
           return null
         }
-      },
-      dataset: function () {
-        return this.$rdf.dataset(this.triples)
-      }
-
-    },
-    methods: {
-      addToGraph: function () {
-        this.triples.push(this.$rdf.quad(this.$rdf.namedNode(this.selectedSubject), this.$rdf.namedNode(this.selectedPredicate), this.$rdf.namedNode(this.selectedObject)))
-        console.log(this.triples)
-      },
-      exportJsonLD: function () {
-        // create a prefix map and fill it
-        const prefixMap = this.$rdf.prefixMap({
-          ex: this.$rdf.namedNode('http://www.uned.es/semantic/')
-        })
-        let quadStream = this.dataset.toStream()
-
-        // create a JSON-LD serializer instance which returns strings and compacts the JSON-LD
-        const serializer = new this.$JsonLdSerializer({outputFormat: 'string', compact: true})
-        // forward the quads to the serializer
-        const jsonStream = serializer.import(quadStream)
-
-        prefixMap.export(quadStream)
-
-        let result
-
-        jsonStream.on('data', (data) => {
-          result = data
-        })
-
-        return this.$rdf.waitFor(jsonStream).then(() => {
-          let dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(result)
-          let downloadAnchorNode = document.createElement('a')
-          downloadAnchorNode.setAttribute('href', dataStr)
-          downloadAnchorNode.setAttribute('download', 'dataset.json')
-          document.body.appendChild(downloadAnchorNode)
-          downloadAnchorNode.click()
-          downloadAnchorNode.remove()
-          console.log(dataStr)
-        })
       }
 
     }
-
   }
 </script>
 

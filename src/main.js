@@ -4,17 +4,7 @@ import router from './router'
 import store from './store'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
-import rdfFetch from 'rdf-fetch-lite'
-import Parser from 'rdf-parser-n3'
-import DataFactory from 'rdf-ext'
-import Readable from 'readable-stream'
-import Serializer from 'rdf-serializer-jsonld-ext'
 import '@mdi/font/css/materialdesignicons.css'
-Object.defineProperty(Vue.prototype, '$rdfFetch', { value: rdfFetch })
-Object.defineProperty(Vue.prototype, '$N3Parser', { value: Parser })
-Object.defineProperty(Vue.prototype, '$rdf', { value: DataFactory })
-Object.defineProperty(Vue.prototype, '$Readable', { value: Readable })
-Object.defineProperty(Vue.prototype, '$JsonLdSerializer', { value: Serializer })
 
 Vue.use(Vuetify, {
   theme: {

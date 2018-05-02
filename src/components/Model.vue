@@ -28,7 +28,7 @@
             <v-card flat>
               <v-card-text>
                 <v-treeview :items="items"></v-treeview>
-                {{dataset}}
+                {{queryResult}}
               </v-card-text>
             </v-card>
           </v-flex>
@@ -51,9 +51,9 @@
 
 <script>
   import Treeview from '@/components/Treeview'
-  import {mapState} from 'vuex'
+  import {mapState, mapActions} from 'vuex'
   export default {
-    computed: mapState(['dataset', 'initialState']),
+    computed: {...mapState(['dataset', 'queryResult'])},
     components: {
       'v-treeview': Treeview
     },
@@ -74,6 +74,10 @@
           ]
         }
       }
+    },
+    methods: {...mapActions(['getClassList'])},
+    beforeMount () {
+      this.getClassList()
     },
     name: 'Model'
   }
