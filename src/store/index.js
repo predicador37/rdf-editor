@@ -7,15 +7,19 @@ Vue.use(Vuex)
 
 let rdf = DataFactory
 let JsonLdSerializer = Serializer
+const baseUrl = 'http://uned.es/'
 
-const debug = process.env.NODE_ENV !== 'production'
+// const debug = process.env.NODE_ENV !== 'production'
 
 export default new Vuex.Store({
   state: {
-    dataset: rdf.dataset([rdf.quad(rdf.namedNode('http://uned.es/analista'), rdf.namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#type'),
-      rdf.namedNode('https://www.w3.org/2002/07/owl#Class'))]),
+    dataset: rdf.dataset([rdf.quad(rdf.namedNode(baseUrl + 'Analista'), rdf.namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#type'),
+      rdf.namedNode('https://www.w3.org/2002/07/owl#Class')), rdf.quad(rdf.namedNode(baseUrl + 'Programador'), rdf.namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#type'),
+      rdf.namedNode('https://www.w3.org/2002/07/owl#Class')), rdf.quad(rdf.namedNode(baseUrl + 'Miguel_Exposito'), rdf.namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#type'),
+      rdf.namedNode(baseUrl + 'Analista'))]),
     queryResult: null,
     initialState: 'prueba',
+    // TODO: extract rdf constants to external js file
     rdfProperties: [
       {text: 'rdf:type', value: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type'},
       {text: 'rdfs:subClassOf', value: 'http://www.w3.org/2000/01/rdf-schema#subClassOf'},
@@ -33,13 +37,16 @@ export default new Vuex.Store({
     ]
   },
   getters: {
-
+    dataset: state => state.dataset
   },
   mutations: {
     initializeDataset (state, dataset) {
       state.dataset = dataset
     },
-    addQuadFromIri (state, subject, predicate, object) {
+    addQuadFromIri (state, {subject, predicate, object}) {
+      console.log(subject)
+      console.log(predicate)
+      console.log(object)
       state.dataset.add(rdf.quad(rdf.namedNode(subject), rdf.namedNode(predicate), rdf.namedNode(object)))
     },
     getClassList (state) {
@@ -50,7 +57,7 @@ export default new Vuex.Store({
 
       quadStream.on('data', (quad) => {
         if ((quad.object.equals(rdf.namedNode('https://www.w3.org/2002/07/owl#Class'))) && (quad.predicate.equals(rdf.namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#type')))) {
-          classes.push({text: quad.subject.value, value: quad.subject.value})
+          classes.push({text: quad.subject.value.split(baseUrl)[1], value: quad.subject.value})
           console.log(classes)
         }
       })
@@ -93,6 +100,9 @@ export default new Vuex.Store({
     // TODO fix warning about vuex state
     getClassList (context) {
       context.commit('getClassList')
+    },
+    addClass (context, className) {
+      context.commit('addQuadFromIri', {subject: baseUrl + className, predicate: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type', object: 'https://www.w3.org/2002/07/owl#Class'})
     }
   },
   strict: false

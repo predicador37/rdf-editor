@@ -15,22 +15,73 @@
       <v-icon>mdi-format-list-bulleted-type</v-icon>
     </v-tab>
     <v-tab-item key="1" id="tab-1">
-      <v-container grid-list-md >
+      <v-container fluid>
         <v-layout row wrap>
-          <v-flex xs6>
-      <v-card flat>
-        <v-card-text>
-          <v-treeview :items="items"></v-treeview>
-        </v-card-text>
-      </v-card>
+          <v-flex px-3 py-3 md6 xs12>
+            <v-card>
+              <v-card-title primary-title>
+                <div class="headline"> Classes</div>
+              </v-card-title>
+
+              <v-card-text>
+                <v-list two-line>
+                  <template v-for="(item, index) in queryResult">
+                    <v-list-tile
+                      :key="item.text"
+                      ripple
+                    >
+                      <v-list-tile-content>
+                        <v-list-tile-title>{{ item.text }}</v-list-tile-title>
+                        <v-list-tile-sub-title class="text--primary">{{ item.headline }}</v-list-tile-sub-title>
+                        <v-list-tile-sub-title>{{ item.value }}</v-list-tile-sub-title>
+                      </v-list-tile-content>
+
+                    </v-list-tile>
+                    <v-divider v-if="index + 1 < queryResult.length" :key="index"></v-divider>
+                  </template>
+                </v-list>
+
+                <v-fab-transition>
+                <v-btn
+                  absolute
+                  small
+                  dark
+                  fab
+                  bottom
+                  right
+                  color="pink"
+                  @click.native.stop="dialog = !dialog"
+                >
+
+                  <v-icon>add</v-icon>
+                </v-btn>
+                </v-fab-transition>
+              </v-card-text>
+              <v-dialog v-model="dialog" max-width="500px">
+                <v-card>
+                  <v-card-text>
+                    <v-text-field v-model="className" label="Class name"></v-text-field>
+                    <small class="grey--text">* This doesn't actually save.</small>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn flat color="primary" @click.native="addClassHandler">Submit</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+
+            </v-card>
+
           </v-flex>
-          <v-flex xs6>
-            <v-card flat>
+          <v-flex px-3 py-3 md6 xs12>
+            <v-card>
+
               <v-card-text>
                 <v-treeview :items="items"></v-treeview>
-                {{queryResult}}
               </v-card-text>
+              {{dataset}}
             </v-card>
+
           </v-flex>
         </v-layout>
       </v-container>
@@ -51,15 +102,19 @@
 
 <script>
   import Treeview from '@/components/Treeview'
-  import {mapState, mapActions} from 'vuex'
+  import {mapState, mapActions, mapGetters} from 'vuex'
   export default {
-    computed: {...mapState(['dataset', 'queryResult'])},
+    computed: {...mapState(['dataset', 'queryResult']),
+      ...mapGetters({dataset: 'dataset'
+      })},
     components: {
       'v-treeview': Treeview
     },
     data () {
       return {
         text: 'prueba',
+        dialog: false,
+        className: null,
         items: {
           name: 'Thing',
           children: [
@@ -75,7 +130,12 @@
         }
       }
     },
-    methods: {...mapActions(['getClassList'])},
+    methods: {...mapActions(['getClassList', 'addClass']),
+      addClassHandler () {
+        this.addClass(this.className)
+        this.getClassList()
+        this.dialog = false
+      }},
     beforeMount () {
       this.getClassList()
     },
