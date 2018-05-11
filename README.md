@@ -1,6 +1,6 @@
 # rdf-editor
 
-> RDF editor for the National Distance Education University (UNED) of Spain
+> A semantic RDF editor for the National University of Distance Education
 
 ## Build Setup
 
