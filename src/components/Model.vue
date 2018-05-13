@@ -25,7 +25,7 @@
 
               <v-card-text>
                 <v-list two-line>
-                  <template v-for="(item, index) in queryResult">
+                  <template v-for="(item, index) in classes">
                     <v-list-tile
                       :key="item.text"
                       ripple
@@ -38,7 +38,7 @@
                       </v-list-tile-content>
 
                     </v-list-tile>
-                    <v-divider v-if="index + 1 < queryResult.length" :key="index"></v-divider>
+                    <v-divider v-if="index + 1 < classes.length" :key="index"></v-divider>
                   </template>
                 </v-list>
 
@@ -100,9 +100,10 @@
 <script>
   import Treeview from '@/components/Treeview'
   import ClassDetail from '@/components/ClassDetail'
+  import Graph from '@/services/Graph'
   import {mapActions, mapGetters} from 'vuex'
   export default {
-    computed: {...mapGetters(['dataset', 'queryResult', 'rdfProperties', 'owlProperties', 'owlClasses'])},
+    computed: {...mapGetters(['dataset', 'rdfConstructs'])},
     components: {
       'v-treeview': Treeview,
       'class-detail': ClassDetail
@@ -113,6 +114,7 @@
         dialog: false,
         currentClassName: '',
         newClassName: null,
+        classes: [],
         items: {
           name: 'Thing',
           children: [
@@ -128,10 +130,14 @@
         }
       }
     },
-    methods: {...mapActions(['getSubjectListByPredicateAndObject', 'addClass']),
+    methods: {...mapActions(['addClass']),
+      async getClasses () {
+        let classes = await Graph.getSubjectListByPredicateAndObject({dataset: this.dataset, predicate: this.rdfConstructs.rdf_type.value, object: this.rdfConstructs.owl_Class.value})
+        this.classes = classes
+      },
       addClassHandler () {
         this.addClass(this.newClassName)
-        this.getSubjectListByPredicateAndObject({predicate: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type', object: 'https://www.w3.org/2002/07/owl#Class'})
+        this.getClasses()
         this.dialog = false
       },
       // TODO: changeCurrentClass mutation to change classdetail component data
@@ -139,8 +145,7 @@
         this.currentClassName = className
       }},
     beforeMount () {
-      console.log(this.owlClasses.owl_Class)
-      this.getSubjectListByPredicateAndObject({predicate: this.rdfProperties.rdf_type.value, object: this.owlClasses.owl_Class.value})
+      this.getClasses()
     },
     name: 'Model'
   }

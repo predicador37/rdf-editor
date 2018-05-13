@@ -13,75 +13,79 @@ const baseUrl = 'http://uned.es/'
 
 export default new Vuex.Store({
   state: {
+    // TODO redefine dataset as a computed property
     dataset: rdf.dataset([rdf.quad(rdf.namedNode(baseUrl + 'Analista'), rdf.namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#type'),
       rdf.namedNode('https://www.w3.org/2002/07/owl#Class')), rdf.quad(rdf.namedNode(baseUrl + 'Programador'), rdf.namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#type'),
       rdf.namedNode('https://www.w3.org/2002/07/owl#Class')), rdf.quad(rdf.namedNode(baseUrl + 'Miguel_Exposito'), rdf.namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#type'),
-      rdf.namedNode(baseUrl + 'Analista'))]),
-    queryResult: null,
+      rdf.namedNode(baseUrl + 'Analista')), rdf.quad(rdf.namedNode(baseUrl + 'Capturador de Requisitos'), rdf.namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#type'),
+      rdf.namedNode('https://www.w3.org/2002/07/owl#Class'))]),
     currentClassName: null,
     initialState: 'prueba',
     // TODO: extract rdf constants to external js file
-    rdfProperties: {
-
+    rdfConstructs: {
       rdf_type: {
         text: 'rdf:type',
-        value: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type'
+        value: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
+        type: 'property'
       },
       rdfs_subClassOf: {
         text:
           'rdfs:subClassOf',
         value:
-          'http://www.w3.org/2000/01/rdf-schema#subClassOf'
+          'http://www.w3.org/2000/01/rdf-schema#subClassOf',
+        type: 'property'
       },
       rdfs_subPropertyOf: {
         text: 'rdfs:subPropertyOf',
         value:
-          'http://www.w3.org/2000/01/rdf-schema#subPropertyOf'
+          'http://www.w3.org/2000/01/rdf-schema#subPropertyOf',
+        type: 'property'
       },
       rdfs_domain: {
         text: 'rdfs:domain',
-        value: 'http://www.w3.org/2000/01/rdf-schema#domain'
+        value: 'http://www.w3.org/2000/01/rdf-schema#domain',
+        type: 'property'
       },
       rdfs_range: {
         text: 'rdfs:range',
-        value: 'http://www.w3.org/2000/01/rdf-schema#range'
-      }
-    },
-    owlClasses: {
+        value: 'http://www.w3.org/2000/01/rdf-schema#range',
+        type: 'property'
+      },
       owl_Thing: {
         text: 'owl:Thing',
-        value: 'https://www.w3.org/2002/07/owl#Thing'
+        value: 'https://www.w3.org/2002/07/owl#Thing',
+        type: 'class'
       },
       owl_Class: {
         text: 'owl:Class',
-        value: 'https://www.w3.org/2002/07/owl#Class'
+        value: 'https://www.w3.org/2002/07/owl#Class',
+        type: 'class'
       },
       owl_DatatypeProperty: {
         text: 'owl:DatatypeProperty',
-        value: 'https://www.w3.org/2002/07/owl#DatatypeProperty'
+        value: 'https://www.w3.org/2002/07/owl#DatatypeProperty',
+        type: 'class'
       },
       owl_ObjectProperty: {
         text: 'owl:ObjectProperty',
-        value: 'https://www.w3.org/2002/07/owl#ObjectProperty'
+        value: 'https://www.w3.org/2002/07/owl#ObjectProperty',
+        type: 'class'
       },
       rdf_XMLLiteral: {
         text: 'rdf:XMLLiteral',
-        value: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral'
-      }
-    },
-    owlProperties: {
+        value: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral',
+        type: 'class'
+      },
       owl_EquivalentClass: {
         text: 'owl:EquivalentClass',
-        value: 'http://www.w3.org/2002/07/owl#EquivalentClass'
+        value: 'http://www.w3.org/2002/07/owl#EquivalentClass',
+        type: 'property'
       }
     }
   },
   getters: {
     dataset: state => state.dataset,
-    owlProperties: state => state.owlProperties,
-    rdfProperties: state => state.rdfProperties,
-    owlClasses: state => state.owlClasses,
-    queryResult: state => state.queryResult
+    rdfConstructs: state => state.rdfConstructs,
   },
   mutations: {
     initializeDataset (state, dataset) {
@@ -93,22 +97,6 @@ export default new Vuex.Store({
       console.log(predicate)
       console.log(object)
       state.dataset.add(rdf.quad(rdf.namedNode(subject), rdf.namedNode(predicate), rdf.namedNode(object)))
-    },
-    // TODO parametrize this: getSubjectListByPredicateAndObject
-    getSubjectListByPredicateAndObject (state, {predicate, object}) {
-      console.log('starting getSubjectListByPredicateAndObject')
-      let classes = []
-
-      let quadStream = state.dataset.toStream()
-
-      quadStream.on('data', (quad) => {
-        if ((quad.object.equals(rdf.namedNode(object))) && (quad.predicate.equals(rdf.namedNode(predicate)))) {
-          classes.push({text: quad.subject.value.split(baseUrl)[1], value: quad.subject.value})
-          console.log(classes)
-        }
-      })
-      state.queryResult = classes
-      console.log('finishing getSubjectListByObjectAndPredicate')
     },
     exportJsonLD (state) {
       // create a prefix map and fill it
@@ -144,11 +132,14 @@ export default new Vuex.Store({
   },
   actions: {
     // TODO fix warning about vuex state
-    getSubjectListByPredicateAndObject (context, {predicate, object}) {
-      context.commit('getSubjectListByPredicateAndObject', {predicate: predicate, object: object})
-    },
     addClass (context, className) {
-      context.commit('addQuadFromIri', {subject: baseUrl + className, predicate: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type', object: 'https://www.w3.org/2002/07/owl#Class'})
+      if (className != null) {
+        context.commit('addQuadFromIri', {
+          subject: baseUrl + className,
+          predicate: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
+          object: 'https://www.w3.org/2002/07/owl#Class'
+        })
+      }
     }
   },
   strict: false
