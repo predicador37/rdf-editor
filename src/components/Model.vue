@@ -20,7 +20,7 @@
           <v-flex px-3 py-3 md6 xs12>
             <v-card>
               <v-card-title primary-title>
-                <div class="headline"> Classes</div>
+                <div class="headline"> Clases</div>
               </v-card-title>
 
               <v-card-text>
@@ -29,8 +29,9 @@
                     <v-list-tile
                       :key="item.text"
                       ripple
+                      @click=""
                     >
-                      <v-list-tile-content>
+                      <v-list-tile-content @click.stop="changeCurrentClass(item.text)">
                         <v-list-tile-title>{{ item.text }}</v-list-tile-title>
                         <v-list-tile-sub-title class="text--primary">{{ item.headline }}</v-list-tile-sub-title>
                         <v-list-tile-sub-title>{{ item.value }}</v-list-tile-sub-title>
@@ -60,12 +61,12 @@
               <v-dialog v-model="dialog" max-width="500px">
                 <v-card>
                   <v-card-text>
-                    <v-text-field v-model="className" label="Class name"></v-text-field>
-                    <small class="grey--text">* This doesn't actually save.</small>
+                    <v-text-field v-model="newClassName" label="Class name"></v-text-field>
+                    <small class="grey--text">Introduzca un nuevo término a modelar como una clase.</small>
                   </v-card-text>
                   <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn flat color="primary" @click.native="addClassHandler">Submit</v-btn>
+                    <v-btn flat color="primary" @click.native="addClassHandler">Guardar</v-btn>
                   </v-card-actions>
                 </v-card>
               </v-dialog>
@@ -74,13 +75,9 @@
 
           </v-flex>
           <v-flex px-3 py-3 md6 xs12>
-            <v-card>
 
-              <v-card-text>
-                <v-treeview :items="items"></v-treeview>
-              </v-card-text>
-              {{dataset}}
-            </v-card>
+              <class-detail :class-name="currentClassName"></class-detail>
+
 
           </v-flex>
         </v-layout>
@@ -102,19 +99,20 @@
 
 <script>
   import Treeview from '@/components/Treeview'
-  import {mapState, mapActions, mapGetters} from 'vuex'
+  import ClassDetail from '@/components/ClassDetail'
+  import {mapActions, mapGetters} from 'vuex'
   export default {
-    computed: {...mapState(['dataset', 'queryResult']),
-      ...mapGetters({dataset: 'dataset'
-      })},
+    computed: {...mapGetters(['dataset', 'queryResult', 'rdfProperties', 'owlProperties', 'owlClasses'])},
     components: {
-      'v-treeview': Treeview
+      'v-treeview': Treeview,
+      'class-detail': ClassDetail
     },
     data () {
       return {
         text: 'prueba',
         dialog: false,
-        className: null,
+        currentClassName: '',
+        newClassName: null,
         items: {
           name: 'Thing',
           children: [
@@ -130,14 +128,19 @@
         }
       }
     },
-    methods: {...mapActions(['getClassList', 'addClass']),
+    methods: {...mapActions(['getSubjectListByPredicateAndObject', 'addClass']),
       addClassHandler () {
-        this.addClass(this.className)
-        this.getClassList()
+        this.addClass(this.newClassName)
+        this.getSubjectListByPredicateAndObject({predicate: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type', object: 'https://www.w3.org/2002/07/owl#Class'})
         this.dialog = false
+      },
+      // TODO: changeCurrentClass mutation to change classdetail component data
+      changeCurrentClass (className) {
+        this.currentClassName = className
       }},
     beforeMount () {
-      this.getClassList()
+      console.log(this.owlClasses.owl_Class)
+      this.getSubjectListByPredicateAndObject({predicate: this.rdfProperties.rdf_type.value, object: this.owlClasses.owl_Class.value})
     },
     name: 'Model'
   }
