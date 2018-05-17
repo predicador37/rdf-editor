@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import DataFactory from 'rdf-ext'
 import Serializer from 'rdf-serializer-jsonld-ext'
+import RdfConstructs from '@/utils/RdfConstructs'
 
 Vue.use(Vuex)
 
@@ -12,80 +13,20 @@ const baseUrl = 'http://uned.es/'
 // const debug = process.env.NODE_ENV !== 'production'
 
 export default new Vuex.Store({
+  // TODO refactor vuex store in getters, mutations, actions, etc
   state: {
-    // TODO redefine dataset as a computed property
-    dataset: rdf.dataset([rdf.quad(rdf.namedNode(baseUrl + 'Analista'), rdf.namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#type'),
-      rdf.namedNode('https://www.w3.org/2002/07/owl#Class')), rdf.quad(rdf.namedNode(baseUrl + 'Programador'), rdf.namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#type'),
-      rdf.namedNode('https://www.w3.org/2002/07/owl#Class')), rdf.quad(rdf.namedNode(baseUrl + 'Miguel_Exposito'), rdf.namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#type'),
-      rdf.namedNode(baseUrl + 'Analista')), rdf.quad(rdf.namedNode(baseUrl + 'Capturador de Requisitos'), rdf.namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#type'),
-      rdf.namedNode('https://www.w3.org/2002/07/owl#Class'))]),
+    rdfConstructs: RdfConstructs,
     currentClassName: null,
     initialState: 'prueba',
-    // TODO: extract rdf constants to external js file
-    rdfConstructs: {
-      rdf_type: {
-        text: 'rdf:type',
-        value: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
-        type: 'property'
-      },
-      rdfs_subClassOf: {
-        text:
-          'rdfs:subClassOf',
-        value:
-          'http://www.w3.org/2000/01/rdf-schema#subClassOf',
-        type: 'property'
-      },
-      rdfs_subPropertyOf: {
-        text: 'rdfs:subPropertyOf',
-        value:
-          'http://www.w3.org/2000/01/rdf-schema#subPropertyOf',
-        type: 'property'
-      },
-      rdfs_domain: {
-        text: 'rdfs:domain',
-        value: 'http://www.w3.org/2000/01/rdf-schema#domain',
-        type: 'property'
-      },
-      rdfs_range: {
-        text: 'rdfs:range',
-        value: 'http://www.w3.org/2000/01/rdf-schema#range',
-        type: 'property'
-      },
-      owl_Thing: {
-        text: 'owl:Thing',
-        value: 'https://www.w3.org/2002/07/owl#Thing',
-        type: 'class'
-      },
-      owl_Class: {
-        text: 'owl:Class',
-        value: 'https://www.w3.org/2002/07/owl#Class',
-        type: 'class'
-      },
-      owl_DatatypeProperty: {
-        text: 'owl:DatatypeProperty',
-        value: 'https://www.w3.org/2002/07/owl#DatatypeProperty',
-        type: 'class'
-      },
-      owl_ObjectProperty: {
-        text: 'owl:ObjectProperty',
-        value: 'https://www.w3.org/2002/07/owl#ObjectProperty',
-        type: 'class'
-      },
-      rdf_XMLLiteral: {
-        text: 'rdf:XMLLiteral',
-        value: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral',
-        type: 'class'
-      },
-      owl_EquivalentClass: {
-        text: 'owl:EquivalentClass',
-        value: 'http://www.w3.org/2002/07/owl#EquivalentClass',
-        type: 'property'
-      }
-    }
+    dataset: rdf.dataset([rdf.quad(rdf.namedNode(baseUrl + 'Analista'), rdf.namedNode(RdfConstructs.rdf_type.value),
+      rdf.namedNode(RdfConstructs.owl_Class.value)), rdf.quad(rdf.namedNode(baseUrl + 'Programador'), rdf.namedNode(RdfConstructs.rdf_type.value),
+      rdf.namedNode(RdfConstructs.owl_Class.value)), rdf.quad(rdf.namedNode(baseUrl + 'Miguel_Exposito'), rdf.namedNode(RdfConstructs.rdf_type.value),
+      rdf.namedNode(baseUrl + 'Analista')), rdf.quad(rdf.namedNode(baseUrl + 'Capturador_de_Requisitos'), rdf.namedNode(RdfConstructs.rdf_type.value),
+      rdf.namedNode(RdfConstructs.owl_Class.value)), rdf.quad(rdf.namedNode(baseUrl + 'Analista'), rdf.namedNode(RdfConstructs.owl_equivalentClass.value), rdf.namedNode(baseUrl + 'Capturador_de_Requisitos')), rdf.quad(rdf.namedNode(baseUrl + 'Analista'), rdf.namedNode(RdfConstructs.rdfs_label.value), rdf.literal('Analista Informático')), rdf.quad(rdf.namedNode(baseUrl + 'Analista'), rdf.namedNode(RdfConstructs.rdfs_comment.value), rdf.literal('El Analista Informático desempeña un rol importante en el desarrollo de software según las metodologías tradicionales.'))])
   },
   getters: {
     dataset: state => state.dataset,
-    rdfConstructs: state => state.rdfConstructs,
+    rdfConstructs: state => state.rdfConstructs
   },
   mutations: {
     initializeDataset (state, dataset) {
@@ -97,6 +38,12 @@ export default new Vuex.Store({
       console.log(predicate)
       console.log(object)
       state.dataset.add(rdf.quad(rdf.namedNode(subject), rdf.namedNode(predicate), rdf.namedNode(object)))
+    },
+    addQuadWithObjectLiteralFromIri (state, {subject, predicate, object}) {
+      console.log(subject)
+      console.log(predicate)
+      console.log(object)
+      state.dataset.add(rdf.quad(rdf.namedNode(subject), rdf.namedNode(predicate), rdf.literal(object)))
     },
     exportJsonLD (state) {
       // create a prefix map and fill it
@@ -138,6 +85,15 @@ export default new Vuex.Store({
           subject: baseUrl + className,
           predicate: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
           object: 'https://www.w3.org/2002/07/owl#Class'
+        })
+      }
+    },
+    addClassLiteralProperty (context, {className, property, literal}) {
+      if (className != null) {
+        context.commit('addQuadWithObjectLiteralFromIri', {
+          subject: baseUrl + className,
+          predicate: RdfConstructs[property].value,
+          object: literal
         })
       }
     }
