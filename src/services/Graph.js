@@ -2,7 +2,6 @@ import DataFactory from 'rdf-ext'
 
 let rdf = DataFactory
 
-
 const BASE_URL = 'http://uned.es/'
 
 export default {
@@ -19,7 +18,7 @@ export default {
     })
     return subjects
   },
-  getObjectListByPredicateAndSubject({dataset, predicate, subject}) {
+  getObjectListByPredicateAndSubject ({dataset, predicate, subject}) {
     return new Promise((resolve, reject) => {
       let objects = []
 

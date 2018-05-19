@@ -104,7 +104,7 @@
       }
     },
     watch: {
-      className:  function (newVal, oldVal) { // watch it
+      className: function (newVal, oldVal) { // watch it
         for (const item of this.editableClassData) {
           this.getRelatedClasses(item)
         }
