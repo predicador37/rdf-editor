@@ -5,6 +5,16 @@ import store from './store'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import '@mdi/font/css/materialdesignicons.css'
+import Parser from 'rdf-parser-n3'
+import Serializer from 'rdf-serializer-jsonld-ext'
+
+import StringStream from 'string-to-stream'
+import DataFactory from 'rdf-ext'
+
+Object.defineProperty(Vue.prototype, '$N3Parser', { value: Parser })
+Object.defineProperty(Vue.prototype, '$string2stream', { value: StringStream })
+Object.defineProperty(Vue.prototype, '$rdf', { value: DataFactory })
+Object.defineProperty(Vue.prototype, '$JsonLdSerializer', { value: Serializer })
 
 Vue.use(Vuetify, {
   theme: {

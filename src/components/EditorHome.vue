@@ -1,7 +1,7 @@
 
 
 <template>
-  <v-container fluid grid-list-xl>
+  <v-container fluid >
     <v-jumbotron color="grey lighten-2">
       <v-container fill-height>
         <v-layout align-center>

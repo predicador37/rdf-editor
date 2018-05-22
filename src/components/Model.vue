@@ -86,6 +86,7 @@
     <v-tab-item key="2" id="tab-2">
       <v-card flat>
         <v-card-text>{{ text }}</v-card-text>
+        <graph-loader @load="importN3($event)"></graph-loader>
       </v-card>
     </v-tab-item>
     <v-tab-item key="3" id="tab-3">
@@ -100,13 +101,15 @@
 <script>
   import Treeview from '@/components/Treeview'
   import ClassDetail from '@/components/ClassDetail'
+  import GraphLoader from '@/components/GraphLoader'
   import Graph from '@/services/Graph'
   import {mapActions, mapGetters} from 'vuex'
   export default {
     computed: {...mapGetters(['dataset', 'rdfConstructs'])},
     components: {
       'v-treeview': Treeview,
-      'class-detail': ClassDetail
+      'class-detail': ClassDetail,
+      'graph-loader': GraphLoader
     },
     data () {
       return {
@@ -115,6 +118,7 @@
         currentClassName: '',
         newClassName: null,
         classes: [],
+        subclasses: [],
         items: {
           name: 'Thing',
           children: [
@@ -130,10 +134,20 @@
         }
       }
     },
-    methods: {...mapActions(['addClass']),
+    methods: {...mapActions(['addClass', 'importN3']),
       async getClasses () {
-        let classes = await Graph.getSubjectListByPredicateAndObject({dataset: this.dataset, predicate: this.rdfConstructs.rdf_type.value, object: this.rdfConstructs.owl_Class.value})
+        let [classes, subclasses] = await Promise.all([Graph.getSubjectListByPredicateAndObject({
+          dataset: this.dataset,
+          predicate: this.rdfConstructs.rdf_type.value,
+          object: this.rdfConstructs.owl_Class.value
+        }), Graph.getSubjectListByPredicate({
+          dataset: this.dataset,
+          predicate: this.rdfConstructs.rdfs_subClassOf.value
+        })])
         this.classes = classes
+        Array.prototype.push.apply(this.classes, subclasses)
+
+        // impossible to merge classes with subclasses
       },
       addClassHandler () {
         this.addClass(this.newClassName)
@@ -146,6 +160,12 @@
       }},
     beforeMount () {
       this.getClasses()
+    },
+    watch: {
+      dataset: function (newVal, oldVal) { // watch it
+        this.getClasses()
+        console.log('Prop changed: ', newVal, ' | was: ', oldVal)
+      }
     },
     name: 'Model'
   }

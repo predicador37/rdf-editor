@@ -7,18 +7,36 @@ const BASE_URL = 'http://uned.es/'
 export default {
   BASE_URL,
   getSubjectListByPredicateAndObject ({dataset, predicate, object}) {
-    let subjects = []
+    return new Promise((resolve, reject) => {
+      let subjects = []
 
-    let quadStream = dataset.toStream()
+      let quadStream = dataset.toStream()
 
-    quadStream.on('data', (quad) => {
-      if ((quad.object.equals(rdf.namedNode(object))) && (quad.predicate.equals(rdf.namedNode(predicate)))) {
-        subjects.push({text: quad.subject.value.split(BASE_URL)[1], value: quad.subject.value})
-      }
+      quadStream.on('data', (quad) => {
+        if ((quad.object.equals(rdf.namedNode(object))) && (quad.predicate.equals(rdf.namedNode(predicate)))) {
+          subjects.push({text: quad.subject.value.split(BASE_URL)[1], value: quad.subject.value})
+        }
+      }).on('end', () => {
+        resolve(subjects)
+      })
     })
-    return subjects
   },
-  getObjectListByPredicateAndSubject ({dataset, predicate, subject}) {
+  getSubjectListByPredicate({dataset, predicate}) {
+    return new Promise((resolve, reject) => {
+      let subjects = []
+
+      let quadStream = dataset.toStream()
+
+      quadStream.on('data', (quad) => {
+        if (quad.predicate.equals(rdf.namedNode(predicate))) {
+          subjects.push({text: quad.subject.value.split(BASE_URL)[1], value: quad.subject.value})
+        }
+      }).on('end', () => {
+        resolve(subjects)
+      })
+    })
+  },
+  async getObjectListByPredicateAndSubject ({dataset, predicate, subject}) {
     return new Promise((resolve, reject) => {
       let objects = []
 
