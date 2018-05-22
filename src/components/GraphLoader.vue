@@ -1,5 +1,5 @@
 <template>
-  <div class="btn btn-primary jbtn-file"> {{ title }}<input
+  <div class="btn btn-primary jbtn-file"> <span class="btn-txt">{{ title }}</span><input
     type="file" @change="fileSelected"></div>
 </template>
 
@@ -39,5 +39,9 @@
     outline: none;
     cursor: inherit;
     display: block;
+
+  }
+  .btn-txt {
+    padding: 20px;
   }
 </style>

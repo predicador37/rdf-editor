@@ -86,7 +86,7 @@
     <v-tab-item key="2" id="tab-2">
       <v-card flat>
         <v-card-text>{{ text }}</v-card-text>
-        <graph-loader @load="importN3($event)"></graph-loader>
+        <graph-loader title="Cargar grafo" @load="importN3($event)"></graph-loader>
       </v-card>
     </v-tab-item>
     <v-tab-item key="3" id="tab-3">
