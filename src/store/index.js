@@ -12,7 +12,7 @@ let rdf = DataFactory
 let N3Parser = Parser
 let string2stream = StringStream
 let JsonLdSerializer = Serializer
-const baseUrl = 'http://uned.es/'
+const baseUrl = 'http://uned.es/example#'
 
 // const debug = process.env.NODE_ENV !== 'production'
 
