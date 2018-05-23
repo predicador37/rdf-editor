@@ -114,6 +114,9 @@ export default new Vuex.Store({
     },
     importN3 (context, content) {
       context.commit('importN3', content)
+    },
+    exportJsonLD (context) {
+      context.commit('exportJsonLD')
     }
   },
   strict: false

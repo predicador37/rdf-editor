@@ -21,7 +21,7 @@ export default {
       })
     })
   },
-  getSubjectListByPredicate({dataset, predicate}) {
+  getSubjectListByPredicate ({dataset, predicate}) {
     return new Promise((resolve, reject) => {
       let subjects = []
 

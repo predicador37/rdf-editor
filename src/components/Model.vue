@@ -86,7 +86,6 @@
     <v-tab-item key="2" id="tab-2">
       <v-card flat>
         <v-card-text>{{ text }}</v-card-text>
-        <graph-loader title="Cargar grafo" @load="importN3($event)"></graph-loader>
       </v-card>
     </v-tab-item>
     <v-tab-item key="3" id="tab-3">
@@ -101,15 +100,13 @@
 <script>
   import Treeview from '@/components/Treeview'
   import ClassDetail from '@/components/ClassDetail'
-  import GraphLoader from '@/components/GraphLoader'
   import Graph from '@/services/Graph'
   import {mapActions, mapGetters} from 'vuex'
   export default {
     computed: {...mapGetters(['dataset', 'rdfConstructs'])},
     components: {
       'v-treeview': Treeview,
-      'class-detail': ClassDetail,
-      'graph-loader': GraphLoader
+      'class-detail': ClassDetail
     },
     data () {
       return {
@@ -134,7 +131,7 @@
         }
       }
     },
-    methods: {...mapActions(['addClass', 'importN3']),
+    methods: {...mapActions(['addClass']),
       async getClasses () {
         let [classes, subclasses] = await Promise.all([Graph.getSubjectListByPredicateAndObject({
           dataset: this.dataset,

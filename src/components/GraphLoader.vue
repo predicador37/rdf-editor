@@ -1,6 +1,9 @@
 <template>
-  <div class="btn btn-primary jbtn-file"> <span class="btn-txt">{{ title }}</span><input
+  <div>
+  <div class="btn btn-primary jbtn-file">
+    <span class="btn-txt">{{ title }}</span><input
     type="file" @change="fileSelected"></div>
+  </div>
 </template>
 
 <script>
@@ -8,7 +11,10 @@
   export default {
     name: 'graph-loader',
     props: {
-      title: String
+      title: {
+        default: 'Importar grafo',
+        type: String
+      }
     },
     methods: {...mapActions(['importN3']),
       fileSelected (ev) {
