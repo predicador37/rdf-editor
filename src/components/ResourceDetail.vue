@@ -2,7 +2,7 @@
 <div>
   <v-card>
     <v-card-title primary-title>
-      <div class="headline"> Clase  {{className}}
+      <div class="headline"> Recurso  {{resourceName}}
       </div>
     </v-card-title>
     <v-card-text>
@@ -63,17 +63,20 @@
   import {mapGetters, mapActions} from 'vuex'
   import Graph from '@/services/Graph'
   export default {
-    name: 'ClassDetail',
+    name: 'ResourceDetail',
     props: {
-      className: {
+      resourceName: {
         type: String,
+        required: true
+      },
+      editableClassData: {
+        type: Array,
         required: true
       }
     },
     computed: {...mapGetters(['dataset', 'rdfConstructs'])},
     data () {
       return {
-        editableClassData: ['rdfs_label', 'rdfs_comment'],
         relatedClasses: {},
         currentProperty: null,
         currentLiteral: null,
@@ -82,7 +85,7 @@
     },
     methods: {...mapActions(['addClassLiteralProperty']),
       async getRelatedClasses (relatedClass) {
-        let classes = await Graph.getObjectListByPredicateAndSubject({dataset: this.dataset, predicate: this.rdfConstructs[relatedClass].value, subject: Graph.BASE_URL + this.className})
+        let classes = await Graph.getObjectListByPredicateAndSubject({dataset: this.dataset, predicate: this.rdfConstructs[relatedClass].value, subject: Graph.BASE_URL + this.resourceName})
         this.$set(this.relatedClasses, relatedClass, classes)
         console.log(JSON.stringify(this.relatedClasses[relatedClass]))
       },
@@ -92,10 +95,10 @@
         this.dialog = !this.dialog
       },
       addClassLiteralPropertyHandler () {
-        console.log(this.className)
+        console.log(this.resourceName)
         console.log(this.currentProperty)
         console.log(this.currentLiteral)
-        this.addClassLiteralProperty({className: this.className, property: this.currentProperty, literal: this.currentLiteral})
+        this.addClassLiteralProperty({resourceName: this.resourceName, property: this.currentProperty, literal: this.currentLiteral})
         for (const item of this.editableClassData) {
           this.getRelatedClasses(item)
         }
@@ -104,7 +107,7 @@
       }
     },
     watch: {
-      className: function (newVal, oldVal) { // watch it
+      resourceName: function (newVal, oldVal) { // watch it
         for (const item of this.editableClassData) {
           this.getRelatedClasses(item)
         }

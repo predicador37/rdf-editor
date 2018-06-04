@@ -1,17 +1,17 @@
 
 
 <template>
-  <v-container fluid >
+  <div>
     <v-jumbotron color="grey lighten-2">
-      <v-container fill-height>
+      <v-container fill-height fluid>
         <v-layout align-center>
-          <v-flex>
+          <v-flex height="100%">
             <h3 class="display-3">{{welcome_message}}</h3>
             <span class="subheading">{{welcome_description}}</span>
             <v-divider class="my-3"></v-divider>
             <div class="title mb-3"> ¡Elige con qué quieres trabajar!</div>
-            <v-btn large color="primary" class="mx-3" to="/Model">Modelar</v-btn>
-            <v-btn large color="primary" class="mx-3" to="/Model">Poblar</v-btn>
+            <v-btn large color="primary" class="mx-3" to="/ModelContainer">Modelar</v-btn>
+            <v-btn large color="primary" class="mx-3" to="/ModelContainer">Poblar</v-btn>
           </v-flex>
         </v-layout>
       </v-container>
@@ -21,7 +21,7 @@
 
 
 
-  </v-container>
+  </div>
   <!--<v-container fluid>
     <v-slide-y-transition mode="out-in">
       <v-layout column>
@@ -78,18 +78,6 @@
         terms: ['analisis', 'pruebas', 'fase', 'metodologia', 'analista', 'usuario', 'producto', 'artefacto', 'especificacion funcional'],
         selectedSubject: null
       }
-    },
-    computed: {
-      qualifiedSubject: function () {
-        // `this` points to the vm instance
-        var prefix = 'http://www.uned.es/semantic/'
-        if (this.selectedSubject != null) {
-          return prefix + this.selectedSubject.charAt(0).toUpperCase() + this.selectedSubject.slice(1)
-        } else {
-          return null
-        }
-      }
-
     }
   }
 </script>

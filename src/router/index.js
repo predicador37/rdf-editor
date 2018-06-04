@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import EditorHome from '@/components/EditorHome'
-import Model from '@/components/Model'
+import ModelContainer from '@/components/ModelContainer'
 import ImportExport from '@/components/ImportExport'
 
 Vue.use(Router)
@@ -15,8 +15,8 @@ export default new Router({
     },
     {
       path: '/model',
-      name: 'Model',
-      component: Model
+      name: 'ModelContainer',
+      component: ModelContainer
     },
     {
       path: '/import-export',

@@ -98,15 +98,24 @@ export default new Vuex.Store({
       if (className != null) {
         context.commit('addQuadFromIri', {
           subject: baseUrl + className,
-          predicate: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
-          object: 'https://www.w3.org/2002/07/owl#Class'
+          predicate: RdfConstructs.rdf_type.value,
+          object: RdfConstructs.owl_Class.value
         })
       }
     },
-    addClassLiteralProperty (context, {className, property, literal}) {
-      if (className != null) {
+    addResource (context, {subject, predicate, object}) {
+      if (subject != null && predicate != null && object != null) {
+        context.commit('addQuadFromIri', {
+          subject: baseUrl + subject,
+          predicate: predicate,
+          object: object
+        })
+      }
+    },
+    addClassLiteralProperty (context, {resourceName, property, literal}) {
+      if (resourceName != null) {
         context.commit('addQuadWithObjectLiteralFromIri', {
-          subject: baseUrl + className,
+          subject: baseUrl + resourceName,
           predicate: RdfConstructs[property].value,
           object: literal
         })
