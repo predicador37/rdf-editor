@@ -61,7 +61,6 @@
 
 <script>
   import {mapGetters, mapActions} from 'vuex'
-  import Graph from '@/services/Graph'
   export default {
     name: 'ResourceDetail',
     props: {
@@ -74,7 +73,7 @@
         required: true
       }
     },
-    computed: {...mapGetters(['dataset', 'rdfConstructs'])},
+    computed: {...mapGetters(['dataset', 'rdfConstructs', 'getObjectListByPredicateAndSubject'])},
     data () {
       return {
         relatedClasses: {},
@@ -85,7 +84,7 @@
     },
     methods: {...mapActions(['addClassLiteralProperty']),
       async getRelatedClasses (relatedClass) {
-        let classes = await Graph.getObjectListByPredicateAndSubject({dataset: this.dataset, predicate: this.rdfConstructs[relatedClass].value, subject: Graph.BASE_URL + this.resourceName})
+        let classes = await this.getObjectListByPredicateAndSubject({predicate: this.rdfConstructs[relatedClass].value, subject: this.rdfConstructs.BASE_URL + this.resourceName})
         this.$set(this.relatedClasses, relatedClass, classes)
         console.log(JSON.stringify(this.relatedClasses[relatedClass]))
       },

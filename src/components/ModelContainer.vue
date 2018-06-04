@@ -61,7 +61,6 @@
   import ResourceList from '@/components/ResourceList'
   import ResourceDetail from '@/components/ResourceDetail'
   import {mapActions, mapGetters} from 'vuex'
-  import Graph from '@/services/Graph'
   export default {
     components: {
       'resource-list': ResourceList,
@@ -76,18 +75,14 @@
         currentResourceName: ''
       }
     },
-    computed: {...mapGetters(['dataset', 'rdfConstructs'])},
+    computed: {...mapGetters(['dataset', 'rdfConstructs', 'getSubjectListByPredicateAndObject', 'getSubjectListByPredicate'])},
     methods: {
       ...mapActions(['addClass']),
       async getClasses () {
-        let [classes, subclasses] = await Promise.all([Graph.getSubjectListByPredicateAndObject({
-          dataset: this.dataset,
+        let [classes, subclasses] = await Promise.all([this.getSubjectListByPredicateAndObject({
           predicate: this.rdfConstructs.rdf_type.value,
           object: this.rdfConstructs.owl_Class.value
-        }), Graph.getSubjectListByPredicate({
-          dataset: this.dataset,
-          predicate: this.rdfConstructs.rdfs_subClassOf.value
-        })])
+        }), this.getSubjectListByPredicate(this.rdfConstructs.rdfs_subClassOf.value)])
         this.classes = classes
         Array.prototype.push.apply(this.classes, subclasses)
 
