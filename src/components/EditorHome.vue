@@ -10,8 +10,8 @@
             <span class="subheading">{{welcome_description}}</span>
             <v-divider class="my-3"></v-divider>
             <div class="title mb-3"> ¡Elige con qué quieres trabajar!</div>
-            <v-btn large color="primary" class="mx-3" to="/ModelContainer">Modelar</v-btn>
-            <v-btn large color="primary" class="mx-3" to="/ModelContainer">Poblar</v-btn>
+            <v-btn large color="primary" class="mx-3" to="/model">Modelar</v-btn>
+            <v-btn large color="primary" class="mx-3" to="/model">Poblar</v-btn>
           </v-flex>
         </v-layout>
       </v-container>

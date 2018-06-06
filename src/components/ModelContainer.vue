@@ -33,7 +33,7 @@
           </v-flex>
           <v-flex px-3 py-3 md6 xs12>
 
-            <resource-detail :resource-name="currentResourceName" :editable-class-data="editableClassData"></resource-detail>
+            <resource-detail :resource-name="currentResourceName" :editable-class-data="editableClassData" :rdfConstructs="rdfConstructs" :relatedClasses="relatedClasses" @add-literal-property="handleAddLiteralProperty($event)"></resource-detail>
 
           </v-flex>
         </v-layout>
@@ -71,13 +71,14 @@
       return {
         classes: [],
         subclasses: [],
+        relatedClasses: {},
         editableClassData: ['rdfs_label', 'rdfs_comment'],
         currentResourceName: ''
       }
     },
-    computed: {...mapGetters(['dataset', 'rdfConstructs', 'getSubjectListByPredicateAndObject', 'getSubjectListByPredicate'])},
+    computed: {...mapGetters(['dataset', 'rdfConstructs', 'getSubjectListByPredicateAndObject', 'getSubjectListByPredicate', 'getObjectListByPredicateAndSubject'])},
     methods: {
-      ...mapActions(['addClass']),
+      ...mapActions(['addClass', 'addClassLiteralProperty']),
       async getClasses () {
         let [classes, subclasses] = await Promise.all([this.getSubjectListByPredicateAndObject({
           predicate: this.rdfConstructs.rdf_type.value,
@@ -88,10 +89,23 @@
 
         // impossible to merge classes with subclasses
       },
+      async getRelatedClasses (relatedClass) {
+        console.log('getRelatedClasses')
+        console.log(this.resourceName)
+        let classes = await this.getObjectListByPredicateAndSubject({predicate: this.rdfConstructs[relatedClass].value, subject: this.rdfConstructs.BASE_URL + this.currentResourceName})
+        this.$set(this.relatedClasses, relatedClass, classes)
+        console.log(JSON.stringify(this.relatedClasses[relatedClass]))
+      },
       handleAddResource (resourceName, type) {
         // using a string concatenation as parameter: 'add'+type to call the methods dynamically
         this['add' + type.charAt(0).toUpperCase() + type.slice(1)](resourceName)
         this[type.match('[ch|sh|s|x|z]$') ? 'get' + type.charAt(0).toUpperCase() + type.slice(1) + 'es' : 'get' + type.charAt(0).toUpperCase() + type.slice(1) + 's']()
+      },
+      handleAddLiteralProperty (triple) {
+        this.addClassLiteralProperty({resourceName: triple.resourceName, property: triple.propertyName, literal: triple.literal})
+        for (const item of this.editableClassData) {
+          this.getRelatedClasses(item)
+        }
       },
       handleCurrentResource (resourceName) {
         this.addClass(resourceName)
@@ -99,6 +113,13 @@
       },
       handleChangeResource (resourceName) {
         this.currentResourceName = resourceName
+        console.log('handleChangeResource in parent')
+        console.log(this.currentResourceName)
+        console.log(JSON.stringify(this.relatedClasses))
+        for (const item of this.editableClassData) {
+          this.getRelatedClasses(item)
+        }
+        console.log(JSON.stringify(this.relatedClasses))
       }
     },
     beforeMount () {

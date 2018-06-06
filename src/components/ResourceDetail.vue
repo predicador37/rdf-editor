@@ -60,7 +60,6 @@
 </template>
 
 <script>
-  import {mapGetters, mapActions} from 'vuex'
   export default {
     name: 'ResourceDetail',
     props: {
@@ -71,23 +70,24 @@
       editableClassData: {
         type: Array,
         required: true
+      },
+      rdfConstructs: {
+        type: Object,
+        required: true
+      },
+      relatedClasses: {
+        type: Object,
+        required: true
       }
     },
-    computed: {...mapGetters(['dataset', 'rdfConstructs', 'getObjectListByPredicateAndSubject'])},
     data () {
       return {
-        relatedClasses: {},
         currentProperty: null,
         currentLiteral: null,
         dialog: false
       }
     },
-    methods: {...mapActions(['addClassLiteralProperty']),
-      async getRelatedClasses (relatedClass) {
-        let classes = await this.getObjectListByPredicateAndSubject({predicate: this.rdfConstructs[relatedClass].value, subject: this.rdfConstructs.BASE_URL + this.resourceName})
-        this.$set(this.relatedClasses, relatedClass, classes)
-        console.log(JSON.stringify(this.relatedClasses[relatedClass]))
-      },
+    methods: {
       addPropertyHandler (property) {
         console.log(property)
         this.currentProperty = property
@@ -97,22 +97,18 @@
         console.log(this.resourceName)
         console.log(this.currentProperty)
         console.log(this.currentLiteral)
-        this.addClassLiteralProperty({resourceName: this.resourceName, property: this.currentProperty, literal: this.currentLiteral})
-        for (const item of this.editableClassData) {
-          this.getRelatedClasses(item)
-        }
+        this.$emit('add-literal-property', {'resourceName': this.resourceName, 'propertyName': this.currentProperty, 'literal': this.currentLiteral})
         this.dialog = false
-        console.log(JSON.stringify(this.dataset))
-      }
-    },
-    watch: {
-      resourceName: function (newVal, oldVal) { // watch it
-        for (const item of this.editableClassData) {
-          this.getRelatedClasses(item)
-        }
-        console.log('Prop changed: ', newVal, ' | was: ', oldVal)
       }
     }
+    // watch: {
+    //   resourceName: function (newVal, oldVal) { // watch it
+    //     for (const item of this.editableClassData) {
+    //       this.getRelatedClasses(item)
+    //     }
+    //     console.log('Prop changed: ', newVal, ' | was: ', oldVal)
+    //   }
+    // }
   }
 </script>
 

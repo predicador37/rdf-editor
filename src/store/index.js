@@ -16,6 +16,8 @@ const baseUrl = 'http://uned.es/example#'
 
 // const debug = process.env.NODE_ENV !== 'production'
 
+// TODO split vuex into modules with getters, mutations, actions
+
 export default new Vuex.Store({
   // TODO refactor vuex store in getters, mutations, actions, etc
   state: {

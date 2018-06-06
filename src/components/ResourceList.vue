@@ -95,6 +95,7 @@
       },
       // TODO: changeCurrentClass mutation to change classdetail component data
       changeCurrentResource (resourceName) {
+        console.log('changeCurrentResource in ResourceList')
         this.$emit('change-resource', resourceName)
         this.currentResourceName = resourceName
       }},
