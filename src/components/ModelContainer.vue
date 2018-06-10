@@ -24,7 +24,7 @@
               </v-card-title>
 
               <v-card-text>
-                <resource-list :dataset="dataset" :resources="classes" @add-resource="handleAddResource($event, 'class')" @change-resource="handleChangeResource($event)"></resource-list>
+                <resource-list  :resources="classes" @add-resource="handleAddResource($event, 'class')" @change-resource="handleChangeResource($event)"></resource-list>
               </v-card-text>
 
 
@@ -76,7 +76,7 @@
         currentResourceName: ''
       }
     },
-    computed: {...mapGetters(['dataset', 'rdfConstructs', 'getSubjectListByPredicateAndObject', 'getSubjectListByPredicate', 'getObjectListByPredicateAndSubject'])},
+    computed: {...mapGetters(['rdfConstructs', 'getSubjectListByPredicateAndObject', 'getSubjectListByPredicate', 'getObjectListByPredicateAndSubject'])},
     methods: {
       ...mapActions(['addClass', 'addClassLiteralProperty']),
       async getClasses () {
@@ -90,11 +90,8 @@
         // impossible to merge classes with subclasses
       },
       async getRelatedClasses (relatedClass) {
-        console.log('getRelatedClasses')
-        console.log(this.resourceName)
         let classes = await this.getObjectListByPredicateAndSubject({predicate: this.rdfConstructs[relatedClass].value, subject: this.rdfConstructs.BASE_URL + this.currentResourceName})
         this.$set(this.relatedClasses, relatedClass, classes)
-        console.log(JSON.stringify(this.relatedClasses[relatedClass]))
       },
       handleAddResource (resourceName, type) {
         // using a string concatenation as parameter: 'add'+type to call the methods dynamically
@@ -113,13 +110,9 @@
       },
       handleChangeResource (resourceName) {
         this.currentResourceName = resourceName
-        console.log('handleChangeResource in parent')
-        console.log(this.currentResourceName)
-        console.log(JSON.stringify(this.relatedClasses))
         for (const item of this.editableClassData) {
           this.getRelatedClasses(item)
         }
-        console.log(JSON.stringify(this.relatedClasses))
       }
     },
     beforeMount () {

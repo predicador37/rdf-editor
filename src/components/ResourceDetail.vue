@@ -89,14 +89,10 @@
     },
     methods: {
       addPropertyHandler (property) {
-        console.log(property)
         this.currentProperty = property
         this.dialog = !this.dialog
       },
       addClassLiteralPropertyHandler () {
-        console.log(this.resourceName)
-        console.log(this.currentProperty)
-        console.log(this.currentLiteral)
         this.$emit('add-literal-property', {'resourceName': this.resourceName, 'propertyName': this.currentProperty, 'literal': this.currentLiteral})
         this.dialog = false
       }

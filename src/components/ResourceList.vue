@@ -52,10 +52,6 @@
   import Treeview from '@/components/Treeview'
   export default {
     props: {
-      dataset: {
-        type: Object,
-        required: true
-      },
       resources: {
         type: Array,
         required: true
@@ -71,7 +67,6 @@
         dialog: false,
         newResourceName: '',
         classes: [],
-        myDataset: '',
         items: {
           name: 'Thing',
           children: [
@@ -95,7 +90,6 @@
       },
       // TODO: changeCurrentClass mutation to change classdetail component data
       changeCurrentResource (resourceName) {
-        console.log('changeCurrentResource in ResourceList')
         this.$emit('change-resource', resourceName)
         this.currentResourceName = resourceName
       }},
@@ -103,9 +97,6 @@
     name: 'ResourceList',
     created () {
       this.classes = this.resources  // Copy prop to local variable
-      this.myDataset = this.dataset
-      console.log(this.classes)
-      console.log(this.myDataset)
     }
   }
 </script>
