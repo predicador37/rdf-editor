@@ -20,8 +20,7 @@ export default new Vuex.Store({
   // TODO refactor vuex store in getters, mutations, actions, etc
   state: {
     rdfConstructs: RdfConstructs,
-    currentClassName: null,
-    initialState: 'prueba',
+    baseUrl: consts.baseUrl,
     dataset: rdf.dataset([rdf.quad(rdf.namedNode(baseUrl + 'Analista'), rdf.namedNode(RdfConstructs.rdf_type.value),
       rdf.namedNode(RdfConstructs.owl_Class.value)), rdf.quad(rdf.namedNode(baseUrl + 'Programador'), rdf.namedNode(RdfConstructs.rdf_type.value),
       rdf.namedNode(RdfConstructs.owl_Class.value)), rdf.quad(rdf.namedNode(baseUrl + 'Miguel_Exposito'), rdf.namedNode(RdfConstructs.rdf_type.value),

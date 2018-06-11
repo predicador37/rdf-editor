@@ -6,6 +6,8 @@ const dataset = state => state.dataset
 
 const rdfConstructs = state => state.rdfConstructs
 
+const baseUrl = state => state.baseUrl
+
 const getSubjectListByPredicateAndObject = (state) => ({predicate, object}) => {
   return new Promise((resolve, reject) => {
     let subjects = []
@@ -59,6 +61,7 @@ const getObjectListByPredicateAndSubject = (state) => ({predicate, subject}) => 
 export default {
   dataset,
   rdfConstructs,
+  baseUrl,
   getSubjectListByPredicateAndObject,
   getSubjectListByPredicate,
   getObjectListByPredicateAndSubject

@@ -6,7 +6,7 @@ let baseUrl = consts.baseUrl
 const addClass = (context, className) => {
   if (className != null) {
     context.commit('ADD_QUAD_FROM_IRI', {
-      subject: baseUrl + className,
+      subject: className,
       predicate: RdfConstructs.rdf_type.value,
       object: RdfConstructs.owl_Class.value
     })
@@ -16,7 +16,17 @@ const addClass = (context, className) => {
 const addResource = (context, {subject, predicate, object}) => {
   if (subject != null && predicate != null && object != null) {
     context.commit('ADD_QUAD_FROM_IRI', {
-      subject: baseUrl + subject,
+      subject: subject, // subject must be an IRI
+      predicate: predicate,
+      object: object
+    })
+  }
+}
+
+const removeResource = (context, {subject, predicate, object}) => {
+  if (subject != null && predicate != null && object != null) {
+    context.commit('REMOVE_QUAD_FROM_IRI', {
+      subject: subject,
       predicate: predicate,
       object: object
     })
@@ -26,7 +36,7 @@ const addResource = (context, {subject, predicate, object}) => {
 const addClassLiteralProperty = (context, {resourceName, property, literal}) => {
   if (resourceName != null) {
     context.commit('ADD_QUAD_WITH_OBJECT_LITERAL_FROM_IRI', {
-      subject: baseUrl + resourceName,
+      subject: resourceName,
       predicate: RdfConstructs[property].value,
       object: literal
     })
@@ -44,6 +54,7 @@ const exportJsonLD = (context) => {
 export default {
   addClass,
   addResource,
+  removeResource,
   addClassLiteralProperty,
   importN3,
   exportJsonLD

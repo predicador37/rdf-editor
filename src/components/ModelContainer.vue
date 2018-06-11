@@ -24,7 +24,7 @@
               </v-card-title>
 
               <v-card-text>
-                <resource-list  :resources="classes" @add-resource="handleAddResource($event, 'class')" @change-resource="handleChangeResource($event)"></resource-list>
+                <resource-list  name="Clase" :resources="classes" @add-resource="handleAddResource($event, 'class')" @change-resource="handleChangeResource($event)"></resource-list>
               </v-card-text>
 
 
@@ -41,7 +41,9 @@
     </v-tab-item>
     <v-tab-item key="2" id="tab-2">
       <v-card flat>
-        <v-card-text>Texto de prueba</v-card-text>
+        <v-card-text>
+          <v-treeview :items="items"></v-treeview>
+        </v-card-text>
       </v-card>
     </v-tab-item>
     <v-tab-item key="3" id="tab-3">
@@ -60,11 +62,13 @@
 <script>
   import ResourceList from '@/components/ResourceList'
   import ResourceDetail from '@/components/ResourceDetail'
+  import Treeview from '@/components/Treeview'
   import {mapActions, mapGetters} from 'vuex'
   export default {
     components: {
       'resource-list': ResourceList,
-      'resource-detail': ResourceDetail
+      'resource-detail': ResourceDetail,
+      'v-treeview': Treeview
     },
     name: 'ModelContainer',
     data () {
@@ -73,10 +77,23 @@
         subclasses: [],
         relatedClasses: {},
         editableClassData: ['rdfs_label', 'rdfs_comment'],
-        currentResourceName: ''
+        currentResourceName: '',
+        items: {
+          name: 'Thing',
+          children: [
+            {
+              name: 'Organization'
+            },
+            {name: 'Address',
+              children: [{
+                name: 'Thoroughfare type'
+              },
+                {name: 'Thoroughfare number'}]}
+          ]
+        }
       }
     },
-    computed: {...mapGetters(['rdfConstructs', 'getSubjectListByPredicateAndObject', 'getSubjectListByPredicate', 'getObjectListByPredicateAndSubject'])},
+    computed: {...mapGetters(['rdfConstructs', 'baseUrl', 'getSubjectListByPredicateAndObject', 'getSubjectListByPredicate', 'getObjectListByPredicateAndSubject'])},
     methods: {
       ...mapActions(['addClass', 'addClassLiteralProperty']),
       async getClasses () {
@@ -93,13 +110,13 @@
         let classes = await this.getObjectListByPredicateAndSubject({predicate: this.rdfConstructs[relatedClass].value, subject: this.rdfConstructs.BASE_URL + this.currentResourceName})
         this.$set(this.relatedClasses, relatedClass, classes)
       },
-      handleAddResource (resourceName, type) {
+      handleAddResource (resourceName, resourceType) {
         // using a string concatenation as parameter: 'add'+type to call the methods dynamically
-        this['add' + type.charAt(0).toUpperCase() + type.slice(1)](resourceName)
-        this[type.match('[ch|sh|s|x|z]$') ? 'get' + type.charAt(0).toUpperCase() + type.slice(1) + 'es' : 'get' + type.charAt(0).toUpperCase() + type.slice(1) + 's']()
+        this['add' + resourceType.charAt(0).toUpperCase() + resourceType.slice(1)](this.baseUrl + resourceName) // addClass
+        this[resourceType.match('[ch|sh|s|x|z]$') ? 'get' + resourceType.charAt(0).toUpperCase() + resourceType.slice(1) + 'es' : 'get' + resourceType.charAt(0).toUpperCase() + resourceType.slice(1) + 's']() // getClasses
       },
       handleAddLiteralProperty (triple) {
-        this.addClassLiteralProperty({resourceName: triple.resourceName, property: triple.propertyName, literal: triple.literal})
+        this.addClassLiteralProperty({resourceName: this.baseUrl + triple.resourceName, property: triple.propertyName, literal: triple.literal})
         for (const item of this.editableClassData) {
           this.getRelatedClasses(item)
         }

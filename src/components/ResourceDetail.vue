@@ -2,7 +2,7 @@
 <div>
   <v-card>
     <v-card-title primary-title>
-      <div class="headline"> Recurso  {{resourceName}}
+      <div class="headline"> Propiedades de clase  {{resourceName}}
       </div>
     </v-card-title>
     <v-card-text>
@@ -28,7 +28,7 @@
                   <v-icon>add</v-icon>
                 </v-btn>
               </v-fab-transition>
-              <v-list-tile-title>{{ rdfConstructs[item].value }}
+              <v-list-tile-title>{{ rdfConstructs[item].desc_plural }}
 
               </v-list-tile-title>
               <v-list-tile-sub-title class="text--primary">{{ item.headline }} </v-list-tile-sub-title>
@@ -39,21 +39,22 @@
 
           </v-list-tile>
           <v-divider v-if="index + 1 < editableClassData.length" :key="index"></v-divider>
+          <v-dialog v-model="dialog" max-width="500px">
+            <v-card>
+              <v-card-text>
+                <v-text-field v-model="currentLiteral" :label="rdfConstructs[item].desc"></v-text-field>
+                <small class="grey--text">Añadir {{ rdfConstructs[item].desc }} para la clase.</small>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn flat color="primary" @click.native.stop="addClassLiteralPropertyHandler">Guardar</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
         </template>
       </v-list>
     </v-card-text>
-    <v-dialog v-model="dialog" max-width="500px">
-      <v-card>
-        <v-card-text>
-          <v-text-field v-model="currentLiteral" label="Anotación"></v-text-field>
-          <small class="grey--text">Introduzca una nueva anotación para la clase.</small>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn flat color="primary" @click.native.stop="addClassLiteralPropertyHandler">Guardar</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+
   </v-card>
 
 </div>

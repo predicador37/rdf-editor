@@ -36,8 +36,8 @@
     <v-dialog v-model="dialog" max-width="500px">
       <v-card>
         <v-card-text>
-          <v-text-field v-model="newResourceName" label="Resource name"></v-text-field>
-          <small class="grey--text">Introduzca un nuevo recurso.</small>
+          <v-text-field v-model="newResourceName" :label="name"></v-text-field>
+          <small class="grey--text">Añadir {{name}}</small>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -52,6 +52,10 @@
   import Treeview from '@/components/Treeview'
   export default {
     props: {
+      name: {
+        type: String,
+        required: true
+      },
       resources: {
         type: Array,
         required: true
