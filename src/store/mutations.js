@@ -20,6 +20,14 @@ const REMOVE_QUAD_FROM_IRI = (state, {subject, predicate, object}) => {
   state.dataset.remove(rdf.quad(rdf.namedNode(subject), rdf.namedNode(predicate), rdf.namedNode(object)))
 }
 
+const REMOVE_RESOURCE_FROM_IRI = (state, resource) => {
+  console.log(resource)
+  console.log(JSON.stringify(state.dataset.match(rdf.namedNode(resource))))
+  state.dataset.removeMatches(rdf.namedNode(resource))
+  // state.dataset.removeMatches(null, resource, null, null)
+  // state.dataset.removeMatches(null, null, resource, null)
+}
+
 const ADD_QUAD_WITH_OBJECT_LITERAL_FROM_IRI = (state, {subject, predicate, object}) => {
   console.log(subject)
   console.log(predicate)
@@ -75,6 +83,7 @@ export default {
   INITIALIZE_DATASET,
   ADD_QUAD_FROM_IRI,
   REMOVE_QUAD_FROM_IRI,
+  REMOVE_RESOURCE_FROM_IRI,
   ADD_QUAD_WITH_OBJECT_LITERAL_FROM_IRI,
   IMPORT_N3,
   EXPORT_JSON_LD

@@ -24,7 +24,7 @@
               </v-card-title>
 
               <v-card-text>
-                <resource-list  name="Clase" :resources="classes" @add-resource="handleAddResource($event, 'class')" @change-resource="handleChangeResource($event)"></resource-list>
+                <resource-list  name="Clase" :resources="classes" @add-resource="handleAddResource($event, 'class')" @change-resource="handleChangeResource($event)" @remove-resource="handleRemoveResource($event)"></resource-list>
               </v-card-text>
 
 
@@ -95,7 +95,7 @@
     },
     computed: {...mapGetters(['rdfConstructs', 'baseUrl', 'getSubjectListByPredicateAndObject', 'getSubjectListByPredicate', 'getObjectListByPredicateAndSubject'])},
     methods: {
-      ...mapActions(['addClass', 'addClassLiteralProperty']),
+      ...mapActions(['addClass', 'addClassLiteralProperty', 'removeResource']),
       async getClasses () {
         let [classes, subclasses] = await Promise.all([this.getSubjectListByPredicateAndObject({
           predicate: this.rdfConstructs.rdf_type.value,
@@ -103,7 +103,6 @@
         }), this.getSubjectListByPredicate(this.rdfConstructs.rdfs_subClassOf.value)])
         this.classes = classes
         Array.prototype.push.apply(this.classes, subclasses)
-
         // impossible to merge classes with subclasses
       },
       async getRelatedClasses (relatedClass) {
@@ -123,13 +122,17 @@
       },
       handleCurrentResource (resourceName) {
         this.addClass(resourceName)
-        this.getClasses() // replace by event to parent
+        this.getClasses()
       },
       handleChangeResource (resourceName) {
         this.currentResourceName = resourceName
         for (const item of this.editableClassData) {
           this.getRelatedClasses(item)
         }
+      },
+      handleRemoveResource (resource) {
+        this.removeResource(resource)
+        this.getClasses()
       }
     },
     beforeMount () {

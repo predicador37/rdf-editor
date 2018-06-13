@@ -1,7 +1,4 @@
 import RdfConstructs from '@/utils/RdfConstructs'
-import consts from './consts'
-
-let baseUrl = consts.baseUrl
 
 const addClass = (context, className) => {
   if (className != null) {
@@ -23,7 +20,13 @@ const addResource = (context, {subject, predicate, object}) => {
   }
 }
 
-const removeResource = (context, {subject, predicate, object}) => {
+const removeResource = (context, resource) => {
+  if (resource != null) {
+    context.commit('REMOVE_RESOURCE_FROM_IRI', resource)
+  }
+}
+
+const removeQuad = (context, {subject, predicate, object}) => {
   if (subject != null && predicate != null && object != null) {
     context.commit('REMOVE_QUAD_FROM_IRI', {
       subject: subject,
@@ -54,6 +57,7 @@ const exportJsonLD = (context) => {
 export default {
   addClass,
   addResource,
+  removeQuad,
   removeResource,
   addClassLiteralProperty,
   importN3,
