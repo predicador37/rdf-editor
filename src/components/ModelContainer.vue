@@ -7,10 +7,6 @@
       <v-icon>mdi-file-tree</v-icon>
     </v-tab>
     <v-tab href="#tab-2">
-      Propiedades
-      <v-icon>mdi-format-list-bulleted-type</v-icon>
-    </v-tab>
-    <v-tab href="#tab-3">
       Relaciones
       <v-icon>mdi-human-male-female</v-icon>
     </v-tab>
@@ -24,7 +20,7 @@
               </v-card-title>
 
               <v-card-text>
-                <resource-list  name="Clase" :resources="classes" @add-resource="handleAddResource($event, 'class')" @change-resource="handleChangeResource($event)" @remove-resource="handleRemoveResource($event)"></resource-list>
+                <resource-list  name="Clase" :type="rdfConstructs.owl_Class" :resources="classes" @add-resource="handleAddResource($event, rdfConstructs.owl_Class.value)" @change-resource="handleChangeResource($event)" @remove-resource="handleRemoveResource($event)"></resource-list>
               </v-card-text>
 
 
@@ -33,7 +29,7 @@
           </v-flex>
           <v-flex px-3 py-3 md6 xs12>
 
-            <resource-detail :resource-name="currentResourceName" :editable-class-data="editableClassData" :rdfConstructs="rdfConstructs" :relatedClasses="relatedClasses" @add-literal-property="handleAddLiteralProperty($event)"></resource-detail>
+            <resource-detail v-if="renderDetail" :resource="currentResource" :editable-class-data="editableClassData" :rdfConstructs="rdfConstructs" :relatedClasses="relatedClasses" @add-literal-property="handleAddLiteralProperty($event)" @remove-resource="handleRemoveQuad($event)"></resource-detail>
 
           </v-flex>
         </v-layout>
@@ -76,8 +72,9 @@
         classes: [],
         subclasses: [],
         relatedClasses: {},
-        editableClassData: ['rdfs_label', 'rdfs_comment'],
-        currentResourceName: '',
+        editableClassData: ['rdfs_label', 'rdfs_comment', 'rdfs_seeAlso'],
+        renderDetail: false,
+        currentResource: '',
         items: {
           name: 'Thing',
           children: [
@@ -95,7 +92,7 @@
     },
     computed: {...mapGetters(['rdfConstructs', 'baseUrl', 'getSubjectListByPredicateAndObject', 'getSubjectListByPredicate', 'getObjectListByPredicateAndSubject'])},
     methods: {
-      ...mapActions(['addClass', 'addClassLiteralProperty', 'removeResource']),
+      ...mapActions(['addResource', 'addClassLiteralProperty', 'removeResource', 'removeQuad']),
       async getClasses () {
         let [classes, subclasses] = await Promise.all([this.getSubjectListByPredicateAndObject({
           predicate: this.rdfConstructs.rdf_type.value,
@@ -106,33 +103,42 @@
         // impossible to merge classes with subclasses
       },
       async getRelatedClasses (relatedClass) {
-        let classes = await this.getObjectListByPredicateAndSubject({predicate: this.rdfConstructs[relatedClass].value, subject: this.rdfConstructs.BASE_URL + this.currentResourceName})
+        let classes = await this.getObjectListByPredicateAndSubject({predicate: this.rdfConstructs[relatedClass].value, subject: this.currentResource})
         this.$set(this.relatedClasses, relatedClass, classes)
       },
       handleAddResource (resourceName, resourceType) {
+        this.addResource({'subject': this.baseUrl + resourceName, 'predicate': this.rdfConstructs.rdf_type.value, 'object': resourceType})
+        resourceType = resourceType.split('#')[1].toLowerCase()
         // using a string concatenation as parameter: 'add'+type to call the methods dynamically
-        this['add' + resourceType.charAt(0).toUpperCase() + resourceType.slice(1)](this.baseUrl + resourceName) // addClass
+        // this['add' + resourceType.charAt(0).toUpperCase() + resourceType.slice(1)](this.baseUrl + resourceName) // addClass
+        // not necessary... a generic resource can be added. But getting classes is the result of joining two datasets...
+        // how to generalize this?
         this[resourceType.match('[ch|sh|s|x|z]$') ? 'get' + resourceType.charAt(0).toUpperCase() + resourceType.slice(1) + 'es' : 'get' + resourceType.charAt(0).toUpperCase() + resourceType.slice(1) + 's']() // getClasses
+        // this.getClasses()
       },
       handleAddLiteralProperty (triple) {
-        this.addClassLiteralProperty({resourceName: this.baseUrl + triple.resourceName, property: triple.propertyName, literal: triple.literal})
+        this.addClassLiteralProperty({subject: triple.resource, predicate: this.rdfConstructs[triple.propertyName].value, object: triple.literal})
         for (const item of this.editableClassData) {
           this.getRelatedClasses(item)
         }
       },
-      handleCurrentResource (resourceName) {
-        this.addClass(resourceName)
+      handleChangeResource (resource) {
+        this.renderDetail = true
+        this.currentResource = resource
+        for (const item of this.editableClassData) {
+          this.getRelatedClasses(item)
+        }
+      },
+      handleRemoveQuad ({subject, predicate, object}) {
+        this.removeQuad({subject, predicate, object})
         this.getClasses()
-      },
-      handleChangeResource (resourceName) {
-        this.currentResourceName = resourceName
-        for (const item of this.editableClassData) {
-          this.getRelatedClasses(item)
-        }
+        this.handleChangeResource(this.currentResource)
       },
       handleRemoveResource (resource) {
         this.removeResource(resource)
         this.getClasses()
+        this.handleChangeResource(this.currentResourceName)
+        this.renderDetail = false
       }
     },
     beforeMount () {

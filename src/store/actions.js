@@ -36,12 +36,12 @@ const removeQuad = (context, {subject, predicate, object}) => {
   }
 }
 
-const addClassLiteralProperty = (context, {resourceName, property, literal}) => {
-  if (resourceName != null) {
+const addClassLiteralProperty = (context, {subject, predicate, object}) => {
+  if (subject != null && predicate != null && object != null) {
     context.commit('ADD_QUAD_WITH_OBJECT_LITERAL_FROM_IRI', {
-      subject: resourceName,
-      predicate: RdfConstructs[property].value,
-      object: literal
+      subject: subject,
+      predicate: predicate,
+      object: object
     })
   }
 }

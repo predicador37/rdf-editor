@@ -17,21 +17,17 @@ const ADD_QUAD_FROM_IRI = (state, {subject, predicate, object}) => {
 }
 
 const REMOVE_QUAD_FROM_IRI = (state, {subject, predicate, object}) => {
+  state.dataset.remove(rdf.quad(rdf.namedNode(subject), rdf.namedNode(predicate), rdf.literal(object)))
   state.dataset.remove(rdf.quad(rdf.namedNode(subject), rdf.namedNode(predicate), rdf.namedNode(object)))
 }
 
 const REMOVE_RESOURCE_FROM_IRI = (state, resource) => {
-  console.log(resource)
-  console.log(JSON.stringify(state.dataset.match(rdf.namedNode(resource))))
   state.dataset.removeMatches(rdf.namedNode(resource))
   // state.dataset.removeMatches(null, resource, null, null)
   // state.dataset.removeMatches(null, null, resource, null)
 }
 
 const ADD_QUAD_WITH_OBJECT_LITERAL_FROM_IRI = (state, {subject, predicate, object}) => {
-  console.log(subject)
-  console.log(predicate)
-  console.log(object)
   state.dataset.add(rdf.quad(rdf.namedNode(subject), rdf.namedNode(predicate), rdf.literal(object)))
 }
 

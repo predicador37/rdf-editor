@@ -7,7 +7,7 @@
           ripple
           @click=""
         >
-          <v-list-tile-content @click.stop="changeCurrentResource(item.text)">
+          <v-list-tile-content @click.stop="changeCurrentResource(item.value)">
             <v-list-tile-title>{{ item.text }}</v-list-tile-title>
             <v-list-tile-sub-title class="text--primary">{{ item.headline }}</v-list-tile-sub-title>
             <v-list-tile-sub-title>{{ item.text }}</v-list-tile-sub-title>
@@ -18,7 +18,7 @@
                 <v-card-actions>
                   <v-spacer></v-spacer>
                   <v-btn color="green darken-1" flat @click.native.stop="deleteDialog = false">Cancelar</v-btn>
-                  <v-btn color="red darken-1" flat @click.stop="handleDeleteResource(resourceToDelete)">Confirmar</v-btn>
+                  <v-btn color="red darken-1" flat @click.stop="deleteResourceHandler(resourceToDelete)">Confirmar</v-btn>
                 </v-card-actions>
               </v-card>
             </v-dialog>
@@ -110,8 +110,7 @@
         this.$emit('add-resource', this.newResourceName)
         this.dialog = false
       },
-      handleDeleteResource (resource) {
-        console.log(resource)
+      deleteResourceHandler (resource) {
         this.$emit('remove-resource', resource)
         this.deleteDialog = false
       },
@@ -121,7 +120,6 @@
       },
       // TODO: changeCurrentClass mutation to change classdetail component data
       changeCurrentResource (resourceName) {
-        console.log(resourceName)
         this.$emit('change-resource', resourceName)
         this.currentResourceName = resourceName
       }},

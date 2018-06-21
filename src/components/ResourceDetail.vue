@@ -2,43 +2,67 @@
 <div>
   <v-card>
     <v-card-title primary-title>
-      <div class="headline"> Propiedades de clase  {{resourceName}}
+      <div class="headline"> Propiedades de clase  {{resource.split('#')[1]}}
       </div>
     </v-card-title>
     <v-card-text>
-      <v-list two-line>
-        <template v-for="(item, index) in editableClassData">
-          <v-list-tile
-            :key="item"
-            ripple
-          >
-            <v-list-tile-content >
-              <v-fab-transition>
-                <v-btn
-                  absolute
-                  small
-                  dark
-                  fab
-                  bottom
-                  right
-                  color="pink"
-                  @click.native.stop="addPropertyHandler(item)"
-                >
+      <v-list expand>
+        <v-list-group
+          v-for="(item,index) in editableClassData"
+          :key="index"
+          no-action>
+          <v-list-tile slot="activator">
+            <v-list-tile-content>
+              <v-list-tile-title>{{rdfConstructs[item].desc_plural}}
+               </v-list-tile-title>
 
-                  <v-icon>add</v-icon>
-                </v-btn>
-              </v-fab-transition>
-              <v-list-tile-title>{{ rdfConstructs[item].desc_plural }}
-
-              </v-list-tile-title>
-              <v-list-tile-sub-title class="text--primary">{{ item.headline }} </v-list-tile-sub-title>
-              <v-list-tile-sub-title><span v-for="(element, idx) in relatedClasses[item]">
-    <span>{{element.text ? element.text : element.value}}</span><span v-if="idx+1 < relatedClasses[item].length">, </span>
-  </span></v-list-tile-sub-title>
             </v-list-tile-content>
+            <v-tooltip top>
+              <v-btn slot="activator" icon ripple @click.native.stop="addPropertyHandler(item)">
+                <v-icon  color="primary lighten-1">add</v-icon>
 
+              </v-btn>
+              <span>Añadir</span>
+            </v-tooltip>
           </v-list-tile>
-          <v-divider v-if="index + 1 < editableClassData.length" :key="index"></v-divider>
+          <v-list-tile v-for="(element, idx) in relatedClasses[item]"
+                       :key="idx" @click="">
+            <v-list-tile-content>
+              <v-list-tile-sub-title>{{ element.text ? element.text : element.value }}</v-list-tile-sub-title>
+              <v-dialog v-model="deleteDialog" persistent max-width="290">
+                <v-card>
+                  <v-card-title class="headline">¿Seguro que quieres eliminar para siempre este recurso?</v-card-title>
+                  <v-card-text>Si lo haces, no podrás volver a recuperarlo del grafo (a no ser que lo vuelvas a añadir, claro).</v-card-text>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="green darken-1" flat @click.native.stop="deleteDialog = false">Cancelar</v-btn>
+                    <v-btn color="red darken-1" flat @click.stop="deleteResourceHandler(currentItem, resourceToDelete)">Confirmar</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </v-list-tile-content>
+            <v-list-tile-action>
+              <v-tooltip top>
+                <v-btn slot="activator" icon ripple @click.native.stop="">
+
+                  <v-icon  color="primary lighten-1">create</v-icon>
+
+
+                </v-btn>
+                <span>Editar</span>
+              </v-tooltip>
+
+            </v-list-tile-action>
+
+            <v-list-tile-action>
+              <v-tooltip top>
+                <v-btn slot="activator" icon ripple @click.native.stop="openDeleteDialog(rdfConstructs[item].value, element.value)">
+                  <v-icon color="pink lighten-1">delete</v-icon>
+                </v-btn>
+                <span>Eliminar</span>
+              </v-tooltip>
+            </v-list-tile-action>
+          </v-list-tile>
           <v-dialog v-model="dialog" max-width="500px">
             <v-card>
               <v-card-text>
@@ -51,20 +75,23 @@
               </v-card-actions>
             </v-card>
           </v-dialog>
-        </template>
+        </v-list-group>
       </v-list>
+
+
     </v-card-text>
 
   </v-card>
 
 </div>
+
 </template>
 
 <script>
   export default {
     name: 'ResourceDetail',
     props: {
-      resourceName: {
+      resource: {
         type: String,
         required: true
       },
@@ -85,7 +112,10 @@
       return {
         currentProperty: null,
         currentLiteral: null,
-        dialog: false
+        dialog: false,
+        deleteDialog: false,
+        resourceToDelete: '',
+        currentItem: ''
       }
     },
     methods: {
@@ -94,8 +124,17 @@
         this.dialog = !this.dialog
       },
       addClassLiteralPropertyHandler () {
-        this.$emit('add-literal-property', {'resourceName': this.resourceName, 'propertyName': this.currentProperty, 'literal': this.currentLiteral})
+        this.$emit('add-literal-property', {'resource': this.resource, 'propertyName': this.currentProperty, 'literal': this.currentLiteral})
         this.dialog = false
+      },
+      openDeleteDialog (item, resource) {
+        this.resourceToDelete = resource
+        this.currentItem = item
+        this.deleteDialog = !this.deleteDialog
+      },
+      deleteResourceHandler (predicate, object) {
+        this.$emit('remove-resource', {'subject': this.resource, 'predicate': predicate, 'object': object})
+        this.deleteDialog = false
       }
     }
     // watch: {
