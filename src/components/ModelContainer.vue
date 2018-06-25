@@ -20,7 +20,7 @@
               </v-card-title>
 
               <v-card-text>
-                <resource-list  name="Clase" :type="rdfConstructs.owl_Class" :resources="classes" @add-resource="handleAddResource($event, rdfConstructs.owl_Class.value)" @change-resource="handleChangeResource($event)" @remove-resource="handleRemoveResource($event)"></resource-list>
+                <resource-list  name="Clase" :type="rdfConstructs.owl_Class" :resources="classes" @add-resource="handleAddResource($event, rdfConstructs.owl_Class.value)" @change-resource="handleChangeResource($event)" @remove-resource="handleRemoveResource($event)" @edit-resource="handleEditResource($event)"></resource-list>
               </v-card-text>
 
 

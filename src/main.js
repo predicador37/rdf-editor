@@ -29,6 +29,8 @@ Vue.use(Vuetify, {
 })
 
 Vue.config.productionTip = false
+Vue.config.devtools = true
+Vue.config.performance = true
 
 /* eslint-disable no-new */
 new Vue({

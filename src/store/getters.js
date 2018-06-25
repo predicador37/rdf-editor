@@ -58,11 +58,29 @@ const getObjectListByPredicateAndSubject = (state) => ({predicate, subject}) => 
   })
 }
 
+const getTriplesMatchingSubject = (state) => (subject) => {
+  return new Promise((resolve, reject) => {
+    let objects = []
+
+    let quadStream = state.dataset.toStream()
+
+    quadStream.on('data', (quad) => {
+      if ((quad.subject.equals(rdf.namedNode(subject))) && (quad.predicate.equals(rdf.namedNode(predicate)))) {
+        objects.push({text: quad.object.value.split('#')[1], value: quad.object.value})
+      }
+    })
+      .on('end', () => {
+        resolve(objects)
+      })
+  })
+}
+
 export default {
   dataset,
   rdfConstructs,
   baseUrl,
   getSubjectListByPredicateAndObject,
   getSubjectListByPredicate,
-  getObjectListByPredicateAndSubject
+  getObjectListByPredicateAndSubject,
+  getTriplesMatchingSubject
 }
