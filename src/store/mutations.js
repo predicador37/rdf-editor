@@ -16,6 +16,14 @@ const ADD_QUAD_FROM_IRI = (state, {subject, predicate, object}) => {
   state.dataset.add(rdf.quad(rdf.namedNode(subject), rdf.namedNode(predicate), rdf.namedNode(object)))
 }
 
+/**
+ * Elimina una tripleta a partir de un IRI generado desde los parámetros de entrada
+ * @param state
+ * @param subject
+ * @param predicate
+ * @param object
+ * @constructor
+ */
 const REMOVE_QUAD_FROM_IRI = (state, {subject, predicate, object}) => {
   state.dataset.remove(rdf.quad(rdf.namedNode(subject), rdf.namedNode(predicate), rdf.literal(object)))
   state.dataset.remove(rdf.quad(rdf.namedNode(subject), rdf.namedNode(predicate), rdf.namedNode(object)))
@@ -23,8 +31,8 @@ const REMOVE_QUAD_FROM_IRI = (state, {subject, predicate, object}) => {
 
 const REMOVE_RESOURCE_FROM_IRI = (state, resource) => {
   state.dataset.removeMatches(rdf.namedNode(resource))
-  // state.dataset.removeMatches(null, resource, null, null)
-  // state.dataset.removeMatches(null, null, resource, null)
+  state.dataset.removeMatches(null, rdf.namedNode(resource), null)
+  state.dataset.removeMatches(null, null, rdf.namedNode(resource))
 }
 
 const ADD_QUAD_WITH_OBJECT_LITERAL_FROM_IRI = (state, {subject, predicate, object}) => {
@@ -46,7 +54,7 @@ const IMPORT_N3 = (state, content) => {
 const EXPORT_JSON_LD = (state) => {
   // create a prefix map and fill it
   const prefixMap = rdf.prefixMap({
-    ex: rdf.namedNode('http://www.uned.es/semantic/')
+    ex: rdf.namedNode('http://www.uned.es#example')
   })
   let quadStream = state.dataset.toStream()
 

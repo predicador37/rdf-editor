@@ -59,11 +59,11 @@ const getObjectListByPredicateAndSubject = (state) => ({predicate, subject}) => 
 }
 
 const getTriplesMatchingSubject = (state) => (subject) => {
-  return state.dataset.match(subject)
+  return state.dataset.match(rdf.namedNode(subject))
 }
 
 const getTriplesMatchingObject = (state) => (object) => {
-  return state.dataset.match(null, null, object)
+  return state.dataset.match(null, null, rdf.namedNode(object))
 }
 
 export default {

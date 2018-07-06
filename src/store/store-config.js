@@ -3,7 +3,7 @@ import mutations from './mutations'
 import actions from './actions'
 import consts from './consts'
 import DataFactory from 'rdf-ext'
-import RdfConstructs from '@/utils/RdfConstructs'
+import RdfConstructs from '../utils/RdfConstructs'
 
 let rdf = DataFactory
 let baseUrl = consts.baseUrl

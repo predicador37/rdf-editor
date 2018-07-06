@@ -21,7 +21,7 @@ describe('getters', () => {
     const state = {
       dataset: dataset
     }
-    const results = getTriplesMatchingObject(state)(rdf.namedNode(baseUrl + 'Analista'))
+    const results = getTriplesMatchingObject(state)(baseUrl + 'Analista')
     let expected = 2
     let actual = results.length
     expect(expected).toEqual(actual)
@@ -31,7 +31,7 @@ describe('getters', () => {
     const state = {
       dataset: dataset
     }
-    const results = getTriplesMatchingSubject(state)(rdf.namedNode(baseUrl + 'Analista'))
+    const results = getTriplesMatchingSubject(state)(baseUrl + 'Analista')
     let expected = 5
     let actual = results.length
     expect(expected).toEqual(actual)

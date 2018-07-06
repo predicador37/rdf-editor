@@ -1,4 +1,5 @@
-import RdfConstructs from '@/utils/RdfConstructs'
+import RdfConstructs from '../utils/RdfConstructs'
+// TODO convention: parameters must be of type string
 
 const addClass = (context, className) => {
   if (className != null) {
@@ -39,17 +40,13 @@ const removeResource = (context, resource) => {
 const editResource = (context, {oldResource, newResource}) => {
   if (oldResource != null && newResource != null) {
     context.getters.getTriplesMatchingSubject(oldResource).forEach((triple) => {
-      let predicate = triple.predicate
-      let object = triple.object
-      context.dispatch('removeQuad', {subject: oldResource, predicate: predicate, object: object})
-      context.dispatch('addQuad', {subject: newResource, predicate: predicate, object: object})
+      context.dispatch('removeQuad', {subject: triple.subject.value, predicate: triple.predicate.value, object: triple.object.value})
+      context.dispatch('addQuad', {subject: newResource, predicate: triple.predicate.value, object: triple.object.value})
     })
 
     context.getters.getTriplesMatchingObject(oldResource).forEach((triple) => {
-      let predicate = triple.predicate
-      let subject = triple.subject
-      context.dispatch('removeQuad', {subject: subject, predicate: predicate, object: oldResource})
-      context.dispatch('addQuad', {subject: subject, predicate: predicate, object: newResource})
+      context.dispatch('removeQuad', {subject: triple.subject.value, predicate: triple.predicate.value, object: triple.object.value})
+      context.dispatch('addQuad', {subject: triple.subject.value, predicate: triple.predicate.value, object: newResource})
     })
   }
 }
