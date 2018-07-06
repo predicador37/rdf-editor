@@ -1,7 +1,8 @@
 import Vue from 'vue'
+import Vuex from 'vuex'
 import App from './App'
 import router from './router'
-import store from './store'
+import storeConfig from './store/store-config'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import '@mdi/font/css/materialdesignicons.css'
@@ -27,6 +28,9 @@ Vue.use(Vuetify, {
     warning: '#FFC107'
   }
 })
+
+Vue.use(Vuex)
+const store = new Vuex.Store(storeConfig)
 
 Vue.config.productionTip = false
 Vue.config.devtools = true
