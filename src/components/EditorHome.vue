@@ -2,20 +2,28 @@
 
 <template>
   <div>
-    <v-jumbotron color="grey lighten-2">
+
       <v-container fill-height fluid>
         <v-layout align-center>
-          <v-flex height="100%">
+          <v-flex >
+            <v-jumbotron height="100%" color="grey lighten-2">
+              <v-container fill-height fluid>
+                <v-layout align-center>
+                  <v-flex >
             <h3 class="display-3">{{welcome_message}}</h3>
             <span class="subheading">{{welcome_description}}</span>
             <v-divider class="my-3"></v-divider>
             <div class="title mb-3"> ¡Elige con qué quieres trabajar!</div>
             <v-btn large color="primary" class="mx-3" to="/model">Modelar</v-btn>
             <v-btn large color="primary" class="mx-3" to="/model">Poblar</v-btn>
+                  </v-flex>
+                </v-layout>
+              </v-container>
+            </v-jumbotron>
           </v-flex>
         </v-layout>
       </v-container>
-    </v-jumbotron>
+
 
 
 
