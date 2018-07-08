@@ -90,9 +90,9 @@
         }
       }
     },
-    computed: {...mapGetters(['rdfConstructs', 'baseUrl', 'getSubjectListByPredicateAndObject', 'getSubjectListByPredicate', 'getObjectListByPredicateAndSubject'])},
+    computed: {...mapGetters(['dataset', 'rdfConstructs', 'baseUrl', 'getSubjectListByPredicateAndObject', 'getSubjectListByPredicate', 'getObjectListByPredicateAndSubject'])},
     methods: {
-      ...mapActions(['addResource', 'addClassLiteralProperty', 'removeResource', 'removeQuad']),
+      ...mapActions(['addResource', 'addClassLiteralProperty', 'removeResource', 'removeQuad', 'editResource']),
       async getClasses () {
         let [classes, subclasses] = await Promise.all([this.getSubjectListByPredicateAndObject({
           predicate: this.rdfConstructs.rdf_type.value,
@@ -100,6 +100,8 @@
         }), this.getSubjectListByPredicate(this.rdfConstructs.rdfs_subClassOf.value)])
         this.classes = classes
         Array.prototype.push.apply(this.classes, subclasses)
+        console.log(this.classes)
+        this.classes.sort()
         // impossible to merge classes with subclasses
       },
       async getRelatedClasses (relatedClass) {
@@ -139,6 +141,12 @@
         this.getClasses()
         this.handleChangeResource(this.currentResourceName)
         this.renderDetail = false
+      },
+      handleEditResource ({oldResource, resource}) {
+        this.editResource({'oldResource': oldResource, 'newResource': resource})
+        console.log(JSON.stringify(this.dataset))
+        this.getClasses()
+        this.handleChangeResource(resource)
       }
     },
     beforeMount () {

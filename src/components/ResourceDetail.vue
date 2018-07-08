@@ -126,6 +126,7 @@
       addClassLiteralPropertyHandler () {
         this.$emit('add-literal-property', {'resource': this.resource, 'propertyName': this.currentProperty, 'literal': this.currentLiteral})
         this.dialog = false
+        this.currentLiteral = null
       },
       openDeleteDialog (item, resource) {
         this.resourceToDelete = resource

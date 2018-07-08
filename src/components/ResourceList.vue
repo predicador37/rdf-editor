@@ -30,7 +30,7 @@
                 </v-card-text>
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn flat color="primary" @click.native.stop="editResourceHandler(resourceToEdit)">Guardar</v-btn>
+                  <v-btn flat color="primary" @click.native.stop="editResourceHandler(oldResource, resourceToEdit)">Guardar</v-btn>
                 </v-card-actions>
               </v-card>
             </v-dialog>
@@ -113,6 +113,7 @@
         editDialog: false,
         resourceToDelete: '',
         resourceToEdit: '',
+        oldResource: '',
         newResourceName: '',
         classes: [],
         items: {
@@ -141,8 +142,8 @@
         this.$emit('remove-resource', resource)
         this.deleteDialog = false
       },
-      editResourceHandler (resource) {
-        this.$emit('edit-resource', resource)
+      editResourceHandler (oldResource, resource) {
+        this.$emit('edit-resource', {oldResource, resource})
         this.editDialog = false
       },
       openDeleteDialog (resource) {
@@ -151,6 +152,7 @@
       },
       openEditDialog (resource) {
         this.resourceToEdit = resource
+        this.oldResource = resource
         this.editDialog = !this.editDialog
       },
       // TODO: changeCurrentClass mutation to change classdetail component data
