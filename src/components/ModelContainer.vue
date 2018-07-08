@@ -72,7 +72,7 @@
         classes: [],
         subclasses: [],
         relatedClasses: {},
-        editableClassData: ['rdfs_label', 'rdfs_comment', 'rdfs_seeAlso'],
+        editableClassData: ['rdfs_subClassOf', 'owl_equivalentClass', 'owl_disjointWith', 'rdfs_label', 'rdfs_comment', 'rdfs_seeAlso'],
         renderDetail: false,
         currentResource: '',
         items: {
@@ -93,16 +93,12 @@
     computed: {...mapGetters(['dataset', 'rdfConstructs', 'baseUrl', 'getSubjectListByPredicateAndObject', 'getSubjectListByPredicate', 'getObjectListByPredicateAndSubject'])},
     methods: {
       ...mapActions(['addResource', 'addClassLiteralProperty', 'removeResource', 'removeQuad', 'editResource']),
-      async getClasses () {
-        let [classes, subclasses] = await Promise.all([this.getSubjectListByPredicateAndObject({
-          predicate: this.rdfConstructs.rdf_type.value,
-          object: this.rdfConstructs.owl_Class.value
-        }), this.getSubjectListByPredicate(this.rdfConstructs.rdfs_subClassOf.value)])
-        this.classes = classes
-        Array.prototype.push.apply(this.classes, subclasses)
+      async getResources ({predicate, object}) {
+        let resources = await this.getSubjectListByPredicateAndObject({predicate, object})
+        this.classes = resources
         console.log(this.classes)
-        this.classes.sort()
-        // impossible to merge classes with subclasses
+        // TODO: order array
+        // TODO: generalize classes to resources
       },
       async getRelatedClasses (relatedClass) {
         let classes = await this.getObjectListByPredicateAndSubject({predicate: this.rdfConstructs[relatedClass].value, subject: this.currentResource})
@@ -133,24 +129,24 @@
       },
       handleRemoveQuad ({subject, predicate, object}) {
         this.removeQuad({subject, predicate, object})
-        this.getClasses()
+        this.getResources({'predicate': this.rdfConstructs.rdf_type.value, 'object': this.rdfConstructs.owl_Class.value})
         this.handleChangeResource(this.currentResource)
       },
       handleRemoveResource (resource) {
         this.removeResource(resource)
-        this.getClasses()
+        this.getResources({'predicate': this.rdfConstructs.rdf_type.value, 'object': this.rdfConstructs.owl_Class.value})
         this.handleChangeResource(this.currentResourceName)
         this.renderDetail = false
       },
       handleEditResource ({oldResource, resource}) {
         this.editResource({'oldResource': oldResource, 'newResource': resource})
         console.log(JSON.stringify(this.dataset))
-        this.getClasses()
+        this.getResources({'predicate': this.rdfConstructs.rdf_type.value, 'object': this.rdfConstructs.owl_Class.value})
         this.handleChangeResource(resource)
       }
     },
     beforeMount () {
-      this.getClasses()
+      this.getResources({'predicate': this.rdfConstructs.rdf_type.value, 'object': this.rdfConstructs.owl_Class.value})
     }
   }
 </script>

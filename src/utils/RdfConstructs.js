@@ -12,8 +12,8 @@ export default {
       'rdfs:subClassOf',
     value:
       'http://www.w3.org/2000/01/rdf-schema#subClassOf',
-    desc: 'Subclase',
-    desc_plural: 'Subclases',
+    desc: 'Subclase de',
+    desc_plural: 'Subclase de',
     type: 'property'
   },
   rdfs_subPropertyOf: {
@@ -40,28 +40,28 @@ export default {
   },
   owl_Thing: {
     text: 'owl:Thing',
-    value: 'https://www.w3.org/2002/07/owl#Thing',
+    value: 'http://www.w3.org/2002/07/owl#Thing',
     desc: 'Cosa',
     desc_plural: 'Cosas',
     type: 'class'
   },
   owl_Class: {
     text: 'owl:Class',
-    value: 'https://www.w3.org/2002/07/owl#Class',
+    value: 'http://www.w3.org/2002/07/owl#Class',
     desc: 'Clase',
     desc_plural: 'Clases',
     type: 'class'
   },
   owl_DatatypeProperty: {
     text: 'owl:DatatypeProperty',
-    value: 'https://www.w3.org/2002/07/owl#DatatypeProperty',
+    value: 'http://www.w3.org/2002/07/owl#DatatypeProperty',
     desc: 'Propiedad tipo de datos',
     desc_plural: 'Propiedades tipo de datos',
     type: 'class'
   },
   owl_ObjectProperty: {
     text: 'owl:ObjectProperty',
-    value: 'https://www.w3.org/2002/07/owl#ObjectProperty',
+    value: 'http://www.w3.org/2002/07/owl#ObjectProperty',
     desc: 'Propiedad objeto',
     desc_plural: 'Propiedades objeto',
     type: 'class'
@@ -76,15 +76,15 @@ export default {
   owl_equivalentClass: {
     text: 'owl:equivalentClass',
     value: 'http://www.w3.org/2002/07/owl#equivalentClass',
-    desc: 'Clase equivalente',
-    desc_plural: 'Clases equivalentes',
+    desc: 'Equivalente a',
+    desc_plural: 'Equivalente a',
     type: 'property'
   },
   owl_disjointWith: {
     text: 'owl:disjointWith',
     value: 'http://www.w3.org/2002/07/owl#disjointWith',
-    desc: 'Disjunto',
-    desc_plural: 'Disjuntos',
+    desc: 'Disjunta con',
+    desc_plural: 'Disjunta con',
     type: 'property'
   },
   rdfs_label: {

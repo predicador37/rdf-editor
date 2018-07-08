@@ -10,6 +10,9 @@ const baseUrl = state => state.baseUrl
 
 const getSubjectListByPredicateAndObject = (state) => ({predicate, object}) => {
   return new Promise((resolve, reject) => {
+    console.log('get subject list by predicate and object')
+    console.log(predicate)
+    console.log(object)
     let subjects = []
 
     let quadStream = state.dataset.toStream()
