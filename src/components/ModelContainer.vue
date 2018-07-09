@@ -29,7 +29,7 @@
           </v-flex>
           <v-flex px-3 py-3 md6 xs12>
 
-            <resource-detail v-if="renderDetail" :resource="currentResource" :editable-class-data="editableClassData" :rdfConstructs="rdfConstructs" :relatedClasses="relatedClasses" @add-literal-property="handleAddLiteralProperty($event)" @remove-resource="handleRemoveQuad($event)"></resource-detail>
+            <resource-detail v-if="renderDetail" :resource="currentResource" :editable-class-data="editableClassData" :rdfConstructs="rdfConstructs" :relatedClasses="relatedClasses" @add-literal-property="handleAddLiteralProperty($event)" @remove-resource="handleRemoveQuad($event)"  @edit-literal-property="handleEditLiteralProperty($event)"></resource-detail>
 
           </v-flex>
         </v-layout>
@@ -92,7 +92,7 @@
     },
     computed: {...mapGetters(['dataset', 'rdfConstructs', 'baseUrl', 'getSubjectListByPredicateAndObject', 'getSubjectListByPredicate', 'getObjectListByPredicateAndSubject'])},
     methods: {
-      ...mapActions(['addResource', 'addClassLiteralProperty', 'removeResource', 'removeQuad', 'editResource']),
+      ...mapActions(['addResource', 'addClassLiteralProperty', 'editClassLiteralProperty', 'removeResource', 'removeQuad', 'editResource']),
       async getResources ({predicate, object}) {
         let resources = await this.getSubjectListByPredicateAndObject({predicate, object})
         this.classes = resources
@@ -143,6 +143,14 @@
         console.log(JSON.stringify(this.dataset))
         this.getResources({'predicate': this.rdfConstructs.rdf_type.value, 'object': this.rdfConstructs.owl_Class.value})
         this.handleChangeResource(resource)
+      },
+      handleEditLiteralProperty ({subject, predicate, object, newObject}) {
+        console.log('handleblablabla')
+        console.log(newObject)
+        this.editClassLiteralProperty({'subject': subject, 'predicate': this.rdfConstructs[predicate].value, 'object': object, 'newObject': newObject})
+        for (const item of this.editableClassData) {
+          this.getRelatedClasses(item)
+        }
       }
     },
     beforeMount () {

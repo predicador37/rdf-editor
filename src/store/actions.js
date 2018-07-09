@@ -61,6 +61,17 @@ const removeQuad = (context, {subject, predicate, object}) => {
   }
 }
 
+const editClassLiteralProperty = (context, {subject, predicate, object, newObject}) => {
+  if (subject != null && predicate != null && object != null) {
+    context.commit('EDIT_QUAD_WITH_OBJECT_LITERAL_FROM_IRI', {
+      subject: subject,
+      predicate: predicate,
+      object: object,
+      newObject: newObject
+    })
+  }
+}
+
 const addClassLiteralProperty = (context, {subject, predicate, object}) => {
   if (subject != null && predicate != null && object != null) {
     context.commit('ADD_QUAD_WITH_OBJECT_LITERAL_FROM_IRI', {
@@ -84,6 +95,7 @@ export default {
   addResource,
   editResource,
   addQuad,
+  editClassLiteralProperty,
   removeQuad,
   removeResource,
   addClassLiteralProperty,

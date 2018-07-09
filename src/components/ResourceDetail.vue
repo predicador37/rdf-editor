@@ -40,10 +40,22 @@
                   </v-card-actions>
                 </v-card>
               </v-dialog>
+              <v-dialog v-model="editDialog" persistent max-width="290">
+                <v-card>
+                  <v-card-text>
+                    <v-text-field v-model="currentLiteral" :label="dialogText"></v-text-field>
+                    <small class="grey--text">Editar {{ dialogText }} para la clase.</small>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn flat color="primary" @click.native.stop="editClassLiteralPropertyHandler">Guardar</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
             </v-list-tile-content>
             <v-list-tile-action>
               <v-tooltip top>
-                <v-btn slot="activator" icon ripple @click.native.stop="">
+                <v-btn slot="activator" icon ripple @click.native.stop="openEditDialog(item, element.value)">
 
                   <v-icon  color="primary lighten-1">create</v-icon>
 
@@ -66,8 +78,8 @@
           <v-dialog v-model="dialog" max-width="500px">
             <v-card>
               <v-card-text>
-                <v-text-field v-model="currentLiteral" :label="rdfConstructs[item].desc"></v-text-field>
-                <small class="grey--text">Añadir {{ rdfConstructs[item].desc }} para la clase.</small>
+                <v-text-field v-model="currentLiteral" :label="dialogText"></v-text-field>
+                <small class="grey--text">Añadir {{ dialogText }} para la clase.</small>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
@@ -113,14 +125,18 @@
         currentProperty: null,
         currentLiteral: null,
         dialog: false,
+        dialogText: '',
         deleteDialog: false,
+        editDialog: false,
         resourceToDelete: '',
+        resourceToEdit: '',
         currentItem: ''
       }
     },
     methods: {
       addPropertyHandler (property) {
         this.currentProperty = property
+        this.dialogText = this.rdfConstructs[property].desc
         this.dialog = !this.dialog
       },
       addClassLiteralPropertyHandler () {
@@ -133,9 +149,23 @@
         this.currentItem = item
         this.deleteDialog = !this.deleteDialog
       },
+      openEditDialog (item, resource) {
+        this.resourceToEdit = resource // object
+        this.currentItem = item // predicate
+        console.log(item)
+        this.dialogText = this.rdfConstructs[item].desc
+        this.currentLiteral = resource
+        this.editDialog = !this.editDialog
+      },
       deleteResourceHandler (predicate, object) {
         this.$emit('remove-resource', {'subject': this.resource, 'predicate': predicate, 'object': object})
         this.deleteDialog = false
+      },
+      editClassLiteralPropertyHandler () {
+        this.$emit('edit-literal-property', {'subject': this.resource, 'predicate': this.currentItem, 'object': this.resourceToEdit, 'newObject': this.currentLiteral})
+        this.editDialog = false
+        this.currentLiteral = null
+        this.resourceToEdit = ''
       }
     }
     // watch: {
