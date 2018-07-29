@@ -1,19 +1,13 @@
 import DataFactory from 'rdf-ext'
-import Parser from 'rdf-parser-n3'
+import {Parser, Store} from 'n3'
 import Serializer from 'rdf-serializer-jsonld-ext'
-import StringStream from 'string-to-stream'
 
 let N3Parser = Parser
 let rdf = DataFactory
-let string2stream = StringStream
 let JsonLdSerializer = Serializer
 
-const INITIALIZE_DATASET = (state, dataset) => {
-  state.dataset = dataset
-}
-
 const ADD_QUAD_FROM_IRI = (state, {subject, predicate, object}) => {
-  state.dataset.add(rdf.quad(rdf.namedNode(subject), rdf.namedNode(predicate), rdf.namedNode(object)))
+  state.n3store.addQuad(rdf.quad(rdf.namedNode(subject), rdf.namedNode(predicate), rdf.namedNode(object)))
 }
 
 /**
@@ -25,40 +19,45 @@ const ADD_QUAD_FROM_IRI = (state, {subject, predicate, object}) => {
  * @constructor
  */
 const REMOVE_QUAD_FROM_IRI = (state, {subject, predicate, object}) => {
-  state.dataset.remove(rdf.quad(rdf.namedNode(subject), rdf.namedNode(predicate), rdf.literal(object)))
-  state.dataset.remove(rdf.quad(rdf.namedNode(subject), rdf.namedNode(predicate), rdf.namedNode(object)))
+  state.n3store.removeQuad(rdf.quad(rdf.namedNode(subject), rdf.namedNode(predicate), rdf.literal(object)))
+  state.n3store.removeQuad(rdf.quad(rdf.namedNode(subject), rdf.namedNode(predicate), rdf.namedNode(object)))
 }
 
 const EDIT_QUAD_WITH_OBJECT_LITERAL_FROM_IRI = (state, {subject, predicate, object, newObject}) => {
-  state.dataset.remove(rdf.quad(rdf.namedNode(subject), rdf.namedNode(predicate), rdf.literal(object)))
-  state.dataset.remove(rdf.quad(rdf.namedNode(subject), rdf.namedNode(predicate), rdf.namedNode(object)))
+  state.n3store.removeQuad(rdf.quad(rdf.namedNode(subject), rdf.namedNode(predicate), rdf.literal(object)))
+  state.n3store.removeQuad(rdf.quad(rdf.namedNode(subject), rdf.namedNode(predicate), rdf.namedNode(object)))
   console.log(subject)
   console.log(predicate)
   console.log(object)
   console.log(newObject)
-  state.dataset.add(rdf.quad(rdf.namedNode(subject), rdf.namedNode(predicate), rdf.literal(newObject)))
+  state.n3store.addQuad(rdf.quad(rdf.namedNode(subject), rdf.namedNode(predicate), rdf.literal(newObject)))
 }
 
 const REMOVE_RESOURCE_FROM_IRI = (state, resource) => {
-  state.dataset.removeMatches(rdf.namedNode(resource))
-  state.dataset.removeMatches(null, rdf.namedNode(resource), null)
-  state.dataset.removeMatches(null, null, rdf.namedNode(resource))
+  let results = state.n3store.getQuads(rdf.namedNode(resource), null, null, null)
+  for (var quad of results) {
+    state.n3store.removeQuad(quad)
+  }
+  results = state.n3store.getQuads(null, rdf.namedNode(resource), null, null)
+  for (quad of results) {
+    state.n3store.removeQuad(quad)
+  }
+  results = state.n3store.getQuads(null, null, rdf.namedNode(resource), null)
+  for (quad of results) {
+    state.n3store.removeQuad(quad)
+  }
 }
 
 const ADD_QUAD_WITH_OBJECT_LITERAL_FROM_IRI = (state, {subject, predicate, object}) => {
-  state.dataset.add(rdf.quad(rdf.namedNode(subject), rdf.namedNode(predicate), rdf.literal(object)))
+  state.n3store.addQuad(rdf.quad(rdf.namedNode(subject), rdf.namedNode(predicate), rdf.literal(object)))
 }
 
 const IMPORT_N3 = (state, content) => {
-  const turtleParser = new N3Parser({factory: rdf})
-  let quadStream = turtleParser.import(string2stream(content))
-  quadStream.on('data', (quad) => {
-    console.log(quad.toString())
-  })
-  rdf.dataset().import(quadStream).then((dataset) => {
-    state.dataset = dataset
-    console.log(JSON.stringify(state.dataset))
-  })
+  const turtleParser = new N3Parser()
+  let quads = turtleParser.parse(content)
+  state.n3store = new Store(quads)
+
+  console.log(JSON.stringify(state.n3store.getQuads()))
 }
 
 const EXPORT_JSON_LD = (state) => {
@@ -66,6 +65,7 @@ const EXPORT_JSON_LD = (state) => {
   const prefixMap = rdf.prefixMap({
     ex: rdf.namedNode('http://www.uned.es#example')
   })
+  // TODO change this
   let quadStream = state.dataset.toStream()
 
   // create a JSON-LD serializer instance which returns strings and compacts the JSON-LD
@@ -94,7 +94,6 @@ const EXPORT_JSON_LD = (state) => {
 }
 
 export default {
-  INITIALIZE_DATASET,
   ADD_QUAD_FROM_IRI,
   REMOVE_QUAD_FROM_IRI,
   REMOVE_RESOURCE_FROM_IRI,

@@ -27,7 +27,7 @@
             </v-card>
 
           </v-flex>
-          <v-flex px-3 py-3 md6 xs12>
+          <v-flex fixed  px-3 py-3 md6 xs12>
 
             <resource-detail v-if="renderDetail" :resource="currentResource" :editable-class-data="editableClassData" :rdfConstructs="rdfConstructs" :relatedClasses="relatedClasses" @add-literal-property="handleAddLiteralProperty($event)" @remove-resource="handleRemoveQuad($event)"  @edit-literal-property="handleEditLiteralProperty($event)"></resource-detail>
 
@@ -96,7 +96,7 @@
       async getResources ({predicate, object}) {
         let resources = await this.getSubjectListByPredicateAndObject({predicate, object})
         this.classes = resources
-        console.log(this.classes)
+        console.log(JSON.stringify(this.classes))
         // TODO: order array
         // TODO: generalize classes to resources
       },

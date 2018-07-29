@@ -3,14 +3,14 @@
     <v-list two-line>
       <template v-for="(item, index) in resources">
         <v-list-tile
-          :key="item.text"
+          :key="item.value"
           ripple
           @click=""
         >
           <v-list-tile-content @click.stop="changeCurrentResource(item.value)">
-            <v-list-tile-title>{{ item.text }}</v-list-tile-title>
+            <v-list-tile-title>{{ item.value }}</v-list-tile-title>
             <v-list-tile-sub-title class="text--primary">{{ item.headline }}</v-list-tile-sub-title>
-            <v-list-tile-sub-title>{{ item.text }}</v-list-tile-sub-title>
+            <v-list-tile-sub-title>{{ item.value }}</v-list-tile-sub-title>
             <v-dialog v-model="deleteDialog" persistent max-width="290">
               <v-card>
                 <v-card-title class="headline">¿Seguro que quieres eliminar para siempre este recurso?</v-card-title>
