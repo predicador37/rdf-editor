@@ -66,7 +66,8 @@ const EXPORT_JSON_LD = (state) => {
     ex: rdf.namedNode('http://www.uned.es#example')
   })
   // TODO change this
-  let quadStream = state.dataset.toStream()
+  let quadStream = require('streamify-array')(state.n3store.getQuads())
+  // let quadStream = state.dataset.toStream()
 
   // create a JSON-LD serializer instance which returns strings and compacts the JSON-LD
   const serializer = new JsonLdSerializer({outputFormat: 'string', compact: true})
