@@ -69,6 +69,11 @@
           icon: 'mdi-cube-outline',
           title: 'Modelado',
           link: '/model'
+        },
+        {
+          icon: 'mdi-database-search',
+          title: 'Consulta',
+          link: '/sparql'
         }],
         title: 'RDF editor'
       }

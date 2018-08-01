@@ -90,7 +90,7 @@
         }
       }
     },
-    computed: {...mapGetters(['dataset', 'rdfConstructs', 'baseUrl', 'getSubjectListByPredicateAndObject', 'getSubjectListByPredicate', 'getObjectListByPredicateAndSubject'])},
+    computed: {...mapGetters(['rdfConstructs', 'baseUrl', 'getSubjectListByPredicateAndObject', 'getSubjectListByPredicate', 'getObjectListByPredicateAndSubject'])},
     methods: {
       ...mapActions(['addResource', 'addClassLiteralProperty', 'editClassLiteralProperty', 'removeResource', 'removeQuad', 'editResource']),
       async getResources ({predicate, object}) {

@@ -4,6 +4,8 @@ let rdf = DataFactory
 
 const n3store = state => state.n3store
 
+const engine = state => state.engine
+
 const rdfConstructs = state => state.rdfConstructs
 
 const baseUrl = state => state.baseUrl
@@ -37,13 +39,19 @@ const getTriplesMatchingObject = (state) => (object) => {
   return state.n3store.getQuads(null, null, rdf.namedNode(object), null)
 }
 
+const getStoreQuads = (state) => (s, p, o, g) => {
+  return state.n3store.getQuads(s, p, o, g)
+}
+
 export default {
   n3store,
+  engine,
   rdfConstructs,
   baseUrl,
   getSubjectListByPredicateAndObject,
   getSubjectListByPredicate,
   getObjectListByPredicateAndSubject,
   getTriplesMatchingSubject,
-  getTriplesMatchingObject
+  getTriplesMatchingObject,
+  getStoreQuads
 }
