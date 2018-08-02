@@ -1,4 +1,5 @@
 'use strict'
+require('babel-polyfill')
 const path = require('path')
 const utils = require('./utils')
 const config = require('../config')
@@ -21,10 +22,11 @@ const createLintingRule = () => ({
 
 module.exports = {
   context: path.resolve(__dirname, '../'),
-  entry: {
-    app: './src/main.js',
-    'babel-polyfill': './src/main.js'
-  },
+  // entry: {
+  //   app: './src/main.js',
+  //   'babel-polyfill': './src/main.js'
+  // },
+  entry: ['babel-polyfill', './src/main.js'],
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',

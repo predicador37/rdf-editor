@@ -18,7 +18,6 @@
 
 <script>
   import {mapGetters} from 'vuex'
-
   export default {
     name: 'SparqlQuery',
     data () {
@@ -27,27 +26,28 @@
         results: []
       }
     },
-    computed: {...mapGetters(['getStoreQuads', 'engine'])},
+    computed: {...mapGetters(['getStoreQuads'])},
     methods: {
       executeSparqlQuery (query) {
         const newEngine = require('@comunica/actor-init-sparql-rdfjs').newEngine
         const source = {
-          match: function (s, p, o, g) {
+          match: (s, p, o, g) => {
             return require('streamify-array')(this.getStoreQuads(s, p, o, g))
           }
         }
         const myEngine = newEngine()
+        let results = []
         myEngine.query(query,
           {'sources': [{type: 'rdfjsSource', value: source}]})
-          .then(function (result) {
+          .then((result) => {
             result.bindingsStream.on('data', function (data) {
               // Each data object contains a mapping from variables to RDFJS terms.
-              this.results.push(data)
-              console.log(data.get('?s'))
+              results.push(data)
+              // console.log(data.get('?s'))
               // console.log(data.get('?p'))
               // console.log(data.get('?o'))
             }).on('end', () => {
-              return (this.results)
+              this.$emit('emit-results', results)
             })
           })
       }

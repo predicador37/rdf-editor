@@ -44,11 +44,16 @@ describe('sparql', () => {
           result.bindingsStream.on('data', function (data) {
             // Each data object contains a mapping from variables to RDFJS terms.
             results.push(data)
-            console.log(data.get('?s'))
+            // console.log(data.get('?s'))
             // console.log(data.get('?p'))
             // console.log(data.get('?o'))
           }).on('end', () => {
             resolve(results)
+            results.forEach((item) => {
+              console.log(item.get('?s').value)
+              console.log(item.get('?p'))
+              console.log(item.get('?o'))
+            })
           })
         })
     })

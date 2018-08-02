@@ -9,7 +9,7 @@
           </v-card-title>
 
           <v-card-text>
-            <sparql-query></sparql-query>
+            <sparql-query @emit-results="handleEmittedResults($event)"></sparql-query>
           </v-card-text>
 
 
@@ -18,7 +18,7 @@
       </v-flex>
       <v-flex fixed  px-3 py-3 md6 xs12>
 
-       <sparql-results></sparql-results>
+       <sparql-results :results="queryResults"></sparql-results>
 
       </v-flex>
     </v-layout>
@@ -38,7 +38,17 @@
       'sparql-query': SparqlQuery,
       'sparql-results': SparqlResults
     },
-    methods: {...mapActions(['importN3', 'exportJsonLD'])}
+    data () {
+      return {
+        queryResults: []
+      }
+    },
+    methods: {
+      ...mapActions(['importN3', 'exportJsonLD']),
+      handleEmittedResults (event) {
+        this.queryResults = event
+      }
+    }
   }
 </script>
 
