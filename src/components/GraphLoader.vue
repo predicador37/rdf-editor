@@ -1,6 +1,6 @@
 <template>
   <div>
-  <div class="btn btn-primary jbtn-file">
+  <div class="v-btn btn-primary jbtn-file">
     <span class="btn-txt">{{ title }}</span><input
     type="file" @change="fileSelected"></div>
   </div>
@@ -22,6 +22,7 @@
         const reader = new FileReader()
         reader.onload = e => this.$emit('load', e.target.result)
         reader.readAsText(file)
+        this.$emit('file-loaded')
       }
     }
   }

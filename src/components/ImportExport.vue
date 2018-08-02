@@ -10,9 +10,20 @@
 
           <v-card-text>
             <p>Si lo deseas, puedes importar un grafo desde un archivo de texto en formato N3 o Turtle.</p>
-            <graph-loader @load="importN3($event)"></graph-loader>
+            <graph-loader @load="importN3($event)" @file-loaded="snackbar = true"></graph-loader>
           </v-card-text>
-
+          <v-snackbar
+            v-model="snackbar"
+          >
+            {{ snackbarMessage }}
+            <v-btn
+              dark
+              flat
+              @click="snackbar = false"
+            >
+              Cerrar
+            </v-btn>
+          </v-snackbar>
         </v-card>
       </v-flex>
       <v-flex px-3 py-3 md6 xs12>
@@ -44,6 +55,12 @@
     name: 'ImportExport',
     components: {
       'graph-loader': GraphLoader
+    },
+    data () {
+      return {
+        snackbar: false,
+        snackbarMessage: 'Archivo importado en el almacén'
+      }
     },
     methods: {...mapActions(['importN3', 'exportJsonLD'])}
   }
