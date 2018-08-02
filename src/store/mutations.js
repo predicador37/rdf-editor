@@ -1,8 +1,9 @@
 import DataFactory from 'rdf-ext'
-import {Parser, Store} from 'n3'
+import {Parser, Store, Writer} from 'n3'
 import Serializer from 'rdf-serializer-jsonld-ext'
 
 let N3Parser = Parser
+let N3Writer = Writer
 let rdf = DataFactory
 let JsonLdSerializer = Serializer
 
@@ -94,6 +95,26 @@ const EXPORT_JSON_LD = (state) => {
   })
 }
 
+const EXPORT_TURTLE = (state) => {
+  // create a prefix map and fill it
+
+  const prefix = { prefixes: { ex: 'http://www.uned.es/example#' } }
+  const writer = N3Writer(prefix)
+  state.n3store.getQuads().forEach((quad) => {
+    writer.addQuad(quad)
+  })
+  writer.end((error, result) => {
+    let dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(result)
+    let downloadAnchorNode = document.createElement('a')
+    downloadAnchorNode.setAttribute('href', dataStr)
+    downloadAnchorNode.setAttribute('download', 'dataset.json')
+    document.body.appendChild(downloadAnchorNode)
+    downloadAnchorNode.click()
+    downloadAnchorNode.remove()
+    console.log(dataStr)
+  })
+}
+
 export default {
   ADD_QUAD_FROM_IRI,
   REMOVE_QUAD_FROM_IRI,
@@ -101,5 +122,6 @@ export default {
   ADD_QUAD_WITH_OBJECT_LITERAL_FROM_IRI,
   EDIT_QUAD_WITH_OBJECT_LITERAL_FROM_IRI,
   IMPORT_N3,
-  EXPORT_JSON_LD
+  EXPORT_JSON_LD,
+  EXPORT_TURTLE
 }

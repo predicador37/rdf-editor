@@ -90,6 +90,9 @@ const exportJsonLD = (context) => {
   context.commit('EXPORT_JSON_LD')
 }
 
+const exportTurtle = (context) => {
+  context.commit('EXPORT_TURTLE')
+}
 export default {
   addClass,
   addResource,
@@ -100,5 +103,6 @@ export default {
   removeResource,
   addClassLiteralProperty,
   importN3,
-  exportJsonLD
+  exportJsonLD,
+  exportTurtle
 }

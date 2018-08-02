@@ -33,8 +33,9 @@
           </v-card-title>
 
           <v-card-text>
-            <p>Asimismo, puedes exportar tu grafo de trabajo a un archivo de texto en formato JSON-ld.</p>
-            <v-btn type="submit" variant="primary" @click="exportJsonLD">Exportar grafo</v-btn>
+            <p>Asimismo, puedes exportar tu grafo de trabajo a un archivo de texto en formato JSON-ld o Turtle.</p>
+            <v-btn type="submit" variant="primary" @click="exportJsonLD">Exportar JSON-ld</v-btn>
+            <v-btn type="submit" variant="primary" @click="exportTurtle">Exportar Turtle</v-btn>
           </v-card-text>
 
         </v-card>
@@ -62,7 +63,7 @@
         snackbarMessage: 'Archivo importado en el almacén'
       }
     },
-    methods: {...mapActions(['importN3', 'exportJsonLD'])}
+    methods: {...mapActions(['importN3', 'exportJsonLD', 'exportTurtle'])}
   }
 </script>
 
