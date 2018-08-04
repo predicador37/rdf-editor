@@ -82,8 +82,10 @@ const addClassLiteralProperty = (context, {subject, predicate, object}) => {
   }
 }
 
-const importN3 = (context, content) => {
-  context.commit('IMPORT_N3', content)
+const importN3 = (context, {content, store}) => {
+  console.log('STORE')
+  console.log(store)
+  context.commit('IMPORT_N3', {content, store})
 }
 
 const exportJsonLD = (context) => {

@@ -38,7 +38,7 @@ describe('sparql', () => {
     const myEngine = newEngine()
     let results = []
     const p = new Promise((resolve, reject) => {
-      myEngine.query('SELECT ?s WHERE {?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>  <http://www.w3.org/2002/07/owl#Class> .} LIMIT 100',
+      myEngine.query('SELECT * WHERE {?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>  <http://www.w3.org/2002/07/owl#Class> .} LIMIT 100',
         {'sources': [{type: 'rdfjsSource', value: source}]})
         .then(function (result) {
           result.bindingsStream.on('data', function (data) {
@@ -48,12 +48,13 @@ describe('sparql', () => {
             // console.log(data.get('?p'))
             // console.log(data.get('?o'))
           }).on('end', () => {
-            resolve(results)
+
             results.forEach((item) => {
               console.log(item.get('?s').value)
-              console.log(item.get('?p'))
-              console.log(item.get('?o'))
+              console.log(item.get('?p').value)
+              console.log(item.get('?o').value)
             })
+            resolve(results)
           })
         })
     })

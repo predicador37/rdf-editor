@@ -95,8 +95,7 @@
       ...mapActions(['addResource', 'addClassLiteralProperty', 'editClassLiteralProperty', 'removeResource', 'removeQuad', 'editResource']),
       async getResources ({predicate, object}) {
         let resources = await this.getSubjectListByPredicateAndObject({predicate, object})
-        this.classes = resources
-        console.log(JSON.stringify(this.classes))
+        return resources
         // TODO: order array
         // TODO: generalize classes to resources
       },
@@ -113,7 +112,12 @@
         // how to generalize this?
         // this[resourceType.match('[ch|sh|s|x|z]$') ? 'get' + resourceType.charAt(0).toUpperCase() + resourceType.slice(1) + 'es' : 'get' + resourceType.charAt(0).toUpperCase() + resourceType.slice(1) + 's']() // getClasses
         // this.getClasses()
-        this.getResources({'predicate': this.rdfConstructs.rdf_type.value, 'object': resourceType})
+        this.getResources({'predicate': this.rdfConstructs.rdf_type.value, 'object': this.rdfConstructs.owl_Class.value}).then((results) => {
+          this.classes = results
+        })
+        this.getResources({'predicate': this.rdfConstructs.rdf_type.value, 'object': this.rdfConstructs.rdfs_Class.value}).then((results) => {
+          this.classes.push(...results)
+        })
       },
       handleAddLiteralProperty (triple) {
         this.addClassLiteralProperty({subject: triple.resource, predicate: this.rdfConstructs[triple.propertyName].value, object: triple.literal})
@@ -130,19 +134,34 @@
       },
       handleRemoveQuad ({subject, predicate, object}) {
         this.removeQuad({subject, predicate, object})
-        this.getResources({'predicate': this.rdfConstructs.rdf_type.value, 'object': this.rdfConstructs.owl_Class.value})
+        this.getResources({'predicate': this.rdfConstructs.rdf_type.value, 'object': this.rdfConstructs.owl_Class.value}).then((results) => {
+          this.classes = results
+        })
+        this.getResources({'predicate': this.rdfConstructs.rdf_type.value, 'object': this.rdfConstructs.rdfs_Class.value}).then((results) => {
+          this.classes.push(...results)
+        })
         this.handleChangeResource(this.currentResource)
       },
       handleRemoveResource (resource) {
         this.removeResource(resource)
-        this.getResources({'predicate': this.rdfConstructs.rdf_type.value, 'object': this.rdfConstructs.owl_Class.value})
+        this.getResources({'predicate': this.rdfConstructs.rdf_type.value, 'object': this.rdfConstructs.owl_Class.value}).then((results) => {
+          this.classes = results
+        })
+        this.getResources({'predicate': this.rdfConstructs.rdf_type.value, 'object': this.rdfConstructs.rdfs_Class.value}).then((results) => {
+          this.classes.push(...results)
+        })
         this.handleChangeResource(this.currentResourceName)
         this.renderDetail = false
       },
       handleEditResource ({oldResource, resource}) {
         this.editResource({'oldResource': oldResource, 'newResource': resource})
         console.log(JSON.stringify(this.dataset))
-        this.getResources({'predicate': this.rdfConstructs.rdf_type.value, 'object': this.rdfConstructs.owl_Class.value})
+        this.getResources({'predicate': this.rdfConstructs.rdf_type.value, 'object': this.rdfConstructs.owl_Class.value}).then((results) => {
+          this.classes = results
+        })
+        this.getResources({'predicate': this.rdfConstructs.rdf_type.value, 'object': this.rdfConstructs.rdfs_Class.value}).then((results) => {
+          this.classes.push(...results)
+        })
         this.handleChangeResource(resource)
       },
       handleEditLiteralProperty ({subject, predicate, object, newObject}) {
@@ -155,7 +174,13 @@
       }
     },
     beforeMount () {
-      this.getResources({'predicate': this.rdfConstructs.rdf_type.value, 'object': this.rdfConstructs.owl_Class.value})
+      this.getResources({'predicate': this.rdfConstructs.rdf_type.value, 'object': this.rdfConstructs.owl_Class.value}).then((results) => {
+        this.classes = results
+      })
+      this.getResources({'predicate': this.rdfConstructs.rdf_type.value, 'object': this.rdfConstructs.rdfs_Class.value}).then((results) => {
+        console.log(JSON.stringify(results))
+        this.classes.push(...results)
+      })
     }
   }
 </script>

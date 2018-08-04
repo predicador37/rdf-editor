@@ -53,12 +53,11 @@ const ADD_QUAD_WITH_OBJECT_LITERAL_FROM_IRI = (state, {subject, predicate, objec
   state.n3store.addQuad(rdf.quad(rdf.namedNode(subject), rdf.namedNode(predicate), rdf.literal(object)))
 }
 
-const IMPORT_N3 = (state, content) => {
+const IMPORT_N3 = (state, {content, store}) => {
   const turtleParser = new N3Parser()
   let quads = turtleParser.parse(content)
-  state.n3store = new Store(quads)
-
-  console.log(JSON.stringify(state.n3store.getQuads()))
+  state[store] = new Store(quads)
+  console.log(JSON.stringify(state[store].getQuads()))
 }
 
 const EXPORT_JSON_LD = (state) => {
@@ -112,6 +111,7 @@ const EXPORT_TURTLE = (state) => {
     downloadAnchorNode.click()
     downloadAnchorNode.remove()
     console.log(dataStr)
+    console.log(error)
   })
 }
 

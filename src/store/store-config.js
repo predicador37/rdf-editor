@@ -10,6 +10,7 @@ let rdf = DataFactory
 let baseUrl = consts.baseUrl
 let quads = [ rdf.quad(rdf.namedNode(baseUrl + 'Analista'), rdf.namedNode(RdfConstructs.rdf_type.value), rdf.namedNode(RdfConstructs.owl_Class.value)),
   rdf.quad(rdf.namedNode(baseUrl + 'Programador'), rdf.namedNode(RdfConstructs.rdf_type.value), rdf.namedNode(RdfConstructs.owl_Class.value)),
+  rdf.quad(rdf.namedNode(baseUrl + 'Diseñador'), rdf.namedNode(RdfConstructs.rdf_type.value), rdf.namedNode(RdfConstructs.rdfs_Class.value)),
   rdf.quad(rdf.namedNode(baseUrl + 'Miguel_Exposito'), rdf.namedNode(RdfConstructs.rdf_type.value), rdf.namedNode(baseUrl + 'Analista')),
   rdf.quad(rdf.namedNode(baseUrl + 'Capturador_de_Requisitos'), rdf.namedNode(RdfConstructs.rdf_type.value), rdf.namedNode(RdfConstructs.owl_Class.value)),
   rdf.quad(rdf.namedNode(baseUrl + 'Analista'), rdf.namedNode(RdfConstructs.owl_equivalentClass.value), rdf.namedNode(baseUrl + 'Capturador_de_Requisitos')),

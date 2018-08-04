@@ -7,6 +7,13 @@ export default {
     desc_plural: 'Tipos',
     type: 'property'
   },
+  rdfs_Class: {
+    text: 'rdf:Class',
+    value: 'http://www.w3.org/2000/01/rdf-schema#Class',
+    desc: 'Clase',
+    desc_plural: 'Clases',
+    type: 'class'
+  },
   rdfs_subClassOf: {
     text:
       'rdfs:subClassOf',

@@ -10,7 +10,7 @@
 
           <v-card-text>
             <p>Si lo deseas, puedes importar un grafo desde un archivo de texto en formato N3 o Turtle.</p>
-            <graph-loader @load="importN3($event)" @file-loaded="snackbar = true"></graph-loader>
+            <graph-loader @load="importN3({'content': $event, 'store': 'n3store'})" @file-loaded="snackbar = true"></graph-loader>
           </v-card-text>
           <v-snackbar
             v-model="snackbar"
