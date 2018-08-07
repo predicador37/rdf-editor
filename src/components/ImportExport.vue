@@ -10,7 +10,7 @@
 
           <v-card-text>
             <p>Si lo deseas, puedes importar un grafo desde un archivo de texto en formato N3 o Turtle.</p>
-            <graph-loader @load="importN3({'content': $event, 'store': 'n3store'})" @file-loaded="snackbar = true"></graph-loader>
+            <file-loader @load="importN3({'content': $event, 'store': 'n3store'})" @file-loaded="snackbar = true"></file-loader>
           </v-card-text>
           <v-snackbar
             v-model="snackbar"
@@ -50,12 +50,12 @@
 </template>
 
 <script>
-  import GraphLoader from '@/components/GraphLoader'
+  import FileLoader from '@/components/FileLoader'
   import {mapActions} from 'vuex'
   export default {
     name: 'ImportExport',
     components: {
-      'graph-loader': GraphLoader
+      'file-loader': FileLoader
     },
     data () {
       return {

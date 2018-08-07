@@ -10,14 +10,19 @@
     hint="Consulta de ejemplo"
   ></v-textarea>
 </div>
-  <div>
   <v-btn type="submit" variant="primary" @click="executeSparqlQuery(query)">Lanzar consulta</v-btn>
-  </div>
+  <v-divider class="my-3"></v-divider>
+  <div class="subheading my-3"> Cargar consulta</div>
+<div>
+    <file-loader title='Desde archivo' @load="loadSparqlQuery($event)" @file-loaded="snackbar = true"></file-loader>
+    <file-loader title='Desde URL' @load="loadSparqlQuery($event)" @file-loaded="snackbar = true"></file-loader>
+</div>
 </div>
 </template>
 
 <script>
   import {mapGetters} from 'vuex'
+  import FileLoader from '@/components/FileLoader'
   export default {
     name: 'SparqlQuery',
     data () {
@@ -25,6 +30,9 @@
         query: 'SELECT ?s WHERE {?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>  <http://www.w3.org/2002/07/owl#Class> .} LIMIT 100',
         results: []
       }
+    },
+    components: {
+      'file-loader': FileLoader
     },
     computed: {...mapGetters(['getStoreQuads'])},
     methods: {
@@ -43,13 +51,14 @@
             result.bindingsStream.on('data', function (data) {
               // Each data object contains a mapping from variables to RDFJS terms.
               results.push(data)
-              // console.log(data.get('?s'))
-              // console.log(data.get('?p'))
-              // console.log(data.get('?o'))
             }).on('end', () => {
+              console.log(JSON.stringify(results))
               this.$emit('emit-results', results)
             })
           })
+      },
+      loadSparqlQuery (content) {
+        this.query = content
       }
     }
   }

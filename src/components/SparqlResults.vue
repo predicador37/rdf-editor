@@ -1,14 +1,15 @@
 <template>
   <v-data-table
     :headers="headers"
-    :items="resultList"
+    :items="values"
     hide-actions
     class="elevation-1"
   >
     <template slot="items" slot-scope="props">
-      <td >{{ (props.item.get('?s') && props.item.get('?s').value) ? props.item.get('?s').value : 'Undefined'}}</td>
-      <td >{{ (props.item.get('?p') && props.item.get('?p').value) ? props.item.get('?p').value : 'Undefined' }}</td>
-      <td>{{ (props.item.get('?o') && props.item.get('?o').value) ? props.item.get('?o').value : 'Undefined' }}</td>
+      <td v-for="(item, key, index) in props.item"> {{ item }} </td>
+      <!--<td >{{ (props.item.get('?s') && props.item.get('?s').value) ? props.item.get('?s').value : 'Undefined'}}</td>-->
+      <!--<td >{{ (props.item.get('?p') && props.item.get('?p').value) ? props.item.get('?p').value : 'Undefined' }}</td>-->
+      <!--<td>{{ (props.item.get('?o') && props.item.get('?o').value) ? props.item.get('?o').value : 'Undefined' }}</td>-->
     </template>
   </v-data-table>
 </template>
@@ -25,11 +26,8 @@
       data () {
         return {
           resultList: [],
-          headers: [
-            {text: 'Sujeto', value: 's'},
-            {text: 'Predicado', value: 'p'},
-            {text: 'Objeto', value: 'o'}
-          ]
+          headers: [],
+          values: []
         }
       },
       created () {
@@ -51,6 +49,32 @@
             }
           })
         }
+      },
+      methods: {
+        getHeaders () {
+          let headers = []
+          let rows = []
+          this.resultList[0].forEach((value, key) => headers.push({'text': key, 'value': key}))
+          console.log(this.resultList[0].toObject())
+          for (let item of this.resultList) {
+            let values = []
+            let result = {}
+            for (let [key, value] of Object.entries(item.toObject())) {
+              console.log(key)
+              console.log(value ? Object.values(value)[0] : 'undefined')
+              values.push(value ? Object.values(value)[0] : 'undefined')
+              result[key] = value ? Object.values(value)[0] : 'undefined'
+            }
+            rows.push(result)
+          }
+          console.log(JSON.stringify(headers))
+          console.log(JSON.stringify(rows))
+          this.headers = headers
+          this.values = rows
+        }
+      },
+      beforeMount () {
+        this.getHeaders()
       }
     }
 </script>

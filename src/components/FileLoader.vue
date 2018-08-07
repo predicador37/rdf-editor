@@ -1,22 +1,20 @@
 <template>
-  <div>
   <div class="v-btn btn-primary jbtn-file">
     <span class="btn-txt">{{ title }}</span><input
     type="file" @change="fileSelected"></div>
-  </div>
+
 </template>
 
 <script>
-  import {mapActions} from 'vuex'
   export default {
-    name: 'graph-loader',
+    name: 'file-loader',
     props: {
       title: {
         default: 'Importar grafo',
         type: String
       }
     },
-    methods: {...mapActions(['importN3']),
+    methods: {
       fileSelected (ev) {
         const file = ev.target.files[0]
         const reader = new FileReader()

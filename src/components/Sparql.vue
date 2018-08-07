@@ -18,7 +18,7 @@
       </v-flex>
       <v-flex fixed  px-3 py-3 md6 xs12>
 
-       <sparql-results :results="queryResults"></sparql-results>
+       <sparql-results v-if="renderResults" :results="queryResults"></sparql-results>
 
       </v-flex>
     </v-layout>
@@ -40,13 +40,15 @@
     },
     data () {
       return {
-        queryResults: []
+        queryResults: [],
+        renderResults: false
       }
     },
     methods: {
       ...mapActions(['importN3', 'exportJsonLD']),
       handleEmittedResults (event) {
         this.queryResults = event
+        this.renderResults = true
       }
     }
   }
