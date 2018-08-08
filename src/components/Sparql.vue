@@ -47,8 +47,10 @@
     methods: {
       ...mapActions(['importN3', 'exportJsonLD']),
       handleEmittedResults (event) {
+        console.log('new results:')
         this.queryResults = event
         this.renderResults = true
+        console.log(this.queryResults)
       }
     }
   }

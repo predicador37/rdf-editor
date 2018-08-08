@@ -10,7 +10,7 @@
     hint="Consulta de ejemplo"
   ></v-textarea>
 </div>
-  <v-btn type="submit" variant="primary" @click="executeSparqlQuery(query)">Lanzar consulta</v-btn>
+  <v-btn type="submit" variant="primary" @click.native="executeSparqlQuery(query)">Lanzar consulta</v-btn>
   <v-divider class="my-3"></v-divider>
   <div class="subheading my-3"> Cargar consulta</div>
 <div>
@@ -37,6 +37,7 @@
     computed: {...mapGetters(['getStoreQuads'])},
     methods: {
       executeSparqlQuery (query) {
+        console.log('executing new sparql query')
         const newEngine = require('@comunica/actor-init-sparql-rdfjs').newEngine
         const source = {
           match: (s, p, o, g) => {

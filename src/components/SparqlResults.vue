@@ -37,17 +37,7 @@
         results: function (newVal, oldVal) { // watch it
           console.log('Prop changed: ', newVal, ' | was: ', oldVal)
           this.resultList = newVal
-          newVal.forEach((item) => {
-            if (item.get('?s') && item.get('?s').value) {
-              console.log(item.get('?s').value)
-            }
-            if (item.get('?p') && item.get('?p').value) {
-              console.log(item.get('?p').value)
-            }
-            if (item.get('?o') && item.get('?o').value) {
-              console.log(item.get('?o').value)
-            }
-          })
+          this.getHeaders()
         }
       },
       methods: {
