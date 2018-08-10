@@ -10,7 +10,7 @@
     name: 'file-loader',
     props: {
       title: {
-        default: 'Importar grafo',
+        default: 'Importar archivo',
         type: String
       }
     },

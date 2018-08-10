@@ -23,7 +23,8 @@ let quads = [ rdf.quad(rdf.namedNode(baseUrl + 'Analista'), rdf.namedNode(RdfCon
 const state = {
   rdfConstructs: RdfConstructs,
   baseUrl: consts.baseUrl,
-  n3store: new Store(quads)
+  n3store: new Store(quads),
+  activity: ''
   // dataset: rdf.dataset([rdf.quad(rdf.namedNode(baseUrl + 'Analista'), rdf.namedNode(RdfConstructs.rdf_type.value),
   //   rdf.namedNode(RdfConstructs.owl_Class.value)), rdf.quad(rdf.namedNode(baseUrl + 'Programador'), rdf.namedNode(RdfConstructs.rdf_type.value),
   //   rdf.namedNode(RdfConstructs.owl_Class.value)), rdf.quad(rdf.namedNode(baseUrl + 'Miguel_Exposito'), rdf.namedNode(RdfConstructs.rdf_type.value),

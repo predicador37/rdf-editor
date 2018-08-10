@@ -61,6 +61,11 @@
           link: '/'
         },
         {
+          icon: 'mdi-book-open-page-variant',
+          title: 'Actividades',
+          link: '/activity'
+        },
+        {
           icon: 'mdi-swap-vertical',
           title: 'Importar/Exportar',
           link: '/import-export'

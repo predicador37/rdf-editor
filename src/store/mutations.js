@@ -60,6 +60,10 @@ const IMPORT_N3 = (state, {content, store}) => {
   console.log(JSON.stringify(state[store].getQuads()))
 }
 
+const SET_ACTIVITY = (state, content) => {
+  state.activity = content
+}
+
 const EXPORT_JSON_LD = (state) => {
   // create a prefix map and fill it
   const prefixMap = rdf.prefixMap({
@@ -122,6 +126,7 @@ export default {
   ADD_QUAD_WITH_OBJECT_LITERAL_FROM_IRI,
   EDIT_QUAD_WITH_OBJECT_LITERAL_FROM_IRI,
   IMPORT_N3,
+  SET_ACTIVITY,
   EXPORT_JSON_LD,
   EXPORT_TURTLE
 }

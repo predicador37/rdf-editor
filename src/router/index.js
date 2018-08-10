@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import EditorHome from '@/components/EditorHome'
 import ModelContainer from '@/components/ModelContainer'
 import ImportExport from '@/components/ImportExport'
+import Activity from '@/components/Activity'
 import Sparql from '@/components/Sparql'
 
 Vue.use(Router)
@@ -23,6 +24,11 @@ export default new Router({
       path: '/import-export',
       name: 'ImportExport',
       component: ImportExport
+    },
+    {
+      path: '/activity',
+      name: 'Activity',
+      component: Activity
     },
     {
       path: '/sparql',

@@ -15,7 +15,7 @@
   <div class="subheading my-3"> Cargar consulta</div>
 <div>
     <file-loader title='Desde archivo' @load="loadSparqlQuery($event)" @file-loaded="snackbar = true"></file-loader>
-    <file-loader title='Desde URL' @load="loadSparqlQuery($event)" @file-loaded="snackbar = true"></file-loader>
+    <url-loader title='Desde URL' @load="loadSparqlQuery($event)" @url-loaded="snackbar = true"></url-loader>
 </div>
 </div>
 </template>
@@ -23,6 +23,7 @@
 <script>
   import {mapGetters} from 'vuex'
   import FileLoader from '@/components/FileLoader'
+  import URLLoader from '@/components/URLLoader'
   export default {
     name: 'SparqlQuery',
     data () {
@@ -32,7 +33,8 @@
       }
     },
     components: {
-      'file-loader': FileLoader
+      'file-loader': FileLoader,
+      'url-loader': URLLoader
     },
     computed: {...mapGetters(['getStoreQuads'])},
     methods: {

@@ -10,6 +10,8 @@ const rdfConstructs = state => state.rdfConstructs
 
 const baseUrl = state => state.baseUrl
 
+const activity = state => state.activity
+
 const getSubjectListByPredicateAndObject = (state) => ({predicate, object}) => {
   return new Promise((resolve, reject) => {
     let subjects = state.n3store.getSubjects(predicate, object, null)
@@ -48,6 +50,7 @@ export default {
   engine,
   rdfConstructs,
   baseUrl,
+  activity,
   getSubjectListByPredicateAndObject,
   getSubjectListByPredicate,
   getObjectListByPredicateAndSubject,

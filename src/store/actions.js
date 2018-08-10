@@ -88,6 +88,10 @@ const importN3 = (context, {content, store}) => {
   context.commit('IMPORT_N3', {content, store})
 }
 
+const setActivity = (context, content) => {
+  context.commit('SET_ACTIVITY', content)
+}
+
 const exportJsonLD = (context) => {
   context.commit('EXPORT_JSON_LD')
 }
@@ -105,6 +109,7 @@ export default {
   removeResource,
   addClassLiteralProperty,
   importN3,
+  setActivity,
   exportJsonLD,
   exportTurtle
 }
