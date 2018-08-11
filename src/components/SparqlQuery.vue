@@ -1,12 +1,15 @@
 <template>
 <div>
-<div>
+  <v-switch v-model="external" value="false" input-value="false" label="Usar Endpoing externo"></v-switch>
+  <v-text-field v-if="external" :disabled="!external" v-model="endpointURL" value="" label="Introduce la URL del endpoint externo"></v-text-field>
+
+<div class="py-3">
   <v-textarea
     solo
     v-model="query"
     name="sparql_query"
     label="Consulta SPARQL"
-    value="SELECT ?s WHERE {?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>  <http://www.w3.org/2002/07/owl#Class> .} LIMIT 100"
+    value="SELECT * { ?s ?p <http://dbpedia.org/resource/Belgium>. ?s ?p ?o } LIMIT 100"
     hint="Consulta de ejemplo"
   ></v-textarea>
 </div>
@@ -28,8 +31,10 @@
     name: 'SparqlQuery',
     data () {
       return {
-        query: 'SELECT ?s WHERE {?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>  <http://www.w3.org/2002/07/owl#Class> .} LIMIT 100',
-        results: []
+        query: 'SELECT * { ?s ?p <http://dbpedia.org/resource/Belgium>. ?s ?p ?o } LIMIT 100',
+        results: [],
+        endpointURL: 'http://fragments.dbpedia.org/2015/en',
+        external: false
       }
     },
     components: {
@@ -38,7 +43,21 @@
     },
     computed: {...mapGetters(['getStoreQuads'])},
     methods: {
-      executeSparqlQuery (query) {
+      async executeSparqlQuery (query) {
+        let results = []
+        console.log(this.external)
+        if (this.external) {
+          results = await this.executeExternalSparqlQuery(query, this.endpointURL)
+          console.log('wey ya')
+        }
+        else {
+          results = await this.executeInternalSparqlQuery(query)
+          this.$emit('emit-results', results)
+        }
+        this.$emit('emit-results', results)
+
+      },
+      executeInternalSparqlQuery (query) {
         console.log('executing new sparql query')
         const newEngine = require('@comunica/actor-init-sparql-rdfjs').newEngine
         const source = {
@@ -48,17 +67,37 @@
         }
         const myEngine = newEngine()
         let results = []
-        myEngine.query(query,
-          {'sources': [{type: 'rdfjsSource', value: source}]})
-          .then((result) => {
-            result.bindingsStream.on('data', function (data) {
-              // Each data object contains a mapping from variables to RDFJS terms.
-              results.push(data)
-            }).on('end', () => {
-              console.log(JSON.stringify(results))
-              this.$emit('emit-results', results)
+          return new Promise((resolve, reject) => {
+          myEngine.query(query,
+            {'sources': [{type: 'rdfjsSource', value: source}]})
+            .then((result) => {
+              result.bindingsStream.on('data', function (data) {
+                // Each data object contains a mapping from variables to RDFJS terms.
+                results.push(data)
+              }).on('end', function () {
+                console.log(JSON.stringify(results))
+                resolve(results)
+              })
+              })
             })
-          })
+      },
+      executeExternalSparqlQuery (query, url) {
+        console.log('executing new external sparql query')
+
+        const newEngine = require('@comunica/actor-init-sparql').newEngine
+        const myEngine = newEngine()
+        let results = []
+        return new Promise((resolve, reject) => {
+          myEngine.query(query, { sources: [ { type: 'hypermedia', value: url } ] })
+              .then(function (result) {
+                result.bindingsStream.on('data', function (data) {
+                  results.push(data)
+                }).on('end', function () {
+                  console.log(JSON.stringify(results))
+                  resolve(results)
+                })
+                })
+              })
       },
       loadSparqlQuery (content) {
         this.query = content

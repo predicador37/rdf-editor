@@ -1,7 +1,5 @@
 <template>
-  <div>
-  <vue-markdown :source="mdText"></vue-markdown>
-  </div>
+  <vue-markdown pa-3 :source="mdText"></vue-markdown>
 </template>
 
 <script>
@@ -17,7 +15,7 @@
          type: String
        }
      }
-    }
+   }
 </script>
 
 <style scoped>

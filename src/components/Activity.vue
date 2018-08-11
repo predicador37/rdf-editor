@@ -33,7 +33,7 @@
           </v-card-title>
 
           <v-card-text>
-           <markdown-viewer :mdText="activity"></markdown-viewer>
+           <markdown-viewer class="pa-3" :mdText="activity"></markdown-viewer>
           </v-card-text>
 
         </v-card>
