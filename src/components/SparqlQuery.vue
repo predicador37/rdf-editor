@@ -1,7 +1,7 @@
 <template>
 <div>
-  <v-switch v-model="external" value="false" input-value="false" label="Usar Endpoing externo"></v-switch>
-  <v-text-field v-if="external" :disabled="!external" v-model="endpointURL" value="" label="Introduce la URL del endpoint externo"></v-text-field>
+  <v-switch v-model="external" value="false" input-value="false" label="Usar Endpoint SPARQL remoto"></v-switch>
+  <v-text-field v-if="external" :disabled="!external" v-model="endpointURL" value="" label="Introduce la URL del endpoint SPARQL remoto"></v-text-field>
 
 <div class="py-3">
   <v-textarea
@@ -49,13 +49,11 @@
         if (this.external) {
           results = await this.executeExternalSparqlQuery(query, this.endpointURL)
           console.log('wey ya')
-        }
-        else {
+        } else {
           results = await this.executeInternalSparqlQuery(query)
           this.$emit('emit-results', results)
         }
         this.$emit('emit-results', results)
-
       },
       executeInternalSparqlQuery (query) {
         console.log('executing new sparql query')
@@ -67,7 +65,7 @@
         }
         const myEngine = newEngine()
         let results = []
-          return new Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => {
           myEngine.query(query,
             {'sources': [{type: 'rdfjsSource', value: source}]})
             .then((result) => {
@@ -78,8 +76,8 @@
                 console.log(JSON.stringify(results))
                 resolve(results)
               })
-              })
             })
+        })
       },
       executeExternalSparqlQuery (query, url) {
         console.log('executing new external sparql query')
@@ -96,8 +94,8 @@
                   console.log(JSON.stringify(results))
                   resolve(results)
                 })
-                })
               })
+        })
       },
       loadSparqlQuery (content) {
         this.query = content
