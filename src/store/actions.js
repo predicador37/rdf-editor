@@ -83,9 +83,13 @@ const addClassLiteralProperty = (context, {subject, predicate, object}) => {
 }
 
 const importN3 = (context, {content, store}) => {
-  console.log('STORE')
+  console.log(content)
   console.log(store)
   context.commit('IMPORT_N3', {content, store})
+}
+
+const addN3 = (context, {content, store}) => {
+  context.commit('ADD_N3', {content, store})
 }
 
 const setActivity = (context, content) => {
@@ -109,6 +113,7 @@ export default {
   removeResource,
   addClassLiteralProperty,
   importN3,
+  addN3,
   setActivity,
   exportJsonLD,
   exportTurtle

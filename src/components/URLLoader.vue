@@ -1,7 +1,7 @@
 <template>
   <div >
     <v-text-field
-                  v-model="URL"
+                  v-model="url"
                   solo append-icon="search"
                   @click:append="getFromURL" hide-details single-line></v-text-field>
 
@@ -21,30 +21,10 @@
     methods: {
       getFromURL () {
         console.log('getting file from url')
-        // axios
-        //   .get('http://www.learningsparql.com/2ndeditionexamples/ex052.rq')
-        // //   .then(response => (console.log(JSON.stringify(response))))
-        // fetch('https://www.w3.org/2000/01/rdf-schema', {method: 'GET',
-        //   mode: 'cors',
-        //   headers: { 'Access-Control-Allow-Origin': '*' }}).then(function (result) {
-        //     console.log(result)
-        //   })
-        // this.$emit('load', content)
-
-        this.$http.get('http://www.learningsparql.com/2ndeditionexamples/ex052.rq', {
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          }
-        }).then(response => {
+        this.$http.get(this.url).then(response => {
           // get body data
           console.log(response.body)
-        }, response => {
-          // error callback
-        })
-        this.$http.get('https://www.w3.org/2000/01/rdf-schema').then(response => {
-          // get body data
-          console.log(response.body)
+          this.$emit('load', response.body)
         }, response => {
           // error callback
         })
@@ -52,7 +32,7 @@
     },
     data () {
       return {
-        URL: 'Desde URL'
+        url: ''
       }
     }
   }
