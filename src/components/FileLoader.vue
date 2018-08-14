@@ -1,7 +1,8 @@
 <template>
   <div class="v-btn btn-primary jbtn-file">
-    <span class="btn-txt">{{ title }}</span><input
-    type="file" @change="fileSelected"></div>
+    <span class="btn-txt">{{ title }} <i class="mdi mdi-upload mdi-18px"></i></span><input
+    type="file" @change="fileSelected">
+  </div>
 
 </template>
 

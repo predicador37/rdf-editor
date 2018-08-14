@@ -13,14 +13,14 @@
     hint="Consulta de ejemplo"
   ></v-textarea>
 </div>
-  <v-btn type="submit" variant="primary" @click.native="executeSparqlQuery(query)">Lanzar consulta</v-btn>
+  <v-btn color="primary" type="submit" variant="primary" @click.native="executeSparqlQuery(query)">Lanzar consulta</v-btn>
   <v-divider class="my-3"></v-divider>
   <div class="subheading my-3"> Cargar consulta</div>
 <div>
     <file-loader title='Desde archivo' @load="loadSparqlQuery($event)" @file-loaded="snackbar = true"></file-loader>
 </div>
   <div>
-    <url-loader title='Desde URL' @load="loadSparqlQuery($event)" @url-loaded="snackbar = true"></url-loader>
+    <url-loader  title='Desde URL' @load="loadSparqlQuery($event)" @url-loaded="snackbar = true"></url-loader>
 </div>
 </div>
 </template>

@@ -1,7 +1,8 @@
 <template>
-  <div >
+  <div class="pt-3 pl-2">
     <v-text-field
                   v-model="url"
+                  label="Desde URL"
                   solo append-icon="search"
                   @click:append="getFromURL" hide-details single-line></v-text-field>
 

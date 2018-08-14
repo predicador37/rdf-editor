@@ -3,9 +3,9 @@
   <v-container fluid>
     <v-layout row wrap>
       <v-flex px-3 py-3 md6 xs12>
-        <v-card>
+        <v-card height="100%">
           <v-card-title primary-title>
-            <div class="headline"> Importación de grafo</div>
+            <div class="headline"> Importar grafo</div>
           </v-card-title>
 
           <v-card-text>
@@ -30,15 +30,20 @@
         </v-card>
       </v-flex>
       <v-flex px-3 py-3 md6 xs12>
-        <v-card>
+        <v-card height="100%">
           <v-card-title primary-title>
-            <div class="headline"> Exportación de grafo</div>
+            <div class="headline"> Exportar grafo</div>
           </v-card-title>
 
           <v-card-text>
             <p>Asimismo, puedes exportar tu grafo de trabajo a un archivo de texto en formato JSON-ld o Turtle.</p>
-            <v-btn type="submit" variant="primary" @click="exportJsonLD">Exportar JSON-ld</v-btn>
-            <v-btn type="submit" variant="primary" @click="exportTurtle">Exportar Turtle</v-btn>
+            <v-btn type="submit" variant="primary" @click="exportJsonLD">
+              Exportar JSON-ld
+              <v-icon dark size="18">mdi-download</v-icon>
+            </v-btn>
+            <v-btn type="submit" variant="primary" @click="exportTurtle">Exportar Turtle
+              <v-icon dark size="18">mdi-download</v-icon>
+            </v-btn>
           </v-card-text>
 
         </v-card>
@@ -48,16 +53,16 @@
   <v-container fluid>
     <v-layout row wrap>
       <v-flex px-3 py-3 md6 xs12>
-        <v-card>
+        <v-card height="100%">
           <v-card-title primary-title>
             <div class="headline"> Añadir a grafo</div>
           </v-card-title>
 
           <v-card-text>
             <p>También es posible importar las tripletas de un grafo externo al grafo de trabajo.</p>
-            <file-loader title="Añadir desde archivo" @load="addN3({'content': $event, 'store': 'n3store'})" @file-loaded="snackbar = true"></file-loader>
+            <file-loader title="Desde archivo" @load="addN3({'content': $event, 'store': 'n3store'})" @file-loaded="snackbar = true"></file-loader>
             <div>
-              <url-loader title='Añadir desde URL' @load="addN3({'content': $event, 'store': 'n3store'})" @url-loaded="snackbar = true"></url-loader>
+              <url-loader title="Desde URL" @load="addN3({'content': $event, 'store': 'n3store'})" @url-loaded="snackbar = true"></url-loader>
             </div>
           </v-card-text>
           <v-snackbar
