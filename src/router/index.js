@@ -4,6 +4,7 @@ import EditorHome from '@/components/EditorHome'
 import ModelContainer from '@/components/ModelContainer'
 import ImportExport from '@/components/ImportExport'
 import Activity from '@/components/Activity'
+import Vocabulary from '@/components/Vocabulary'
 import Sparql from '@/components/Sparql'
 
 Vue.use(Router)
@@ -29,6 +30,11 @@ export default new Router({
       path: '/activity',
       name: 'Activity',
       component: Activity
+    },
+    {
+      path: '/vocabulary',
+      name: 'Vocabulary',
+      component: Vocabulary
     },
     {
       path: '/sparql',

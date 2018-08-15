@@ -70,6 +70,16 @@ const ADD_N3 = (state, {content, store}) => {
   // console.log(JSON.stringify(state[store].getQuads()))
 }
 
+const DEL_N3 = (state, {content, store}) => {
+  console.log('del n3')
+  console.log(store)
+  console.log(JSON.stringify(state[store]))
+  const turtleParser = new N3Parser()
+  let quads = turtleParser.parse(content)
+  state[store].removeQuads(quads)
+  // console.log(JSON.stringify(state[store].getQuads()))
+}
+
 const SET_ACTIVITY = (state, content) => {
   state.activity = content
 }
@@ -137,6 +147,7 @@ export default {
   EDIT_QUAD_WITH_OBJECT_LITERAL_FROM_IRI,
   IMPORT_N3,
   ADD_N3,
+  DEL_N3,
   SET_ACTIVITY,
   EXPORT_JSON_LD,
   EXPORT_TURTLE

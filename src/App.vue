@@ -66,6 +66,11 @@
           link: '/activity'
         },
         {
+          icon: 'mdi-school',
+          title: 'Vocabularios',
+          link: '/vocabulary'
+        },
+        {
           icon: 'mdi-swap-vertical',
           title: 'Importar/Exportar',
           link: '/import-export'

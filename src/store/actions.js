@@ -92,6 +92,10 @@ const addN3 = (context, {content, store}) => {
   context.commit('ADD_N3', {content, store})
 }
 
+const delN3 = (context, {content, store}) => {
+  context.commit('DEL_N3', {content, store})
+}
+
 const setActivity = (context, content) => {
   context.commit('SET_ACTIVITY', content)
 }
@@ -114,6 +118,7 @@ export default {
   addClassLiteralProperty,
   importN3,
   addN3,
+  delN3,
   setActivity,
   exportJsonLD,
   exportTurtle
