@@ -88,7 +88,7 @@
         const myEngine = newEngine()
         let results = []
         return new Promise((resolve, reject) => {
-          myEngine.query(query, { sources: [ { type: 'hypermedia', value: url } ] })
+          myEngine.query(query, { sources: [ { type: 'sparql', value: url } ] })
               .then(function (result) {
                 result.bindingsStream.on('data', function (data) {
                   results.push(data)
