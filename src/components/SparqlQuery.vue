@@ -13,7 +13,7 @@
     hint="Consulta de ejemplo"
   ></v-textarea>
 </div>
-  <v-btn color="primary" type="submit" variant="primary" @click.native="executeSparqlQuery(query)">Lanzar consulta</v-btn>
+  <v-btn color="primary" type="submit" variant="primary" :loading="loading" @click.native="executeSparqlQuery(query)">Lanzar consulta</v-btn>
   <v-divider class="my-3"></v-divider>
   <div class="subheading my-3"> Cargar consulta</div>
 <div>
@@ -35,8 +35,9 @@
       return {
         query: 'SELECT ?s WHERE {?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>  <http://www.w3.org/2002/07/owl#Class> .} LIMIT 100',
         results: [],
-        endpointURL: 'http://fragments.dbpedia.org/2015/en',
-        external: false
+        endpointURL: 'https://query.wikidata.org/sparql',
+        external: false,
+        loading: false
       }
     },
     components: {
@@ -46,16 +47,21 @@
     computed: {...mapGetters(['getStoreQuads'])},
     methods: {
       async executeSparqlQuery (query) {
+        this.loading = true
         let results = []
         console.log(this.external)
         if (this.external) {
-          results = await this.executeExternalSparqlQuery(query, this.endpointURL)
-          console.log('wey ya')
+          try {
+            results = await this.executeExternalSparqlQuery(query, this.endpointURL)
+            console.log('wey ya')
+          } catch (error) {
+            this.$emit('error', error.message)
+          }
         } else {
           results = await this.executeInternalSparqlQuery(query)
-          this.$emit('emit-results', results)
         }
         this.$emit('emit-results', results)
+        this.loading = false
       },
       executeInternalSparqlQuery (query) {
         console.log('executing new sparql query')
@@ -97,6 +103,7 @@
                   resolve(results)
                 })
               })
+            .catch(function(e) { reject(Error(e)) })
         })
       },
       loadSparqlQuery (content) {

@@ -2,6 +2,11 @@
   <div class="v-btn btn-primary jbtn-file">
     <span class="btn-txt">{{ title }} <i class="mdi mdi-upload mdi-18px"></i></span><input
     type="file" @change="fileSelected">
+    <v-progress-circular
+      v-if="loading"
+      indeterminate
+      color="primary"
+    ></v-progress-circular>
   </div>
 
 </template>
@@ -17,11 +22,18 @@
     },
     methods: {
       fileSelected (ev) {
+        this.loading = true
         const file = ev.target.files[0]
         const reader = new FileReader()
         reader.onload = e => this.$emit('load', e.target.result)
         reader.readAsText(file)
+        this.loading = false
         this.$emit('file-loaded')
+      }
+    },
+    data () {
+      return {
+        loading: false
       }
     }
   }
