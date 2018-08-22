@@ -4,6 +4,7 @@ import actions from './actions'
 import consts from './consts'
 import DataFactory from 'rdf-ext'
 import RdfConstructs from '../utils/RdfConstructs'
+import prefixes from '../utils/Prefixes'
 import {Store} from 'n3'
 
 let rdf = DataFactory
@@ -24,7 +25,8 @@ const state = {
   rdfConstructs: RdfConstructs,
   baseUrl: consts.baseUrl,
   n3store: new Store(quads),
-  activity: ''
+  activity: '',
+  prefixes: prefixes
   // dataset: rdf.dataset([rdf.quad(rdf.namedNode(baseUrl + 'Analista'), rdf.namedNode(RdfConstructs.rdf_type.value),
   //   rdf.namedNode(RdfConstructs.owl_Class.value)), rdf.quad(rdf.namedNode(baseUrl + 'Programador'), rdf.namedNode(RdfConstructs.rdf_type.value),
   //   rdf.namedNode(RdfConstructs.owl_Class.value)), rdf.quad(rdf.namedNode(baseUrl + 'Miguel_Exposito'), rdf.namedNode(RdfConstructs.rdf_type.value),

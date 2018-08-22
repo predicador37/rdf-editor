@@ -33,7 +33,7 @@
     name: 'SparqlQuery',
     data () {
       return {
-        query: 'SELECT ?s WHERE {?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>  <http://www.w3.org/2002/07/owl#Class> .} LIMIT 100',
+        query: '',
         results: [],
         endpointURL: 'https://query.wikidata.org/sparql',
         external: false,
@@ -44,7 +44,7 @@
       'file-loader': FileLoader,
       'url-loader': URLLoader
     },
-    computed: {...mapGetters(['getStoreQuads'])},
+    computed: {...mapGetters(['getStoreQuads', 'prefixes'])},
     methods: {
       async executeSparqlQuery (query) {
         this.loading = true
@@ -109,6 +109,9 @@
       loadSparqlQuery (content) {
         this.query = content
       }
+    },
+    beforeMount () {
+      this.query = this.prefixes + 'SELECT ?s WHERE {?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>  <http://www.w3.org/2002/07/owl#Class> .} LIMIT 100'
     }
   }
 </script>

@@ -8,6 +8,8 @@ const engine = state => state.engine
 
 const rdfConstructs = state => state.rdfConstructs
 
+const prefixes = state => state.prefixes
+
 const baseUrl = state => state.baseUrl
 
 const activity = state => state.activity
@@ -49,6 +51,7 @@ export default {
   n3store,
   engine,
   rdfConstructs,
+  prefixes,
   baseUrl,
   activity,
   getSubjectListByPredicateAndObject,
