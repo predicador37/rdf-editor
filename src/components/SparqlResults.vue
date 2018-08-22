@@ -2,7 +2,9 @@
   <v-data-table
     :headers="headers"
     :items="values"
-    hide-actions
+    rows-per-page-text="Filas por página"
+    prev-icon="mdi-menu-left"
+    next-icon="mdi-menu-right"
     class="elevation-1"
   >
     <template slot="items" slot-scope="props">
@@ -11,6 +13,7 @@
       <!--<td >{{ (props.item.get('?p') && props.item.get('?p').value) ? props.item.get('?p').value : 'Undefined' }}</td>-->
       <!--<td>{{ (props.item.get('?o') && props.item.get('?o').value) ? props.item.get('?o').value : 'Undefined' }}</td>-->
     </template>
+
   </v-data-table>
 </template>
 

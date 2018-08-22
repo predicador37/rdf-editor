@@ -8,6 +8,7 @@
     solo
     v-model="query"
     name="sparql_query"
+    auto-grow="true"
     label="Consulta SPARQL"
     value="SELECT ?s WHERE {?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>  <http://www.w3.org/2002/07/owl#Class> .} LIMIT 100"
     hint="Consulta de ejemplo"
