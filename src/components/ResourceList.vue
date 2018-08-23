@@ -35,23 +35,30 @@
               </v-card>
             </v-dialog>
           </v-list-tile-content>
+
           <v-list-tile-action>
-            <v-tooltip top>
-              <v-btn slot="activator" icon ripple @click.native.stop="openEditDialog(item.value)">
-
-                <v-icon  color="primary lighten-1">create</v-icon>
-
-
+            <v-menu bottom left>
+              <v-btn
+                slot="activator"
+                light
+                icon
+              >
+                <v-icon>more_vert</v-icon>
               </v-btn>
-              <span>Editar</span>
-            </v-tooltip>
 
+              <v-list>
+                <v-list-tile
+                  v-for="(action,j) in actions"
+                  :key="j"
+                  @click=""
+                  @click.native.stop="executeAction(action, item.value)"
+                >
+                  <v-list-tile-title>{{ action.title }}</v-list-tile-title>
+                </v-list-tile>
+              </v-list>
+            </v-menu>
           </v-list-tile-action>
-          <v-list-tile-action>
-            <v-btn icon ripple @click.native.stop="openDeleteDialog(item.value)">
-              <v-icon color="pink lighten-1">delete</v-icon>
-            </v-btn>
-          </v-list-tile-action>
+
         </v-list-tile>
         <v-divider v-if="index + 1 < resources.length" :key="index"></v-divider>
 
@@ -116,7 +123,12 @@
         oldResource: '',
         newResourceName: '',
         classes: [],
-        items: {
+        actions: [
+          {title: 'Editar', method: 'openEditDialog'},
+          {title: 'Eliminar ', method: 'openDeleteDialog'},
+          {title: 'Añadir subclase', method: ''}
+        ],
+        items2: {
           name: 'Thing',
           children: [
             {
@@ -154,6 +166,10 @@
         this.resourceToEdit = resource
         this.oldResource = resource
         this.editDialog = !this.editDialog
+      },
+      executeAction(action, itemValue) {
+        console.log(action.method)
+        this[action.method](itemValue)
       },
       // TODO: changeCurrentClass mutation to change classdetail component data
       changeCurrentResource (resourceName) {
