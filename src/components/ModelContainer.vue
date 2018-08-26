@@ -13,18 +13,9 @@
     <v-tab-item key="1" id="tab-1">
       <v-container fluid>
         <v-layout row wrap>
-          <v-flex px-3 py-3 md6 xs12>
-            <v-card>
-              <v-card-title primary-title>
-                <div class="headline"> Clases</div>
-              </v-card-title>
+          <v-flex fixed  px-3 py-3 md6 xs12>
 
-              <v-card-text>
                 <resource-list  name="Clase" :type="rdfConstructs.owl_Class" :resources="classes" @add-resource="handleAddResource($event, rdfConstructs.owl_Class.value)" @change-resource="handleChangeResource($event)" @remove-resource="handleRemoveResource($event)" @edit-resource="handleEditResource($event)"></resource-list>
-              </v-card-text>
-
-
-            </v-card>
 
           </v-flex>
           <v-flex fixed  px-3 py-3 md6 xs12>

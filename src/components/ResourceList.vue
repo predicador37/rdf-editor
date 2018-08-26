@@ -1,16 +1,79 @@
 <template>
   <div>
-    <v-list two-line>
-      <template v-for="(item, index) in resources">
-        <v-list-tile
-          :key="item.value"
-          ripple
-          @click=""
-        >
-          <v-list-tile-content @click.stop="changeCurrentResource(item.value)">
-            <v-list-tile-title>{{ item.value }}</v-list-tile-title>
-            <v-list-tile-sub-title class="text--primary">{{ item.headline }}</v-list-tile-sub-title>
-            <v-list-tile-sub-title>{{ item.value }}</v-list-tile-sub-title>
+    <v-card height="100%">
+        <v-card-title primary-title>
+          <div class="headline"> {{name}}
+          </div>
+          <v-fab-transition>
+            <v-btn
+              absolute
+              small
+              dark
+              fab
+              middle
+              right
+              color="pink"
+              @click.native.stop="dialog = !dialog"
+            >
+
+              <v-icon>add</v-icon>
+            </v-btn>
+          </v-fab-transition>
+          <v-dialog v-model="dialog" max-width="500px">
+            <v-card height="100%">
+              <v-card-text>
+                <v-text-field v-model="newResourceName" :label="name"></v-text-field>
+                <small class="grey--text">Añadir {{name}}</small>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn flat color="primary" @click.native="addResourceHandler">Guardar</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </v-card-title>
+<v-card-text>
+    <v-data-table
+      hide-headers
+      :items="resources"
+      rows-per-page-text="Filas por página"
+      prev-icon="mdi-menu-left"
+      next-icon="mdi-menu-right"
+      class="elevation-1"
+    >
+      <template slot="items" slot-scope="props">
+        <tr :key="props.item.value" class="tableRowCursor" @click="" @click.stop="changeCurrentResource(props.item.value)">
+        <td> {{ props.item.value}} </td>
+          <td class="text-xs-right">
+            <v-menu bottom right>
+              <v-btn
+                slot="activator"
+                light
+                icon
+              >
+                <v-icon>more_vert</v-icon>
+              </v-btn>
+
+              <v-list>
+                <v-list-tile
+                  v-for="(action,j) in actions"
+                  :key="j"
+                  @click=""
+                  @click.native.stop="executeAction(action, props.item.value)"
+                >
+                  <v-list-tile-title>{{ action.title }}</v-list-tile-title>
+                </v-list-tile>
+              </v-list>
+            </v-menu>
+          </td>
+        </tr>
+        <!--<td >{{ (props.item.get('?s') && props.item.get('?s').value) ? props.item.get('?s').value : 'Undefined'}}</td>-->
+        <!--<td >{{ (props.item.get('?p') && props.item.get('?p').value) ? props.item.get('?p').value : 'Undefined' }}</td>-->
+        <!--<td>{{ (props.item.get('?o') && props.item.get('?o').value) ? props.item.get('?o').value : 'Undefined' }}</td>-->
+      </template>
+
+    </v-data-table>
+
             <v-dialog v-model="deleteDialog" persistent max-width="290">
               <v-card>
                 <v-card-title class="headline">¿Seguro que quieres eliminar para siempre este recurso?</v-card-title>
@@ -34,64 +97,8 @@
                 </v-card-actions>
               </v-card>
             </v-dialog>
-          </v-list-tile-content>
-
-          <v-list-tile-action>
-            <v-menu bottom left>
-              <v-btn
-                slot="activator"
-                light
-                icon
-              >
-                <v-icon>more_vert</v-icon>
-              </v-btn>
-
-              <v-list>
-                <v-list-tile
-                  v-for="(action,j) in actions"
-                  :key="j"
-                  @click=""
-                  @click.native.stop="executeAction(action, item.value)"
-                >
-                  <v-list-tile-title>{{ action.title }}</v-list-tile-title>
-                </v-list-tile>
-              </v-list>
-            </v-menu>
-          </v-list-tile-action>
-
-        </v-list-tile>
-        <v-divider v-if="index + 1 < resources.length" :key="index"></v-divider>
-
-      </template>
-    </v-list>
-
-    <v-fab-transition>
-      <v-btn
-        absolute
-        small
-        dark
-        fab
-        bottom
-        right
-        color="pink"
-        @click.native.stop="dialog = !dialog"
-      >
-
-        <v-icon>add</v-icon>
-      </v-btn>
-    </v-fab-transition>
-    <v-dialog v-model="dialog" max-width="500px">
-      <v-card>
-        <v-card-text>
-          <v-text-field v-model="newResourceName" :label="name"></v-text-field>
-          <small class="grey--text">Añadir {{name}}</small>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn flat color="primary" @click.native="addResourceHandler">Guardar</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+      </v-card-text>
+    </v-card>
   </div>
 </template>
 
@@ -114,6 +121,7 @@
     data () {
       return {
         text: 'prueba',
+        headers: [],
         type: this.resourceType,
         dialog: false,
         deleteDialog: false,
@@ -180,11 +188,15 @@
     name: 'ResourceList',
     created () {
       this.classes = this.resources  // Copy prop to local variable
+      this.headers.push({'text': this.name, 'value': this.name})
+      console.log(this.headers)
     }
   }
 </script>
 
 <style scoped>
-
+.tableRowCursor{
+  cursor:pointer
+}
 
 </style>

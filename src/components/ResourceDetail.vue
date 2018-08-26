@@ -1,6 +1,6 @@
 <template>
 <div>
-  <v-card>
+  <v-card height="100%">
     <v-card-title primary-title>
       <div class="headline"> Propiedades de clase  {{resource.split('#')[1]}}
       </div>
