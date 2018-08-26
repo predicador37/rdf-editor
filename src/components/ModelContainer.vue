@@ -13,12 +13,12 @@
     <v-tab-item key="1" id="tab-1">
       <v-container fluid>
         <v-layout row wrap>
-          <v-flex fixed  px-3 py-3 md6 xs12>
+          <v-flex pr-3 py-3 md6 xs12>
 
                 <resource-list  name="Clase" :type="rdfConstructs.owl_Class" :resources="classes" @add-resource="handleAddResource($event, rdfConstructs.owl_Class.value)" @change-resource="handleChangeResource($event)" @remove-resource="handleRemoveResource($event)" @edit-resource="handleEditResource($event)"></resource-list>
 
           </v-flex>
-          <v-flex fixed  px-3 py-3 md6 xs12>
+          <v-flex fixed  py-3 md6 xs12>
 
             <resource-detail v-if="renderDetail" :resource="currentResource" :editable-class-data="editableClassData" :rdfConstructs="rdfConstructs" :relatedClasses="relatedClasses" @add-literal-property="handleAddLiteralProperty($event)" @remove-resource="handleRemoveQuad($event)"  @edit-literal-property="handleEditLiteralProperty($event)"></resource-detail>
 
@@ -39,9 +39,6 @@
       </v-card>
     </v-tab-item>
   </v-tabs>
-
-
-
 
 </div>
 </template>
