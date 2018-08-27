@@ -1,11 +1,22 @@
 
 \chapter{Introducción}
 
-<Intro ... >
+La Web Semántica es un término originalmente acuñado por Tim Berners-Lee en el año 2001. Hasta la fecha, la World Wide Web había sido concebida como una idea de colaboración abierta en la que múltiples contribuciones de varios autores podían tener cabida y ser compartidas universalmente. Dichas contribuciones, realizadas en forma de documentos, estaban dirigidas a personas y no a máquinas o computadores. Berners-Lee vio más allá y propuso su extensión para lograr su manipulación automática; en resumidas cuentas, permitir que agentes inteligentes (programas de ordenador) fueran capaces de encontrar datos y su significado a través de hiperenlaces a definiciones de términos clave y reglas de razonamiento e inferencia lógica.
+
+Para lograr tan ambicioso objetivo, los agentes inteligentes necesitaban tener acceso a contenido y conocimiento estructurado, así como a las reglas de inferencia necesarias. En este contexto, la Web Semántica podía apoyarse en las siguientes tecnologías existentes:
+
+\begin{itemize}  
+	\item  \textbf{RDF} (Resource Description Framework), que permite expresar conocimiento en forma de tripletas (a modo de sujeto, verbo y objeto en una oración) utilizando URIs (Uniform Resource Indicators).
+	\item \textbf{XML} (eXtensible Markup Language), que permite la creación de documentos convenientemente etiquetados y con estructura arbitraria.
+\end{itemize}
+
+Sin embargo, un tercer pilar era necesario para resolver la problemática de la existencia de distintos identificadores en distintas bases de datos relacionadas con el mismo significado conceptual. Gracias a las \textbf{ontologías}, documentos que definen formalmente las relaciones entre distintos términos, estas diferencias podían ser salvadas bien mediante el uso de términos estandarizados bien mediante la definición de relaciones conceptuales de igualdad o similitud entre dichos términos.
+
+En palabras del propio Berners-Lee: \blockquote[{\cite{Berners-Lee01}}]{Con un diseño adecuado, la Web Semántica puede ayudar en la evolución del conocimiento humano como un todo.}
+
 
 \section{Motivación y objetivos}
 
-<Ejemplo biblio \cite{eckel03,gamma95}>
 
 <Ejemplo referencia a sección \ref{sec:Estructura-de-la-memoria}
 y a subsección de otro capítulo, que en este caso es un anexo \ref{subsec:<Primera-subsecci=0000F3n-anexo>}.
@@ -37,21 +48,7 @@ tabla etc, para referenciarla desde el texto.}
 
 \end{figure}
 
-\begin{table}
-\begin{centering}
-\begin{tabular}{|c|c|c|c|}
-\hline 
-1 & 2 & 3 & 4\tabularnewline
-\hline 
-\hline 
-aaaaaa & aaaaaa & aaaaaa & aaaaaa\tabularnewline
-\hline 
-aaaaaa & aaaaaa & aaaaaa & aaaaaa\tabularnewline
-\hline 
-\end{tabular}
-\par\end{centering}
-\caption{\label{tab:Ejemplo-de-tabla}Ejemplo de tabla}
-\end{table}
+
 
 <Ejemplo de listado de código, ver listado \ref{lis:Codigo-de-edit},
 lo mejor para utilizarlo es copiar el recuadro y cambiar el código
@@ -103,6 +100,8 @@ Ctrl+May+v, en el menú de Lyx Editar->Pegado especial->Texto simple.>
 \end{lstlisting}
 
 \section{Estado actual}
+
+
 
 \section{Estructura de la memoria\label{sec:Estructura-de-la-memoria}}
 
