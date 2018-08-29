@@ -15,7 +15,10 @@ La técnica de captura de requisitos utilizada para este proyecto ha sido, fundam
 
 Concretamente, se han llevado a cabo varias entrevistas utilizando la plataforma colaborativa Skype y una presencial, en la que el autor de este proyecto se ha desplazado a la sede del departamento en Madrid con objeto de conseguir una comunicación más fluida y un mayor entendimiento a la hora de consensuar las necesidades y funcionalidades requeridas del producto.
 
-La primera entrevista a distancia propició un intercambio de documentos e ideas que desembocó en la elaboración del documento del anteproyecto. 
+La primera entrevista a distancia propició un intercambio de documentos e ideas que desembocó en la elaboración del documento del anteproyecto. El resto de entrevistas a través de Skype sirvieron para concretar en mayor medida las tareas a realizar y el enfoque del proyecto. Sin embargo, no fue hasta que no tuvo lugar la reunión presencial cuando realmente se le dio al proyecto su orientación final, con unos objetivos claramente definidos y una posibilidad para cumplir los hitos propuestos.
+
+A continuación se resumen todas las sesiones de captura de requisitos:
+
 \vspace*{\baselineskip}
 \begin{center}
 \begin{table}[htb]
@@ -38,12 +41,79 @@ La primera entrevista a distancia propició un intercambio de documentos e ideas 
 
 \subsection{Documentación}
 
-Para documentar la captura de requisitos, se utilizará la técnica de casos de uso. Se descarta la incorporación de diagramas UML de casos de uso 
+Para documentar la captura de requisitos, se utilizará la técnica de casos de uso. Se descarta la incorporación de diagramas UML de casos de uso, dado que dichos diagramas carecen de información esencial sobre los mismos (como qué actor lleva a cabo cada paso, o notas sobre el orden de ejecución de los pasos). Si bien pueden ser útiles como resumen o índice de contenidos, se decide prescindir de ellos dado que el número de casos de uso contemplados en el proyecto es manejable.
+
+Se utilizará una plantilla propuesta por Cockburn{\cite{cockburn01}}: el estilo RUP (\textit{Rational Unified Process}){\cite{rational01}}, atractivo y fácil de seguir pese al elevado número de apartados, modificado para plasmar los aspectos más relevantes del proyecto (por ejemplo, no se incluirá un campo \textit{ámbito} porque siempre va a estar referido al mismo sistema o aplicación). El motivo de no utilizar una tabla es meramente subjetivo, ya que el autor de esta memoria opina que puede oscurecer el contenido.
+
+La plantilla sigue la siguiente estructura:
+
+\begin{enumerate}  
+	\item Nombre del caso de uso
+	\begin{enumerate}
+		\item Descripción breve
+		\item Actores, entre los que estará el actor principal. Presentan comportamiento.
+		\item Disparadores: acciones sobre el sistema que inician los casos de uso.
+	\end{enumerate}
+	\item Flujo de eventos
+		\begin{enumerate}
+		\item Flujo básico: escenario principal de éxito.
+		\item Flujos alternativos: qué puede pasar que no sea el flujo principal.
+			\begin{enumerate}
+			\item Condicion 1
+			\item Condición 2
+			\item \ldots
+		\end{enumerate}
+	\end{enumerate}
+	\item Requisitos especiales (si se dieran): plataforma, etc.
+	\item Precondiciones: qué debe ser cierto antes de ejecutar el caso de uso.
+	\item Postcondiciones: qué debe ser cierto después de ejecutar el caso de uso.
+\end{enumerate}
+
+Los requisitos fueron capturados inicialmente como notas manuscritas y convertidos en necesidades de alto nivel en la plataforma Trello. A partir de ahí, dichas necesidades se refinaron para dar lugar a la batería de casos de uso incluida en \ref{sec:53}.
 
 \section{Necesidades}
 
+La reunión presencial marcó un punto de inflexión en cuanto a objetivos del proyecto, lo que se traduce en un cambio de necesidades. Para reflejar la evolución completa, se dividirá su captura en dos fases detalladas a continuación:
 
-\section{Casos de uso}
+\subsection{Captura inicial}
+
+A continuación se resumen, en lenguaje natural, las necesidades identificadas durante la primera fase de desarrollo del proyecto:
+\begin{enumerate}
+\item Permitir a usuarios de la UNED  de distintos colectivos etiquetar y generar sus propios cuadernos con información y metainformación semántica.
+\item Permitir a dichos usuarios realizar consultas sobre sus cuadernos.
+\item Desarrollar una interfaz web que permita al usuario gestionar tripletas RDF.
+\item Desarrollar un módulo de generación de consultas SPARQL a partir de consultas de lectura y escritura en formato JSON.
+\item Desarrollar los correspondientes productos de interés para el usuario: consultas exportadas en forma diversa (CSV, JSON) o embebidas en una plantilla HTML significativa para el usuario.
+\item Ofrecer la posibilidad de variar interfaces de entrada y exportadores en función de los distintos colectivos de usuario utilizando los metadatos sobre cuadernos RDF previamente almacenados en una base de datos relacional.
+\item Permitir mostrar en pantalla una serie de términos como punto de partida que el usuario pueda utilizar para construir ternas RDF y relaciones entre ellas.
+\item Permitir mostrar en pantalla una serie de términos como punto de partida que el usuario pueda utilizar para construir ternas RDF y relaciones entre ellas.
+\item Ofrecer al usuario una visualización sencilla y correcta de su modelo que proporciona una perspectiva adecuada sobre la que trabajar.
+\item Presentar una interfaz de mantenimiento del grafo: vocabulario e instancias (conceptualización y poblamiento de una ontología).
+\item Importar y exportar información estructurada en formatos semánticos estándar.
+\item Extender con vocabularios tales como SKOS y OWL. 
+\end{enumerate}
+
+\subsection{Captura final}
+
+Una vez celebrada la reunión presencial, se decidió darle otro enfoque al proyecto. Si bien la idea inicial era desarrollar un sistema que permitiese generar cuadernos a través de la manipulación de grafos, una vez presentada una maqueta o prueba de concepto con funcionalidades básicas de modelado el tutor propuso convertir la herramienta en un \textit{playground} o sistema de realización de actividades académicas con un enfoque docente orientado a facilitar el aprendizaje de las tecnologías de la Web Semántica (básicamente RDF y SPARQL) a personas con poco o ningún contacto con estas materias (por ejemplo, alumnos de los Grados de Ingeniería Informática o en Tecnologías de la Información de la UNED).
+
+Este nuevo enfoque se tradujo en la siguiente instantánea de necesidades de alto nivel:
+
+\begin{enumerate}
+\item Permitir el modelado semántico con edición CRUD de clases, subclases y propiedades de clases (anotaciones básicas).
+\item Permitir la edición CRUD de relaciones o propiedades, subpropiedades, etc.
+\item Ofrecer mecanismos de poblamiento del grafo.
+\item Permitir el lanzamiento de consultas SPARQL sobre el grafo local y visualización de resultados.
+\item Permitir el lanzamiento de consultas SPARQL sobre endpoints remotos y visualización de resultados.
+\item Ofrecer funcionalidad de carga de consultas SPARQL predefinidas desde archivo de texto.
+\item Incorporar módulo para añadir un texto con la definición de la actividad a realizar en formato Markdown.
+\item Permitir la importación de tripletas desde archivos o URL.
+\item Permitir la incorporación (append) de tripletas al grafo local desde archivos o URL.
+\item Ofrecer un panel para cargar en el grafo vocabularios comunes predefinidos.
+\item Presentar una interfaz fácil de usar y responsiva para el usuario, con una gestión de errores adecuada y suficiente.
+\end{enumerate}
+
+\section{Casos de uso} \label{sec:53}
 
 \subsection{Caso de uso 1}
 
