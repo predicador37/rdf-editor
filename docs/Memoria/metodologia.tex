@@ -1,3 +1,70 @@
 \chapter{Metodología}
 
-<....>
+\section{Elección de la metodología}
+
+Para acometer este proyecto, se han valorado dos familias de metodologías de desarrollo de \textit{software}:
+
+\begin{enumerate}
+	\item Metodologías en cascada (\textit{Waterfall})
+	\item Metodologías ágiles (incrementales e iterativas)
+\end{enumerate} 
+
+La metodología de desarrollo en cascada surgió como idea en un artículo de Winston W. Royce en 1970{\cite{royce01}}. Históricamente, este modelo se ha extendido tanto en ámbitos académicos como profesionales, siendo estas sus principales características:
+
+\begin{itemize}
+	\item Gestión predictiva de proyectos llevada al software.
+	\item Toma como modelo la forma de proceder en el resto de ingenierías.
+	\item Intenta llenar el vacío del \textit{code \& fix}.
+	\item Cada fase se realiza, en principio, una única vez.
+	\item Cada fase produce un entregable que será entrada de la siguiente.
+	\item Los entregables no son, en principio, modificables.
+\end{itemize}
+
+Es decir, se basa en la separación entre diseño y construcción (o entre creatividad y repetición).
+
+La propuesta de Royce,tal y como se desprende de la lectura del artículo original, describía el modelo en cascada como la \blockquote[{\cite{royce01}}]{descripción más simple} que solo funcionaría para los proyectos más sencillos. Irónicamente, este mensaje malentendido ha sido el origen de la popularidad de la metodología en cascada, que hoy en día se sigue promoviendo en muchos casos por inercia, desconocimiento, comodidad o ilusión de control sobre el proyecto.
+ 
+Lamentablemente, en la \textit{Ingeniería de Software} los pesos de diseño y construcción están invertidos con respecto a otras ingenierías, siendo el \textit{software} un dominio de cambio y alta inestabilidad. El desarrollo de \textit{software} es, intrínsecamente, una labor creativa; y la creatividad no es fácilmente predecible. Esto ha dado lugar a que los desarrollos tradicionales adolezcan de ciertos problemas{\cite{larman01}}:
+
+\begin{itemize}
+	\item Existencia de muchos requisitos vagos o especulativos y diseño detallado por adelantado.
+	\item Están fuertemente asociados con las tasas de fallo más altas en proyectos.
+	\item Se encuentran promovidos históricamente por creencia más que por evidencia estadística significativa.
+	\item Su rigidez incrementa el riesgo de fracaso, pospuesto hasta las fases finales del proyecto.
+	\item Asume que las especificaciones son predecibles, estables y completas.
+	\item Pospone integración y pruebas hasta fases tardías.
+	\item Se basa en estimaciones y planificación ``fiables''.
+\end{itemize}
+
+Entre los estudios que ratifican las afirmaciones anteriores, cabe citar los siguientes:
+
+\begin{itemize}
+	\item Informe Chaos 2015\cite{chaos15}.
+	\item \textit{Dr. Dobb's Journal article The Non'Existent Software Crisis: Debunking the Chaos Report}\cite{ambler01}.
+	\item Encuesta de Gartner\cite{mieritz01}.
+    \item TODO
+\end{itemize}
+
+Por tanto, atendiendo a esta exposición y considerando que el proyecto en cuestión presentaba un alto nivel de incertidumbre debido a su alto componente en investigación del estado tecnológico actual, se ha optado por utilizar un enfoque metodológico incremental e iterativo, puesto que:
+
+\begin{itemize}
+	\item Facilita llevar a cabo proyectos pequeños.
+	\item Fomenta la interacción entre el desarrollador y el usuario.
+	\item Fuerza a que los inevitables cambios en requisitos sucedan en fases tempranas del proyecto.
+\end{itemize}
+
+Entre sus características es posible citar:
+
+\begin{itemize}
+	\item Se trabaja sobre subconjuntos de funcionalidad (\textit{features}).
+	\item Los incrementos permiten añadir funcionalidad al producto (mejora del proceso).
+	\item Las iteraciones permiten rediseñar, revisar y refactorizar el producto (mejora del producto).
+	\item Se basa en entregas frecuentes y ciclos prueba/error.
+	\item Ofrece flexibilidad a la hora de gestionar el cambio.
+\end{itemize}
+
+La referencia más clara en este ámbito es \textit{Extreme Programming}, de Kent Beck\cite{beck01}. \textit{Extreme Programming} es \blockquote[{\cite{royce01}}]{un estilo de desarrollo de software centrado en la aplicación excelente de técnicas de programación, comunicación clara y trabajo en equipo que permite conseguir objetivos antes impensables}. Se trata de una metodología basada en valores como la comunicación, realimentación, simplicidad, valentía y respeto, soportada sobre un cuerpo de prácticas útiles y con un conjunto de principios complementarios, además de contar con una comunidad de usuarios que comparte todo lo anterior.
+
+Su aplicación al desarrollo de este proyecto no ha sido estricta; por ejemplo, no se han definido ciclos estrictos por la propia naturaleza inestable de la dedicación al desarrollo del mismo, pero sí que ha realizado un diseño evolutivo soportado sobre un número suficiente de pruebas unitarias así como una planificación incremental y adaptativa a las problemáticas que iban surgiendo.
+
+Prueba del acierto a la hora de elegir esta metodología es el cambio de necesidades y requisitos funcionales que tuvo lugar en la reunión presencial mantenida con el tutor, donde \textbf{la metodología aportó que no fuera necesario descartar ningún desarrollo o trabajo realizado hasta la fecha}. Permitió realizar una gestión del cambio efectiva, re-orientando el trabajo a tiempo sin impactar en el diseño ni en la implementación existente. Finalmente, tanto la organización como la planificación de las tareas han sido lo suficientemente flexibles para conseguir un ritmo adecuado de desarrollo, reduciendo los puntos de bloqueo.

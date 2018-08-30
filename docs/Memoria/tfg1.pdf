@@ -1,0 +1,63 @@
+
+\chapter{Introducción}
+
+La Web Semántica es un término originalmente acuñado por Tim Berners-Lee en el año 2001. Hasta la fecha, la World Wide Web había sido concebida como una idea de colaboración abierta en la que múltiples contribuciones de varios autores podían tener cabida y ser compartidas universalmente. Dichas contribuciones, realizadas en forma de documentos, estaban dirigidas a personas y no a máquinas o computadores. Berners-Lee vio más allá y propuso su extensión para lograr su manipulación automática; en resumidas cuentas, permitir que agentes inteligentes (programas de ordenador) fueran capaces de encontrar datos y su significado a través de hiperenlaces a definiciones de términos clave y reglas de razonamiento e inferencia lógica.
+
+Para lograr tan ambicioso objetivo, los agentes inteligentes necesitaban tener acceso a contenido y conocimiento estructurado, así como a las reglas de inferencia necesarias. En este contexto, la Web Semántica podía apoyarse en las siguientes tecnologías existentes:
+
+\begin{itemize}  
+	\item  \textbf{RDF} (Resource Description Framework), que permite expresar conocimiento en forma de tripletas (a modo de sujeto, verbo y objeto en una oración) utilizando URIs (Uniform Resource Indicators).
+	\item \textbf{XML} (eXtensible Markup Language), que permite la creación de documentos convenientemente etiquetados y con estructura arbitraria.
+\end{itemize}
+
+Sin embargo, un tercer pilar era necesario para resolver la problemática de la existencia de distintos identificadores en distintas bases de datos relacionadas con el mismo significado conceptual. Gracias a las \textbf{ontologías}, documentos que definen formalmente las relaciones entre distintos términos, estas diferencias podían ser salvadas bien mediante el uso de términos estandarizados bien mediante la definición de relaciones conceptuales de igualdad o similitud entre dichos términos.
+
+En palabras del propio Berners-Lee: \blockquote[{\cite{bernerslee01}}]{Con un diseño adecuado, la Web Semántica puede ayudar en la evolución del conocimiento humano como un todo.}
+
+
+\section{Motivación y objetivos}
+
+
+
+
+
+\section{Estado actual}
+
+El estado actual (o \textit{state of the art}, del inglés) de las tecnologías de la Web Semántica alcanza distintos niveles de madurez en sus implementaciones.
+
+\subsection{Java}
+
+Así, para la plataforma Java se cuenta con Apache Jena{\cite{jena01}}, un marco de trabajo o \textit{framework} \textit{opensource} para construir aplicaciones para la Web Semántica o sobre datos enlazados. De entre sus componentes y funcionalidades, cabe destacar:
+
+\begin{itemize} 
+\item TDB: una base de datos de tripletas nativa y de alto rendimiento, con excelente integración con el resto de APIs de Jena.
+\item ARQ: un motor SPARQL compatible con su versión 1.1 que soporta consultas federadas y búsqueda por texto libre.
+\item API RDF: una API principal que permite interactuar con RDF para crear y leer grafos y tripletas, así como serializarlas a los formatos más comunes (Turtle, XML, etc.).
+\item Fuseki: un \textit{endpoint} SPARQL que permite exponer el grafo de trabajo y ofrece interacción tipo REST con tripletas RDF.
+\item Otras APIs: como las de ontologías e inferencias, que permiten añadir más semántica al modelo y razonar sobre reglas por defecto o personalizadas.
+\end{itemize}  
+
+Apache Jena es una solución robusta y muy utilizada en entornos académicos y de producción empresarial con más de quince años de vida.
+
+\subsection{Python}
+
+RDFLib es una biblioteca \textit{opensource} ligera pero funcionalmente completa para trabajar con RDF desde plataformas Python. Permite a las aplicaciones acceder a estructuras RDF a través de construcciones idiomáticas en Python, lo que permite acercar la tecnología al programador de Python experimentado; por ejemplo, un grafo no es más que una colección de tripletas \textit{<sujeto, predicado, objeto>}. Entre el resto de sus características, destacan:
+
+\begin{itemize}
+	\item Contiene procesadores y serializadores para XML, N3, Turtle, RDFa, etc.
+	\item Presenta una interfaz para un grafo que puede soportarse sobre multitud de implementaciones de almacenes.
+	\item Incluye una implementación de SPARQL v1.1.
+	\item Presenta una arquitectura modular basada en \textit{plugins} o complementos.
+\end{itemize} 
+
+\subsection{Javascript}
+
+\section{Estructura de la memoria\label{sec:Estructura-de-la-memoria}}
+
+La memoria de esta proyecto se estructura en los siguientes capítulos:
+\begin{enumerate}
+\item Introducción general y objetivos
+\item <añadir los demás capítulos>
+\item Conclusiones y trabajos futuros
+\end{enumerate}
+<Comentar los capítulos>

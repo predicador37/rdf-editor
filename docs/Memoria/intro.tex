@@ -1,9 +1,10 @@
 
 \chapter{Introducción}
 
-La Web Semántica es un término originalmente acuñado por Tim Berners-Lee en el año 2001. Hasta la fecha, la World Wide Web había sido concebida como una idea de colaboración abierta en la que múltiples contribuciones de varios autores podían tener cabida y ser compartidas universalmente. Dichas contribuciones, realizadas en forma de documentos, estaban dirigidas a personas y no a máquinas o computadores. Berners-Lee vio más allá y propuso su extensión para lograr su manipulación automática; en resumidas cuentas, permitir que agentes inteligentes (programas de ordenador) fueran capaces de encontrar datos y su significado a través de hiperenlaces a definiciones de términos clave y reglas de razonamiento e inferencia lógica.
+La Web Semántica es un término originalmente acuñado por Tim Berners-Lee en el año 2001. Hasta la fecha, la \textit{World Wide Web} había sido concebida como una idea de colaboración abierta en la que múltiples contribuciones de varios autores podían tener cabida y ser compartidas universalmente. Dichas contribuciones, realizadas en forma de documentos, estaban dirigidas a personas y no a máquinas o computadores. Berners-Lee vio más allá y propuso su extensión para lograr su manipulación automática; en resumidas cuentas, permitir que agentes inteligentes (programas de ordenador) fueran capaces de encontrar datos y su significado a través de hiperenlaces a definiciones de términos clave y reglas de razonamiento e inferencia lógica.
 
 Para lograr tan ambicioso objetivo, los agentes inteligentes necesitaban tener acceso a contenido y conocimiento estructurado, así como a las reglas de inferencia necesarias. En este contexto, la Web Semántica podía apoyarse en las siguientes tecnologías existentes:
+
 
 \begin{itemize}  
 	\item  \textbf{RDF} (Resource Description Framework), que permite expresar conocimiento en forma de tripletas (a modo de sujeto, verbo y objeto en una oración) utilizando URIs (Uniform Resource Indicators).
@@ -14,90 +15,70 @@ Sin embargo, un tercer pilar era necesario para resolver la problemática de la e
 
 En palabras del propio Berners-Lee: \blockquote[{\cite{bernerslee01}}]{Con un diseño adecuado, la Web Semántica puede ayudar en la evolución del conocimiento humano como un todo.}
 
+Las tecnologías de la Web Semántica permiten, por tanto, almacenar conocimiento en forma de conceptos y relaciones a través de ternas o tripletas, modelar dominios de conocimiento con vocabularios estándar y ofrecer potentes facilidades de consulta sobre dichos modelos.
+
+En concreto, RDF permite:
+
+\begin{itemize}  
+	\item  Añadir información legible a los motores de búsqueda.
+	\item  Enriquecer un conjunto de datos enlazándolo con conjuntos de datos de terceros.
+	\item Facilitar el descubrimiento de APIs\footnote{\textit{Aplication Programming Interface}, en este caso referido a puntos accesibles a través de la Web.} a través de su entrelazado.
+	\item Construir agregaciones de datos sobre determinados temas.
+	\item Proporcionar un estándar de intercambio de datos entre bases de datos.
+	\item Enriquecer, describir y contextualizar los datos mediante un enfoque rico en metadatos.
+\end{itemize}
+
+Su principal ventaja frente a los modelos y bases de datos relacionales es una mayor facilidad para evolucionar los grafos, que en un sistema relacional es complejo (dado que requiere de modificaciones en las estructuras de almacenamiento de datos y sus consultas asociadas). En otras palabras, su \textbf{flexibilidad para modelar lo inesperado}.
+
 
 \section{Motivación y objetivos}
 
 
-<Ejemplo referencia a sección \ref{sec:Estructura-de-la-memoria}
-y a subsección de otro capítulo, que en este caso es un anexo \ref{subsec:<Primera-subsecci=0000F3n-anexo>}.
-\textbf{Para que funcionen correctamente las referencias a otros capítulos
-al exportar a pdf, debe estar abierto el archivo maestro, abrir/editar
-el archivo a exportar desde él y exportar desde el maestro}.>
+El objetivo principal del proyecto es obtener una herramienta académica que permita a los Equipos Docentes de las asignaturas relacionadas con tecnologías de la Web Semántica ofrecer a los alumnos (o a cualquier no iniciado en estas tecnologías) un \textit{playground} o entorno de pruebas que les permita consolidar su aprendizaje teórico con una base práctica adaptada al mundo real.
 
-<Ejemplo referencia a figura \ref{fig:Ejemplo-de-figura}>
+Las tecnologías de la Web Semántica se caracterizan por un cambio de paradigma bastante fuerte con respecto a otras tecnologías de manipulación de datos con las que el alumno pueda estar familiarizado a la hora de introducirse en este nuevo mundo. Es cierto que pueden establecerse ciertas comparativas conceptuales que pueden facilitar su comprensión; como ejemplo, la siguiente tabla equipara la Web Semántica con un sistema basado en bases de datos relacionales:
 
-<Ejemplo referencia a tabla \ref{tab:Ejemplo-de-tabla}>
+\vspace*{\baselineskip}
+\begin{center}
+	\begin{table}[htb]
+		\centering
+		\begin{tabular}{p{5cm}p{5cm}}
+			\toprule
+			Mundo Relacional & Mundo Semántico \\ \midrule
+		    Registro de tabla & Nodo RDF \\ \midrule
+		    Columna de tabla & RDF propertyType \\ \midrule
+			Celda de tabla & Valor \\ \midrule
+			Consulta SQL & Consulta SPARQL \\ \midrule
+			Modelo de datosL & Ontología \\ 
+			\bottomrule
+		\end{tabular}
+		\caption{Comparativa paradigma relacional vs semántico}
+		\label{tabkanban}
+	\end{table}
+\end{center}
 
-<Ejemplo de nomenclatura \nomenclature{POO}{Programación Orientada a Objetos}
-(POO)>
+Sin embargo, determinados indicadores pueden dar lugar a entender que la interiorización de los conceptos asociados a la Web Semántica no es sencilla. Por ejemplo: su uso casi exclusivamente académico con poca penetración en el mundo empresarial, su lenta velocidad de propagación, su soporte limitado en determinadas plataformas tecnológicas o incluso su escaso interés en el ámbito público (excluyendo el académico o universitario). Un ejemplo muy concreto, real y tangible de esta escasa penetración es el reducido número de artículos (cuatro) presentado en \textit{workshops} como SemStats\footnote{SemStats es un \textit{workshop} de celebración anual centrado en el estado actual de las tecnologías de la Web Semántica aplicadas a la estadística pública}\cite{semstats2018}, de cuyo \textit{Program Comittee} este autor forma parte:
 
-\begin{figure}
-\begin{centering}
-\includegraphics[width=0.5\columnwidth]{figs/logo_uned}
-\par\end{centering}
-\caption[Ejemplo de figura con un pie largo]{\label{fig:Ejemplo-de-figura}Ejemplo de figura con un pie largo
-para mostrar el uso del ítem del menú de Lyx Insertar->Título breve.
-La utilidad del título breve se aprecia en la lista de figuras, es
-ahí donde aparece, si no, aparecería todo el pie en la lista, también
-es conveniente para títulos de capítulos secciones y demás largo que
-ocupen más de una línea en la lista de índice correspondiente.(Para
-insertar salto de línea en pie o en enumeración Ctrl-Enter)\protect \\
-La figura o tabla hay que insertarla dentro de un flotante.\protect \\
-Siempre hay que Insertar->Etiqueta de la figura (fig:Ejemplo-de-figura),
-tabla etc, para referenciarla desde el texto.}
-
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.25]{semstats2018}
+	\caption{Trabajos enviados a Semstats 2018}
 \end{figure}
 
+Por tanto, parece interesante trabajar en la línea de conseguir una herramienta que acerque este tipo de tecnologías a quienes tengan interés u obligación de trabajar con ellas.
 
+Si bien es cierto que existen, por una parte, varias aproximaciones gratuitas en la red a modo de \textit{playground} que permiten el lanzamiento de consultas SPARQL a determinados \textit{endpoints} y por otra, editores y herramientas de modelado del calibre de Protégé, no parece haber en el mercado referencias de aplicaciones que ofrezcan subconjuntos reducidos de ambas funcionalidades. Llenar este hueco y \textbf{conseguir una herramienta formativa de modelado y consulta es la motivación} que da lugar al desarrollo de este proyecto.
 
-<Ejemplo de listado de código, ver listado \ref{lis:Codigo-de-edit},
-lo mejor para utilizarlo es copiar el recuadro y cambiar el código
-contenido, así conservaremos las opciones que se han establecido,
-como: mostrar números de línea, quebrar líneas largas. etc. Para ver
-las opciones y poder modificarlas click derecho sobre el listado y
-elegir Configuración. Para cambiar el listado contenido copiar del
-IDE el trozo de código que se desee y pegarlo dentro del listado con
-Ctrl+May+v, en el menú de Lyx Editar->Pegado especial->Texto simple.>
+De forma más específica, es posible enumerar los siguientes objetivos:
 
-\begin{lstlisting}[caption={Código de edit},label={lis:Codigo-de-edit},language=Java,float=p,numbers=left,basicstyle={\ttfamily},breaklines=true,tabsize=4]
-    public final boolean edit() {
-        
-        ArrayList<String> campos = cargaCampos();
-        
-        Scanner in = new Scanner( System.in );     
-	
-	/* La variable resp sera true si el usuario acepta la edicion
-	 */
-        
-	boolean resp = false;        
-        int numero_total_opciones = campos.size() + opciones_no_campos;
-        System.out.println("\n" + toString()); // muestra el registro
-        
-        editLoop: while (true) {            
-            editMensaje();
-            System.out.println("Seleccione un numero (1-" + numero_total_opciones + "):  ");
-            int opcion;
-            if ( in.hasNextInt() ) {
-                opcion = in.nextInt();
-                in.nextLine();
-            } else {
-                System.out.println("\nOPCION NO VALIDA. POR FAVOR, INTRODUZCA UN NUMERO.");
-                in.nextLine();
-                continue;
-            }            
-            campos = procesaOpcion(campos, opcion, in);
-            if(salir) {
-                if(aceptar) 
-                    resp = true;
-                salir = false;
-                aceptar = false;
-                break editLoop;                   
-            }
-            
-        }
-        return resp;
-    }
-\end{lstlisting}
+\begin{itemize}  
+	\item  Facilitar el aprendizaje y la \textbf{familiarización con tecnologías de la Web Semántica} a usuarios inexpertos.
+	\item Ofrecer a los Equipos Docentes la posibilidad de \textbf{distribuir actividades formativas} auto-contenidas para que los alumnos trabajen sobre ellas en la herramienta.
+	\item Agrupar en un solo producto funcionalidades básicas de edición y consulta sobre grafos, de cara a cubrir las expectativas educativas en este ámbito.
+	\item Permitir al alumno comprobar \textit{in situ} los efectos de sus acciones sobre un grafo y ofrecerle la \textbf{flexibilidad suficiente} como para permitirle dar rienda suelta a su creatividad e inquietudes.
+\end{itemize}
+
+\section{Trabajos previos}
 
 \section{Estado actual}
 
