@@ -1,3 +1,136 @@
 \chapter{Planificación}
 
-<....>
+\newenvironment{changemargin}[2]{%
+	\begin{list}{}{%
+			\setlength{\topsep}{0pt}%
+			\setlength{\leftmargin}{#1}%
+			\setlength{\rightmargin}{#2}%
+			\setlength{\listparindent}{\parindent}%
+			\setlength{\itemindent}{\parindent}%
+			\setlength{\parsep}{\parskip}%
+		}%
+		\item[]}{\end{list}}
+	
+
+
+\begin{ganttchart}[
+	canvas/.append style={fill=none, draw=black!5, line width=.75pt},
+	hgrid style/.style={draw=black!5, line width=.75pt},
+	vgrid={*1{draw=black!5, line width=.75pt}},
+	title/.style={draw=none, fill=none},
+	title label font=\bfseries\footnotesize,
+	title label node/.append style={below=4pt},
+	include title in canvas=false,
+	bar label font=\mdseries\small\color{black!70},
+	bar label node/.append style={left=2cm},
+	bar/.append style={draw=none, fill=black!63},
+	bar incomplete/.append style={fill=barblue},
+	bar progress label font=\mdseries\footnotesize\color{black!70},
+	group/.append style={draw=none, fill=groupblue},
+	group left shift=0,
+	group right shift=0,
+	group height=.5,
+	group peaks tip position=0,
+	group label node/.append style={left=.6cm},
+	group progress label font=\bfseries\small,
+	link/.style={-latex, line width=1.5pt, linkred},
+	link label font=\scriptsize\bfseries,
+	link label node/.append style={below left=-2pt and 0pt}
+	]{1}{20}
+	\gantttitle{Planificación inicial}{20} \\
+	\gantttitle{Febrero}{4}
+	\gantttitle{Marzo}{4}
+	\gantttitle{Abril}{4}
+	\gantttitle{Mayo}{4}
+	\gantttitle{Junio}{4}\\
+	\gantttitle[
+	title label node/.append style={below left=4pt and -3pt}
+	]{Semana:\quad1}{1}
+	\gantttitlelist{2,...,20}{1} \\
+	\ganttgroup[]{Documentación y arranque}{1}{4} \\
+	\ganttgroup[]{Prueba de concepto}{4}{8} \\
+	\ganttgroup[]{Desarrollo del proyecto}{8}{14} \\
+	\ganttgroup[]{Resultados y memoria}{14}{20} \\
+\end{ganttchart}
+
+
+\begin{changemargin}{-2cm}{-1cm}
+\vspace*{-2cm}
+\begin{tikzpicture}[y=0.50cm] 
+\begin{ganttchart}[
+    y unit chart=0.8cm,
+	canvas/.append style={fill=none, draw=black!5, line width=.75pt},
+	hgrid style/.style={draw=black!5, line width=.75pt},
+	vgrid={*1{draw=black!5, line width=.75pt}},
+	title/.style={draw=none, fill=none},
+	title label font=\bfseries\footnotesize,
+	title label node/.append style={below=4pt},
+	include title in canvas=false,
+	bar label font=\mdseries\tiny\color{black!70},
+	bar label node/.append style={left=0.5cm},
+	bar/.append style={draw=none, fill=barblue!63},
+	bar incomplete/.append style={fill=barblue},
+	bar progress label font=\mdseries\footnotesize\color{black!70},
+	group incomplete/.append style={fill=groupblue},
+	group/.append style={draw=none, fill=groupblue},
+	group left shift=0,
+	group right shift=0,
+	group height=.5,
+	group peaks tip position=0,
+	group label node/.append style={left=.6cm},
+	group label font=\bfseries\tiny,
+	milestone label font=\bfseries\tiny,
+	link/.style={-latex, line width=1.5pt, linkred},
+	link label font=\scriptsize\bfseries,
+	link label node/.append style={below left=-2pt and -5pt}
+	]{1}{28}
+	\gantttitle{Planificación efectiva}{28} \\
+	\gantttitle{Febrero}{2}
+	\gantttitle{Marzo}{4}
+	\gantttitle{Abril}{4}
+	\gantttitle{Mayo}{4}
+	\gantttitle{Junio}{4}
+	\gantttitle{Julio}{4}
+	\gantttitle{Agosto}{4}
+	\gantttitle{Septiembre}{2}\\
+	\gantttitle[
+	title label node/.append style={below left=4pt and -6pt}
+	]{Semana:\quad1}{1}
+	\gantttitlelist{2,...,28}{1} \\
+	\ganttgroup[]{Formación y arranque (FA)}{1}{6} \\
+	\ganttbar[
+	name=FA11
+	]{\textbf{FA 1.1} RDF y OWL}{1}{2} \\
+	\ganttbar[
+	name=FA12
+	]{\textbf{FA 1.2} JS ES6+, Vue}{3}{6} \\
+	\ganttbar[
+	name=FA13
+	]{\textbf{FA 1.3} POC edición tripleta}{1}{6} \\
+	\ganttmilestone{Prueba de concepto inicial}{6}{6} \\
+	\ganttbar[
+	name=FA14
+	]{\textbf{FA 1.4} Análisis de necesidades}{1}{6} \\
+	\ganttgroup[]{Desarrollo de módulo de edición (ME)}{7}{20} \\
+	\ganttbar[]{\textbf{ME 2.1} Plantilla Vue + testing}{7}{8} \\
+	\ganttbar[]{\textbf{ME 2.2} Diseño de componentes}{8}{9} \\
+	\ganttbar[]{\textbf{ME 2.3} Implementación CRUD clases}{9}{13} \\
+	\ganttbar[]{\textbf{ME 2.4} Implementación export/import}{12}{14} \\
+	\ganttbar[]{\textbf{ME 2.5} Mejoras en visualización y uso }{14}{16} \\
+	\ganttbar[]{\textbf{ME 2.6} Refactorización y generalización }{16}{20} \\
+	\ganttbar[]{\textbf{ME 2.7} Pruebas}{7}{20} \\
+	\ganttmilestone{Reunión presencial}{20}{20} \\
+	\ganttgroup[]{Desarrollo de módulos playground}{20}{25} \\
+	\ganttbar[]{\textbf{ME 3.1} Módulo de consulta SPARQL}{20}{23} \\
+	\ganttbar[]{\textbf{ME 3.2} Módulo de carga de actividades}{23}{24} \\
+	\ganttbar[]{\textbf{ME 3.3} Módulo de carga de vocabularios}{23}{24} \\
+	\ganttbar[]{\textbf{ME 3.4} Mejoras en la importación}{23}{24} \\
+	\ganttbar[]{\textbf{ME 3.5} Revisión, refactoring, cleaning}{24}{25} \\
+	\ganttbar[]{\textbf{ME 3.6} Pruebas}{20}{25} \\
+	\ganttgroup[]{Redacción de memoria y cierre}{24}{28} \\
+	\ganttbar[]{\textbf{ME 4.1} Formación latex}{24}{24} \\
+	\ganttbar[]{\textbf{ME 4.2} Redacción memoria}{24}{28} \\
+	
+\end{ganttchart}
+\end{tikzpicture}
+\end{changemargin}
