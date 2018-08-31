@@ -1,23 +1,19 @@
 Resumen
 Abstract
 Índices
-Introducción
-  Motivación y objetivos
-  Estado actual
-  Estructura de la memoria
-Desarrollo
-  Metodología
-  Planificación
-  Recursos
-  Análisis
+1. Introducción
+2. La Web Semántica
+3. Motivación y objetivos
+4. Trabajos previos, Estado actual y Recursos
+5. Metodología y Planificación
+6.  Análisis
     Necesidades
     Requisitos
-  Diseño
+7.  Diseño
     Componentes
-  Implementación
-  Pruebas
-  Resultados
-Conclusiones y líneas futuras de trabajo
+8. Implementación y Pruebas
+9.  Resultados
+10. Conclusiones y Líneas Futuras de Trabajo
   Conclusiones
   Líneas futuras de trabajo
 Bibliografía

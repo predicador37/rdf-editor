@@ -1,0 +1,117 @@
+
+\chapter{Trabajos previos, estado actual y recursos}
+
+
+\section{Trabajos previos} \label{trabajosprevios}
+
+Para enfocar el presente proyecto se llevó a cabo un estudio previo de los trabajos existentes que pudieran estar relacionado con los objetivos del mismo. En las siguientes subsecciones se analizan las familias de herramientas analizadas.
+
+\subsection{Herramientas de consulta}
+
+La herramienta de consulta web que se asemeja más a los resultados obtenidos con este proyecto es el SPARQL playground desarrollado por el \textit{Swiss Institute of Bioinformatics}\footnote{https://www.isb-sib.ch}.
+
+Se trata de una aplicación web\textit{ standalone} y multiplataforma cuyo propósito fundamental es el aprendizaje de SPARQL. Sus autores proporcionan una demo \textit{online}\footnote{http://sparql-playground.sib.swiss/} además de documentación y consultas de ejemplo para que cualquiera pueda familiarizarse con este lenguaje de consulta.
+
+Si bien sus funcionalidades de consulta son muy completas, carece de facilidades de edición de grafos propios o de consulta a \textit{endpoints} externos, por ejemplo.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.25]{sparql_playground}
+	\caption{Interfaz de SPARQL \textit{playground}}
+\end{figure}
+
+Existan también bibliotecas de consulta para el \textit{frontend}, como Jassa (\textit{JAvascript Suite for Sparql Access})\footnote{http://aksw.org/Projects/Jassa.html}. Se trata de una biblioteca modular que comprende desde una API RDF sobre una capa de abstracción de servicios hasta una capa de navegación por facetas. Sin embargo, desarrolla un modelo propio del grafo RDF no basado en estándares y se integra con versiones muy antiguas de Angular, lo que hace que pierda interés para su uso en producción.
+
+\subsection{Herramientas de modelado}
+
+\subsubsection{Herramientas web}
+
+Existen pocas herramientas con funcionalidades de edición de grafos RDF en la Web. Al margen de la versión web de Protégé, cuya versión de escritorio (más representativa) se comenta en el punto \ref{deescritorio}, el resto de trabajos encontrados son fundamentalmente bibliotecas o paquetes de edición de formularios, como rdfforms\footnote{https://rdforms.org/}. Se trata de una biblioteca Javascript cuyo propósito es facilitar la construcción de editores RDF basados en formularios en un entorno web. Para ello, se basa en un mecanismo de plantillas que describe cómo generar un formulario HTML y cómo mapear expresiones específicas en un grafo RDF a sus correspondientes campos.
+
+Unas pruebas iniciales con la biblioteca sugirieron falta de madurez por fallos en su funcionamiento en un navegador. Además, la biblioteca implementa su propio modelo de grafo RDF, que no está relacionado con los estándares actuales (ver sección \ref{estadoactual}).
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.25]{rdfforms}
+	\caption{Ejemplo de formulario desarrollado con rdfforms}
+\end{figure}
+
+\subsubsection{Herramientas de escritorio} \label{deescritorio}
+
+La herramienta de modelado de ontologías en RDF por antonomasia es Protégé, un editor de ontologías \textit{opensource} gratuito y un marco de trabajo para construir sistemas inteligentes soportados por una fuerte comunidad de usuarios académicos, gubernamentales y corporativos. Se utiliza en áreas tan diversas como la biomedicina, el comercio electrónico, la predicción metereológica o el modelado organizacional.
+
+Protégé se instala como una aplicación de escritorio multiplataforma y tiene una arquitectura basada en \textit{plugins} o complementos que permite extender fácilmente su funcionalidad. Tiene soporte para razonadores sobre las distintas ontologías que se modelan y facilidades de representación y edición de grafos RDF.
+
+De cara a un primer encuentro con las tecnologías de la Web Semántica, puede parecer abrumador por su gran flexibilidad y potencia. Además, no cuenta con facilidades de consulta sobre los grafos modelados.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.25]{protege}
+	\caption{Interfaz de Protégé}
+\end{figure}
+
+
+\section{Estado actual} \label{estadoactual}
+
+El estado actual (o \textit{state of the art}, del inglés) de las tecnologías de la Web Semántica alcanza distintos niveles de madurez en sus implementaciones. Complementando el listado de herramientas ya presentado en el estudio de trabajos previos (\ref{trabajosprevios}), se analizan a continuación las plataformas o bibliotecas más representativas dentro de las tecnologías más utilizadas.
+
+\subsection{Java}
+
+Así, para la plataforma Java se cuenta con Apache Jena{\cite{jena01}}, un marco de trabajo o \textit{framework} \textit{opensource} para construir aplicaciones para la Web Semántica o sobre datos enlazados. De entre sus componentes y funcionalidades, cabe destacar:
+
+\begin{itemize} 
+\item \textbf{TDB}: una base de datos de tripletas nativa y de alto rendimiento, con excelente integración con el resto de APIs de Jena.
+\item \textbf{ARQ}: un motor SPARQL compatible con su versión 1.1 que soporta consultas federadas y búsqueda por texto libre.
+\item \textbf{API RDF}: una API principal que permite interactuar con RDF para crear y leer grafos y tripletas, así como serializarlas a los formatos más comunes (Turtle, XML, etc.).
+\item \textbf{Fuseki}: un \textit{endpoint} SPARQL que permite exponer el grafo de trabajo y ofrece interacción tipo REST con tripletas RDF.
+\item \textbf{Otras APIs}: como las de ontologías e inferencias, que permiten añadir más semántica al modelo y razonar sobre reglas por defecto o personalizadas.
+\end{itemize}  
+
+Apache Jena es una solución robusta y muy utilizada en entornos académicos y de producción empresarial con más de quince años de vida.
+
+\subsection{Python}
+
+RDFLib\footnote{https://github.com/RDFLib/rdflib} es una biblioteca \textit{opensource} ligera pero funcionalmente completa para trabajar con RDF desde plataformas Python. Permite a las aplicaciones acceder a estructuras RDF a través de construcciones idiomáticas en Python, lo que facilita un acercamiento de la tecnología al programador experimentado; por ejemplo, un grafo no es más que una colección de tripletas \textit{<sujeto, predicado, objeto>}. Entre el resto de sus características, destacan:
+
+\begin{itemize}
+	\item Contiene procesadores y serializadores para XML, N3, Turtle, RDFa, etc.
+	\item Presenta una interfaz para un grafo que puede soportarse sobre multitud de implementaciones de almacenes.
+	\item Incluye una implementación de SPARQL v1.1.
+	\item Presenta una arquitectura modular basada en \textit{plugins} o complementos.
+\end{itemize} 
+
+Su desarrollo es estable y ha sido utilizada en referencias bibliográficas como \textit{Programming the Semantic Web}\cite{evanstaylor01}, de\textit{ O'Reilly}.
+
+\subsection{Javascript}
+
+Dado que uno de los objetivos del proyecto es reducir al máximo los requisitos de uso de la herramienta para alcanzar el mayor público objetivo posible (ver \ref{objetivos}), Javascript se presenta como una tecnología de sumo interés, ya que permite producir aplicaciones ejecutables al cien por cien en un navegador web estándar.
+
+Sin embargo, el \textbf{estado actual de implementación de RDF en Javascript puede calificarse de inmaduro y e inestable}. Se han llevado a cabo intentos aislados de construir APIs RDF y herramientas para gestión de grafos y consultas SPARQL, como las citadas en la sección \ref{trabajosprevios}, pero no existe un estándar único consolidado (aún).
+
+En el W3C puede consultarse la mejor comparativa existente de bibliotecas desarrolladas en Javascript para trabajar con RDF\cite{rdfjscomparison}.
+
+Sin duda, el esfuerzo más destacable hasta ahora para conseguir un estándar de RDF en Javascript es el proyecto rdflib.js\footnote{https://github.com/linkeddata/rdflib.js}, liderado por el mismísimo Tim Berners-Lee. Se trata de una biblioteca que proporciona una API local para lanzar consultas a un almacén RDF, soporta parte de la especificación SPARQL y permite importar y escribir formatos como RDF/XML, Turtle y N3. 
+
+En el propio repositorio de rdflib.js se cita al \textit{ RDFJS Representation Task Force}\footnote{https://github.com/rdfjs/representation-task-force}, un grupo dentro del \textit{RDFJS Community Group}\footnote{https://www.w3.org/community/rdfjs/} encargado de diseñar las especificaciones de interfaz con el objetivo de conseguir que las distintas implementaciones de conceptos RDF en Javascript sean interoperables. La especificación de la interfaz existe en forma de borrador a fecha de 14 de Agosto de 2017\footnote{http://rdf.js.org/}. En ella se definen interfaces para términos, cuaternas, factorías de datos, nodos en blanco, literales, etc. así como para \textit{streams} de Javascript.
+
+Consultando el sitio web del \textit{Community Group} se puede encontrar una noticia del 23 de Abril de 2018 (publicada, por tanto, en pleno desarrollo de este proyecto) anunciando la creación de RDF.js, que tratará de unir los esfuerzos de distintas entidades (como la Universidad de Gante o el MIT) y alinear y publicar bajo un único paraguas proyectos como:
+
+\pagebreak
+
+\begin{itemize}
+	\item El citado rdflib.js
+	\item RDF-Ext, una biblioteca Javascript para trabajar con RDF y datos enlazados que cumple con la especificación del RDFJS Representation Task Force.
+	\item N3.js, una biblioteca que implementa la especificación de bajo nivel RDF.js y permite leer, procesar, almacenar y exportar ternas RDF de forma asíncrona en Javascript.
+\end{itemize} 
+
+Ante esta situación confusa y repleta de distintas implementaciones, se optó por utilizar canales de comunicación directos con sus autores. Existen varios grupos de discusión en Gitter, tales como:
+
+\begin{itemize}
+	\item rdfjs/public\footnote{https://gitter.im/rdfjs/public}
+	\item rdf-ext/discussions\footnote{https://gitter.im/rdf-ext/discussions}
+\end{itemize} 
+
+En ellos, el autor del proyecto tuvo la oportunidad de recibir indicaciones directamente de Thomas Bergwinkl, 
+
+
+\section{Recursos}

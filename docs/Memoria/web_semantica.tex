@@ -1,0 +1,136 @@
+
+\chapter{La Web Semántica}
+
+La Web Semántica es un término originalmente acuñado por Tim Berners-Lee en el año 2001\cite{bernerslee01}. Hasta la fecha, la \textit{World Wide Web} había sido concebida como una idea de colaboración abierta en la que múltiples contribuciones de varios autores podían tener cabida y ser compartidas universalmente. Dichas contribuciones, realizadas en forma de documentos, estaban dirigidas a personas y no a máquinas o computadores. Berners-Lee vio más allá y propuso su extensión para lograr su manipulación automática; en resumidas cuentas, permitir que agentes inteligentes (programas de ordenador) fueran capaces de encontrar datos y su significado a través de hiperenlaces a definiciones de términos clave y reglas de razonamiento e inferencia lógica.
+
+Para lograr tan ambicioso objetivo, los agentes inteligentes necesitarían tener acceso a contenido y conocimiento estructurado, así como a las reglas de inferencia necesarias. En este contexto, la Web Semántica podía apoyarse en las siguientes tecnologías existentes:
+
+
+\begin{itemize}  
+	\item  \textbf{RDF} (\textit{Resource Description Framework}), que permite expresar conocimiento en forma de tripletas (a modo de sujeto, verbo y objeto en una oración) utilizando URIs (\textit{Uniform Resource Indicators}).
+	\item \textbf{XML} (\textit{eXtensible Markup Language}), que permite la creación de documentos convenientemente etiquetados y con estructura arbitraria.
+\end{itemize}
+
+Sin embargo, un tercer pilar era necesario para resolver la problemática de la existencia de distintos identificadores en distintas bases de datos relacionadas con el mismo significado conceptual. Gracias a las \textbf{ontologías}, documentos que definen formalmente las relaciones entre distintos términos, estas diferencias podían ser salvadas bien mediante el uso de términos estandarizados bien mediante la definición de relaciones conceptuales de igualdad o similitud entre dichos términos.
+
+En palabras del propio Berners-Lee: \blockquote[{\cite{bernerslee01}}]{Con un diseño adecuado, la Web Semántica puede ayudar en la evolución del conocimiento humano como un todo.}
+
+\section{Linked Data}
+
+Estrechamente relacionado con la Web Semántica se encuentra el concepto de datos enlazados o \textit{Linked Data}, también propuesto por Berners-Lee en 2006\cite{bernerslee02} en lo que se considera como su introducción oficial y formal. Se trata de un movimiento respaldado por el propio W3C que se centra en conectar conjuntos de datos a lo largo de la Web y que puede verse como un subconjunto de la Web Semántica.
+
+Se basa, por tanto, en dos aspectos clave:
+
+\begin{itemize}
+	\item La publicación de conjuntos datos estructurados en línea.
+	\item El establecimiento de enlaces entre dichos conjuntos de datos.
+\end{itemize}
+
+La Web Semántica es el fin y los datos enlazados proporcionan el medio para alcanzar dicho fin.
+
+\section{RDF}
+
+Las tecnologías de la Web Semántica permiten, por tanto, almacenar conocimiento en forma de conceptos y relaciones a través de ternas o tripletas, modelar dominios de conocimiento con vocabularios estándar y ofrecer potentes facilidades de consulta sobre dichos modelos. Dentro de estas tecnologías, RDF es, sin duda, el bloque de construcción fundamental en la Web Semántica (como HTML lo ha sido para la Web).
+
+RDF fue propuesto por el W3C en 1999\cite{Lassila:99:RDF} como un estándar para crear y procesar metadatos con el objetivo de describir recursos independientemente de su dominio de aplicación, ayudando por tanto a promover la interoperabilidad entre aplicaciones.
+
+Sin embargo, con la llegada de la Web Semántica el alcance de RDF creció, y ya no sólo se usa para codificar metadatos sobre recursos web, sino también \textbf{para describir cualquier recurso así como sus relaciones} en el mundo real.
+
+El nuevo alcance de RDF quedó reflejado en las especificaciones publicadas en 2004 por el \textit{RDF Core Working Group}\footnote{Recomendaciones del W3C, https://www.w3.org/2001/sw/RDFCore/}, ahora actualizadas a fecha de 2014\footnote{Versiones actualizadas de las recomendaciones del W3C, https://www.w3.org/2011/rdf-wg/wiki/Main\_Page}, de las que se pueden extraer las siguientes definiciones de RDF:
+
+
+\vspace*{\baselineskip}
+\begin{center}
+	\begin{table}[htb]
+		\centering
+		\begin{tabular}{p{3cm}p{10cm}}
+			\toprule
+			Recomendación & Definición \\ \midrule
+			RDF Primer & Un framework para expresar información sobre recursos. \\ \midrule
+			RDF Concepts \& Syntax & Un framework para representar información en la Web. \\ 
+			\bottomrule
+		\end{tabular}
+		\caption{Definiciones de RDF en las recomendaciones del W3C}
+		\label{tabdefrdf}
+	\end{table}
+\end{center}
+
+\subsection{Modelo Abstracto de RDF}
+
+RDF ofrece un modelo abstracto que permite descomponer el conocimiento en pequeñas piezas llamadas sentencias (\textit{statements}), tripletas o ternas y que toman la forma:
+
+\begin{center}
+Sujeto - Predicado - Objeto
+\end{center}
+
+En donde \textit{Sujeto} y \textit{Objeto} representan dos conceptos o ``cosas'' en el mundo (también denominados \textbf{recursos}) y \textit{Predicado} la relación que los conecta.
+
+Los nombres de estos recursos (así como de los predicados) han de ser globales y deberían identificarse por un \textit{Uniform Resource Idenfifier} (URI).
+
+Por tanto, un modelo RDF puede expresarse como una colección de tripletas o un grafo, dado que estas no son más que grafos dirigidos. Los sujetos y objetos serían los nodos del grafo y los predicados sus aristas.
+
+Otra nomenclatura utilizada para representar una terna sería la siguiente:
+
+\begin{center}
+	Recurso - Propiedad - Valor de la propiedad
+\end{center}
+
+En donde el valor de la propiedad u Objeto también puede ser un literal, que consiste simplemente en un dato textual bruto.
+
+Cabe destacar que una terna RDF sólo puede modelar relaciones binarias. Para modelar una relación n-aria, suelen utilizarse recursos intermedios como nodos en blanco, que no son más que sujetos u objetos que no tienen un URI como identificador (nodos sin nombre o anónimos).
+
+En resumen:
+
+\vspace*{\baselineskip}
+\begin{center}
+	\begin{table}[htb]
+		\centering
+		\begin{tabular}{p{5cm}p{6cm}}
+			\toprule
+			Sujeto & Puede ser un URI o un nodo en blanco. \\ \midrule
+			Predicado o Propiedad & Debe ser un URI. \\ \midrule
+			Objeto o Valor de la Propiedad & Puede ser un URI, un literal o un nodo en blanco. \\
+			\bottomrule
+		\end{tabular}
+		\caption{Resumen conceptual de ternas}
+		\label{tabresterna}
+	\end{table}
+\end{center}
+
+A continuación se muestran dos ejemplos de tripletas:
+
+\vspace*{\baselineskip}
+\begin{center}
+	\begin{table}[htb]
+		\tiny
+		\centering
+		\begin{tabular}{p{5cm}p{5cm}p{5cm}}
+			\toprule
+			Sujeto & Predicado & Objeto \\ \midrule
+			http://www.uned.es/ia/example\#Analista & http://www.w3.org/1999/02/22-rdf-syntax-ns\#type & http://www.w3.org/2002/07/owl\#Class  \\ \midrule
+		    http://www.uned.es/ia/example\#Analista & http://www.w3.org/2000/01/rdf-schema\#label & ``Analista Informático'' \\ 
+			\bottomrule
+		\end{tabular}
+		\caption{Ejemplos de tripletas reales}
+		\label{tabejternas}
+	\end{table}
+\end{center}
+
+\subsection{Aplicaciones prácticas de RDF}
+
+Gracias a RDF, es posible construir la Web Semántica y enlazar conjuntos de datos. A continuación se enumeran algunas de sus aplicaciones reales:
+
+\begin{itemize}  
+	\item Añadir información legible a los motores de búsqueda.
+	\item Enriquecer un conjunto de datos enlazándolo con conjuntos de datos de terceros.
+	\item Facilitar el descubrimiento de APIs\footnote{\textit{Aplication Programming Interface}, en este caso referido a puntos accesibles a través de la Web.} a través de su entrelazado.
+	\item Construir agregaciones de datos sobre determinados temas.
+	\item Proporcionar un estándar de intercambio de datos entre bases de datos.
+	\item Enriquecer, describir y contextualizar los datos mediante un enfoque rico en metadatos.
+\end{itemize}
+
+Su principal ventaja frente a los modelos y bases de datos relacionales es una mayor facilidad para evolucionar los grafos, algo que en un sistema relacional es complejo (dado que requiere de modificaciones en las estructuras de almacenamiento de datos y sus consultas asociadas). En otras palabras, su \textbf{flexibilidad para modelar lo inesperado}.
+
+Un ejemplo claro a nivel global es Wikidata\footnote{https://www.wikidata.org/wiki/Wikidata:Main\_Page}, una base de datos de conocimiento abierta que puede ser leída y editada tanto por personas como por máquinas. Wikidata actúa como un almacén centralizado para datos estructurados de otros proyectos hermanos como Wikipedia, Wikisource, etc. En el momento de redacción de esta memoria, cuenta con  50,035,140 elementos de datos que cualquiera puede editar.
+ 
+De una forma más concreta, es destacable el importante rol de RDF y las tecnologías de la Web Semántica en ámbitos de \textbf{búsqueda y clasificación bibliográfica o documental}, pudiendo citarse como ejemplo la publicación en RDF del \textit{Diccionario de Lugares Geográficos} y el \textit{Diccionario y Tesauro de Materias} del Patrimonio Cultural de España, gestionado en la actualidad por el Ministerio de Educación, Cultura y Deporte del Gobierno de España\footnote{https://www.mecd.gob.es/cultura-mecd/areas-cultura/museos/destacados/2015/tesauros.html}.
