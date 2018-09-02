@@ -18,6 +18,7 @@
 \usepackage{wrapfig}
 \usepackage{tabularx}
 \usepackage{graphicx}
+\usepackage{titlesec}
 \usepackage{setspace}
 \usepackage[authoryear]{natbib}
 \usepackage{nomencl}
@@ -32,6 +33,12 @@
 \makeatletter
 \raggedbottom
 \graphicspath{ {./img/} }
+\title{Desarrollo de un playground para formación en tecnologías de la Web Semántica}
+\author{Miguel Expósito Martín}
+\let\thetitle\@title
+\titleformat{\chapter}[display]   
+{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}   
+\titlespacing*{\chapter}{0pt}{-10pt}{30pt}
 \newenvironment{changemargin}[2]{%
 	\begin{list}{}{%
 			\setlength{\topsep}{0pt}%
@@ -61,7 +68,6 @@
 \setlength{\headheight}{15.2pt}
 \pagestyle{fancy}
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
-\renewcommand{\sectionmark}[1]{\markright{#1}{}}
 \makeatletter
 \let\sv@endpart\@endpart
 \def\@endpart{\thispagestyle{empty}\sv@endpart}
@@ -104,7 +110,13 @@
 
 \listoftables
 
-\cleardoublepage{}\fancyhf{}\pagenumbering{arabic}\pagestyle{fancy}\fancyhead[LE,RO]{\thepage}\fancyhead[LO]{\chaptername {} \thechapter. \leftmark}\fancyhead[RE]{\thesection. \rightmark}
+\cleardoublepage{}
+\fancyhf{}
+\pagenumbering{arabic}
+\pagestyle{fancy}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[LO]{\chaptername {} \thechapter. \leftmark}
+\fancyhead[RE]{\slshape Desarrollo de un playground para formación en tecnologías de la Web Semántica}
 
 \include{intro}\cleardoublepage{}
 
@@ -126,7 +138,7 @@
 
 \include{conclusiones}
 
-\cleardoublepage{}\fancyhead[LO]{\nouppercase{\leftmark}}\fancyhead[RE]{\nouppercase{\rightmark}}
+
 
 \cleardoublepage{}
 

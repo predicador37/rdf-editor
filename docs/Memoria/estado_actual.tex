@@ -1,4 +1,3 @@
-
 \chapter{Trabajos previos, estado actual y recursos}
 
 
@@ -227,7 +226,7 @@ Por otra parte, a la vista una encuesta de stateofjs.com en 2017 (ver figura \re
 \begin{figure}[h] 
 	\centering
 	\includegraphics[scale=0.75]{awarenessjs}
-	\caption{Encuesta sobre el estado de Javascript en 2017 por stateofjs.com\cite{techmagic01}} \label{fig:techmagic}
+	\caption{Encuesta sobre el estado de Javascript en 2017 por stateofjs.com\cite{}} 
 	\label{fig:stateofjs}
 \end{figure}
 
@@ -235,7 +234,7 @@ Por otra parte, a la vista una encuesta de stateofjs.com en 2017 (ver figura \re
 \begin{figure}[h] 
 	\centering
 	\includegraphics[scale=0.3]{jsfwshare}
-	\caption{Ofertas de trabajo según Medium.com a través de Indeed.com\cite{techmagic01}} \label{fig:techmagic}
+	\caption{Ofertas de trabajo por \textit{framework} JS según Medium.com a través de Indeed.com\cite{techmagic01}} \label{fig:techmagic}
 \end{figure}
 
 Cabe destacar en esta memoria que Vue fue propuesto como alternativa para el desarrollo del proyecto por los miembros del \textit{W3C RDFJS Community Group}, como puede comprobarse en la figura \ref{fig:gitter02}.
@@ -257,21 +256,26 @@ Una vez analizados los trabajos previos existentes en \ref{trabajosprevios} y la
 
 
 \begin{itemize}
-	\item En primer lugar, será necesario utilizar un sistema de control de versiones para el código desarrollado. Actualmente, el más utilizado es git, y la plataforma con mayor número de desarrolladores, Github.
-	\item Para llevar a cabo la planificación y evolución diaria de las tareas, se utilizará un plan gratuito de Trello (lo cual se estudia en profundidad en la sección \ref{label})
-	\item A la vista de los objetivos del proyecto, Javascript ES6 parece la tecnología más adecuada para su desarrollo. Dada la inexperiencia del autor en esta tecnología, se proponen las siguientes referencias bibliográficas y de formación online:
+	\item En primer lugar, será necesario utilizar un sistema de control de versiones para el código desarrollado. Actualmente, el más utilizado es \textit{git}, y la plataforma con mayor número de desarrolladores, \textit{Github} (28 millones, según la propia Github\footnote{https://github.com/search?q=type:user\&type=Users}). Una cuenta gratuita bastará para alojar el código fuente y la documentación del proyecto, si bien \textit{Github} ofrece cuentas privadas con duración limitada para estudiantes universitarios.
+	\item Para llevar a cabo la planificación y evolución diaria de las tareas, se utilizará un plan gratuito de \textit{Trello} (lo cual se detalla en profundidad en la subsección \ref{subsec:agileplanning})
+	\item A la vista de los objetivos del proyecto, Javascript ES6 parece la tecnología más adecuada para su desarrollo. Dada la inexperiencia del autor en esta tecnología, se proponen las siguientes referencias bibliográficas y de formación \textit{online}:
 	 \begin{itemize}
-	 	\item libro 1
+	 	\item \textit{Get Programming With Javascript Next}, JD Isaacks\cite{isaacks01}.
+	 	\item Curso en la plataforma Udemy\footnote{https://www.udemy.com}: \textit{ES6 Javascript: The Complete Developer's Guide}, Stephen Grider\cite{grider01}.
+	 	\item Curso en la plataforma Udemy: Working with Javascript Streams\cite{stoneriver01}.
 	 \end{itemize}
 	\item Analizadas las distintas implementaciones de RDF y SPARQL en Javascript y, siguiendo las recomendaciones del W3C RDFJS Community Group, se propone el uso inicial de los siguientes recursos:
 		 \begin{itemize}
-		\item RDF-Ext 
+		\item RDF-Ext como biblioteca para trabajar con la API de RDF, siguiendo los estándares existentes.
 		\item Comunica para las consultas SPARQL, dado que aún con los riesgos inherentes que conlleva la utilización de un producto aún en desarrollo, es la única plataforma que puede responder a las necesidades del proyecto.
 	\end{itemize}
-	\item Tras el estudio de la situación actual de los framerworks de frontend Javascrip y, teniendo en cuenta asimismo las recomendaciones del W3C RDFJS Community Group, se opta por Vue para el proyecto dada su gran proyección y su curva de aprendizaje suave. En concreto, se propone utilizar los siguientes recursos:
+	\item Tras el estudio de la situación actual de los framerworks de front-end Javascript y, teniendo en cuenta asimismo las recomendaciones del\textit{ W3C RDFJS Community Group}, se opta por Vue para el proyecto dada su gran proyección y su curva de aprendizaje suave. En concreto, se propone utilizar los siguientes recursos:
 	 \begin{itemize}
-		\item curso 1
+		\item Curso en la plataforma Udemy:\textit{ Vue JS 2 - The Complete Guide}, Maximilian Schwarzmüller\cite{max01}, un referente en la comunidad de desarrolladores de Vue.
+		\item Curso en la plataforma Udemy:\textit{ The Ultimate Vue JS 2 Developers Course}, Anthony Gore\cite{gore01}. Otro referente importante.
+		\item \textit{Vue.js Design Patterns and Best Practices}, Paul Halliday\cite{halliday01}.
 	\end{itemize}
+	\item Como entorno de desarrollo, el autor de este proyecto ya contaba con una licencia de estudiante de WebStorm de Jetbrains\footnote{https://www.jetbrains.com/webstorm/}, uno de los entornos integrados de desarrollo (IDE) más completos y modernos para Javascript existentes en la actualidad. Soporta Javascript de forma nativa, depuración con el navegador y frameworks como Vue, React o Angular, además de facilidades de pruebas unitarias, análisis estático de código, análisis de rendimiento, etc.
 
 \end{itemize}
 
