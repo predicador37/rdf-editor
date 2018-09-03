@@ -1,8 +1,250 @@
 \chapter{Diseño}
 
-\section{Arquitectura de la aplicación semántica}
+\section{Arquitectura de una aplicación semántica}
+
+Independientemente de la tecnología elegida para su implementación, una aplicación semántica genérica se caracteriza por una arquitectura concreta que se va a proceder a detallar. Dicha arquitectura está basada en componentes que pueden ser proporcionados por uno o varios productos de mercado. Es común encontrar los siguientes:
+
+\begin{itemize}  
+	\item \textbf{Almacén de ternas} (\textit{store}): no es más que una base de datos que permite el almacenamiento y extracción de ternas RDF, así como consolidar información procedente de distintas fuentes de datos.
+	\item \textbf{Procesador/Serializador} (\textit{parser/serializer}): un procesador RDF lee ficheros de texto y los interpreta como ternas RDF; un serializador realiza el proceso inverso.
+	\item \textbf{Motor de consultas} (\textit{query engine}): provee a la aplicación de la funcionalidad de recuperación de información en base a consultas estructuradas.
+\end{itemize}
+
+A continuación se estudian con más detalle, ofreciendo ejemplos de los más utilizados y el caso concreto del proyecto que atañe a esta memoria.
+
+\subsection{Almacén RDF (\textit{store})}
+
+El almacén de ternas es un componente esencial para salvaguardar conjuntos de datos en ternas independientemente de su origen (un fichero serializado, el resultado de una consulta, etc.). Conceptualmente, el equivalente en una base de datos relacional sería una tabla con tres columnas (Sujeto - Predicado - Objeto). Sin embargo, parece evidente que un almacén RDF esté optimizado para el almacenamiento y recuperación de ternas RDF.
+
+Comparados con una base de datos relacional, sin embargo, son más flexibles y requieren de menor coste de uso y mantenimiento. Más concretamente:
+
+\begin{itemize}  
+	\item \textbf{Flexibilidad:} su esquema flexible permite realizar cambios sin paradas ni rediseños, cosa que no ocurre con una base de datos relacional.
+	\item \textbf{Estandarización:} el nivel de estandarización de RDF y SPARQL es mucho mayor que el de SQL. Es prácticamente inmediato sustituir un almacén de tripletas por otro, mientras que en el caso de las bases de datos relacionales es necesario tener en cuenta los distintos dialectos e implementaciones de SQL según el fabricante.
+	\item \textbf{Expresividad:} es mucho más sencillo modelar datos complejos y con elevado número de relaciones entre ellos en RDF que en SQL. Ocurre al contrario si los datos son de naturaleza tabular, naturalmente.
+\end{itemize}
+
+No todo son ventajas en la comparación:
+
+\begin{itemize}  
+	\item \textbf{Madurez:} las bases de datos relacionales son mucho más maduras y presentan más funcionalidades que los almacenes de ternas.
+	\item \textbf{Coste de almacenamiento:} El coste por unidad de información almacenada en un almacén de ternas es mucho mayor que el de una base de datos relacional, lo cual puede ser crítico si se están tratando grandes volúmenes de datos.
+\end{itemize}
+
+Entre los almacenes de ternas más utilizados, se pueden citar OpenLink Virtuoso\footnote{https://virtuoso.openlinksw.com/}, GraphDB de Ontotext\footnote{https://ontotext.com/products/graphdb/}, Apache Jena TDB\footnote{https://jena.apache.org/documentation/tdb/} o AllegroGraph\footnote{https://franz.com/agraph/allegrograph/}.
 
 
+\subsubsection{Almacén en el proyecto}
+
+En el caso del presente proyecto, se valoraron dos alternativas:
+
+\begin{itemize}  
+	\item \textbf{RDF-Ext Dataset\footnote{https://github.com/rdf-ext/rdf-store-dataset}:} un simple conjunto de datos cargado en memoria y conforme con la especificación estándar. Este almacén presentaba limitaciones en cuanto a rendimiento y número de tripletas a almacenar, además de estar pensado para operaciones síncronas.
+	\item \textbf{N3.js:\footnote{https://github.com/rdfjs/N3.js/}} La bilioteca N3 ofrece, además de almacenamiento de tripletas en memoria en Javascript nativo, facilidades de serialización y procesado con formatos estándar como Turtle, N3, N-Triples y TriG. Si bien su conformidad con la especificación de interfaces RDF.js no es completa, sí está presente en gran parte de sus módulos (\textit{DataFactory, StreamParser, StreamWriter y Store}).
+\end{itemize}
+
+Confirmadas las limitaciones de RDF-Ext Dataset y consultado con el \textit{W3C RDFJS Community Group}, se opta finalmente por utilizar \textbf{N3.js} (lo que supuso adaptar ligeramente la implementación del proyecto al nuevo \textit{storage}).
 
 
+\subsection{Procesador y Serializador RDF (\textit{parser/serializer})}
 
+En muchos casos, los módulos para importación y exportación de datos en RDF son proporcionados por el propio almacén. Sin entrar a valorar su sintaxis dada su complejidad específica y por considerarse fuera del interés de este proyecto, sí se va a proceder a identificar y caracterizar los formatos de serialización más comunes.
+
+\subsubsection{RDF/XML}
+
+Se trata de una representación en XML, comúnmente criticada por su dificultad de lectura por parte de personas. Entre sus otras críticas están las limitaciones impuestas por las reglas de nomenclatura de XML o los problemas encontrados para procesar este formato con herramientas populares para XML\cite{ducharme01}. Para poder codificar un grafo RDF en XML, tanto los nodos como los predicados han de ser representados en términos de XML (elementos, atributos, contenido de elementos y valores de atributos). 
+
+Conceptualmente, se construye a partir de un conjunto de descripciones más pequeñas, cada una de las cuales traza un camino a lo largo de un grafo RDF. Estos caminos se describen en términos de los nodos (sujetos) y enlaces (predicados), que los conectan con otros nodos (objetos).
+
+A continuación se muestra un ejemplo de serialización en RDF/XML\footnote{https://www.w3.org/TR/rdf-syntax-grammar/\#example3}:
+
+\begin{lstlisting}[basicstyle=\tiny, language=XML, caption={Ejemplo de RDF/XML del W3C.},captionpos=b]
+
+<rdf:Description rdf:about="http://www.w3.org/TR/rdf-syntax-grammar">
+<ex:editor>
+<rdf:Description>
+<ex:homePage>
+<rdf:Description rdf:about="http://purl.org/net/dajobe/">
+</rdf:Description>
+</ex:homePage>
+</rdf:Description>
+</ex:editor>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/TR/rdf-syntax-grammar">
+<ex:editor>
+<rdf:Description>
+<ex:fullName>Dave Beckett</ex:fullName>
+</rdf:Description>
+</ex:editor>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/TR/rdf-syntax-grammar">
+<dc:title>RDF 1.1 XML Syntax</dc:title>
+</rdf:Description>
+
+\end{lstlisting}
+
+\subsubsection{N-Triples}
+
+Se trata de una notación muy simple pero verbosa, donde cada línea representa una única declaración conteniendo sujeto, predicado y objeto seguidos por un punto.
+
+Ejemplo\footnote{https://www.w3.org/TR/n-triples/}:
+
+\begin{lstlisting}[basicstyle=\tiny, language=XML, caption={Ejemplo de N-Triples del W3C.},captionpos=b]
+
+<http://example.org/#spiderman> <http://www.perceive.net/schemas/relationship/enemyOf> <http://example.org/#green-goblin> .
+
+\end{lstlisting}
+
+\subsubsection{N3}
+
+N3, abreviatura de \textit{Notation 3}, fue un proyecto personal de Tim Berners-Lee\cite{ducharme01}. Es muy similar a N-Triples, pero añadiendo características adicionales como atajos, un formato más claro, o la condensación de muchas de las repeticiones de este formato.
+
+A pesar de todo, N3 nunca se convirtió en un estándar y sus características adicionales frente a N-Triples no tuvieron mucha aceptación.
+
+\subsubsection{Turtle}
+
+El formato Turtle permite escribir un grafo RDF en texto de una forma más compacta que RDF/XML y más sencilla de leer que N-Triples. Su gramática es un subconjunto de la especificación del lenguaje de consulta SPARQL 1.1, compartiendo ambas nombres de terminales y producciones en la medida de lo posible.
+
+En estos momentos, es el formato de serialización más popular entre las comunidades de desarrolladores\cite{yu01}.
+
+A continuación se muestra un ejemplo de serialización en Turtle\footnote{https://www.w3.org/TR/turtle/}:
+
+\begin{lstlisting}[basicstyle=\tiny, language=XML, caption={Ejemplo de Turtle del W3C.},captionpos=b]
+
+@base <http://example.org/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rel: <http://www.perceive.net/schemas/relationship/> .
+
+<#green-goblin>
+rel:enemyOf <#spiderman> ;
+a foaf:Person ;    # in the context of the Marvel universe
+foaf:name "Green Goblin" .
+
+<#spiderman>
+rel:enemyOf <#green-goblin> ;
+a foaf:Person ;
+foaf:name "Spiderman" .
+
+\end{lstlisting}
+
+\subsubsection{Procesadores y serializadores en el proyecto}
+
+El almacén seleccionado, \textbf{N3.js, proporciona procesadores y serializadores} para los principales formatos citados: N3, N-Triples, Turtle y TriG (una extensión de este último).
+
+No se ha considerado necesario diseñar ningún serializador o procesador personalizado, al estar ya incluidos los formatos más comunes utilizados por desarrolladores (nótese la ausencia deliberada de RDF/XML).
+
+
+\subsection{Motor de consulta RDF (\textit{query engine})}
+
+El motor de consulta es un componente íntimamente ligado al almacén de ternas. El W3C fijó un estándar para consultas: SPARQL (presentado en \ref{sparql}), cuya especificación está en su versión 1.1 desde 2013.
+
+Desde el punto de vista de la arquitectura de una aplicación semántica, es deseable que el motor de consultas, además de cumplir con la especificación, esté íntimamente integrado con el almacén de ternas para ofrecer un rendimiento aceptable.
+
+Los principales proveedores de almacenes de ternas ofrecen también motores de consulta integrados, como Apache Jena, Virtuoso, AllegroGraph...
+
+
+\subsubsection{Motor de consultas en el proyecto}
+
+En el caso del presente proyecto, integrar un motor de consultas no fue sencillo. El componente N3.js no ofrece dichas funcionalidades, con lo que fue necesario estudiar la viabilidad de incorporar un motor local totalmente desarrollado en Javascript.
+
+Tras el estudio de los trabajos previos desarrollados (\ref{subsection:consulta}) y la  situación actual (\ref{subsubsection:manejosparql}), se llegó a la conclusión de que la plataforma Comunica se posicionaba como el producto abierto más prometedor para satisfacer las necesidades de consulta SPARQL.
+
+Comunica proporciona las herramientas necesarias para crear una aplicación combinando múltiples bloques de construcción independientes. Su propósito es ofrecer una implementación modular de un cliente \textit{Triple Pattern Fragment} o\textit{ Linked Data Fragment}, un tipo de fragmento que consiste en:
+
+\begin{itemize}  
+	\item \textbf{Datos} que corresponden a un patrón de tripleta.
+	\item \textbf{Metadatos} que consisten en el total aproximado de tripletas.
+	\item \textbf{Controles} que llevan al resto de fragmentos del mismo conjunto de datos.
+\end{itemize}
+
+De forma resumida, un cliente que soporta este tipo de fragmentos puede resolver múltiples consultas SPARQL de forma eficiente.
+
+Comunica consta de los siguientes componentes:
+
+\begin{itemize}  
+	\item \textbf{Actores:} definen el formato de la entrada que aceptan y la salida correspondiente que producen.
+	\item \textbf{Buses:} combinan los actores que soportan el mismo formato de entrada y salida y permite enviar mensajes a todos los actores registrados en un bus dado.
+	\item \textbf{Mediadores:} envuelven los buses y se aseguran de que cada petición recibe tan sólo una respuesta.
+\end{itemize}
+
+\begin{figure}[h]
+	\centering
+	\includesvg[width = 500pt]{actor-mediator-bus}
+	\caption{Arquitectura de Comunica}
+\end{figure}
+
+Para el presente proyecto, han sido necesarios dos actores:
+
+\begin{itemize}  
+	\item \textbf{actor-init-sparql:} se trata de un cliente que permite resolver consultas sobre interfaces heterogéneos. En concreto, este módulo inicializa un motor Comunica con actores que evalúan consultas SPARQL.
+	\item \textbf{actor-init-sparql-rdfjs:} permite lanzar consultas SPARQL a fuentes que implementan la interfaz \textit{Source}\footnote{http://rdf.js.org/\#source-interface}. Una de esas fuentes es N3.js, el \textit{store} utilizado para almacenar ternas en el proyecto.
+\end{itemize}
+
+Es decir, se utiliza un módulo para lanzar consultas a \textit{endpoints} SPARQL remotos y otro para la fuente o almacén local. Estos módulos \textbf{aún están en desarrollo y no han alcanzado una versión estable} a fecha de redacción de la presente memoria, con lo que se van adquiriendo nuevas funcionalidades y corrigiendo defectos a lo largo del tiempo de desarrollo de este proyecto (por ejemplo, en Julio de 2018 el motor de consulta no soportaba la palabra clave SERVICE, característica implementada en Agosto).
+
+\section{Arquitectura de la aplicación Vue}
+
+Al margen de su naturaleza semántica, la herramienta desarrollada se implementa en Javascript ES6+ y Vue.js. Es necesario, por tanto, proponer un diseño de alto nivel de sus componentes.
+
+\subsection{Almacenamiento de estado}
+
+Para almacenar el estado de la aplicación se ha optado por usar Vuex\footnote{https://vuex.vuejs.org/}. 
+
+Vuex es una biblioteca que implementa un patrón de gestión de estado (ver figura \ref{fig:vuex}\cite{vuex01}) basado en Redux\footnote{Redux es un contenedor predecible del estado de aplicaciones Javascript. Ver https://es.redux.js.org/}, Flux\footnote{Una arquitectura de aplicación para React que utiliza un flujo de datos unidireccional. Ver https://github.com/facebook/flux} y la arquitectura Elm\footnote{Un patrón sencillo de arquitectura de aplicaciones web. Ver https://guide.elm-lang.org/architecture/}. Se utiliza como un almacén centralizado para todos los componentes de la aplicación, y permite asegurar:
+
+\begin{itemize}  
+	\item Que todos los componentes comparten ese estado.
+	\item Que el estado sólo podrá ser modificado de forma controlada, bien síncrona o asíncrona.
+\end{itemize}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.5]{vuex}
+	\caption{Vuex: gestión de estado centralizado.}
+	\label{fig:vuex}
+\end{figure}
+
+Sin entrar en detalles, el funcionamiento de Vuex se ciñe a las siguientes reglas:
+
+\begin{itemize}  
+	\item Existe un único estado compartido por todos los componentes de la aplicación, independientemente de que cada componente tenga su propio estado individual.
+	\item El acceso al estado centralizado se realiza a través de \textbf{getters}.
+	\item El estado sólo puede ser modificado a través de \textbf{mutaciones síncronas}.
+	\item Las mutaciones pueden ser ejecutadas de manera asíncrona a través de \textbf{acciones}.
+\end{itemize}
+
+\subsection{Arquitectura de componentes}
+
+Para poder dar cumplimiento a los requisitos de la aplicación, se definen los siguientes componentes con sus ámbitos de responsabilidad:
+
+\vspace*{\baselineskip}
+\begin{center}
+	\begin{table}[htb]
+		\centering
+		\begin{tabular}{p{1cm}p{3cm}p{10cm}}
+			\toprule
+			ID & Componente & Responsabilidad \\ \midrule
+			1 & Contenedor de aplicación &  Estructura básica de la aplicación (cabecera, pie, barra lateral). \\ \midrule
+			2 & Bienvenida &  Entrada a la aplicación con ayuda y descripción general. \\ \midrule
+			3 & Contenedor de modelo &  Contiene los componentes de edición del modelo.\\ \midrule
+			4 & Contenedor de importación/exportación & Contiene los componentes de importación y exportación de datos. \\ \midrule
+			5 & Contenedor de consultas SPARQL &  Contiene los componentes de ejecución y visualización de resultados de consultas SPARQL. \\ \midrule
+			6 & Contenedor de actividades &  Contiene los componentes de carga y visualización de actividades. \\ \midrule
+			7 & Listado de recursos &  Componente reutilizable para listar recursos en una tabla de datos. \\ \midrule
+			8 & Detalle de recursos &  Componente reutilizable para visualizar detalles de recursos. \\ \midrule
+			9 & Lanzador de consultas SPARQL & Componente reutilizable para lanzar consultas SPARQL \\ \midrule
+			10 & Listado de resultados de consultas SPARQL & Componente reutilizable para mostrar resultados de una consulta SPARQL.\\ \midrule
+			11 & Cargador de archivos &  Componente reutilizable para importar datos desde archivo. \\ \midrule
+			12 & Cargador de URLs &  Componente reutilizable para importar datos desde URL. \\ \midrule
+			13 & Cargador de Vocabularios & Componente reutilizable para habilitar o deshabilitar vocabularios. \\ \midrule
+			14 & Visor de markdown & Componente reutilizable para visualizar markdown renderizado en HTML. \\ 
+			\bottomrule
+		\end{tabular}
+		\caption{Listado de componentes de la aplicación.}
+		\label{tab:componentes}
+	\end{table}
+\end{center}

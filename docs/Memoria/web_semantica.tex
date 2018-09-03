@@ -4,7 +4,6 @@ La Web Semántica es un término originalmente acuñado por Tim Berners-Lee en el a
 
 Para lograr tan ambicioso objetivo, los agentes inteligentes necesitarían tener acceso a contenido y conocimiento estructurado, así como a las reglas de inferencia necesarias. En este contexto, la Web Semántica podía apoyarse en las siguientes tecnologías existentes:
 
-
 \begin{itemize}  
 	\item  \textbf{RDF} (\textit{Resource Description Framework}), que permite expresar conocimiento en forma de tripletas (a modo de sujeto, verbo y objeto en una oración) utilizando URIs (\textit{Uniform Resource Indicators}).
 	\item \textbf{XML} (\textit{eXtensible Markup Language}), que permite la creación de documentos convenientemente etiquetados y con estructura arbitraria.
@@ -133,3 +132,48 @@ Su principal ventaja frente a los modelos y bases de datos relacionales es una m
 Un ejemplo claro a nivel global es Wikidata\footnote{https://www.wikidata.org/wiki/Wikidata:Main\_Page}, una base de datos de conocimiento abierta que puede ser leída y editada tanto por personas como por máquinas. Wikidata actúa como un almacén centralizado para datos estructurados de otros proyectos hermanos como Wikipedia, Wikisource, etc. En el momento de redacción de esta memoria, cuenta con  50,035,140 elementos de datos que cualquiera puede editar.
  
 De una forma más concreta, es destacable el importante rol de RDF y las tecnologías de la Web Semántica en ámbitos de \textbf{búsqueda y clasificación bibliográfica o documental}, pudiendo citarse como ejemplo la publicación en RDF del \textit{Diccionario de Lugares Geográficos} y el \textit{Diccionario y Tesauro de Materias} del Patrimonio Cultural de España, gestionado en la actualidad por el Ministerio de Educación, Cultura y Deporte del Gobierno de España\footnote{https://www.mecd.gob.es/cultura-mecd/areas-cultura/museos/destacados/2015/tesauros.html}.
+
+\section{SPARQL} \label{sec:sparql}
+
+Tal como SQL provee (al menos, relativamente) un de un estándar de consulta  para las bases de datos relacionales, SPARQL ofrece un lenguaje de consulta estandarizado para grafos RDF. 
+
+SPARQL es un acrónimo recursivo para SPARQL Protocol And RDF Query Language; es a la vez un lenguaje de consulta de grafos RDF y un protocolo, dado que permite exponer servicios web que acepten consultas en dicho lenguaje.
+
+Entre sus características, cabe citar:
+
+\begin{itemize}  
+	\item Recuperación de valores de datos estructurados o semi-estructurados.
+	\item Exploración de conjuntos de datos a través de consultas sobre relaciones desconocidas.
+	\item Ejecución de uniones complejas sobre bases de datos dispersas en una única consulta.
+	\item Transformación de datos RDF desde un vocabulario a otro.
+\end{itemize}
+
+La estructura básica de una consulta SPARQL es la siguiente:
+
+\begin{lstlisting}[basicstyle=\tiny, caption={Estructura básica de consulta SPARQL.},captionpos=b]
+
+# declaraciones de prefijos
+PREFIX foo: <http://example.com/resources/>
+...
+# definición del conjunto de datos
+FROM ...
+# cláusula de resultado
+SELECT ...
+# patrón de la consulta
+WHERE {
+	...
+}
+# modificadores de la consulta
+ORDER BY ...
+\end{lstlisting} 
+
+No es objeto de este proyecto profundizar en la sintaxis del lenguaje, pero sí se incluye a continuación un ejemplo de consulta:
+
+\begin{lstlisting}[basicstyle=\tiny, caption={Consulta que devuelve todos los nombres de personas mencionadas en un grafo.},captionpos=b]
+PREFIX foaf:  <http://xmlns.com/foaf/0.1/>
+SELECT ?name
+WHERE {
+	?person foaf:name ?name .
+}
+\end{lstlisting} 
+
