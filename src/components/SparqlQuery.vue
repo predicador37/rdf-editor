@@ -104,7 +104,7 @@
                   resolve(results)
                 })
               })
-            .catch(function(e) { reject(Error(e)) })
+            .catch(function (e) { reject(Error(e)) })
         })
       },
       loadSparqlQuery (content) {

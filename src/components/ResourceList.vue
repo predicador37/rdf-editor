@@ -175,7 +175,7 @@
         this.oldResource = resource
         this.editDialog = !this.editDialog
       },
-      executeAction(action, itemValue) {
+      executeAction (action, itemValue) {
         console.log(action.method)
         this[action.method](itemValue)
       },

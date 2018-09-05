@@ -40,7 +40,7 @@
                   </v-card-actions>
                 </v-card>
               </v-dialog>
-              <v-dialog v-model="editDialog" persistent max-width="290">
+              <v-dialog v-model="editDialog" max-width="500px">
                 <v-card>
                   <v-card-text>
                     <v-text-field v-model="currentLiteral" :label="dialogText"></v-text-field>
@@ -54,25 +54,26 @@
               </v-dialog>
             </v-list-tile-content>
             <v-list-tile-action>
-              <v-tooltip top>
-                <v-btn slot="activator" icon ripple @click.native.stop="openEditDialog(item, element.value)">
-
-                  <v-icon  color="primary lighten-1">create</v-icon>
-
-
+              <v-menu bottom right>
+                <v-btn
+                  slot="activator"
+                  light
+                  icon
+                >
+                  <v-icon>more_vert</v-icon>
                 </v-btn>
-                <span>Editar</span>
-              </v-tooltip>
 
-            </v-list-tile-action>
-
-            <v-list-tile-action>
-              <v-tooltip top>
-                <v-btn slot="activator" icon ripple @click.native.stop="openDeleteDialog(rdfConstructs[item].value, element.value)">
-                  <v-icon color="pink lighten-1">delete</v-icon>
-                </v-btn>
-                <span>Eliminar</span>
-              </v-tooltip>
+                <v-list>
+                  <v-list-tile
+                    v-for="(action,j) in actions"
+                    :key="j"
+                    @click=""
+                    @click.native.stop="executeAction(action, item, element.value)"
+                  >
+                    <v-list-tile-title>{{ action.title }}</v-list-tile-title>
+                  </v-list-tile>
+                </v-list>
+              </v-menu>
             </v-list-tile-action>
           </v-list-tile>
           <v-dialog v-model="dialog" max-width="500px">
@@ -130,7 +131,11 @@
         editDialog: false,
         resourceToDelete: '',
         resourceToEdit: '',
-        currentItem: ''
+        currentItem: '',
+        actions: [
+          {title: 'Editar', method: 'openEditDialog'},
+          {title: 'Eliminar ', method: 'openDeleteDialog'}
+        ]
       }
     },
     methods: {
@@ -146,7 +151,7 @@
       },
       openDeleteDialog (item, resource) {
         this.resourceToDelete = resource
-        this.currentItem = item
+        this.currentItem = this.rdfConstructs[item].value
         this.deleteDialog = !this.deleteDialog
       },
       openEditDialog (item, resource) {
@@ -156,6 +161,10 @@
         this.dialogText = this.rdfConstructs[item].desc
         this.currentLiteral = resource
         this.editDialog = !this.editDialog
+      },
+      executeAction (action, item, resource) {
+        console.log(action.method)
+        this[action.method](item, resource)
       },
       deleteResourceHandler (predicate, object) {
         this.$emit('remove-resource', {'subject': this.resource, 'predicate': predicate, 'object': object})

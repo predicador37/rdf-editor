@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import VeeValidate from 'vee-validate'
 import App from './App'
 import router from './router'
 import storeConfig from './store/store-config'
@@ -38,6 +39,7 @@ Vue.config.productionTip = false
 Vue.config.devtools = true
 Vue.config.performance = true
 
+Vue.use(VeeValidate)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

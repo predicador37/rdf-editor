@@ -61,7 +61,7 @@
         this.renderResults = true
         console.log(this.queryResults)
       },
-      handleError(event) {
+      handleError (event) {
         this.errorMessage = JSON.stringify(event)
         this.errorDialog = true
       }

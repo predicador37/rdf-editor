@@ -10,10 +10,11 @@
 
           <v-card-text>
             <p>Si lo deseas, puedes importar una actividad desde un archivo de texto en formato Markdown.</p>
-            <file-loader @load="setActivity($event)" @file-loaded="snackbar = true"></file-loader>
+            <file-loader @load-error="handleError($event)" @load="setActivity($event)" @file-loaded="handleFileLoaded($event)"></file-loader>
           </v-card-text>
           <v-snackbar
             v-model="snackbar"
+            :color="color"
           >
             {{ snackbarMessage }}
             <v-btn
@@ -60,10 +61,22 @@
     data () {
       return {
         snackbar: false,
-        snackbarMessage: 'Archivo importado en el almacén'
+        snackbarMessage: 'Archivo importado en el almacén',
+        color: 'primary'
       }
     },
-    methods: {...mapActions(['setActivity'])}
+    methods: {...mapActions(['setActivity']),
+      handleError (event) {
+        this.snackbarMessage = event
+        this.color = 'error'
+        this.snackbar = true
+      },
+      handleFileLoaded (event) {
+        this.snackbarMessage = event
+        this.color = 'success'
+        this.snackbar = true
+      }
+    }
   }
 </script>
 

@@ -139,6 +139,13 @@ El caso de usa comienza cuando el usuario pulsa en el botón flotante + asociado 
 		\item El nuevo recurso de tipo clase se crea y aparece en el listado de clases.
 	\end{enumerate}
 	\item Flujo alternativo 1
+\begin{enumerate}
+	\item El usuario pulsa en el botón flotante + asociado a la tarjeta del listado de clases.
+	\item Aparece un cuadro de diálogo donde el usuario debe introducir el nombre de la clase.
+	\item El usuario introduce (o no) el URI del recurso que quiere dar de alta como clase y pulsa fuera del cuadro de diálogo.
+	\item El cuadro de diálogo se cierra y no hay ningún cambio en los recursos.
+\end{enumerate}
+	\item Flujo alternativo 2
 	\begin{enumerate}
 		\item El usuario pulsa en el botón flotante + asociado a la tarjeta del listado de clases.
 		\item Aparece un cuadro de diálogo donde el usuario debe introducir el nombre de la clase.
@@ -176,20 +183,27 @@ El actor principal es el usuario de la aplicación (fundamentalmente dirigida a u
 
 \subsubsection{Disparadores}
 
-El caso de usa comienza cuando el usuario pulsa en el icono de menú asociado a la clase que quiere editar y selecciona la acción "Editar".
+El caso de usa comienza cuando el usuario pulsa en el icono de menú asociado a la clase que quiere editar y selecciona la acción ``Editar''.
 
 \subsubsection{Flujo de eventos}
 \begin{enumerate}
 	\item Flujo básico
 	\begin{enumerate}
-		\item El usuario pulsa en el icono de menú asociado a la clase que quiere editar y selecciona la acción "Editar".
+		\item El usuario pulsa en el icono de menú asociado a la clase que quiere editar y selecciona la acción ``Editar''.
 		\item Aparece un cuadro de diálogo con el URI del recurso actual que el usuario puede modificar.
 		\item El usuario modifica (o no) el URI del recurso  y pulsa en guardar.
 		\item El recurso ha sido modificado y su cambio se ve reflejado en el listado.
 	\end{enumerate}
-	\item Flujo alternativo 1
+\item Flujo alternativo 1
+\begin{enumerate}
+	\item El usuario pulsa en el icono de menú asociado a la clase que quiere editar y selecciona la acción ``Editar''.
+	\item Aparece un cuadro de diálogo con el URI del recurso actual que el usuario puede modificar.
+	\item El usuario modifica (o no) el URI del recurso  y pulsa fuera del cuadro de diálogo.
+	\item El cuadro de diálogo se cierra y no hay ningún cambio en los recursos.
+\end{enumerate}
+	\item Flujo alternativo 2
 	\begin{enumerate}
-		\item El usuario pulsa en el icono de menú asociado a la clase que quiere editar y selecciona la acción "Editar".
+		\item El usuario pulsa en el icono de menú asociado a la clase que quiere editar y selecciona la acción ``Editar''.
 		\item Aparece un cuadro de diálogo con el URI del recurso actual que el usuario puede modificar.
 		\item El usuario modifica (o no) el URI del recurso  y pulsa en guardar.
 		\item Ocurre un error en el guardado del recurso que le es comunicado al usuario a través de una notificación en pantalla.
@@ -236,14 +250,21 @@ El caso de usa comienza cuando el usuario pulsa en el icono de menú asociado a l
 		\item El usuario elige confirmar.
 		\item El recurso y su detalle asociado desaparecen del listado.
 	\end{enumerate}
-	\item Flujo alternativo 1
+\item Flujo alternativo 1
+\begin{enumerate}
+	\item El usuario pulsa en el icono de menú asociado a la clase que quiere editar y selecciona la acción ``Eliminar''.
+	\item Aparece un cuadro de diálogo advirtiendo al usuario de que si confirma el cambio, no podrá volver a recuperar el recurso del grafo.
+	\item El usuario pulsa fuera del cuadro de diálogo.
+	\item El cuadro de diálogo se cierra y no hay ningún cambio en los recursos.
+\end{enumerate}
+	\item Flujo alternativo 2
 	\begin{enumerate}
 		\item El usuario pulsa en el icono de menú asociado a la clase que quiere editar y selecciona la acción ``Eliminar''.
 	\item Aparece un cuadro de diálogo advirtiendo al usuario de que si confirma el cambio, no podrá volver a recuperar el recurso del grafo.
 	\item El usuario elige cancelar.
 	\item El recurso y su detalle siguen apareciendo y no son eliminados.
 	\end{enumerate}
-	\item Flujo alternativo 2
+	\item Flujo alternativo 3
 \begin{enumerate}
 	\item El usuario pulsa en el icono de menú asociado a la clase que quiere editar y selecciona la acción ``Eliminar''.
 	\item Aparece un cuadro de diálogo advirtiendo al usuario de que si confirma el cambio, no podrá volver a recuperar el recurso del grafo.
@@ -263,7 +284,237 @@ El usuario debe haber navegado previamente hasta la sección de modelado, bien a 
 
 \subsubsection{Postcondiciones}
 
+Una vez eliminada un recurso de tipo clase, se eliminan también todas las tripletas que lo tengan como objeto o como sujeto (es decir, cualquier relación con dicha clase).
+
+\subsubsection{Extensiones}
+
 Ninguna.
+
+\subsection{Dar de alta una nueva anotación o propiedad estándar de una clase}
+
+\subsubsection{Descripción breve}
+
+Este caso de uso permite a un usuario añadir una nueva propiedad de una clase a su grafo. Tan sólo se podrán añadir propiedades entre las previamente configuradas en el código fuente de la aplicación (es decir, han de fijarse de manera previa, si bien su extensión es sencilla). La configuración por defecto ofrece una lista de las propiedades más utilizadas.
+
+\subsubsection{Actores}
+
+El actor principal es el usuario de la aplicación (fundamentalmente dirigida a un alumno, pero podría ser un profesor o cualquier otro usuario).
+
+\subsubsection{Disparadores}
+
+El caso de usa comienza cuando el usuario pulsa en el signo + asociado al nombre de la propiedad a la que quiere dar un valor.
+
+\subsubsection{Flujo de eventos}
+\begin{enumerate}
+	\item Flujo básico
+	\begin{enumerate}
+		\item El usuario pulsa en el botón flotante + asociado a la tarjeta del listado de clases.
+		\item Aparece un cuadro de diálogo donde el usuario debe introducir el nombre de la clase.
+		\item El usuario introduce el URI del recurso que quiere dar de alta como clase y pulsa en guardar.
+		\item El nuevo recurso de tipo clase se crea y aparece en el listado de clases.
+	\end{enumerate}
+	\item Flujo alternativo 1
+	\begin{enumerate}
+		\item El usuario pulsa en el botón flotante + asociado a la tarjeta del listado de clases.
+		\item Aparece un cuadro de diálogo donde el usuario debe introducir el nombre de la clase.
+		\item El usuario introduce (o no) el URI del recurso que quiere dar de alta como clase y pulsa fuera del cuadro de diálogo.
+		\item El cuadro de diálogo se cierra y no hay ningún cambio en los recursos.
+	\end{enumerate}
+	\item Flujo alternativo 2
+	\begin{enumerate}
+		\item El usuario pulsa en el botón flotante + asociado a la tarjeta del listado de clases.
+		\item Aparece un cuadro de diálogo donde el usuario debe introducir el nombre de la clase.
+		\item El usuario introduce el URI del recurso que quiere dar de alta como clase y pulsa en guardar.
+		\item Ocurre un error en el guardado del recurso que le es comunicado al usuario a través de una notificación en pantalla.
+	\end{enumerate}
+	
+\end{enumerate}
+
+\subsubsection{Requisitos especiales}
+
+Ninguno.
+
+\subsubsection{Precondiciones}
+
+El usuario debe haber navegado previamente hasta la sección de modelado, bien a través de la pantalla de bienvenida, bien a través de la barra de navegación lateral, y haber seleccionado previamente una clase de entre el listado de clases (en la tarjeta de la izquierda) para poder añadirle una propiedad.
+
+\subsubsection{Postcondiciones}
+
+Ninguna.
+
+\subsubsection{Extensiones}
+
+Ninguna.
+
+\subsection{Editar una propiedad o anotación de una clase}
+
+\subsubsection{Descripción breve}
+
+Este caso de uso permite a un usuario editar el recurso asociado a una propiedad o anotación de una clase existente en su grafo y cambiar su URI. Tan sólo se podrá editar una propiedad o anotación de entre las previamente configuradas en el código fuente de la aplicación (es decir, han de fijarse de manera previa, si bien su extensión es sencilla).
+
+\subsubsection{Actores}
+
+El actor principal es el usuario de la aplicación (fundamentalmente dirigida a un alumno, pero podría ser un profesor o cualquier otro usuario).
+
+\subsubsection{Disparadores}
+
+El caso de usa comienza cuando el usuario pulsa en el icono de menú asociado a la propiedad de clase que quiere editar y selecciona la acción ``Editar''.
+
+\subsubsection{Flujo de eventos}
+\begin{enumerate}
+	\item Flujo básico
+\begin{enumerate}
+	\item El usuario pulsa en el icono de menú asociado a la propiedad de la clase que quiere editar y selecciona la acción ``Editar''.
+	\item Aparece un cuadro de diálogo con el URI del recurso actual que el usuario puede modificar.
+	\item El usuario modifica (o no) el URI del recurso  y pulsa en guardar.
+	\item El recurso ha sido modificado y su cambio se ve reflejado en el listado de detalle de la propiedad.
+\end{enumerate}
+\item Flujo alternativo 1
+\begin{enumerate}
+	\item El usuario pulsa en el icono de menú asociado a la propiedad de la clase que quiere editar y selecciona la acción ``Editar''.
+	\item Aparece un cuadro de diálogo con el URI del recurso actual que el usuario puede modificar.
+	\item El usuario modifica (o no) el URI del recurso  y pulsa fuera del cuadro de diálogo.
+	\item El cuadro de diálogo se cierra y no hay ningún cambio en los recursos.
+\end{enumerate}
+\item Flujo alternativo 2
+\begin{enumerate}
+	\item El usuario pulsa en el icono de menú asociado a la propiedad de la clase que quiere editar y selecciona la acción ``Editar''.
+	\item Aparece un cuadro de diálogo con el URI del recurso actual que el usuario puede modificar.
+	\item El usuario modifica (o no) el URI del recurso  y pulsa en guardar.
+	\item Ocurre un error en el guardado del recurso que le es comunicado al usuario a través de una notificación en pantalla.
+	\end{enumerate}
+	
+\end{enumerate}
+
+\subsubsection{Requisitos especiales}
+
+Ninguno.
+
+\subsubsection{Precondiciones}
+
+El usuario debe haber navegado previamente hasta la sección de modelado, bien a través de la pantalla de bienvenida, bien a través de la barra de navegación lateral, y haber seleccionado previamente una clase de entre el listado de clases (en la tarjeta de la izquierda) para poder editar una de sus propiedades a través del menú.
+
+\subsubsection{Postcondiciones}
+
+Ninguna.
+
+\subsubsection{Extensiones}
+
+Ninguna.
+
+\subsection{Eliminar una propiedad o anotación de una clase}
+
+\subsubsection{Descripción breve}
+
+Este caso de uso permite a un usuario eliminar el recurso asociado a una propiedad o anotación de una clase existente en su grafo. Tan sólo se podrá eliminar una propiedad o anotación de entre las previamente configuradas en el código fuente de la aplicación (es decir, han de fijarse de manera previa, si bien su extensión es sencilla).
+
+\subsubsection{Actores}
+
+El actor principal es el usuario de la aplicación (fundamentalmente dirigida a un alumno, pero podría ser un profesor o cualquier otro usuario).
+
+\subsubsection{Disparadores}
+
+El caso de usa comienza cuando el usuario pulsa en el icono de menú asociado a la propiedad de clase que quiere editar y selecciona la acción ``Eliminar''.
+
+\subsubsection{Flujo de eventos}
+\begin{enumerate}
+	\item Flujo básico
+	\begin{enumerate}
+		\item El usuario pulsa en el icono de menú asociado a la propiedad de la clase que quiere editar y selecciona la acción ``Eliminar''.
+		\item Aparece un cuadro de diálogo advirtiendo al usuario de que si confirma el cambio, no podrá volver a recuperar el recurso del grafo.
+	\item El usuario pulsa fuera del cuadro de diálogo.
+	\item El cuadro de diálogo se cierra y no hay ningún cambio en los recursos.
+	\end{enumerate}
+	\item Flujo alternativo 1
+	\begin{enumerate}
+		\item El usuario pulsa en el icono de menú asociado a la propiedad de la clase que quiere editar y selecciona la acción ``Eliminar''.
+		\item Aparece un cuadro de diálogo advirtiendo al usuario de que si confirma el cambio, no podrá volver a recuperar el recurso del grafo.
+	\item El usuario pulsa fuera del cuadro de diálogo.
+	\item El cuadro de diálogo se cierra y no hay ningún cambio en los recursos.
+	\end{enumerate}
+	\item Flujo alternativo 2
+	\begin{enumerate}
+		\item El usuario pulsa en el icono de menú asociado a la propiedad de la clase que quiere editar y selecciona la acción ``Editar''.
+		\item Aparece un cuadro de diálogo advirtiendo al usuario de que si confirma el cambio, no podrá volver a recuperar el recurso del grafo.
+	\item El usuario elige cancelar.
+	\item El recurso y su detalle siguen apareciendo y no son eliminados.
+	\end{enumerate}
+	\item Flujo alternativo 3
+\begin{enumerate}
+	\item El usuario pulsa en el icono de menú asociado a la propiedad de la clase que quiere editar y selecciona la acción ``Eliminar''.
+	\item Aparece un cuadro de diálogo advirtiendo al usuario de que si confirma el cambio, no podrá volver a recuperar el recurso del grafo.
+	\item El usuario elige confirmar.
+	\item  Ocurre un error en el borrado del recurso que le es comunicado al usuario a través de una notificación en pantalla.
+\end{enumerate}
+	
+\end{enumerate}
+
+\subsubsection{Requisitos especiales}
+
+Ninguno.
+
+\subsubsection{Precondiciones}
+
+El usuario debe haber navegado previamente hasta la sección de modelado, bien a través de la pantalla de bienvenida, bien a través de la barra de navegación lateral, y haber seleccionado previamente una clase de entre el listado de clases (en la tarjeta de la izquierda) para poder editar una de sus propiedades a través del menú.
+
+\subsubsection{Postcondiciones}
+
+Ninguna.
+
+\subsubsection{Extensiones}
+
+Ninguna.
+
+\subsection{Cargar una actividad}
+
+\subsubsection{Descripción breve}
+
+Este caso de uso permite a un usuario cargar en la aplicación un fichero de texto en formato Markdown para su visualización. Su objetivo es presentar la actividad formativa a llevar a cabo en un formato legible y de forma persistente mientras se lleve a cabo la misma.
+
+\subsubsection{Actores}
+
+El actor principal es el usuario de la aplicación (fundamentalmente dirigida a un alumno, pero podría ser un profesor o cualquier otro usuario).
+
+\subsubsection{Disparadores}
+
+El caso de usa comienza cuando el usuario pulsa en el botón de ``Importar archivo'' presente en la tarjeta de actividad.
+
+\subsubsection{Flujo de eventos}
+\begin{enumerate}
+	\item Flujo básico
+	\begin{enumerate}
+		\item El usuario pulsa en el botón de ``Importar archivo'' presente en la tarjeta de actividad.
+		\item Aparece un cuadro de diálogo para seleccionar un archivo en formato Markdown.
+		\item El usuario selecciona un archivo en formato Markdown con extensión .md para cargar.
+		\item El cuadro de diálogo se cierra y aparece un mensaje informando del éxito en la carga, demás de poderse visualizar el contenido de la actividad en la tarjeta de contenido de la misma.
+	\end{enumerate}
+	\item Flujo alternativo 1
+	\begin{enumerate}
+		\item El usuario pulsa en el botón de ``Importar archivo'' presente en la tarjeta de actividad.
+		\item Aparece un cuadro de diálogo para seleccionar un archivo en formato Markdown.
+		\item El usuario selecciona un archivo con una extensión distinta a .md para cargar.
+		\item El cuadro de diálogo se cierra y aparece un mensaje de error informando de que solo es posible cargar archivos en formato Markdown (con extensión .md).
+	\end{enumerate}
+	\item Flujo alternativo 2
+	\begin{enumerate}
+		\item El usuario pulsa en el botón de ``Importar archivo'' presente en la tarjeta de actividad.
+		\item El usuario selecciona un archivo en formato Markdown con extensión .md para cargar que ocupa más del máximo permitido (500K, siendo este máximo configurable)
+		\item El cuadro de diálogo se cierra y aparece un mensaje de error informando de que solo es posible cargar archivos con tamaño inferior al máximo permitido, especificando cuál es dicho máximo.
+	\end{enumerate}
+	
+\end{enumerate}
+
+\subsubsection{Requisitos especiales}
+
+Ninguno.
+
+\subsubsection{Precondiciones}
+
+El usuario debe haber navegado previamente hasta la sección de Actividades a través de la barra de navegación lateral.
+
+\subsubsection{Postcondiciones}
+
+La actividad se visualizará con el formato Markdown interpretado en HTML en la tarjeta asociada al contenido de la misma.
 
 \subsubsection{Extensiones}
 
