@@ -115,26 +115,156 @@ Este nuevo enfoque se tradujo en la siguiente instantánea de necesidades de alto
 
 \section{Casos de uso} \label{sec:53}
 
-\subsection{Caso de uso 1}
+\subsection{Dar de alta una nueva clase}
 
-\subsubsection{Contexto}
+\subsubsection{Descripción breve}
 
-\subsubsection{Ámbito}
+Este caso de uso permite a un usuario añadir una nueva clase a su grafo a través de una tripleta que tendrá como sujeto el nombre de la clase, como objeto el recurso owl:Class y como predicado el recurso rdf:type. 
 
-\subsubsection{Nivel}
+\subsubsection{Actores}
 
-\subsubsection{Actor principal}
+El actor principal es el usuario de la aplicación (fundamentalmente dirigida a un alumno, pero podría ser un profesor o cualquier otro usuario).
 
-\subsubsection{Participantes e interesados}
+\subsubsection{Disparadores}
+
+El caso de usa comienza cuando el usuario pulsa en el botón flotante + asociado a la tarjeta del listado de clases.
+
+\subsubsection{Flujo de eventos}
+\begin{enumerate}
+	\item Flujo básico
+	\begin{enumerate}
+		\item El usuario pulsa en el botón flotante + asociado a la tarjeta del listado de clases.
+		\item Aparece un cuadro de diálogo donde el usuario debe introducir el nombre de la clase.
+		\item El usuario introduce el URI del recurso que quiere dar de alta como clase y pulsa en guardar.
+		\item El nuevo recurso de tipo clase se crea y aparece en el listado de clases.
+	\end{enumerate}
+	\item Flujo alternativo 1
+	\begin{enumerate}
+		\item El usuario pulsa en el botón flotante + asociado a la tarjeta del listado de clases.
+		\item Aparece un cuadro de diálogo donde el usuario debe introducir el nombre de la clase.
+		\item El usuario introduce el URI del recurso que quiere dar de alta como clase y pulsa en guardar.
+		\item Ocurre un error en el guardado del recurso que le es comunicado al usuario a través de una notificación en pantalla.
+	\end{enumerate}
+
+\end{enumerate}
+
+\subsubsection{Requisitos especiales}
+
+Ninguno.
 
 \subsubsection{Precondiciones}
 
-\subsubsection{Garantías mínimas}
+El usuario debe haber navegado previamente hasta la sección de modelado, bien a través de la pantalla de bienvenida, bien a través de la barra de navegación lateral.
 
-\subsubsection{Garantías de éxito}
+\subsubsection{Postcondiciones}
 
-\subsubsection{Disparador}
-
-\subsubsection{Descripción}
+Ninguna.
 
 \subsubsection{Extensiones}
+
+Ninguna.
+
+\subsection{Editar una clase existente}
+
+\subsubsection{Descripción breve}
+
+Este caso de uso permite a un usuario editar el recurso asociado a una clase existente en su grafo y cambiar su URI.
+
+\subsubsection{Actores}
+
+El actor principal es el usuario de la aplicación (fundamentalmente dirigida a un alumno, pero podría ser un profesor o cualquier otro usuario).
+
+\subsubsection{Disparadores}
+
+El caso de usa comienza cuando el usuario pulsa en el icono de menú asociado a la clase que quiere editar y selecciona la acción "Editar".
+
+\subsubsection{Flujo de eventos}
+\begin{enumerate}
+	\item Flujo básico
+	\begin{enumerate}
+		\item El usuario pulsa en el icono de menú asociado a la clase que quiere editar y selecciona la acción "Editar".
+		\item Aparece un cuadro de diálogo con el URI del recurso actual que el usuario puede modificar.
+		\item El usuario modifica (o no) el URI del recurso  y pulsa en guardar.
+		\item El recurso ha sido modificado y su cambio se ve reflejado en el listado.
+	\end{enumerate}
+	\item Flujo alternativo 1
+	\begin{enumerate}
+		\item El usuario pulsa en el icono de menú asociado a la clase que quiere editar y selecciona la acción "Editar".
+		\item Aparece un cuadro de diálogo con el URI del recurso actual que el usuario puede modificar.
+		\item El usuario modifica (o no) el URI del recurso  y pulsa en guardar.
+		\item Ocurre un error en el guardado del recurso que le es comunicado al usuario a través de una notificación en pantalla.
+	\end{enumerate}
+	
+\end{enumerate}
+
+\subsubsection{Requisitos especiales}
+
+Ninguno.
+
+\subsubsection{Precondiciones}
+
+El usuario debe haber navegado previamente hasta la sección de modelado, bien a través de la pantalla de bienvenida, bien a través de la barra de navegación lateral.
+
+\subsubsection{Postcondiciones}
+
+Ninguna.
+
+\subsubsection{Extensiones}
+
+Ninguna.
+
+\subsection{Eliminar una clase existente}
+
+\subsubsection{Descripción breve}
+
+Este caso de uso permite a un usuario eliminar el recurso asociado a una clase existente en su grafo.
+
+\subsubsection{Actores}
+
+El actor principal es el usuario de la aplicación (fundamentalmente dirigida a un alumno, pero podría ser un profesor o cualquier otro usuario).
+
+\subsubsection{Disparadores}
+
+El caso de usa comienza cuando el usuario pulsa en el icono de menú asociado a la clase que quiere editar y selecciona la acción ``Eliminar''.
+
+\subsubsection{Flujo de eventos}
+\begin{enumerate}
+	\item Flujo básico
+	\begin{enumerate}
+		\item El usuario pulsa en el icono de menú asociado a la clase que quiere editar y selecciona la acción ``Eliminar''.
+		\item Aparece un cuadro de diálogo advirtiendo al usuario de que si confirma el cambio, no podrá volver a recuperar el recurso del grafo.
+		\item El usuario elige confirmar.
+		\item El recurso y su detalle asociado desaparecen del listado.
+	\end{enumerate}
+	\item Flujo alternativo 1
+	\begin{enumerate}
+		\item El usuario pulsa en el icono de menú asociado a la clase que quiere editar y selecciona la acción ``Eliminar''.
+	\item Aparece un cuadro de diálogo advirtiendo al usuario de que si confirma el cambio, no podrá volver a recuperar el recurso del grafo.
+	\item El usuario elige cancelar.
+	\item El recurso y su detalle siguen apareciendo y no son eliminados.
+	\end{enumerate}
+	\item Flujo alternativo 2
+\begin{enumerate}
+	\item El usuario pulsa en el icono de menú asociado a la clase que quiere editar y selecciona la acción ``Eliminar''.
+	\item Aparece un cuadro de diálogo advirtiendo al usuario de que si confirma el cambio, no podrá volver a recuperar el recurso del grafo.
+	\item El usuario elige confirmar.
+	\item  Ocurre un error en el borrado del recurso que le es comunicado al usuario a través de una notificación en pantalla.
+\end{enumerate}
+	
+\end{enumerate}
+
+\subsubsection{Requisitos especiales}
+
+Ninguno.
+
+\subsubsection{Precondiciones}
+
+El usuario debe haber navegado previamente hasta la sección de modelado, bien a través de la pantalla de bienvenida, bien a través de la barra de navegación lateral.
+
+\subsubsection{Postcondiciones}
+
+Ninguna.
+
+\subsubsection{Extensiones}
+
+Ninguna.

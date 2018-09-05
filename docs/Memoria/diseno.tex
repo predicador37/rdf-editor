@@ -217,13 +217,12 @@ Sin entrar en detalles, el funcionamiento de Vuex se ciñe a las siguientes regla
 	\item Las mutaciones pueden ser ejecutadas de manera asíncrona a través de \textbf{acciones}.
 \end{itemize}
 
-\subsection{Arquitectura de componentes}
+\subsection{Arquitectura de componentes}\label{sec:arquitectura-de-componentes}
 
-Para poder dar cumplimiento a los requisitos de la aplicación, se definen los siguientes componentes con sus ámbitos de responsabilidad:
+Para poder dar cumplimiento a los requisitos de la aplicación, se definen en el cuadro \ref{tab:componentes} los componentes necesarios con sus ámbitos de responsabilidad.
 
-\vspace*{\baselineskip}
-\begin{center}
-	\begin{table}[htb]
+
+	\begin{table}
 		\centering
 		\begin{tabular}{p{1cm}p{3cm}p{10cm}}
 			\toprule
@@ -247,4 +246,18 @@ Para poder dar cumplimiento a los requisitos de la aplicación, se definen los si
 		\caption{Listado de componentes de la aplicación.}
 		\label{tab:componentes}
 	\end{table}
-\end{center}
+
+
+En la figura \ref{fig:componentes} se muestra un diagrama UML 2.0 con la jerarquía de componentes de la aplicación, que muestra convenientemente las relaciones entre los mismos distinguiéndose tres niveles:
+
+\begin{itemize}
+	\item Componente raíz de la aplicación, del que dependen todos los demás (actúa de enrutador).
+	\item Componentes intermedios o contenedores, no reutilizables.
+	\item Componentes finales reutilizables.
+\end{itemize}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.4]{componentes}
+	\caption{Jerarquía de componentes de la aplicación.}\label{fig:componentes}
+\end{figure}
