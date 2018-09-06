@@ -1,7 +1,7 @@
 <template>
   <div class="v-btn btn-primary jbtn-file">
     <span class="btn-txt">{{ title }} <i class="mdi mdi-upload mdi-18px"></i></span><input name="file-upload"
-    type="file" accept="text/markdown" data-max-size="2048" @change="fileSelected">
+    type="file" :accept="accepted" @change="fileSelected">
     <v-progress-circular
       v-if="loading"
       indeterminate
@@ -22,8 +22,12 @@
         default: 500000,
         type: Number
       },
-      extension: {
-        default: 'md',
+      extensions: {
+        default: function () { return ['md'] },
+        type: Array
+      },
+      accepted: {
+        default: 'text/markdown',
         type: String
       }
     },
@@ -33,10 +37,12 @@
         const file = ev.target.files[0]
         const reader = new FileReader()
         reader.onload = e => this.$emit('load', e.target.result)
-        if (file.name.split('.')[1] !== this.extension) {
+        console.log(this.extensions)
+        console.log(file.name.split('.')[1])
+        if (!this.extensions.includes(file.name.split('.')[1])) {
           console.log(file.name)
           this.loading = false
-          this.$emit('load-error', 'El fichero no tiene extensión .md')
+          this.$emit('load-error', 'El fichero no tiene extensión ' + this.extensions)
           return
         }
         if (file.size > this.size) {

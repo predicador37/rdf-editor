@@ -519,3 +519,95 @@ La actividad se visualizará con el formato Markdown interpretado en HTML en la t
 \subsubsection{Extensiones}
 
 Ninguna.
+
+\subsection{Cargar un vocabulario}
+
+\subsubsection{Descripción breve}
+
+Este caso de uso permite a un usuario cargar en la aplicación los vocabularios más comunes de forma predefinida. Este conjunto de vocabularios es fácilmente extensible a través del código fuente y se carga a través de URLs externas.
+
+\subsubsection{Actores}
+
+El actor principal es el usuario de la aplicación (fundamentalmente dirigida a un alumno, pero podría ser un profesor o cualquier otro usuario).
+
+\subsubsection{Disparadores}
+
+El caso de usa comienza cuando el usuario pulsa en uno de los interruptores asociado a cualquiera de los vocabularios más utilizados ofrecidos por la aplicación, siempre y cuando dichos interruptores estén en su posición ``desactivado''.
+
+\subsubsection{Flujo de eventos}
+\begin{enumerate}
+	\item Flujo básico
+	\begin{enumerate}
+		\item El usuario pulsa en un interruptor inactivo de un vocabulario.
+		\item El interruptor pasa a estar activo y el vocabulario cargado.
+	\end{enumerate}
+	\item Flujo alternativo 1
+	\begin{enumerate}
+		\item El usuario pulsa en un interruptor inactivo de un vocabulario.
+		\item Ocurre un error al recuperar o cargar el vocabulario y el interruptor vuelve a su posición de desactivado. Simultáneamente, aparece un mensaje de error.
+		
+	\end{enumerate}
+	
+\end{enumerate}
+
+\subsubsection{Requisitos especiales}
+
+Es necesario que haya conexión a Internet para poder descargar los vocabularios de las URLs precargadas.
+
+\subsubsection{Precondiciones}
+
+El usuario debe haber navegado previamente hasta la sección de Vocabularios a través de la barra de navegación lateral.
+
+\subsubsection{Postcondiciones}
+
+Las tripletas de los vocabularios activados estarán cargadas en el grafo junto con las del modelo.
+
+\subsubsection{Extensiones}
+
+Ninguna.
+
+\subsection{Des-cargar un vocabulario}
+
+\subsubsection{Descripción breve}
+
+Este caso de uso permite a un usuario des-cargar en la aplicación los vocabularios que haya podido cargar previamente. 
+
+\subsubsection{Actores}
+
+El actor principal es el usuario de la aplicación (fundamentalmente dirigida a un alumno, pero podría ser un profesor o cualquier otro usuario).
+
+\subsubsection{Disparadores}
+
+El caso de usa comienza cuando el usuario pulsa en uno de los interruptores asociado a cualquiera de los vocabularios más utilizados ofrecidos por la aplicación, siempre y cuando su posición esté en ``activado''.
+
+\subsubsection{Flujo de eventos}
+\begin{enumerate}
+	\item Flujo básico
+	\begin{enumerate}
+		\item El usuario pulsa en un interruptor activo de un vocabulario.
+		\item El interruptor pasa a estar inactivo y el vocabulario des-cargado.
+	\end{enumerate}
+	\item Flujo alternativo 1
+	\begin{enumerate}
+		\item El usuario pulsa en un interruptor activo de un vocabulario.
+		\item Ocurre un error al recuperar o cargar el vocabulario para su borrado del grafo y el interruptor vuelve a su posición de ``activado'', puesto que el vocabulario no se ha podido des-cargar. Simultáneamente, aparece un mensaje de error.
+		
+	\end{enumerate}
+	
+\end{enumerate}
+
+\subsubsection{Requisitos especiales}
+
+Es necesario que haya conexión a Internet para poder descargar los vocabularios de las URLs precargadas y así eliminarlos del grafo local.
+
+\subsubsection{Precondiciones}
+
+El usuario debe haber navegado previamente hasta la sección de Vocabularios a través de la barra de navegación lateral.
+
+\subsubsection{Postcondiciones}
+
+Las tripletas de los vocabularios desactivados ya no estarán cargadas en el grafo junto con las del modelo.
+
+\subsubsection{Extensiones}
+
+Ninguna.

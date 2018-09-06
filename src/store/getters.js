@@ -10,6 +10,8 @@ const rdfConstructs = state => state.rdfConstructs
 
 const prefixes = state => state.prefixes
 
+const vocabularies = state => state.vocabularies
+
 const baseUrl = state => state.baseUrl
 
 const activity = state => state.activity
@@ -52,6 +54,7 @@ export default {
   engine,
   rdfConstructs,
   prefixes,
+  vocabularies,
   baseUrl,
   activity,
   getSubjectListByPredicateAndObject,

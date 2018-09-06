@@ -107,6 +107,10 @@ const exportJsonLD = (context) => {
 const exportTurtle = (context) => {
   context.commit('EXPORT_TURTLE')
 }
+
+const setVocabularyState = (context, {vocabulary, active}) => {
+  context.commit('SET_VOCABULARY_STATE', {vocabulary, active})
+}
 export default {
   addClass,
   addResource,
@@ -121,5 +125,6 @@ export default {
   delN3,
   setActivity,
   exportJsonLD,
-  exportTurtle
+  exportTurtle,
+  setVocabularyState
 }

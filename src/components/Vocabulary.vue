@@ -11,11 +11,12 @@
           <v-card-text>
             <p>Desde aquí puedes precargar algunos de los vocabularios más utilizados en tu grafo para poder utilizarlos posteriormente en tus consultas SPARQL.</p>
 
-              <v-switch v-for="value in vocabularies" v-model="selectedVocabulary" :key="value.name" @change="changeVocabularyState"  :label="value.name" :false-value="{method: 'delN3', url: value.url}" :true-value="{method: 'addN3', url: value.url}"></v-switch>
+              <v-switch v-for="vocab in vocabularies" v-model="selectedVocabulary[vocab.name]" :key="vocab.name" @change="changeVocabularyState(vocab.name)"  :value="vocab.active" :label="vocab.name" :false-value="{name: vocab.name, method: 'delN3', url: vocab.url, active: false}" :true-value="{name: vocab.name, method: 'addN3', url: vocab.url, active: true}"></v-switch>
 
           </v-card-text>
           <v-snackbar
             v-model="snackbar"
+            :color="color"
           >
             {{ snackbarMessage }}
             <v-btn
@@ -34,33 +35,44 @@
 </template>
 
 <script>
-  import Vocabularies from '../utils/Vocabularies'
-  import {mapActions} from 'vuex'
+  import {mapActions, mapGetters} from 'vuex'
   export default {
     name: 'vocabulary',
     data () {
       return {
-        vocabularies: Vocabularies,
-        selectedVocabulary: null,
+        selectedVocabulary: {},
         snackbar: false,
-        snackbarMessage: 'Vocabulario importado'
+        snackbarMessage: 'Vocabulario importado',
+        color: 'primary',
+        vocabularyList: {}
       }
     },
-    methods: { ...mapActions(['addN3', 'delN3']),
-      changeVocabularyState () {
-        console.log(JSON.stringify(this.selectedVocabulary))
-        this.$http.get(this.selectedVocabulary.url).then(response => {
+    computed: {...mapGetters(['vocabularies'])},
+    methods: { ...mapActions(['addN3', 'delN3', 'setVocabularyState']),
+      changeVocabularyState (vocab) {
+        this.$http.get(this.selectedVocabulary[vocab].url).then(response => {
           // get body data
-          console.log(this.selectedVocabulary.name)
-          console.log(response.body)
-          this[this.selectedVocabulary.method]({'content': response.body, 'store': 'n3store'})
+          console.log(this.selectedVocabulary[vocab].name)
+          console.log(this.selectedVocabulary[vocab].active)
+          this.setVocabularyState({'vocabulary': this.selectedVocabulary[vocab].name, 'active': this.selectedVocabulary[vocab].active})
+          this[this.selectedVocabulary[vocab].method]({'content': response.body, 'store': 'n3store'})
         }, response => {
           // error callback
+          console.log("ocurrio un error")
+          this.snackbarMessage = 'Ocurrió un error al cargar el vocabulario. Revise la conexión a Internet.'
+          this.color = 'error'
+          this.snackbar = true
+          this.setVocabularyState({'vocabulary': this.selectedVocabulary[vocab].name, 'active': !this.selectedVocabulary[vocab].name})
         })
       }
         // todo implement enableVocabulary and disableVocabulary
         // add vocabulary to graph from URL
         // delete vocabulary from graph
+    },
+    beforeMount () {
+      this.vocabularyList = this.vocabularies
+      this.selectedVocabulary = this.vocabularies
+      console.log(JSON.stringify(this.selectedVocabulary['foaf']))
     }
   }
 </script>

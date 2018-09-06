@@ -62,8 +62,6 @@ const IMPORT_N3 = (state, {content, store}) => {
 
 const ADD_N3 = (state, {content, store}) => {
   console.log('add n3')
-  console.log(store)
-  console.log(JSON.stringify(state[store]))
   const turtleParser = new N3Parser()
   let quads = turtleParser.parse(content)
   state[store].addQuads(quads)
@@ -72,8 +70,6 @@ const ADD_N3 = (state, {content, store}) => {
 
 const DEL_N3 = (state, {content, store}) => {
   console.log('del n3')
-  console.log(store)
-  console.log(JSON.stringify(state[store]))
   const turtleParser = new N3Parser()
   let quads = turtleParser.parse(content)
   state[store].removeQuads(quads)
@@ -139,6 +135,10 @@ const EXPORT_TURTLE = (state) => {
   })
 }
 
+const SET_VOCABULARY_STATE = (state, {vocabulary, active}) => {
+  state.vocabularies[vocabulary].active = active
+}
+
 export default {
   ADD_QUAD_FROM_IRI,
   REMOVE_QUAD_FROM_IRI,
@@ -150,5 +150,6 @@ export default {
   DEL_N3,
   SET_ACTIVITY,
   EXPORT_JSON_LD,
-  EXPORT_TURTLE
+  EXPORT_TURTLE,
+  SET_VOCABULARY_STATE
 }

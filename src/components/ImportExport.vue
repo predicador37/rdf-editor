@@ -10,13 +10,14 @@
 
           <v-card-text>
             <p>Si lo deseas, puedes importar un grafo desde un archivo de texto en formato N3 o Turtle.</p>
-            <file-loader title="Desde archivo" @load="importN3({'content': $event, 'store': 'n3store'})" @file-loaded="snackbar = true"></file-loader>
+            <file-loader title="Desde archivo" accepted="text/n3,text/ttl,application/x-trig,application/n-triples" :extensions="['ttl', 'nt', 'n3', 'trig']" @load="importN3({'content': $event, 'store': 'n3store'})" @file-loaded="handleFileLoaded($event)" @load-error="handleError($event)"></file-loader>
             <div>
               <url-loader title='Desde URL' @load="importN3({'content': $event, 'store': 'n3store'})" @url-loaded="snackbar = true"></url-loader>
             </div>
           </v-card-text>
           <v-snackbar
             v-model="snackbar"
+            :color="color"
           >
             {{ snackbarMessage }}
             <v-btn
@@ -60,13 +61,14 @@
 
           <v-card-text>
             <p>También es posible importar las tripletas de un grafo externo al grafo de trabajo.</p>
-            <file-loader title="Desde archivo" @load="addN3({'content': $event, 'store': 'n3store'})" @file-loaded="snackbar = true"></file-loader>
+            <file-loader title="Desde archivo" @load="addN3({'content': $event, 'store': 'n3store'})" @file-loaded="handleFileLoaded($event)" @load-error="handleError($event)"></file-loader>
             <div>
               <url-loader title="Desde URL" @load="addN3({'content': $event, 'store': 'n3store'})" @url-loaded="snackbar = true"></url-loader>
             </div>
           </v-card-text>
           <v-snackbar
             v-model="snackbar"
+            :color="color"
           >
             {{ snackbarMessage }}
             <v-btn
@@ -99,10 +101,22 @@
     data () {
       return {
         snackbar: false,
-        snackbarMessage: 'Archivo importado en el almacén'
+        snackbarMessage: 'Archivo importado en el almacén',
+        color: 'primary'
       }
     },
-    methods: {...mapActions(['importN3', 'addN3', 'exportJsonLD', 'exportTurtle'])}
+    methods: {...mapActions(['importN3', 'addN3', 'exportJsonLD', 'exportTurtle']),
+      handleError (event) {
+        this.snackbarMessage = event
+        this.color = 'error'
+        this.snackbar = true
+      },
+      handleFileLoaded (event) {
+        this.snackbarMessage = event
+        this.color = 'success'
+        this.snackbar = true
+      }
+    }
   }
 </script>
 
