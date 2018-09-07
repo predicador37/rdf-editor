@@ -1,5 +1,4 @@
 export default {
-  BASE_URL: 'http://uned.es/example#',
   rdf_type: {
     text: 'rdf:type',
     value: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',

@@ -8,7 +8,7 @@ import consts from '../../../src/store/consts'
 
 let rdf = DataFactory
 let baseUrl = consts.baseUrl
-
+// TODO refactor all tests to n3 store (no more match)
 describe('actions', () => {
   test('add triple to store', () => {
     Vue.use(Vuex)

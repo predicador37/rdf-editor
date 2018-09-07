@@ -58,7 +58,7 @@
           this[this.selectedVocabulary[vocab].method]({'content': response.body, 'store': 'n3store'})
         }, response => {
           // error callback
-          console.log("ocurrio un error")
+          console.log('ocurrio un error')
           this.snackbarMessage = 'Ocurrió un error al cargar el vocabulario. Revise la conexión a Internet.'
           this.color = 'error'
           this.snackbar = true

@@ -30,10 +30,17 @@ const getSubjectListByPredicate = (state) => (predicate) => {
   })
 }
 
+const getAllSubjectList = (state) => () => {
+  return new Promise((resolve, reject) => {
+    let subjects = state.n3store.getSubjects(null, null, null)
+    resolve(subjects)
+  })
+}
+
 const getObjectListByPredicateAndSubject = (state) => ({predicate, subject}) => {
   return new Promise((resolve, reject) => {
-    let subjects = state.n3store.getObjects(subject, predicate, null)
-    resolve(subjects)
+    let objects = state.n3store.getObjects(subject, predicate, null)
+    resolve(objects)
   })
 }
 
@@ -49,6 +56,16 @@ const getStoreQuads = (state) => (s, p, o, g) => {
   return state.n3store.getQuads(s, p, o, g)
 }
 
+const getDefaultResources = (state) => (resource) => {
+  let results = []
+  Object.keys(state.rdfConstructs).forEach((key) => {
+    if (state.rdfConstructs[key].type === resource) {
+      results.push(state.rdfConstructs[key].value)
+    }
+   })
+  return results
+}
+
 export default {
   n3store,
   engine,
@@ -59,8 +76,10 @@ export default {
   activity,
   getSubjectListByPredicateAndObject,
   getSubjectListByPredicate,
+  getAllSubjectList,
   getObjectListByPredicateAndSubject,
   getTriplesMatchingSubject,
   getTriplesMatchingObject,
-  getStoreQuads
+  getStoreQuads,
+  getDefaultResources
 }

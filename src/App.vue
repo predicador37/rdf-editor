@@ -78,6 +78,11 @@
           link: '/model'
         },
         {
+          icon: 'mdi-account-multiple-plus',
+          title: 'Poblamiento',
+          link: '/population'
+        },
+        {
           icon: 'mdi-database-search',
           title: 'Consulta',
           link: '/sparql'
