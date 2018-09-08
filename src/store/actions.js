@@ -8,16 +8,24 @@ const addClass = (context, className) => {
       predicate: RdfConstructs.rdf_type.value,
       object: RdfConstructs.owl_Class.value
     })
+  } else {
+    throw new Error('La clase no debe ser nula')
   }
 }
 
 const addResource = (context, {subject, predicate, object}) => {
+  console.log('VALUES')
+  console.log(subject)
+  console.log(predicate)
+  console.log(object)
   if (subject != null && predicate != null && object != null) {
     context.commit('ADD_QUAD_FROM_IRI', {
       subject: subject, // subject must be an IRI
       predicate: predicate,
       object: object
     })
+  } else {
+    throw new Error('Error: Ningún elemento de la terna debe ser nulo.')
   }
 }
 

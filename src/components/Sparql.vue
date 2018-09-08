@@ -15,8 +15,12 @@
 
       </v-flex>
       <v-flex fixed  px-3 py-3 md6 xs12>
-
+        <v-card>
+          <v-card-title primary-title>
+            <div class="headline">Resultados</div>
+          </v-card-title>
        <sparql-results v-if="renderResults" :results="queryResults"></sparql-results>
+        </v-card>
         <v-dialog v-model="errorDialog" persistent max-width="500">
           <v-card>
             <v-card-title class="headline"><span class="red--text">Ha ocurrido un error</span></v-card-title>

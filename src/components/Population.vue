@@ -9,9 +9,9 @@
           </v-card-title>
 
           <v-card-text>
-            <p>Desde aquí podrás añadir tripletas arbitrarias a tu grafo.</p>
+            <p>Desde aquí podrás añadir ternas arbitrarias a tu grafo. Puedes introducir cualquier URI en los distintos elementos del formulario, si bien se presentarán algunas sugerencias preparadas para crear instancias de clases ya existentes.</p>
             <v-text-field
-              label="Selecciona un recurso como sujeto"
+              label="Introduce un recurso como sujeto"
               v-model="subject"
             ></v-text-field>
 
@@ -20,7 +20,7 @@
               :items="predicates"
               item-text="value"
               item-value="value"
-              label="Introduce un recurso como predicado"
+              label="Selecciona un recurso como predicado"
               :search-input.sync="predicateSearchInput"
             ></v-combobox>
 
@@ -33,8 +33,7 @@
               :search-input.sync="objectSearchInput"
             ></v-combobox>
             <v-btn type="submit" variant="primary" @click="addTripleToGraph()">Añadir instancia</v-btn>
-            <p>{{subject.value}} {{predicate.value}}  {{object.value}}</p>
-            <p>{{subjectSearchInput}} {{predicateSearchInput}}  {{objectSearchInput}}</p>
+
 
 
             </v-select>
@@ -63,21 +62,21 @@
 <script>
   import {mapActions, mapGetters} from 'vuex'
   export default {
-    name: 'vocabulary',
+    name: 'population',
     data () {
       return {
         snackbar: false,
-        snackbarMessage: 'Vocabulario importado',
+        snackbarMessage: 'Terna añadida con éxito',
         color: 'primary',
         subjects: [],
         predicates: [],
         objects: [],
-        subject: '',
-        predicate: '',
-        object: '',
-        subjectSearchInput: '',
-        predicateSearchInput: '',
-        objectSearchInput: ''
+        subject: null,
+        predicate: null,
+        object: null,
+        subjectSearchInput: null,
+        predicateSearchInput: null,
+        objectSearchInput: null
       }
     },
     computed: {...mapGetters(['rdfConstructs', 'getAllSubjectList', 'getDefaultResources', 'getSubjectListByPredicateAndObject', 'getObjectListByPredicateAndSubject'])},
@@ -95,13 +94,28 @@
         // TODO: generalize classes to resources
       },
       addTripleToGraph () {
-        if (this.subject != null && this.predicate != null && this.object != null) {
-          this.addResource({'subject': this.subject, 'predicate': this.predicate, 'object': this.object})
+        try {
+          this.addResource({
+            'subject': this.subject,
+            'predicate': this.predicateSearchInput !== null ? this.predicateSearchInput : this.predicate,
+            'object': this.objectSearchInput !== null ? this.objectSearchInput : this.object
+          })
+          this.handleSuccess('La terna ha sido añadida con éxito')
+        } catch (error) {
+          this.handleError(error.message)
+          console.log(error)
         }
+      },
+      handleError (event) {
+        this.snackbarMessage = event
+        this.color = 'error'
+        this.snackbar = true
+      },
+      handleSuccess(event) {
+        this.snackbarMessage = event
+        this.color = 'success'
+        this.snackbar = true
       }
-    // todo implement enableVocabulary and disableVocabulary
-    // add vocabulary to graph from URL
-    // delete vocabulary from graph
     },
     beforeMount () {
 

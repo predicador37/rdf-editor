@@ -611,3 +611,103 @@ Las tripletas de los vocabularios desactivados ya no estarán cargadas en el graf
 \subsubsection{Extensiones}
 
 Ninguna.
+
+\subsection{Poblar el grafo con una tripleta}
+
+\subsubsection{Descripción breve}
+
+Este caso de uso permite a un usuario añadir una tripleta arbitraria al grafo, seleccionando su sujeto (campo libre), predicado (campo de selección que permite introducir nuevos términos) y objeto  (campo de selección que permite introducir nuevos términos).
+
+\subsubsection{Actores}
+
+El actor principal es el usuario de la aplicación (fundamentalmente dirigida a un alumno, pero podría ser un profesor o cualquier otro usuario).
+
+\subsubsection{Disparadores}
+
+El caso de usa comienza cuando el usuario comienza a rellenar los campos del formulario de poblamiento y pulsa en aceptar cuando ha terminado. 
+
+\subsubsection{Flujo de eventos}
+\begin{enumerate}
+	\item Flujo básico
+	\begin{enumerate}
+		\item El usuario rellena los campos del formulario, bien con los selectores, bien con un texto libre.
+		\item El usuario pulsa en añadir instancia.
+		\item Aparece un mensaje indicando el éxito de la operación y la instancia se añade al grafo.
+	\end{enumerate}
+	\item Flujo alternativo 1
+	\begin{enumerate}
+		\item El usuario rellena los campos del formulario pero deja al menos un campo vacío (sin rellenar).
+		\item El usuario pulsa en añadir instancia.
+		\item Aparece un mensaje de error indicando que ningún elemento de la terna puede ser nulo.
+	\end{enumerate}
+	
+\end{enumerate}
+
+\subsubsection{Requisitos especiales}
+
+Para que las opciones del selector aparezcan precargadas es necesario que, además de los recursos por defecto, se haya cargado algún tipo de modelo en el grafo.
+
+\subsubsection{Precondiciones}
+
+El usuario debe haber navegado previamente hasta la sección de Poblamiento a través de la barra de navegación lateral.
+
+\subsubsection{Postcondiciones}
+
+La terna añadida en caso de éxito puede visualizarse utilizando el módulo de consultas o, en caso de ser una terna estructural de modelado, en el módulo correspondiente.
+
+\subsubsection{Extensiones}
+
+Ninguna.
+
+\subsection{Importar grafo}
+
+\subsubsection{Descripción breve}
+
+Este caso de uso permite a un usuario importar un grafo completo en los formatos N3, Turtle, TriG o N-Triples. El grafo importado sustituirá al cargado por defecto en memoria por la aplicación.
+
+\subsubsection{Actores}
+
+El actor principal es el usuario de la aplicación (fundamentalmente dirigida a un alumno, pero podría ser un profesor o cualquier otro usuario).
+
+\subsubsection{Disparadores}
+
+El caso de usa comienza cuando el usuario importa un grafo desde archivo o desde URL.
+
+\subsubsection{Flujo de eventos}
+\begin{enumerate}
+	\item Flujo básico
+	\begin{enumerate}
+		\item El usuario pulsa en importar archivo o rellena la URL del mismo y pulsa en el icono con forma de lupa.
+		\item El usuario selecciona el archivo a importar en caso de ser importación desde archivo.
+		\item Aparece un mensaje indicando el éxito de la operación y se carga el grafo en el almacén.
+	\end{enumerate}
+	\item Flujo alternativo 1
+	\begin{enumerate}
+		\item  El usuario pulsa en importar archivo o rellena la URL del mismo y pulsa en el icono con forma de lupa.
+		\item El usuario selecciona o apunta a un archivo que supera el límite de tamaño permitido (configurable en la aplicación.)
+		\item Aparece un mensaje de error indicando que no es posible cargar el grafo.
+	\end{enumerate}
+\item Flujo alternativo 2
+\begin{enumerate}
+	\item El usuario rellena la URL del mismo y pulsa en el icono con forma de lupa.
+	\item La URL no está disponible o devuelve un error de descarga (por ejemplo, CORS, si el servidor no está preparado).
+	\item Aparece un mensaje de error indicando que no es posible cargar el grafo.
+\end{enumerate}
+	
+\end{enumerate}
+
+\subsubsection{Requisitos especiales}
+
+Para cargar archivos desde una URL externa, el servidor remoto tiene que tener correctamente configuradas las cabeceras CORS (\textit{Cross-Origin Resource Sharing})\footnote{\url{https://developer.mozilla.org/es/docs/Web/HTTP/Access_control_CORS}}
+
+\subsubsection{Precondiciones}
+
+El usuario debe haber navegado previamente hasta la sección de Poblamiento a través de la barra de navegación lateral.
+
+\subsubsection{Postcondiciones}
+
+La terna añadida en caso de éxito puede visualizarse utilizando el módulo de consultas o, en caso de ser una terna estructural de modelado, en el módulo correspondiente.
+
+\subsubsection{Extensiones}
+
+Ninguna.

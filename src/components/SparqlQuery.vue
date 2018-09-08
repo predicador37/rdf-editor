@@ -10,7 +10,7 @@
     name="sparql_query"
     auto-grow="true"
     label="Consulta SPARQL"
-    value="SELECT ?s WHERE {?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>  <http://www.w3.org/2002/07/owl#Class> .} LIMIT 100"
+    value="SELECT ?s ?p ?o WHERE {?s ?p ?o .} LIMIT 100"
     hint="Consulta de ejemplo"
   ></v-textarea>
 </div>
@@ -18,7 +18,7 @@
   <v-divider class="my-3"></v-divider>
   <div class="subheading my-3"> Cargar consulta</div>
 <div>
-    <file-loader title='Desde archivo' @load="loadSparqlQuery($event)" @file-loaded="snackbar = true"></file-loader>
+    <file-loader title='Desde archivo' @load="loadSparqlQuery($event)" :extensions="['rq']" @file-loaded="snackbar = true"></file-loader>
 </div>
   <div>
     <url-loader  title='Desde URL' @load="loadSparqlQuery($event)" @url-loaded="snackbar = true"></url-loader>
@@ -112,7 +112,8 @@
       }
     },
     beforeMount () {
-      this.query = this.prefixes + 'SELECT ?s WHERE {?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>  <http://www.w3.org/2002/07/owl#Class> .} LIMIT 100'
+      //this.query = this.prefixes + 'SELECT ?s WHERE {?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>  <http://www.w3.org/2002/07/owl#Class> .} LIMIT 100'
+      this.query = this.prefixes + 'SELECT ?s ?p ?o WHERE {?s ?p ?o .} LIMIT 100'
     }
   }
 </script>

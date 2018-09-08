@@ -126,7 +126,7 @@ const EXPORT_TURTLE = (state) => {
     let dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(result)
     let downloadAnchorNode = document.createElement('a')
     downloadAnchorNode.setAttribute('href', dataStr)
-    downloadAnchorNode.setAttribute('download', 'dataset.json')
+    downloadAnchorNode.setAttribute('download', 'dataset.ttl')
     document.body.appendChild(downloadAnchorNode)
     downloadAnchorNode.click()
     downloadAnchorNode.remove()
