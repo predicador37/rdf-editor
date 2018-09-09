@@ -677,13 +677,13 @@ El caso de usa comienza cuando el usuario importa un grafo desde archivo o desde
 \begin{enumerate}
 	\item Flujo básico
 	\begin{enumerate}
-		\item El usuario pulsa en importar archivo o rellena la URL del mismo y pulsa en el icono con forma de lupa.
+		\item El usuario pulsa en importar desde archivo o rellena la URL del mismo y pulsa en el icono con forma de lupa.
 		\item El usuario selecciona el archivo a importar en caso de ser importación desde archivo.
 		\item Aparece un mensaje indicando el éxito de la operación y se carga el grafo en el almacén.
 	\end{enumerate}
 	\item Flujo alternativo 1
 	\begin{enumerate}
-		\item  El usuario pulsa en importar archivo o rellena la URL del mismo y pulsa en el icono con forma de lupa.
+		\item  El usuario pulsa en importar desde archivo o rellena la URL del mismo y pulsa en el icono con forma de lupa.
 		\item El usuario selecciona o apunta a un archivo que supera el límite de tamaño permitido (configurable en la aplicación.)
 		\item Aparece un mensaje de error indicando que no es posible cargar el grafo.
 	\end{enumerate}
@@ -702,11 +702,209 @@ Para cargar archivos desde una URL externa, el servidor remoto tiene que tener c
 
 \subsubsection{Precondiciones}
 
-El usuario debe haber navegado previamente hasta la sección de Poblamiento a través de la barra de navegación lateral.
+El usuario debe haber navegado previamente hasta la sección de Importar/Exportar a través de la barra de navegación lateral.
 
 \subsubsection{Postcondiciones}
 
-La terna añadida en caso de éxito puede visualizarse utilizando el módulo de consultas o, en caso de ser una terna estructural de modelado, en el módulo correspondiente.
+Una vez cargado el grafo, este podrá visualizarse en el módulo de modelado (si tiene ternas estructurales) o en el de consulta en todo caso.
+
+\subsubsection{Extensiones}
+
+Ninguna.
+
+\subsection{Añadir a grafo}
+
+\subsubsection{Descripción breve}
+
+Este caso de uso es una leve modificación del anterior y permite a un usuario añadir un grafo externo al ya existente en el almacén en los formatos N3, Turtle, TriG o N-Triples. El grafo importado no sustituirá al cargado por defecto en memoria por la aplicación, sino que pasará a formar parte de él.
+
+\subsubsection{Actores}
+
+El actor principal es el usuario de la aplicación (fundamentalmente dirigida a un alumno, pero podría ser un profesor o cualquier otro usuario).
+
+\subsubsection{Disparadores}
+
+El caso de usa comienza cuando el usuario añade un grafo desde archivo o desde URL.
+
+\subsubsection{Flujo de eventos}
+\begin{enumerate}
+	\item Flujo básico
+	\begin{enumerate}
+		\item El usuario pulsa en añadir desde archivo o rellena la URL del mismo y pulsa en el icono con forma de lupa.
+		\item El usuario selecciona el archivo a añadir en caso de ser importación desde archivo.
+		\item Aparece un mensaje indicando el éxito de la operación y se añade el grafo en el almacén.
+	\end{enumerate}
+	\item Flujo alternativo 1
+	\begin{enumerate}
+		\item  El usuario pulsa en añadir a archivo o rellena la URL del mismo y pulsa en el icono con forma de lupa.
+		\item El usuario selecciona o apunta a un archivo que supera el límite de tamaño permitido (configurable en la aplicación.)
+		\item Aparece un mensaje de error indicando que no es posible cargar el grafo.
+	\end{enumerate}
+	\item Flujo alternativo 2
+	\begin{enumerate}
+		\item El usuario rellena la URL del mismo y pulsa en el icono con forma de lupa.
+		\item La URL no está disponible o devuelve un error de descarga (por ejemplo, CORS, si el servidor no está preparado).
+		\item Aparece un mensaje de error indicando que no es posible añadir el grafo.
+	\end{enumerate}
+	
+\end{enumerate}
+
+\subsubsection{Requisitos especiales}
+
+Para cargar archivos desde una URL externa, el servidor remoto tiene que tener correctamente configuradas las cabeceras CORS (\textit{Cross-Origin Resource Sharing})\footnote{\url{https://developer.mozilla.org/es/docs/Web/HTTP/Access_control_CORS}}
+
+\subsubsection{Precondiciones}
+
+El usuario debe haber navegado previamente hasta la sección de Importar/Exportar a través de la barra de navegación lateral.
+
+\subsubsection{Postcondiciones}
+
+Una vez añadido el grafo, este podrá visualizarse junto con el existente previamente en el módulo de modelado (si tiene ternas estructurales) o en el de consulta en todo caso.
+
+\subsubsection{Extensiones}
+
+Ninguna.
+
+\subsection{Exportar grafo}
+
+\subsubsection{Descripción breve}
+
+Este caso de uso  permite a un usuario exportar a un archivo de texto en formato Turtle o JSON-LD el grafo de trabajo.
+
+\subsubsection{Actores}
+
+El actor principal es el usuario de la aplicación (fundamentalmente dirigida a un alumno, pero podría ser un profesor o cualquier otro usuario).
+
+\subsubsection{Disparadores}
+
+El caso de usa comienza cuando el usuario pulsa en el botón de ``Exportar JSON-LD'' o ``Exportar Turtle''.
+
+\subsubsection{Flujo de eventos}
+\begin{enumerate}
+	\item Flujo básico
+	\begin{enumerate}
+		\item El usuario pulsa en el botón de ``Exportar JSON-LD'' o ``Exportar Turtle''.
+		\item El grafo se exporta y aparece un cuadro de diálogo para guardar el archivo.
+	\end{enumerate}
+	\item Flujo alternativo 1
+	\begin{enumerate}
+		\item El usuario pulsa en el botón de ``Exportar JSON-LD'' o ``Exportar Turtle''.
+		\item Ocurre un error inesperado que se muestra al usuario.
+	\end{enumerate}
+	
+\end{enumerate}
+
+\subsubsection{Requisitos especiales}
+
+Ninguno.
+
+\subsubsection{Precondiciones}
+
+Debe existir un grafo cargado en memoria.
+
+\subsubsection{Postcondiciones}
+
+Ninguna.
+
+\subsubsection{Extensiones}
+
+Ninguna.
+
+\subsection{Lanzar consulta a grafo local}
+
+\subsubsection{Descripción breve}
+
+Este caso de uso  permite a un usuario lanzar una consulta SPARQL al grafo local cargado en memoria, bien desde un archivo con extensión ``rq'' o URL, bien desde un cuadro de texto.
+
+\subsubsection{Actores}
+
+El actor principal es el usuario de la aplicación (fundamentalmente dirigida a un alumno, pero podría ser un profesor o cualquier otro usuario).
+
+\subsubsection{Disparadores}
+
+El caso de usa comienza cuando el usuario carga la consulta pulsa en el botón de ``Lanzar Consulta''.
+
+\subsubsection{Flujo de eventos}
+\begin{enumerate}
+	\item Flujo básico
+	\begin{enumerate}
+		\item El usuario carga la consulta a lanzar, bien escribiéndola en el cuadro de texto, bien cargándola desde un archivo ``rq'' o URL donde se encuentre.
+		\item El usuario pulsa en el botón de ``Lanzar Consulta''.
+		\item Los resultados de la consulta aparecen en la tabla de ``Resultados''.
+		
+	\end{enumerate}
+	\item Flujo alternativo 1
+	\begin{enumerate}
+			\item El usuario carga la consulta a lanzar, bien escribiéndola en el cuadro de texto, bien cargándola desde un archivo ``rq'' o URL donde se encuentre.
+		\item El usuario pulsa en el botón de ``Lanzar Consulta''.
+		\item Ocurre un error inesperado o de sintaxis al lanzar la consulta y aparece un mensaje de error para el usuario.
+	\end{enumerate}
+	
+\end{enumerate}
+
+\subsubsection{Requisitos especiales}
+
+Ninguno.
+
+\subsubsection{Precondiciones}
+
+Debe existir un grafo cargado en memoria.
+
+\subsubsection{Postcondiciones}
+
+Ninguna.
+
+\subsubsection{Extensiones}
+
+Ninguna.
+
+\subsection{Lanzar consulta a grafo remoto}
+
+\subsubsection{Descripción breve}
+
+Este caso de uso  permite a un usuario lanzar una consulta SPARQL a un grafo ubicado en un endpoint remoto, bien desde un archivo con extensión ``rq'' o URL, bien desde un cuadro de texto.
+
+\subsubsection{Actores}
+
+El actor principal es el usuario de la aplicación (fundamentalmente dirigida a un alumno, pero podría ser un profesor o cualquier otro usuario).
+
+\subsubsection{Disparadores}
+
+El caso de usa comienza cuando el usuario activa la opción ``Usar endpoint SPARQL remoto''.
+
+\subsubsection{Flujo de eventos}
+\begin{enumerate}
+	\item Flujo básico
+	\begin{enumerate}
+		\item El usuario activa la opción ``Usar endpoint SPARQL remoto''.
+		\item El usuario introduce la URL del endpoint remoto.
+		\item El usuario carga la consulta a lanzar, bien escribiéndola en el cuadro de texto, bien cargándola desde un archivo ``rq'' o URL donde se encuentre.
+		\item El usuario pulsa en el botón de ``Lanzar Consulta''.
+		\item Los resultados de la consulta al grafo remoto aparecen en la tabla de ``Resultados''.
+		
+	\end{enumerate}
+	\item Flujo alternativo 1
+	\begin{enumerate}
+		\item El usuario activa la opción ``Usar endpoint SPARQL remoto''.
+		\item El usuario introduce la URL del endpoint remoto.
+		\item El usuario carga la consulta a lanzar, bien escribiéndola en el cuadro de texto, bien cargándola desde un archivo ``rq'' o URL donde se encuentre.
+		\item El usuario pulsa en el botón de ``Lanzar Consulta''.
+		\item Ocurre un error inesperado, de URL o de sintaxis al lanzar la consulta y aparece un mensaje de error para el usuario.
+	\end{enumerate}
+	
+\end{enumerate}
+
+\subsubsection{Requisitos especiales}
+
+Ninguno.
+
+\subsubsection{Precondiciones}
+
+Los endpoints remotos deben soportar el protocolo SPARQL y tener correctamente configuradas las cabeceras CORS.
+
+\subsubsection{Postcondiciones}
+
+Ninguna.
 
 \subsubsection{Extensiones}
 
