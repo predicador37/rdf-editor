@@ -1,7 +1,7 @@
 
 
 <template>
-  <div>
+  <div id="home-editor">
 
       <v-container fill-height fluid>
         <v-layout align-center>

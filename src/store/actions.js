@@ -1,23 +1,7 @@
 import RdfConstructs from '../utils/RdfConstructs'
 // TODO convention: parameters must be of type string
 
-const addClass = (context, className) => {
-  if (className != null) {
-    context.commit('ADD_QUAD_FROM_IRI', {
-      subject: className,
-      predicate: RdfConstructs.rdf_type.value,
-      object: RdfConstructs.owl_Class.value
-    })
-  } else {
-    throw new Error('La clase no debe ser nula')
-  }
-}
-
 const addResource = (context, {subject, predicate, object}) => {
-  console.log('VALUES')
-  console.log(subject)
-  console.log(predicate)
-  console.log(object)
   if (subject != null && predicate != null && object != null) {
     context.commit('ADD_QUAD_FROM_IRI', {
       subject: subject, // subject must be an IRI
@@ -29,19 +13,11 @@ const addResource = (context, {subject, predicate, object}) => {
   }
 }
 
-const addQuad = (context, {subject, predicate, object}) => {
-  if (subject != null && predicate != null && object != null) {
-    context.commit('ADD_QUAD_FROM_IRI', {
-      subject: subject, // subject must be an IRI
-      predicate: predicate,
-      object: object
-    })
-  }
-}
-
 const removeResource = (context, resource) => {
   if (resource != null) {
     context.commit('REMOVE_RESOURCE_FROM_IRI', resource)
+  } else {
+    throw new Error('Error: No existe el recurso.')
   }
 }
 
@@ -49,13 +25,14 @@ const editResource = (context, {oldResource, newResource}) => {
   if (oldResource != null && newResource != null) {
     context.getters.getTriplesMatchingSubject(oldResource).forEach((triple) => {
       context.dispatch('removeQuad', {subject: triple.subject.value, predicate: triple.predicate.value, object: triple.object.value})
-      context.dispatch('addQuad', {subject: newResource, predicate: triple.predicate.value, object: triple.object.value})
+      context.dispatch('addResource', {subject: newResource, predicate: triple.predicate.value, object: triple.object.value})
     })
-
     context.getters.getTriplesMatchingObject(oldResource).forEach((triple) => {
       context.dispatch('removeQuad', {subject: triple.subject.value, predicate: triple.predicate.value, object: triple.object.value})
-      context.dispatch('addQuad', {subject: triple.subject.value, predicate: triple.predicate.value, object: newResource})
+      context.dispatch('addResource', {subject: triple.subject.value, predicate: triple.predicate.value, object: newResource})
     })
+  } else {
+    throw new Error('Error: Los recursos no deben ser nulos.')
   }
 }
 
@@ -66,6 +43,8 @@ const removeQuad = (context, {subject, predicate, object}) => {
       predicate: predicate,
       object: object
     })
+  } else {
+    throw new Error('Error: Los elementos de la terna no deben ser nulos.')
   }
 }
 
@@ -77,6 +56,8 @@ const editClassLiteralProperty = (context, {subject, predicate, object, newObjec
       object: object,
       newObject: newObject
     })
+  } else {
+    throw new Error('Error: Los elementos de la terna no deben ser nulos.')
   }
 }
 
@@ -87,25 +68,41 @@ const addClassLiteralProperty = (context, {subject, predicate, object}) => {
       predicate: predicate,
       object: object
     })
+  } else {
+    throw new Error('Error: Los elementos de la terna no deben ser nulos.')
   }
 }
 
 const importN3 = (context, {content, store}) => {
-  console.log(content)
-  console.log(store)
-  context.commit('IMPORT_N3', {content, store})
+  if (content != null) {
+    context.commit('IMPORT_N3', {content, store})
+  } else {
+    throw new Error('Error: El contenido a importar no debe ser nulo.')
+  }
 }
 
 const addN3 = (context, {content, store}) => {
-  context.commit('ADD_N3', {content, store})
+  if (content != null) {
+    context.commit('ADD_N3', {content, store})
+  } else {
+    throw new Error('Error: El contenido a añadir no debe ser nulo.')
+  }
 }
 
 const delN3 = (context, {content, store}) => {
-  context.commit('DEL_N3', {content, store})
+  if (content != null) {
+    context.commit('DEL_N3', {content, store})
+  } else {
+    throw new Error('Error: El contenido a eliminar no debe ser nulo.')
+  }
 }
 
 const setActivity = (context, content) => {
-  context.commit('SET_ACTIVITY', content)
+  if (content != null) {
+    context.commit('SET_ACTIVITY', content)
+  } else {
+    throw new Error('Error: El contenido de la actividad no debe ser nulo.')
+  }
 }
 
 const exportJsonLD = (context) => {
@@ -120,10 +117,8 @@ const setVocabularyState = (context, {vocabulary, active}) => {
   context.commit('SET_VOCABULARY_STATE', {vocabulary, active})
 }
 export default {
-  addClass,
   addResource,
   editResource,
-  addQuad,
   editClassLiteralProperty,
   removeQuad,
   removeResource,
