@@ -30,13 +30,6 @@ const getSubjectListByPredicate = (state) => (predicate) => {
   })
 }
 
-const getAllSubjectList = (state) => () => {
-  return new Promise((resolve, reject) => {
-    let subjects = state.n3store.getSubjects(null, null, null)
-    resolve(subjects)
-  })
-}
-
 const getObjectListByPredicateAndSubject = (state) => ({predicate, subject}) => {
   return new Promise((resolve, reject) => {
     let objects = state.n3store.getObjects(subject, predicate, null)
@@ -76,7 +69,6 @@ export default {
   activity,
   getSubjectListByPredicateAndObject,
   getSubjectListByPredicate,
-  getAllSubjectList,
   getObjectListByPredicateAndSubject,
   getTriplesMatchingSubject,
   getTriplesMatchingObject,

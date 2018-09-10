@@ -1,5 +1,5 @@
 <template>
-<div>
+<div id="population">
   <v-container fluid>
     <v-layout row wrap>
       <v-flex px-3 py-3 md6 xs12>
@@ -79,7 +79,7 @@
         objectSearchInput: null
       }
     },
-    computed: {...mapGetters(['rdfConstructs', 'getAllSubjectList', 'getDefaultResources', 'getSubjectListByPredicateAndObject', 'getObjectListByPredicateAndSubject'])},
+    computed: {...mapGetters(['rdfConstructs', 'getDefaultResources', 'getSubjectListByPredicateAndObject', 'getObjectListByPredicateAndSubject'])},
     methods: { ...mapActions(['addResource']),
       async getSubjects ({predicate, object}) {
         let resources = await this.getSubjectListByPredicateAndObject({predicate, object})

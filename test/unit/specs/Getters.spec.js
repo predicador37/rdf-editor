@@ -13,10 +13,44 @@ let baseUrl = consts.baseUrl
 describe('getters', () => {
   test('get properties', () => {
     Vue.use(Vuex)
-    console.log('jest test')
     const clonedStoreConfig = deepClone(storeConfig)
     const store = new Vuex.Store(clonedStoreConfig)
-    const results = getters.getDefaultResources(store.state)('property')
-    console.log(JSON.stringify(results))
+    expect(getters.getDefaultResources(store.state)('property')).toHaveLength(10)
+  })
+  test('get subject list by predicate and object', () => {
+    Vue.use(Vuex)
+    const clonedStoreConfig = deepClone(storeConfig)
+    const store = new Vuex.Store(clonedStoreConfig)
+    expect(getters.getSubjectListByPredicateAndObject(store.state)({'predicate': RdfConstructs.rdf_type.value, 'object': RdfConstructs.owl_Class.value})).resolves.toHaveLength(4)
+  })
+  test('get subject list by predicate', () => {
+    Vue.use(Vuex)
+    const clonedStoreConfig = deepClone(storeConfig)
+    const store = new Vuex.Store(clonedStoreConfig)
+    expect(getters.getSubjectListByPredicate(store.state)(RdfConstructs.rdfs_label.value)).resolves.toHaveLength(1)
+  })
+  test('get object list by predicate and subject', () => {
+    Vue.use(Vuex)
+    const clonedStoreConfig = deepClone(storeConfig)
+    const store = new Vuex.Store(clonedStoreConfig)
+    expect(getters.getObjectListByPredicateAndSubject(store.state)({'predicate': RdfConstructs.rdfs_label.value, 'subject': baseUrl + 'Analista'})).resolves.toHaveLength(1)
+  })
+  test('get triples matching subject', () => {
+    Vue.use(Vuex)
+    const clonedStoreConfig = deepClone(storeConfig)
+    const store = new Vuex.Store(clonedStoreConfig)
+    expect(getters.getTriplesMatchingSubject(store.state)(baseUrl + 'Analista')).toHaveLength(5)
+  })
+  test('get triples matching object', () => {
+    Vue.use(Vuex)
+    const clonedStoreConfig = deepClone(storeConfig)
+    const store = new Vuex.Store(clonedStoreConfig)
+    expect(getters.getTriplesMatchingObject(store.state)(RdfConstructs.owl_Class.value)).toHaveLength(4)
+  })
+  test('get store quads', () => {
+    Vue.use(Vuex)
+    const clonedStoreConfig = deepClone(storeConfig)
+    const store = new Vuex.Store(clonedStoreConfig)
+    expect(getters.getStoreQuads(store.state)()).toHaveLength(11)
   })
 })

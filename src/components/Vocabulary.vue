@@ -1,5 +1,5 @@
 <template>
-<div>
+<div id="vocabulary">
   <v-container fluid>
     <v-layout row wrap>
       <v-flex px-3 py-3 md6 xs12>

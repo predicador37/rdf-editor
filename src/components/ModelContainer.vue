@@ -1,5 +1,5 @@
 <template>
-<div>
+<div id="model">
   <v-tabs icons-and-text>
     <v-tabs-slider color="primary"></v-tabs-slider>
     <v-tab href="#tab-1">
