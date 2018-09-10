@@ -17,7 +17,7 @@ describe('actions', () => {
     const store = new Vuex.Store(clonedStoreConfig)
     let beforeSize = store.state.n3store.size
     // store.state.n3store.addQuad(rdf.quad(rdf.namedNode(baseUrl + 'Pepito_Perez'), rdf.namedNode(RdfConstructs.rdf_type.value), rdf.namedNode(baseUrl + 'Programador')))
-    store.dispatch('addResource', {subject: baseUrl + 'Pepito_Perez', predicate: RdfConstructs.rdf_type.value, object: baseUrl + 'Programador'})
+    store.dispatch('addTriple', {subject: baseUrl + 'Pepito_Perez', predicate: RdfConstructs.rdf_type.value, object: baseUrl + 'Programador'})
     let afterSize = store.state.n3store.size
     let expected = beforeSize + 1
     let actual = afterSize
@@ -36,7 +36,7 @@ describe('actions', () => {
     expect(actual).toBe(expected)
   })
 
-  test('edit triples matching subject', () => {
+  test('edit triple', () => {
     Vue.use(Vuex)
     const clonedStoreConfig = deepClone(storeConfig)
     const store = new Vuex.Store(clonedStoreConfig)

@@ -217,6 +217,93 @@ Sin entrar en detalles, el funcionamiento de Vuex se ciñe a las siguientes regla
 	\item Las mutaciones pueden ser ejecutadas de manera asíncrona a través de \textbf{acciones}.
 \end{itemize}
 
+El estado de la aplicación puede resumirse con las entidades mostradas en el cuadro \ref{tab:estado}. Por otra parte, se han definido las acciones y mutaciones necesarias para modificar dicho estado. En el cuadro \ref{tab:actions} se resumen las acciones a implementar con la funcionalidad requerida (no se incluyen las mutaciones por considerarse que no aportan nada en cuanto a diseño que no aporten ya las acciones).
+
+Es interesante también enumerar los \textit{getters} (ver cuadro \ref{tab:getters}), o métodos de consulta que permiten extraer información del estado de la aplicación sin acceder directamente a sus estructuras de datos.
+
+\begin{table}
+	\centering
+	\begin{tabular}{p{3cm}p{10cm}}
+		\toprule
+		Estado & Descripción \\ \midrule
+		Bloques de construcción RDF &  Contiene los bloques más comunes utilizados para modelar un dominio de información en RDF (ej: clases, propiedades, etc.) \\ \midrule
+		Almacén de ternas &  Estructura de datos de tipo almacén que albergará las ternas que componen el grafo. \\ \midrule
+		Actividad &  Contiene el contenido de la actividad académica a realizar. \\ \midrule
+		Prefijos & Contiene los prefijos más comunes utilizados para precargar en las consultas SPARQL. \\ \midrule
+		Vocabularios &  Contiene las definiciones y URLs de los vocabularios más comunes para posibilitar su descarga al grafo en el módulo correspondiente. \\
+		\bottomrule
+	\end{tabular}
+	\caption{Estado de la aplicación.}
+	\label{tab:estado}
+\end{table}
+
+	\begin{table}
+	\centering
+	\begin{tabular}{p{2cm}p{11cm}}
+		\toprule
+		ID & Getter \\ \midrule
+		GET-1 & Recuperar listado de sujetos por predicado y objeto. \\ \midrule
+		GET-2 & Recuperar listado de sujetos por predicado. \\ \midrule
+		GET-3 & Recuperar listado de objetos por predicado y sujeto. \\ \midrule
+		GET-4 & Recuperar listado de ternas cuyo sujeto coincide con uno dado. \\ \midrule
+		GET-5 & Recuperar listado de ternas cuyo objeto coincide con uno dado. \\ \midrule
+		GET-6 & Recuperar todas las ternas del almacén. \\ \midrule
+		GET-7 & Recuperar un listado de las propiedades cargadas por defecto para el modelado. \\
+		\bottomrule
+	\end{tabular}
+	\caption{Listado de \textit{getters} que recuperan el estado de la aplicación.}
+	\label{tab:getters}
+\end{table}
+
+
+	\begin{table}
+	\centering
+	\begin{tabular}{p{2cm}p{3cm}p{11cm}}
+		\toprule
+		ID & Acción & Responsabilidad \\ \midrule
+		ACC-1 & Añadir terna &  Añade una terna al grafo pasando como parámetros su sujeto, predicado y objeto. \\ \midrule
+		ACC-2 & Eliminar recurso & Elimina todas las ternas que tengan un determinado recurso en cualquiera de sus posibles posiciones (sujeto, predicado, objeto). \\ \midrule
+		ACC-3 & Editar recurso &  Modifica la definición de un recurso en todas las ternas que lo tengan en cualquiera de sus posibles posiciones (sujeto, predicado, objeto). \\ \midrule
+		ACC-4 & Eliminar terna & Elimina una terna del grafo pasando como parámetros su sujeto, predicado y objeto. \\ \midrule
+		ACC-5 & Editar literal &  Modifica la definición de un literal o cadena de texto utilizado como objeto en una propiedad. \\ \midrule
+		ACC-6 & Añadir literal &  Añade una terna con un literal o cadena de texto como objeto. \\ \midrule
+		ACC-7 & Importar N3 & Importa un grafo en formato N3, Turtle, TriG o N-Triples. \\ \midrule
+		ACC-8 & Añadir N3 &  Añade al grafo existente otro en formato N3, Turtle, TriG o N-Triples. \\ \midrule
+		ACC-9 & Eliminar N3 & Elimina del grafo local las ternas existentes en otro grafo en formato N3, Turtle, TriG o N-Triples \\ \midrule
+		ACC-10 & Cargar actividad & Carga el contenido de una actividad en formato Markdown. \\ \midrule
+		ACC-11 & Exportar a JSON-LD &  Exporta el grafo local a un archivo en formato JSON-LD. \\ \midrule
+		ACC-12 & Exportar a Turtle &  Exporta el grafo local a un archivo en formato Turtle. \\ \midrule
+		ACC-13 & Modificar estado de un vocabulario & Activa o desactiva uno de los vocabularios precargados. \\
+		\bottomrule
+	\end{tabular}
+	\caption{Listado de \textit{actions} que modifican el estado de la aplicación.}
+	\label{tab:actions}
+\end{table}
+
+ \hspace{2em}
+ 
+\subsection{Arquitectura de módulos}\label{sec:arquitectura-de-módulos}
+
+En el cuadro \ref{tab:modulos} se plantea el desglose de la aplicación en módulos independientes que dan respuesta a las necesidades expuestas.
+
+\begin{table}
+	\centering
+	\begin{tabular}{p{2cm}p{3cm}p{3cm}p{5cm}}
+		\toprule
+		ID & Módulo & Necesidades & Casos de uso \\ \midrule
+		MOD-1 & Actividades & 7 & \ref{sec:cargar-una-actividad} \\ \midrule
+		MOD-2 & Vocabularios & 10 & \ref{sec:cargar-un-vocabulario}, \ref{sec:des-cargar-un-vocabulario} \\ \midrule
+		MOD-3 & Importar/exportar &  8, 9 & \ref{sec:importar-grafo}, \ref{sec:anadir-a-grafo}, \ref{sec:exportar-grafo} \\ \midrule
+		MOD-4 & Modelado & 1, 2 & \ref{sec:dar-de-alta-una-nueva-clase}, \ref{sec:editar-una-clase-existente}, \ref{sec:eliminar-una-clase-existente}, \ref{sec:dar-de-alta-una-nueva-anotacion-o-propiedad-estandar-de-una-clase}, \ref{sec:editar-una-propiedad-o-anotacion-de-una-clase}, \ref{sec:eliminar-una-propiedad-o-anotacion-de-una-clase} \\ \midrule
+		MOD-5 & Poblamiento & 3 & \ref{sec:poblar-el-grafo-con-una-tripleta} \\ \midrule
+		MOD-6 & Consulta &  4, 5, 6 & \ref{sec:lanzar-consulta-a-grafo-local}, \ref{sec:lanzar-consulta-a-grafo-remoto} \\ 
+		\bottomrule
+	\end{tabular}
+	\caption{Matriz de trazabilidad de módulos, requisitos y necesidades.}
+	\label{tab:modulos}
+\end{table}
+
+
 \subsection{Arquitectura de componentes}\label{sec:arquitectura-de-componentes}
 
 Para poder dar cumplimiento a los requisitos de la aplicación, se definen en el cuadro \ref{tab:componentes} los componentes necesarios con sus ámbitos de responsabilidad.
@@ -224,23 +311,23 @@ Para poder dar cumplimiento a los requisitos de la aplicación, se definen en el 
 
 	\begin{table}
 		\centering
-		\begin{tabular}{p{1cm}p{3cm}p{10cm}}
+		\begin{tabular}{p{2cm}p{3cm}p{10cm}}
 			\toprule
 			ID & Componente & Responsabilidad \\ \midrule
-			1 & Contenedor de aplicación &  Estructura básica de la aplicación (cabecera, pie, barra lateral). \\ \midrule
-			2 & Bienvenida &  Entrada a la aplicación con ayuda y descripción general. \\ \midrule
-			3 & Contenedor de modelo &  Contiene los componentes de edición del modelo.\\ \midrule
-			4 & Contenedor de importación/exportación & Contiene los componentes de importación y exportación de datos. \\ \midrule
-			5 & Contenedor de consultas SPARQL &  Contiene los componentes de ejecución y visualización de resultados de consultas SPARQL. \\ \midrule
-			6 & Contenedor de actividades &  Contiene los componentes de carga y visualización de actividades. \\ \midrule
-			7 & Listado de recursos &  Componente reutilizable para listar recursos en una tabla de datos. \\ \midrule
-			8 & Detalle de recursos &  Componente reutilizable para visualizar detalles de recursos. \\ \midrule
-			9 & Lanzador de consultas SPARQL & Componente reutilizable para lanzar consultas SPARQL \\ \midrule
-			10 & Listado de resultados de consultas SPARQL & Componente reutilizable para mostrar resultados de una consulta SPARQL.\\ \midrule
-			11 & Cargador de archivos &  Componente reutilizable para importar datos desde archivo. \\ \midrule
-			12 & Cargador de URLs &  Componente reutilizable para importar datos desde URL. \\ \midrule
-			13 & Cargador de Vocabularios & Componente reutilizable para habilitar o deshabilitar vocabularios. \\ \midrule
-			14 & Visor de markdown & Componente reutilizable para visualizar markdown renderizado en HTML. \\ 
+			COMP-1 & Contenedor de aplicación &  Estructura básica de la aplicación (cabecera, pie, barra lateral). \\ \midrule
+			COMP-2 & Bienvenida &  Entrada a la aplicación con ayuda y descripción general. \\ \midrule
+			COMP-3 & Contenedor de modelo &  Contiene los componentes de edición del modelo.\\ \midrule
+			COMP-4 & Contenedor de importación/exportación & Contiene los componentes de importación y exportación de datos. \\ \midrule
+			COMP-5 & Contenedor de consultas SPARQL &  Contiene los componentes de ejecución y visualización de resultados de consultas SPARQL. \\ \midrule
+			COMP-6 & Contenedor de actividades &  Contiene los componentes de carga y visualización de actividades. \\ \midrule
+			COMP-7 & Listado de recursos &  Componente reutilizable para listar recursos en una tabla de datos. \\ \midrule
+			COMP-8 & Detalle de recursos &  Componente reutilizable para visualizar detalles de recursos. \\ \midrule
+			COMP-9 & Lanzador de consultas SPARQL & Componente reutilizable para lanzar consultas SPARQL \\ \midrule
+			COMP-10 & Listado de resultados de consultas SPARQL & Componente reutilizable para mostrar resultados de una consulta SPARQL.\\ \midrule
+			COMP-11 & Cargador de archivos &  Componente reutilizable para importar datos desde archivo. \\ \midrule
+			COMP-12 & Cargador de URLs &  Componente reutilizable para importar datos desde URL. \\ \midrule
+			COMP-13 & Cargador de Vocabularios & Componente reutilizable para habilitar o deshabilitar vocabularios. \\ \midrule
+			COMP-14 & Visor de markdown & Componente reutilizable para visualizar markdown renderizado en HTML. \\ 
 			\bottomrule
 		\end{tabular}
 		\caption{Listado de componentes de la aplicación.}

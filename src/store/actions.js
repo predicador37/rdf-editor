@@ -1,7 +1,7 @@
 import RdfConstructs from '../utils/RdfConstructs'
 // TODO convention: parameters must be of type string
 
-const addResource = (context, {subject, predicate, object}) => {
+const addTriple = (context, {subject, predicate, object}) => {
   if (subject != null && predicate != null && object != null) {
     context.commit('ADD_QUAD_FROM_IRI', {
       subject: subject, // subject must be an IRI
@@ -25,11 +25,11 @@ const editResource = (context, {oldResource, newResource}) => {
   if (oldResource != null && newResource != null) {
     context.getters.getTriplesMatchingSubject(oldResource).forEach((triple) => {
       context.dispatch('removeQuad', {subject: triple.subject.value, predicate: triple.predicate.value, object: triple.object.value})
-      context.dispatch('addResource', {subject: newResource, predicate: triple.predicate.value, object: triple.object.value})
+      context.dispatch('addTriple', {subject: newResource, predicate: triple.predicate.value, object: triple.object.value})
     })
     context.getters.getTriplesMatchingObject(oldResource).forEach((triple) => {
       context.dispatch('removeQuad', {subject: triple.subject.value, predicate: triple.predicate.value, object: triple.object.value})
-      context.dispatch('addResource', {subject: triple.subject.value, predicate: triple.predicate.value, object: newResource})
+      context.dispatch('addTriple', {subject: triple.subject.value, predicate: triple.predicate.value, object: newResource})
     })
   } else {
     throw new Error('Error: Los recursos no deben ser nulos.')
@@ -117,7 +117,7 @@ const setVocabularyState = (context, {vocabulary, active}) => {
   context.commit('SET_VOCABULARY_STATE', {vocabulary, active})
 }
 export default {
-  addResource,
+  addTriple,
   editResource,
   editClassLiteralProperty,
   removeQuad,

@@ -80,7 +80,7 @@
     },
     computed: {...mapGetters(['rdfConstructs', 'baseUrl', 'getSubjectListByPredicateAndObject', 'getSubjectListByPredicate', 'getObjectListByPredicateAndSubject'])},
     methods: {
-      ...mapActions(['addResource', 'addClassLiteralProperty', 'editClassLiteralProperty', 'removeResource', 'removeQuad', 'editResource']),
+      ...mapActions(['addTriple', 'addClassLiteralProperty', 'editClassLiteralProperty', 'removeResource', 'removeQuad', 'editResource']),
       async getResources ({predicate, object}) {
         let resources = await this.getSubjectListByPredicateAndObject({predicate, object})
         return resources
@@ -92,7 +92,7 @@
         this.$set(this.relatedClasses, relatedClass, classes)
       },
       handleAddResource (resourceName, resourceType) {
-        this.addResource({'subject': this.baseUrl + resourceName, 'predicate': this.rdfConstructs.rdf_type.value, 'object': resourceType})
+        this.addTriple({'subject': this.baseUrl + resourceName, 'predicate': this.rdfConstructs.rdf_type.value, 'object': resourceType})
         // resourceType = resourceType.split('#')[1].toLowerCase()
         // using a string concatenation as parameter: 'add'+type to call the methods dynamically
         // this['add' + resourceType.charAt(0).toUpperCase() + resourceType.slice(1)](this.baseUrl + resourceName) // addClass

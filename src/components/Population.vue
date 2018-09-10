@@ -80,7 +80,7 @@
       }
     },
     computed: {...mapGetters(['rdfConstructs', 'getDefaultResources', 'getSubjectListByPredicateAndObject', 'getObjectListByPredicateAndSubject'])},
-    methods: { ...mapActions(['addResource']),
+    methods: { ...mapActions(['addTriple']),
       async getSubjects ({predicate, object}) {
         let resources = await this.getSubjectListByPredicateAndObject({predicate, object})
         return resources
@@ -95,7 +95,7 @@
       },
       addTripleToGraph () {
         try {
-          this.addResource({
+          this.addTriple({
             'subject': this.subject,
             'predicate': this.predicateSearchInput !== null ? this.predicateSearchInput : this.predicate,
             'object': this.objectSearchInput !== null ? this.objectSearchInput : this.object

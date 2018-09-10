@@ -161,3 +161,88 @@ Sin pretender entrar a fondo en los detalles de la implementación, que puede con
 \end{itemize}
 
 \section{Pruebas}
+
+\subsection{Pruebas unitarias}
+
+Con objeto de aportar el máximo valor posible con un esfuerzo razonable, se ha optado por codificar pruebas unitarias de los siguientes elementos de la aplicación:
+
+	\begin{itemize}
+	\item \textbf{Actions}: métodos que permiten modificar el estado general de la aplicación de forma asíncrona. Al llamar a su vez síncronamente a las mutaciones (\textit{mutations}), no se ha considerado necesario codificar pruebas unitarias para estas últimas.
+	\item \textbf{Getters}: métodos que permiten recuperar diferentes variables de estado de la aplicación, o subconjuntos de estas a través de un procesado adicional. 
+\end{itemize}
+
+En los cuadros \ref{tab:test-actions} y \ref{tab:test-getters} se muestran sendos listados de las pruebas codificadas (indicando qué se está probando) y los \textit{actions} y \textit{getters} relacionados. No se ha considerado necesario probar la exportación a distintos formatos por tratarse de una característica intrínseca de la biblioteca utilizada (y por lo tanto, probada en dicha biblioteca) cuyo tratamiento no ha sido modificado en esta aplicación.
+
+La propia biblioteca jest incluye herramientas para calcular la cobertura de pruebas unitarias, que en este caso, según dichas herramientas, resulta ser de en torno a un 40\% para el código relacionado con el estado de la aplicación. Sin embargo, \textbf{este indicador falsea la cobertura real}, puesto que carencias en la integración de jest con Vuex impiden considerar como válidas las pruebas de las llamadas a las mutaciones, por ejemplo, que sí están siendo probadas pero no aparecen reflejadas en este indicador.
+
+No obstante lo anterior, y con un interés meramente informativo, se incluyen en la figura \ref{fig:cobertura} los resultados mostrados por jest.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.25]{cobertura}
+	\caption{Cobertura calculada por jest (no real).}\label{fig:cobertura}
+\end{figure}
+
+	\begin{table}
+	\centering
+	\begin{tabular}{p{1cm}p{3cm}p{10cm}p{1.5cm}}
+		\toprule
+		ID & Prueba & Descripción & \textit{Action} \\ \midrule
+		PU-1 & Añadir terna &  Añade una terna al grafo y comprueba que el número total de ternas de este se ha incrementado en uno. & ACC-1 \\ \midrule
+		PU-2 & Eliminar ternas según recurso & Elimina todas las ternas que tengan el recurso ``Analista'' en cualquiera de sus posiciones; se cuentan las ternas eliminadas y se comprueba que el tamaño final del grafo es correcto. & ACC-2 \\ \midrule
+		PU-3 & Editar recurso &  Se edita el recurso ``Analista'' cambiándolo por otro nombre y se recuperan las ternas asociadas al antiguo y nuevo recurso antes y después de su edición, comprobando que el número de ternas asociadas es el correcto en cada caso. & ACC-3 \\ \midrule
+		PU-4 & Editar literal  & Se comprueba que, tras editar el literal asociado a un objeto de una terna recuperada, el contenido de este cambia en consecuencia. & ACC-5 \\ \midrule
+		PU-5 & Añadir literal &  Añade un literal como propiedad de un recurso y se comprueba que el número de propiedades de tipo literal para ese recurso se incrementa en uno. & ACC-6 \\ \midrule
+		PU-6 & Importar N3 & Se incluye cadena de texto simulando un fichero en formato Turtle, se importa y se comprueba que el número de ternas del grafo coincide con las importadas. & ACC-7 \\ \midrule
+		PU-7 & Añadir N3 & Se incluye cadena de texto simulando un fichero en formato Turtle, se añade al grafo actual y se comprueba que el número de ternas del grafo resultante es la suma de las que tenía anteriormente más las importadas. & ACC-8 \\ \midrule
+		PU-8 & Eliminar N3 & Se incluye cadena de texto simulando un fichero en formato Turtle, se añaden las ternas al grafo, se cuenta el número total de ternas, se eliminan de nuevo del grafo actual y se comprueba que el número de ternas del grafo resultante es el original. & ACC-9 \\ \midrule
+		PU-9 & Importar actividad & Se importa una actividad en formato Markdown y se comprueba que la variable de estado que aloja su contenido deja de estar vacía. & ACC-10 \\ \midrule
+		PU-10 & Cargar vocabulario & Se verifica que el cambio de estado de un vocabulario de inactivo a activo ocurre, consultando el mismo tras la operación. & ACC-13 \\ 
+		\bottomrule
+	\end{tabular}
+\caption{Listado de pruebas unitarias de actions}\label{tab:test-actions}
+\end{table}
+
+	\begin{table}
+	\centering
+	\begin{tabular}{p{2cm}p{3cm}p{8cm}p{2cm}}		
+		\toprule
+		ID & Prueba & Descripción & \textit{Getter} \\ \midrule
+		PU-11 & Recuperar listado de sujetos por predicado y objeto & Se recuperan todos los sujetos de tipo owl:Class y se comprueba que son cuatro. & GET-1\\ \midrule
+		PU-12 & Recuperar listado de sujetos por predicado & Se recupera una lista de sujetos de tipo anotación, por ejemplo, y se comprueba que se devuelve el número de correcto de resultados. & GET-2 \\ \midrule
+		PU-13 & Recuperar listado de objetos por predicado y sujeto & Se recuperan todos los objetos para el sujeto ``Analista'' y el predicado etiqueta, y se comprueba que el número devuelvo es el correcto.  &GET-3 \\ \midrule
+		PU-14 & Recuperar listado de ternas para un sujeto dado & Se recupera un listado de ternas para el sujeto ``Analista'' y se comprueba que el número devuelto es el correcto. & GET-4 \\ \midrule
+		PU-15 & Recuperar listado de ternas para un objeto dado & Se recupera un listado de ternas cuyo objeto es owl:Class y se comprueba que el número resultante es el correcto. & GET-5 \\ \midrule
+		PU-16 & Recuperar listado de todas las ternas del almacén & Se recuperan todas las ternas y se comprueba que el resultado es el número total de ternas cargadas en el grafo. & GET-6 \\ \midrule
+		PU-17 & Recuperar listado de todas las propiedades cargadas por defecto & Se recupera el listado de todas las propiedades cargadas por defecto en la aplicación y se comprueba que el número total resultante es el correcto. & GET-7 \\ 
+		\bottomrule
+	\end{tabular}
+	\caption{Listado de pruebas unitarias de getters}\label{tab:test-getters}
+\end{table}
+
+\pagebreak
+
+\subsection{Pruebas extremo a extremo (\textit{end-to-end})}
+
+Las pruebas extremo a extremo (o end-to-end) permiten probar la interfaz de usuario a través de un navegador automatizado. En su forma más básica, este tipo de pruebas permite comprobar la existencia de determinados elementos en el DOM\footnote{Document Object Model} de la aplicación web, así como verificar que su contenido es correcto.
+
+Para el presente proyecto se ha optado por codificar una prueba extremo a extremo por cada módulo definido en la sección \ref{sec:arquitectura-de-módulos}, a modo de \textit{sanity check} o prueba de cordura. En el cuadro \ref{tab:test-e2e} se detalla un listado de los mismos relacionados con sus correspondientes módulos:
+
+\vspace*{\baselineskip}
+\vspace*{\baselineskip}
+
+	\begin{table}[htb]
+	\centering
+	\begin{tabular}{p{2cm}p{3cm}p{8cm}p{2cm}}		
+		\toprule
+		ID & Prueba  & Descripción & Módulo \\ \midrule
+		E2E-1 & Actividad & Se comprueba número de \textit{inputs} y el contenido de párrafo. & MOD-1\\ \midrule
+		E2E-2 & Vocabulario & Se comprueba número de \textit{inputs} y el contenido de una cabecera. & MOD-2 \\ \midrule
+		E2E-3 & Importar/exportar & Se comprueba número de botones y el contenido de una cabecera.  & MOD-3 \\ \midrule
+		E2E-4 & Modelado & Se comprueba el número de enlaces y el contenido de una pestaña. & MOD-4 \\ \midrule
+		E2E-5 & Poblamiento & Se comprueba el número de \textit{inputs} y una cabecera. & MOD-5 \\ \midrule
+		E2E-6 & Consulta & Se comprueba el contenido de una etiqueta y el número de \textit{textarea}. & MOD-6 \\ 
+		\bottomrule
+	\end{tabular}
+	\caption{Listado de pruebas extremo a extremo.}\label{tab:test-e2e}
+\end{table}
