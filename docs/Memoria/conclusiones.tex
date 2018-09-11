@@ -1,10 +1,41 @@
-\chapter{Conclusiones y trabajos futuros}
+\chapter{Conclusiones y líneas de trabajo futuras}
 
 
 \section{Conclusiones}
 
-<....>
+Alimentar la Web con datos estructurados y contextualizados con metadatos no ha de ser una labor exclusiva de entornos académicos y universitarios. Si bien son estas organizaciones las que han modelado dominios de información y liberado conjuntos de datos de forma masiva a lo largo de los últimos años, es necesario extender esta responsabilidad a otros organismos públicos y privados y, por qué no, a potenciales usuarios o clientes particulares. Solo a partir de ese momento, el relato inicial de Berners-Lee\cite{bernerslee01} en su primera definición de la Web Semántica será una realidad en nuestra Sociedad.
 
-\section{Trabajos futuros}
+No obstante, aún queda mucho trabajo por hacer. Organizaciones públicas y privadas han de concienciarse de la enorme importancia de poner a disposición de la Sociedad en general datos estructurados en formatos reutilizables. Sólo de esta forma crecerá el interés en su tratamiento y explotación, así como en el desarrollo de agentes inteligentes que sean capaz de procesarlos para generar nuevos resultados de análisis. No hay más que recurrir a los datos del Estudio de Caracterización del Sector Infomediario en España\cite{ontsi01} proporcionados por el Observatorio Nacional de las Telecomunicaciones y de la Sociedad de la Información, que recogen que el 70\% de las empresas encuestadas accede a datos no estructurados, frente al 69\% que lo hace a datos en formatos abiertos (si bien no se especifica si se trata de datos a nivel de datos abiertos enlazados o \textit{linked open data}).
 
-<....>
+La comunidad de tecnológos y desarrolladores de aplicaciones para la Web Semántica debe trabajar por la democratización de esta tecnología. Con los niveles de complejidad conceptual y de uso actuales, su difusión entre el público general se hace complicada. En este sentido, las grandes revoluciones surgidas en torno al mundo del desarrollo de frontend web en general (y Javascript en particular) y el nivel de madurez alcanzado en estos momentos por las tecnologías de la Web Semántica, favorecen la llegada del momento más propicio en los últimos veinte años para lograr un impulso real. Aún son pocas las comunidades de desarrolladores trabajando en ofrecer servicios semánticos a través de Javascript, pero la existencia de un ``community group''\cite{rdfw3ccg} que aglutina esfuerzos para aunar a dichas comunidades en un sólo proyecto es una noticia prometedora de cara al futuro de esta tecnología.
+
+Como pequeña contribución a estos esfuerzos de difusión y democratización, se ha desarrollado el presente proyecto, que representa la culminación de meses de trabajo pero también el inicio de la vida de un producto. Se sientan las bases para obtener una herramienta académica que permita acercar las tecnologías de la Web Semántica a cualquier no iniciado. Si bien en esta primera versión ya se cuenta con una aplicación funcional, el estado de las bibliotecas que integra y las posibilidades de RDF y SPARQL sugieren unas expectativas de evolución lo suficientemente optimistas como para continuar su desarrollo y no abandonar su mantenimiento.
+
+A partir de este punto, la hoja de ruta que se propone para el producto desarrollado en el presente proyecto es clara: en un primer curso académico, comenzar a utilizarlo a modo de prueba piloto en asignaturas técnicas relacionadas con la Web Semántica a través de actividades opcionales (para mejorar la nota total del alumno, por ejemplo) e ir evaluando su idoneidad de cara a su manejo en el entorno para el que fue pensado. Paralelamente, la aplicación puede seguir siendo mejorada y perfeccionada, en caso de aparición de defectos inesperados (algo, por otra parte, perfectamente asumible hoy en día).
+
+Un claro compromiso por parte del autor del proyecto debe ser para con la Comunidad Educativa, y especialmente para los grupos de trabajo como el \textit{RDF Javascript Libraries Community Group} por su inestimable ayuda prestada. Por tanto, parece razonable trabajar en una futura traducción al idioma inglés para permitir su publicación como repositorio de código abierto y revertir el desarrollo a la Comunidad.
+
+No se podría concluir este capítulo de conclusiones sin valorar las competencias tecnológicas y organizativas que el desarrollo del proyecto ha permitido adquirir a su autor: profundización en el modelado RDF, las arquitecturas de aplicaciones de la Web Semántica, los motores de consultas SPARQL y el desarrollo en frameworks Javascript completos y bien estructurados como Vue.js (una inversión, esta última, más que rentable en términos de utilización de la tecnología).
+
+Tomar decisiones entre altas dosis de incertidumbre no es sencillo, y menos aún cuando la oferta tecnológica es numerosa y variada (como es el caso, por ejemplo, de las bibliotecas de componentes gráficos para Vue). Además, la complejidad inicial del desarrollo en Javascript no presenta una curva de aprendizaje suave, especialmente en la configuración del entorno necesario: empaquetadores, ``transpilers'' con sus módulos asociados, existencia de diversos estándares conviviendo entre distintos módulos que complican su integración, etc.
+
+Por otra parte, los trabajos previos de implementación de RDF en Javascript también son numerosos y confusos (prueba de ello es la reciente noticia de Junio de este mismo año, 2018, indicando la unificación de las diferentes implementaciones existentes en una única implementación). Afortunadamente, la ayuda y los consejos de los propios desarrolladores, ya con experiencia, ha permitido enfocar el proyecto con las estrategias adecuadas.
+
+En resumidas cuentas, se ha tratado de obtener un producto apto para la formación académica en tecnologías de la Web Semántica, cumpliendo razonablemente con los objetivos iniciales y abriendo un camino al desarrollo de una herramienta mucho más completa que pueda aprovecharse de las tecnologías emergentes en el área del frontend web. Se han utilizado bibliotecas y módulos estándares dentro de la situación actual, lo que permitirá una mayor facilidad de mantenimiento en el futuro y pretende abrir el camino a evoluciones más ambiciosas. A fecha de finalización de la presente memoria, ya se están manteniendo conversaciones con el Director del Proyecto para el futuro uso de la aplicación en la actividad docente, lo que permitirá, sin duda, obtener \textit{feedback} de cara a su futura mejora.
+
+\section{Líneas de trabajo futuras}
+
+Como punto de partida para futuras mejoras y nuevas funcionalidades, se proponen las siguientes líneas de trabajo:
+
+\begin{itemize}
+\item Integrar la primera versión estable de los distintos módulos de la plataforma Comunica y optimizar el uso de dependencias.
+\item Integrar las futuras versiones del framework de componentes Vuetify y utilizar nuevos componentes como la estructura jerárquica (en árbol) para representar clases y propiedades.
+\item Integrar o desarrollar consultas SPARL con Comunica a grafos en RDFXML\footnote{\url{https://github.com/comunica/comunica/issues/140}}
+\item Incrementar la cobertura de pruebas unitarias y extremo a extremo
+\item Re-orientar las operaciones de consulta a través del módulo \textit{actor-init-sparql-rdfjs} (ver sección \ref{sec:motor-de-consultas-en-el-proyecto})
+\item Funcionalidad de exportar a un formato JSON-raw (una lista de objetos con ternas).
+\item Posibilidad de modificar los prefijos a incluir en las consultas. En general, facilitar el uso de prefijos.
+\item Enriquecer y refactorizar la funcionalidad de modelado.
+\item Soportar múltiples grafos.
+\item Revisar la carga de términos básicos y estudiar la viabilidad de carga on-line desde una ontología estándar.
+\end{itemize} 

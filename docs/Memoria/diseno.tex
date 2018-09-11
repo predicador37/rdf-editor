@@ -1,5 +1,7 @@
 \chapter{Diseño}
 
+Un diseño cuidadoso puede suponer un gran ahorro a la hora de llevar a cabo el mantenimiento de una aplicación software. Son, por tanto, labores que requieren de un estudio exhaustivo y que pueden concretarse de lo general a lo particular, a medida que se avanza en el desarrollo. En las siguientes secciones se describe la arquitectura del sistema desde distintos puntos de vista.
+
 \section{Arquitectura de una aplicación semántica}
 
 Independientemente de la tecnología elegida para su implementación, una aplicación semántica genérica se caracteriza por una arquitectura concreta que se va a proceder a detallar. Dicha arquitectura está basada en componentes que pueden ser proporcionados por uno o varios productos de mercado. Es común encontrar los siguientes:
@@ -147,7 +149,7 @@ Desde el punto de vista de la arquitectura de una aplicación semántica, es desea
 Los principales proveedores de almacenes de ternas ofrecen también motores de consulta integrados, como Apache Jena, Virtuoso, AllegroGraph...
 
 
-\subsubsection{Motor de consultas en el proyecto}
+\subsubsection{Motor de consultas en el proyecto}\label{sec:motor-de-consultas-en-el-proyecto}
 
 En el caso del presente proyecto, integrar un motor de consultas no fue sencillo. El componente N3.js no ofrece dichas funcionalidades, con lo que fue necesario estudiar la viabilidad de incorporar un motor local totalmente desarrollado en Javascript.
 

@@ -87,7 +87,7 @@
           title: 'Consulta',
           link: '/sparql'
         }],
-        title: 'RDF editor'
+        title: 'RDFplay'
       }
     },
     name: 'App'
