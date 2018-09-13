@@ -1,16 +1,16 @@
 \chapter{La Web Semántica}
 
-A continuación se presentan la Web Semántica y los pilares tecnológicos que la acompañan: datos enlazados, RDF, y SPARQL.
+Cabe comenzar el desarrollo de la presente memoria con una breve introducción a los fundamentos de la Web Semántica y las tecnologías que la sustentan: RDF y SPARQL. Asimismo, queda definido también el término de datos enlazados o \textit{linked data}, estrechamente relacionado con estos conceptos y de gran importancia hoy en día en la difusión de datos estructurados a través de Internet.
 
 \section{Fundamentos}
 
 La Web Semántica es un término originalmente acuñado por Tim Berners-Lee en el año 2001\cite{bernerslee01}. Hasta la fecha, la \textit{World Wide Web} había sido concebida como una idea de colaboración abierta en la que múltiples contribuciones de varios autores podían tener cabida y ser compartidas universalmente. Dichas contribuciones, realizadas en forma de documentos, estaban dirigidas a personas y no a máquinas o computadores. Berners-Lee vio más allá y propuso su extensión para lograr su manipulación automática; en resumidas cuentas, permitir que agentes inteligentes (programas de ordenador) fueran capaces de encontrar datos y su significado a través de hiperenlaces a definiciones de términos clave y reglas de razonamiento e inferencia lógica.
 
-Para lograr tan ambicioso objetivo, los agentes inteligentes necesitarían tener acceso a contenido y conocimiento estructurado, así como a las reglas de inferencia necesarias. En este contexto, la Web Semántica podía apoyarse en las siguientes tecnologías existentes:
+Para lograr tan ambicioso objetivo, los agentes inteligentes necesitarían tener acceso a contenido y conocimiento estructurado, así como a las reglas de inferencia necesarias. En este contexto, la Web Semántica podía apoyarse en las siguientes tecnologías ya existentes:
 
 \begin{itemize}  
-	\item  \textbf{RDF} (\textit{Resource Description Framework}), que permite expresar conocimiento en forma de tripletas (a modo de sujeto, verbo y objeto en una oración) utilizando URIs (\textit{Uniform Resource Indicators}).
-	\item \textbf{XML} (\textit{eXtensible Markup Language}), que permite la creación de documentos convenientemente etiquetados y con estructura arbitraria.
+	\item  \textbf{RDF} (\textit{Resource Description Framework}), que permite expresar conocimiento en forma de tripletas o ternas (a modo de sujeto, verbo y objeto en una oración) utilizando URIs (\textit{Uniform Resource Indicators}\footnote{Cadenas de caracteres que identifican los recursos de una red de forma unívoca.}).
+	\item \textbf{XML} (\textit{eXtensible Markup Language}), un metalenguaje que permite crear lenguajes de etiquetado o marcado y documentos a su vez convenientemente etiquetados y con estructura arbitraria.
 \end{itemize}
 
 Sin embargo, un tercer pilar era necesario para resolver la problemática de la existencia de distintos identificadores en distintas bases de datos relacionadas con el mismo significado conceptual. Gracias a las \textbf{ontologías}, documentos que definen formalmente las relaciones entre distintos términos, estas diferencias podían ser salvadas bien mediante el uso de términos estandarizados bien mediante la definición de relaciones conceptuales de igualdad o similitud entre dichos términos.
@@ -48,8 +48,8 @@ El nuevo alcance de RDF quedó reflejado en las especificaciones publicadas en 20
 		\begin{tabular}{p{3cm}p{10cm}}
 			\toprule
 			Recomendación & Definición \\ \midrule
-			RDF Primer & Un framework para expresar información sobre recursos. \\ \midrule
-			RDF Concepts \& Syntax & Un framework para representar información en la Web. \\ 
+			RDF Primer & Un marco de trabajo para expresar información sobre recursos. \\ \midrule
+			RDF Concepts \& Syntax & Un marco de trabajo para representar información en la Web. \\ 
 			\bottomrule
 		\end{tabular}
 		\caption{Definiciones de RDF en las recomendaciones del W3C}
@@ -99,6 +99,8 @@ En resumen:
 	\end{table}
 \end{center}
 
+\pagebreak
+
 A continuación se muestran dos ejemplos de tripletas:
 
 \vspace*{\baselineskip}
@@ -139,9 +141,9 @@ De una forma más concreta, es destacable el importante rol de RDF y las tecnolog
 
 \section{SPARQL} \label{sec:sparql}
 
-Tal como SQL provee (al menos, relativamente) un de un estándar de consulta  para las bases de datos relacionales, SPARQL ofrece un lenguaje de consulta estandarizado para grafos RDF. 
+Tal y como SQL provee (al menos, relativamente) un de un estándar de consulta  para las bases de datos relacionales, SPARQL ofrece un lenguaje de consulta estandarizado para grafos RDF. 
 
-SPARQL es un acrónimo recursivo para SPARQL Protocol And RDF Query Language; es a la vez un lenguaje de consulta de grafos RDF y un protocolo, dado que permite exponer servicios web que acepten consultas en dicho lenguaje.
+SPARQL es un acrónimo recursivo para \textit{SPARQL Protocol And RDF Query Language}; es a la vez un lenguaje de consulta de grafos RDF y un protocolo, dado que permite exponer servicios web que acepten consultas en dicho lenguaje.
 
 Entre sus características, cabe citar:
 
@@ -151,6 +153,8 @@ Entre sus características, cabe citar:
 	\item Ejecución de uniones complejas sobre bases de datos dispersas en una única consulta.
 	\item Transformación de datos RDF desde un vocabulario a otro.
 \end{itemize}
+
+\pagebreak
 
 La estructura básica de una consulta SPARQL es la siguiente:
 
@@ -170,8 +174,6 @@ WHERE {
 # modificadores de la consulta
 ORDER BY ...
 \end{lstlisting} 
-
-\pagebreak
 
 No es objeto de este proyecto profundizar en la sintaxis del lenguaje, pero sí se incluye a continuación un ejemplo de consulta:
 

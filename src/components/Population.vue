@@ -86,7 +86,7 @@
         return resources
     // TODO: order array
     // TODO: generalize classes to resources
-     },
+      },
       async getObjects ({predicate, subject}) {
         let resources = await this.getObjectListByPredicateAndSubject({predicate, subject})
         return resources
@@ -111,18 +111,17 @@
         this.color = 'error'
         this.snackbar = true
       },
-      handleSuccess(event) {
+      handleSuccess (event) {
         this.snackbarMessage = event
         this.color = 'success'
         this.snackbar = true
       }
     },
     beforeMount () {
-
       this.getSubjects({'predicate': null, 'object': null}).then((results) => {
         this.subjects = results
       })
-      this.getObjects({'predicate': null, 'subject':null}).then((results) => {
+      this.getObjects({'predicate': null, 'subject': null}).then((results) => {
         this.subjects.push(...results)
       })
 

@@ -10,9 +10,9 @@
 
           <v-card-text>
             <p>Si lo deseas, puedes importar un grafo desde un archivo de texto en formato N3 o Turtle.</p>
-            <file-loader title="Desde archivo" accepted="text/n3,text/ttl,application/x-trig,application/n-triples" :extensions="['ttl', 'nt', 'n3', 'trig']" @load="importN3({'content': $event, 'store': 'n3store'})" @file-loaded="handleFileLoaded($event)" @load-error="handleError($event)"></file-loader>
+            <file-loader title="Desde archivo" accepted="text/n3,text/ttl,application/x-trig,application/n-triples" :extensions="['ttl', 'nt', 'n3', 'trig']" @load="handleLoadEvent({'event': $event, 'method': 'importN3'})"  :size="500000000" @load-error="handleError($event)" @loading="loading=true"></file-loader>
             <div>
-              <url-loader title='Desde URL' @load="importN3({'content': $event, 'store': 'n3store'})" @url-loaded="snackbar = true"></url-loader>
+              <url-loader title='Desde URL' @load="handleLoadEvent({'event': $event, 'method': 'importN3'})" @url-loaded="snackbar = true"></url-loader>
             </div>
           </v-card-text>
           <v-snackbar
@@ -28,6 +28,13 @@
               Cerrar
             </v-btn>
           </v-snackbar>
+          <v-dialog v-model="loading" persistent fullscreen content-class="loading-dialog">
+            <v-container fill-height>
+              <v-layout row justify-center align-center>
+                <v-progress-circular indeterminate :size="70" :width="7" :color="color"></v-progress-circular>
+              </v-layout>
+            </v-container>
+          </v-dialog>
         </v-card>
       </v-flex>
       <v-flex px-3 py-3 md6 xs12>
@@ -61,9 +68,9 @@
 
           <v-card-text>
             <p>También es posible importar las tripletas de un grafo externo al grafo de trabajo.</p>
-            <file-loader title="Desde archivo" @load="addN3({'content': $event, 'store': 'n3store'})" @file-loaded="handleFileLoaded($event)" @load-error="handleError($event)"></file-loader>
+            <file-loader title="Desde archivo" accepted="text/n3,text/ttl,application/x-trig,application/n-triples" :extensions="['ttl', 'nt', 'n3', 'trig']" @load="handleLoadEvent({'event': $event, 'method': 'addN3'})" :size="500000000" @load-error="handleError($event)" @loading="loading=true"></file-loader>
             <div>
-              <url-loader title="Desde URL" @load="addN3({'content': $event, 'store': 'n3store'})" @url-loaded="snackbar = true"></url-loader>
+              <url-loader title="Desde URL" @load="handleLoadEvent({'event': $event, 'method': 'addN3'})" @url-loaded="snackbar = true"></url-loader>
             </div>
           </v-card-text>
           <v-snackbar
@@ -84,7 +91,6 @@
     </v-layout>
   </v-container>
 
-
 </div>
 </template>
 
@@ -101,8 +107,10 @@
     data () {
       return {
         snackbar: false,
-        snackbarMessage: 'Archivo importado en el almacén',
-        color: 'primary'
+        successMessage: 'Archivo importado con éxito',
+        snackbarMessage: 'Archivo importado con éxito',
+        color: 'primary',
+        loading: false
       }
     },
     methods: {...mapActions(['importN3', 'addN3', 'exportJsonLD', 'exportTurtle']),
@@ -115,6 +123,19 @@
         this.snackbarMessage = event
         this.color = 'success'
         this.snackbar = true
+      },
+      handleLoadEvent ({event, method}) {
+        try {
+          this[method]({'content': event, 'store': 'n3store'})
+          this.snackbarMessage = this.successMessage
+          this.color = 'success'
+          this.loading = false
+          this.snackbar = true
+        } catch (error) {
+          this.loading = false
+          console.log('there is an error')
+          this.handleError(error.message)
+        }
       }
     }
   }

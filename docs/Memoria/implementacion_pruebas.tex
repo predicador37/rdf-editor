@@ -1,14 +1,15 @@
 \chapter{Implementación y pruebas}
 
-En la filosofía del Test Driven Development (o TDD), primero se codifica la prueba unitaria y después se implementa la lógica a probar. Este enfoque permite garantizar niveles razonables de calidad en el desarrollo de software. En el presente proyecto no se ha seguido estrictamente debido a la naturaleza del desarrollo, muy orientado a la interfaz gráfica; no obstante, sí se han incluido las pruebas unitarias consideradas como críticas para garantizar un correcto funcionamiento general de la aplicación. Esto, junto con distintos detalles de implementación, se discute en el presente capítulo.
+
+La implementación del diseño del software se compara habitualmente con la construcción de un edificio basándose en sus planos, pero lo cierto es que el desarrollo de software es una disciplina eminentemente creativa que hace que dicha comparación no termine de ser realmente representativa. Por otra parte, en la filosofía del \textit{Test Driven Development} (TDD) \cite{beck02}, primero se codifica la prueba unitaria y después se implementa la lógica a probar. Este enfoque permite garantizar niveles razonables de calidad en el desarrollo de software. En el presente proyecto no se ha seguido estrictamente debido a la naturaleza del desarrollo, muy orientado a la interfaz gráfica; no obstante, sí se han incluido las pruebas unitarias consideradas como críticas para garantizar un correcto funcionamiento general de la aplicación. El presente capítulo expone detalles relevantes de implementación así como una relación de las pruebas unitarias y extremo a extremo codificadas para garantizar la calidad del producto.
 
 \section{Implementación}
 
 \subsection{Estándar Javascript}
 
-Desde su nacimiento en 1995 de la mano de Netscape como lenguaje de \textit{scripting} para mejorar la experiencia final del usuario de Internet a través de un navegador, Javascript ha evolucionado hasta convertirse en la tecnología dominante en el desarrollo de frontend web. 
+Desde su nacimiento en 1995 de la mano de Netscape como lenguaje de \textit{scripting} para mejorar la experiencia final del usuario de Internet a través de un navegador, \textit{Javascript} ha evolucionado hasta convertirse en la tecnología dominante en el desarrollo de \textit{frontend} web. 
 
-Es importante describir dicha evolución a través de sus distintos estándares (ECMAScript) para contextualizar el presente desarrollo:
+Es importante describir dicha evolución a través de sus distintos estándares (\textit{ECMAScript}) para contextualizar el presente desarrollo:
 
 	\begin{itemize}
 	\item ES5, publicado en 2009 y soportado por la práctica totalidad de los navegadores (incluidos los antiguos).
@@ -16,13 +17,13 @@ Es importante describir dicha evolución a través de sus distintos estándares (EC
 	\item ES2016 y posteriores, que van incorporando más mejoras como la gestión de eventos asíncronos con \textit{async/await}.
 \end{itemize}
 
-Aunque los navegadores están haciendo grandes progresos con su compatibilidad total con ES6, aún no es recomendable utilizarlo en forma nativa. Para resolver este problema surgen los transpiladores o \textit{transpilers} como Babel\footnote{\url{https://babeljs.io/}} (utilizado en este proyecto), que traducen el lenguaje programado en un estándar más moderno como ES2015+ a ``Vanilla ES5'', de tal manera que el código pueda ser ejecutado en cualquier navegador.
+Aunque los navegadores están haciendo grandes progresos con su compatibilidad total con ES6, aún no es recomendable utilizarlo en forma nativa. Para resolver este problema surgen los transpiladores o \textit{transpilers} como Babel\footnote{\url{https://babeljs.io/}} (utilizado en este proyecto), que traducen el lenguaje programado en un estándar más moderno como \textit{ES2015+} a \textit{``Vanilla ES5''}, de tal manera que el código pueda ser ejecutado en cualquier navegador.
 
 A la vista de lo expuesto, se plantea la implementación de la presente aplicación en ES6+ (es decir, ES6 y posteriores), pero efectuando un \textit{transpiling} a ES5 para minimizar cualquier problema de compatibilidad con los distintos navegadores.
 
 \subsection{Entorno}
 
-Hoy en día, no es posible hablar de desarrollo profesional y moderno en Javascript sin hablar de Node.js\footnote{\url{https://nodejs.org}}. Node.js es un entorno de ejecución para Javascript construido con el motor V8 de Chrome\footnote{El motor de alto rendimiento de Google para Javascript escrito en C++. Ver \url{https://developers.google.com/v8/}} y orientado a eventos asíncronos. Está diseñado para construir aplicaciones de red escalables. Introdujo un sistema de módulos que ha sido la base de la reutilización de bibliotecas de código en Javascript a través del repositorio npm\footnote{https://docs.npmjs.com/getting-started/what-is-npm}, con en torno a 600.000 paquetes de código abierto disponibles para la comunidad de desarrolladores.
+Hoy en día, no es posible hablar de desarrollo profesional y moderno en \textit{Javascript} sin hablar de Node.js\footnote{\url{https://nodejs.org}}. Node.js es un entorno de ejecución para Javascript construido con el motor V8 de Chrome\footnote{El motor de alto rendimiento de Google para \textit{Javascript} escrito en C++. Ver \url{https://developers.google.com/v8/}} y orientado a eventos asíncronos. Está diseñado para construir aplicaciones de red escalables. Introdujo un sistema de módulos que ha sido la base de la reutilización de bibliotecas de código en Javascript a través del repositorio npm\footnote{\url{https://docs.npmjs.com/getting-started/what-is-npm}}, con en torno a 600.000 paquetes de código abierto disponibles para la comunidad de desarrolladores.
 
 En la implementación de esta aplicación se han utilizado las siguientes versiones de estos componentes, cuya instalación previa es necesaria para la construcción y ejecución de la misma:
 
@@ -40,17 +41,17 @@ El proyecto presenta la siguiente estructura jerárquica de directorios:
 
 \begin{itemize}
 	\item \textbf{build}: contiene los archivos de configuración de Webpack, tanto para el servidor de desarrollo como para el entorno de producción.
-	\item \textbf{config}: contiene los archivos de configuración del proyecto por entorno (dev, test, pro). Si bien no es conveniente modificarlo, para la presente aplicación tuvo que añadirse el soporte para babel-polyfill para permitir la correcta ejecución de determinados paquetes en todos los navegadores.
+	\item \textbf{config}: contiene los archivos de configuración del proyecto por entorno (\textit{dev, test, pro}). Si bien no es conveniente modificarlo, para la presente aplicación tuvo que añadirse el soporte para \textit{babel-polyfill} para permitir la correcta ejecución de determinados paquetes en todos los navegadores.
 	\item \textbf{dist}: contiene los archivos que deberán ser desplegados en la plataforma de producción (por ejemplo, Firebase).
-	\item \textbf{docs}: notas del proyecto en markdown y código fuente en \LaTeX de esta memoria.
+	\item \textbf{docs}: notas del proyecto en Markdown y código fuente en \LaTeX de esta memoria.
 	\item \textbf{node\_modules}: contiene todos los paquetes y dependencias de npm necesarios para ejecutar el proyecto.
 	\item \textbf{src}: contiene el código fuente de la aplicación y está estructurado, a su vez, de la siguiente forma:
 	\begin{itemize}
 		\item \textbf{components}: contiene los distintos componentes de la aplicación, siendo App.vue el principal.
-		\item \textbf{fonts}: contiene las fuentes necesarias para visualizar correctamente Material Design.
+		\item \textbf{fonts}: contiene las fuentes necesarias para visualizar correctamente \textit{Material Design}.
 		\item \textbf{router}: contiene la configuración de vue-router, un enrutador para Vue.js.
-		\item \textbf{services}: contiene la configuración única de servicios para recuperar información de APIs REST a trabés dfe bibliotecas como axios\footnote{Un cliente HTTP basado en promesas para Node.js. Ver \url{https://github.com/axios/axios}}
-		\item \textbf{store}: contiene la lógica necesaria para mantener el estado único de la aplicación a trabés de Vuex (ficheros de acciones, mutaciones, getters y el propio almacén.)
+		\item \textbf{services}: contiene la configuración única de servicios para recuperar información de APIs REST a través de bibliotecas como axios\footnote{Un cliente HTTP basado en promesas para Node.js. Ver \url{https://github.com/axios/axios}}
+		\item \textbf{store}: contiene la lógica necesaria para mantener el estado único de la aplicación mediante Vuex (ficheros de acciones, mutaciones, getters y el propio almacén.)
 		\item \textbf{utils}: contiene utilidades o información por defecto necesaria para el correcto funcionamiento de la aplicación.
 	\end{itemize}
 	\item \textbf{static}: recursos estáticos que son copiados directamente.
@@ -72,7 +73,7 @@ Además, en el directorio raíz de la estructura del proyecto se pueden encontrar,
 
 \subsection{Construcción del proyecto}
 
-El proyecto de trabajo se ha generado usando la herramienta vue-cli\footnote{\url{https://cli.vuejs.org/}} en su versión 2 (durante el tiempo de desarrollo de este proyecto se publicó la versión 3). Esta herramienta permite generar proyectos configurados a partir de una plantilla y selección de parámetros. En concreto, se utilizó una plantilla propuesta por Vuetify\footnote{\url{https://vuetifyjs.com}}, una biblioteca de componentes de interfaz de usuario basada en Material Design\footnote{Un sistema de diseño para desarrollar interfaces de usuario impulsado por Google. Ver \url{https://material.io/}} para Vue. Se eligió esta biblioteca por ser una de las más usadas entre la comunidad de usuarios, disponer de un amplio catálogo de componentes implementados y presentar líneas de trabajo prometedoras para finales de este año (con la previsión de publicación de nuevos componentes y de mejora de los actuales).
+El proyecto de trabajo se ha generado usando la herramienta vue-cli\footnote{\url{https://cli.vuejs.org/}} en su versión 2 (durante el tiempo de desarrollo de este proyecto se publicó la versión 3). Esta herramienta permite generar proyectos configurados a partir de una plantilla y selección de parámetros. En concreto, se utilizó una plantilla propuesta por Vuetify\footnote{\url{https://vuetifyjs.com}}, una biblioteca de componentes de interfaz de usuario basada en \textit{Material Design}\footnote{Un sistema de diseño para desarrollar interfaces de usuario impulsado por Google. Ver \url{https://material.io/}} para Vue. Se eligió esta biblioteca por ser una de las más usadas entre la comunidad de usuarios, disponer de un amplio catálogo de componentes implementados y presentar líneas de trabajo prometedoras para finales de este año (con la previsión de publicación de nuevos componentes y de mejora de los actuales).
 
 La propia web de Vuetify presenta un asistente para elegir la plantilla más adecuada basándose en diversos parámetros introducidos por el usuario, tales como: experiencia con Vue, tipo de interfaz (web, móvil, escritorio), necesidad o no de generar estructuras de pruebas unitarias, etc. Dadas las necesidades de este proyecto, se optó por elegir una plantilla para programadores con poca experiencia en Vue, para la web y con estructuras de pruebas unitarias (y no con posicionamiento web). 
 
@@ -141,7 +142,17 @@ Para desplegar la aplicación a modo de demostración se ha optado por utilizar Fi
 		"default": "unedtfg-198720"
 	}
 }
-\end{lstlisting} 
+\end{lstlisting}
+
+El proyecto puede desplegarse en cualquier servidor web o HTTP (como Apache\footnote{Apache Web Server es el servidor HTTP con mayor cuota de mercado. Ver \url{https://news.netcraft.com/archives/2018/07/19/july-2018-web-server-survey.html}}, por ejemplo). Para ello, será necesario seguir los siguientes pasos:
+
+	\begin{itemize}
+	\item \textbf{npm run build:} Construcción del proyecto en /dist.
+	\item Copia de la carpeta /dist al servidor web donde se vaya a desplegar.
+	\item Configuración del servidor web para servir el proyecto construido y empaquetado.
+	
+\end{itemize}
+
 
 El entorno de demostración del proyecto es accesible con conexión a Internet a través de la siguiente URL: \url{https://unedtfg-198720.firebaseapp.com/#/}
 
@@ -166,23 +177,32 @@ Sin pretender entrar a fondo en los detalles de la implementación, que puede con
 
 \subsection{Pruebas unitarias}
 
+La codificación de pruebas unitarias ayuda a resolver diversos problemas inherentes al desarrollo de software\cite{beck02}:
+
+\begin{itemize}
+	\item Extensión innecesaria del alcance: muchas veces se tiende a desarrollar funcionalidad extra como previsión de uso en el futuro. Esto lleva a generar productos software con un alto porcentaje de funcionalidades que no se utilicen. Las pruebas unitarias ayudan al desarrollador a centrarse en lo que realmente debe hacer el sistema y a conseguir un ritmo adecuado de trabajo.
+	\item Cohesión y acoplamiento: si una prueba unitaria resulta difícil de escribir, lo más probable es que se trate de un problema del diseño y no de la prueba en sí.
+	\item Confianza: una suite de pruebas unitarias funcionando generan confianza en que el código desarrollado hace lo que debe hacer de forma correcta.
+\end{itemize}
+
+
 Con objeto de aportar el máximo valor posible con un esfuerzo razonable, se ha optado por codificar pruebas unitarias de los siguientes elementos de la aplicación:
 
-	\begin{itemize}
+\begin{itemize}
 	\item \textbf{Actions}: métodos que permiten modificar el estado general de la aplicación de forma asíncrona. Al llamar a su vez síncronamente a las mutaciones (\textit{mutations}), no se ha considerado necesario codificar pruebas unitarias para estas últimas.
 	\item \textbf{Getters}: métodos que permiten recuperar diferentes variables de estado de la aplicación, o subconjuntos de estas a través de un procesado adicional. 
 \end{itemize}
 
 En los cuadros \ref{tab:test-actions} y \ref{tab:test-getters} se muestran sendos listados de las pruebas codificadas (indicando qué se está probando) y los \textit{actions} y \textit{getters} relacionados. No se ha considerado necesario probar la exportación a distintos formatos por tratarse de una característica intrínseca de la biblioteca utilizada (y por lo tanto, probada en dicha biblioteca) cuyo tratamiento no ha sido modificado en esta aplicación.
 
-La propia biblioteca jest incluye herramientas para calcular la cobertura de pruebas unitarias, que en este caso, según dichas herramientas, resulta ser de en torno a un 40\% para el código relacionado con el estado de la aplicación. Sin embargo, \textbf{este indicador falsea la cobertura real}, puesto que carencias en la integración de jest con Vuex impiden considerar como válidas las pruebas de las llamadas a las mutaciones, por ejemplo, que sí están siendo probadas pero no aparecen reflejadas en este indicador.
+La propia biblioteca \textit{jest} incluye herramientas para calcular la cobertura de pruebas unitarias, que en este caso, según dichas herramientas, resulta ser de en torno a un 40\% para el código relacionado con el estado de la aplicación. Sin embargo, \textbf{este indicador falsea la cobertura real}, puesto que carencias en la integración de \textit{jest} con Vuex impiden considerar como válidas las pruebas de las llamadas a las mutaciones, por ejemplo, que sí están siendo probadas pero no aparecen reflejadas en este indicador.
 
-No obstante lo anterior, y con un interés meramente informativo, se incluyen en la figura \ref{fig:cobertura} los resultados mostrados por jest.
+No obstante lo anterior, y con un interés meramente informativo, se incluyen en la figura \ref{fig:cobertura} los resultados mostrados por \textit{jest}.
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.25]{cobertura}
-	\caption{Cobertura calculada por jest (no real).}\label{fig:cobertura}
+	\caption{Cobertura calculada por \textit{jest} (no real).}\label{fig:cobertura}
 \end{figure}
 
 	\begin{table}

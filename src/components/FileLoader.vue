@@ -27,13 +27,13 @@
         type: Array
       },
       accepted: {
-        default: 'text/markdown',
+        default: '',
         type: String
       }
     },
     methods: {
       fileSelected (ev) {
-        this.loading = true
+        this.$emit('loading')
         const file = ev.target.files[0]
         const reader = new FileReader()
         reader.onload = e => this.$emit('load', e.target.result)
@@ -53,7 +53,7 @@
         }
         reader.readAsText(file)
         this.loading = false
-        this.$emit('file-loaded', 'El fichero se ha cargado en el almacenamiento interno.')
+        // this.$emit('file-loaded', 'El fichero se ha cargado en el almacenamiento interno.')
       }
     },
     data () {

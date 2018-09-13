@@ -1,6 +1,6 @@
 \chapter{Trabajos previos, estado actual y recursos}
 
-Tras la introducción a los fundamentos teóricos, es conveniente resumir cuál es el estado del arte de las distintas tecnologías relacionadas con este proyecto. A continuación se revisa un conjunto de herramientas existentes relacionadas en algún modo con los objetivos presentados, así como los estados de implementación de las tecnologías de la Web Semántica en plataformas como Java, Python o Javascript.
+Tras la introducción a los fundamentos teóricos, es conveniente resumir cuál es el estado del arte de las distintas tecnologías relacionadas con este proyecto. A continuación se revisa un conjunto de herramientas existentes relacionadas en algún modo con los objetivos presentados, así como los estados de implementación de las tecnologías de la Web Semántica en plataformas como \textit{Java}, \textit{Python} o \textit{Javascript}.
 
 \section{Trabajos previos} \label{trabajosprevios}
 
@@ -10,9 +10,9 @@ Para enfocar el presente proyecto se llevó a cabo un estudio previo de los traba
 
 La herramienta de consulta web que se asemeja más a los resultados obtenidos con este proyecto es el SPARQL playground desarrollado por el \textit{Swiss Institute of Bioinformatics}\footnote{https://www.isb-sib.ch}.
 
-Se trata de una aplicación web\textit{ standalone} y multiplataforma cuyo propósito fundamental es el aprendizaje de SPARQL. Sus autores proporcionan una demo \textit{online}\footnote{http://sparql-playground.sib.swiss/} además de documentación y consultas de ejemplo para que cualquiera pueda familiarizarse con este lenguaje de consulta.
+Se trata de una aplicación web\textit{ standalone} y multiplataforma cuyo propósito fundamental es el aprendizaje de SPARQL. Sus autores proporcionan una demostración en línea\footnote{http://sparql-playground.sib.swiss/} además de documentación y consultas de ejemplo para que cualquiera pueda familiarizarse con este lenguaje de consulta.
 
-Si bien sus funcionalidades de consulta son muy completas, carece de facilidades de edición de grafos propios o de consulta a \textit{endpoints} externos, por ejemplo.
+Si bien sus funcionalidades de consulta son muy completas, carece de facilidades de edición de grafos propios o de consulta a \textit{endpoints}\footnote{Puntos de acceso en la red, en este caso a través del protocolo SPARQL.} externos, por ejemplo.
 
 \begin{figure}[h]
 	\centering
@@ -20,13 +20,13 @@ Si bien sus funcionalidades de consulta son muy completas, carece de facilidades
 	\caption{Interfaz de SPARQL \textit{playground}}
 \end{figure}
 
-Existan también bibliotecas de consulta para el \textit{frontend}, como Jassa (\textit{JAvascript Suite for Sparql Access})\footnote{http://aksw.org/Projects/Jassa.html}. Se trata de una biblioteca modular que comprende desde una API RDF sobre una capa de abstracción de servicios hasta una capa de navegación por facetas. Sin embargo, desarrolla un modelo propio del grafo RDF no basado en estándares y se integra con versiones muy antiguas de Angular, lo que hace que pierda interés para su uso en producción.
+También es posible encontrar bibliotecas de consulta para el \textit{frontend}, como Jassa (\textit{JAvascript Suite for Sparql Access})\footnote{http://aksw.org/Projects/Jassa.html}. Se trata de una biblioteca modular que comprende desde una API RDF sobre una capa de abstracción de servicios hasta una capa de navegación por facetas. Sin embargo, desarrolla un modelo propio del grafo RDF no basado en estándares y se integra con versiones muy antiguas de Angular, lo que hace que pierda interés para su uso en producción.
 
 \subsection{Herramientas de modelado}
 
 \subsubsection{Herramientas web}
 
-Existen pocas herramientas con funcionalidades de edición de grafos RDF en la Web. Al margen de la versión web de Protégé, cuya versión de escritorio (más representativa) se comenta en el punto \ref{deescritorio}, el resto de trabajos encontrados son fundamentalmente bibliotecas o paquetes de edición de formularios, como rdfforms\footnote{https://rdforms.org/}. Se trata de una biblioteca Javascript cuyo propósito es facilitar la construcción de editores RDF basados en formularios en un entorno web. Para ello, se basa en un mecanismo de plantillas que describe cómo generar un formulario HTML y cómo mapear expresiones específicas en un grafo RDF a sus correspondientes campos.
+Existen pocas herramientas con funcionalidades de edición de grafos RDF en la Web. Al margen de la versión web de Protégé, cuya versión de escritorio (más representativa) se comenta en el punto \ref{deescritorio}, el resto de trabajos encontrados son fundamentalmente bibliotecas o paquetes de edición de formularios, como rdfforms\footnote{https://rdforms.org/}. Se trata de una biblioteca \textit{Javascript} cuyo propósito es facilitar la construcción de editores RDF basados en formularios en un entorno web. Para ello, se basa en un mecanismo de plantillas que describe cómo generar un formulario HTML y cómo mapear expresiones específicas en un grafo RDF a sus correspondientes campos.
 
 Unas pruebas iniciales con la biblioteca sugirieron falta de madurez por fallos en su funcionamiento en un navegador. Además, la biblioteca implementa su propio modelo de grafo RDF, que no está relacionado con los estándares actuales (ver sección \ref{estadoactual}).
 
@@ -38,7 +38,7 @@ Unas pruebas iniciales con la biblioteca sugirieron falta de madurez por fallos 
 
 \subsubsection{Herramientas de escritorio} \label{deescritorio}
 
-La herramienta de modelado de ontologías en RDF por antonomasia es Protégé, un editor de ontologías \textit{opensource} gratuito y un marco de trabajo para construir sistemas inteligentes soportados por una fuerte comunidad de usuarios académicos, gubernamentales y corporativos. Se utiliza en áreas tan diversas como la biomedicina, el comercio electrónico, la predicción metereológica o el modelado organizacional.
+La herramienta de modelado de ontologías en RDF por antonomasia es Protégé, un editor de ontologías \textit{opensource}\footnote{Software de fuentes abiertas, ver \url{https://opensource.org/faq\#osd} } gratuito y un marco de trabajo para construir sistemas inteligentes soportados por una fuerte comunidad de usuarios académicos, gubernamentales y corporativos. Se utiliza en áreas tan diversas como la biomedicina, el comercio electrónico, la predicción metereológica o el modelado organizacional.
 
 Protégé se instala como una aplicación de escritorio multiplataforma y tiene una arquitectura basada en \textit{plugins} o complementos que permite extender fácilmente su funcionalidad. Tiene soporte para razonadores sobre las distintas ontologías que se modelan y facilidades de representación y edición de grafos RDF.
 
@@ -57,7 +57,7 @@ El estado actual (o \textit{state of the art}, del inglés) de las tecnologías de
 
 \subsection{RDF en Java}
 
-Así, para la plataforma Java se cuenta con Apache Jena{\cite{jena01}}, un marco de trabajo o \textit{framework} \textit{opensource} para construir aplicaciones para la Web Semántica o sobre datos enlazados. De entre sus componentes y funcionalidades, cabe destacar:
+Así, para la plataforma \textit{Java} se cuenta con \textit{Apache Jena}{\cite{jena01}}, un marco de trabajo o \textit{framework} \textit{opensource} para construir aplicaciones para la Web Semántica o sobre datos enlazados. De entre sus componentes y funcionalidades, cabe destacar:
 
 \begin{itemize} 
 \item \textbf{TDB}: una base de datos de tripletas nativa y de alto rendimiento, con excelente integración con el resto de APIs de Jena.
@@ -67,11 +67,11 @@ Así, para la plataforma Java se cuenta con Apache Jena{\cite{jena01}}, un marco 
 \item \textbf{Otras APIs}: como las de ontologías e inferencias, que permiten añadir más semántica al modelo y razonar sobre reglas por defecto o personalizadas.
 \end{itemize}  
 
-Apache Jena es una solución robusta y muy utilizada en entornos académicos y de producción empresarial con más de quince años de vida.
+\textit{Apache Jena} es una solución robusta y muy utilizada en entornos académicos y de producción empresarial con más de quince años de vida.
 
 \subsection{RDF en Python}
 
-RDFLib\footnote{https://github.com/RDFLib/rdflib} es una biblioteca \textit{opensource} ligera pero funcionalmente completa para trabajar con RDF desde plataformas Python. Permite a las aplicaciones acceder a estructuras RDF a través de construcciones idiomáticas en Python, lo que facilita un acercamiento de la tecnología al programador experimentado; por ejemplo, un grafo no es más que una colección de tripletas \textit{<sujeto, predicado, objeto>}. Entre el resto de sus características, destacan:
+RDFLib\footnote{https://github.com/RDFLib/rdflib} es una biblioteca \textit{opensource} ligera pero funcionalmente completa para trabajar con RDF desde plataformas \textit{Python}. Permite a las aplicaciones acceder a estructuras RDF a través de construcciones idiomáticas en \textit{Python}, lo que facilita un acercamiento de la tecnología al programador experimentado; por ejemplo, un grafo no es más que una colección de tripletas \textit{<sujeto, predicado, objeto>}. Entre el resto de sus características, destacan:
 
 \begin{itemize}
 	\item Contiene procesadores y serializadores para XML, N3, Turtle, RDFa, etc.
@@ -84,34 +84,34 @@ Su desarrollo es estable y ha sido utilizada en referencias bibliográficas como 
 
 \subsection{RDF en Javascript}
 
-Dado que uno de los objetivos del proyecto es reducir al máximo los requisitos de uso de la herramienta para alcanzar el mayor público objetivo posible (ver \ref{objetivos}), \textbf{Javascript se presenta como una tecnología de sumo interés para la implementación del mismo}, ya que permite producir aplicaciones ejecutables al cien por cien en un navegador web estándar.
+Dado que uno de los objetivos del proyecto es reducir al máximo los requisitos de uso de la herramienta para alcanzar el mayor público objetivo posible (ver \ref{objetivos}), \textbf{\textit{Javascript} se presenta como una tecnología de sumo interés para su implementación}, ya que permite producir aplicaciones ejecutables al cien por cien en un navegador web estándar.
 
 Sin embargo, el \textbf{estado actual de implementación de RDF en Javascript puede calificarse de inmaduro y e inestable}. Se han llevado a cabo intentos aislados de construir APIs RDF y herramientas para gestión de grafos y consultas SPARQL, como las citadas en la sección \ref{trabajosprevios}, pero no existe un estándar único consolidado (aún).
 
 \subsubsection{Manejo de RDF}
 
-En el W3C puede consultarse la mejor comparativa existente de bibliotecas desarrolladas en Javascript para trabajar con RDF\cite{rdfjscomparison}.
+En el W3C\footnote{\textit{World Wide Web Consortium}, ver \url{https://www.w3c.es/}} puede consultarse la mejor comparativa existente de bibliotecas desarrolladas en Javascript para trabajar con RDF\cite{rdfjscomparison}.
 
-Sin duda, el esfuerzo más destacable hasta ahora para conseguir un estándar de RDF en Javascript es el proyecto \textbf{rdflib.js}\footnote{https://github.com/linkeddata/rdflib.js}, iniciado por el mismísimo Tim Berners-Lee. Se trata de una biblioteca que proporciona una API local para lanzar consultas a un almacén RDF, soporta parte de la especificación SPARQL y permite importar y escribir formatos como RDF/XML, Turtle y N3. 
+Sin duda, el esfuerzo más destacable hasta ahora para conseguir un estándar de RDF en Javascript es el proyecto \textbf{rdflib.js}\footnote{\url{https://github.com/linkeddata/rdflib.js}}, iniciado por el mismísimo Tim Berners-Lee. Se trata de una biblioteca que proporciona una API local para lanzar consultas a un almacén RDF, soporta parte de la especificación SPARQL y permite importar y escribir formatos como RDF/XML, Turtle y N3. 
 
-En el propio repositorio de rdflib.js se cita al \textit{ RDFJS Representation Task Force}\footnote{https://github.com/rdfjs/representation-task-force}, un grupo dentro del \textit{RDFJS Community Group}\footnote{https://www.w3.org/community/rdfjs/} encargado de diseñar las especificaciones de interfaz con el objetivo de conseguir que las distintas implementaciones de conceptos RDF en Javascript sean interoperables. La especificación de la interfaz existe en forma de borrador a fecha de 14 de Agosto de 2017\footnote{http://rdf.js.org/}. En ella se definen interfaces para términos, cuaternas, factorías de datos, nodos en blanco, literales, etc. así como para \textit{streams} de Javascript.
+En el propio repositorio de rdflib.js se cita al \textit{ RDFJS Representation Task Force}\footnote{\url{https://github.com/rdfjs/representation-task-force}}, un grupo dentro del \textit{RDFJS Community Group}\footnote{\url{https://www.w3.org/community/rdfjs/}} encargado de diseñar las especificaciones de interfaz con el objetivo de conseguir que las distintas implementaciones de conceptos RDF en \textit{Javascript} sean interoperables. La especificación de la interfaz existe en forma de borrador a fecha de 14 de Agosto de 2017\footnote{\url{http://rdf.js.org/}}. En ella se definen interfaces para términos, cuaternas, factorías de datos, nodos en blanco, literales, etc. así como para \textit{streams}\footnote{API para acceder a flujos de datos asíncronos en \textit{Javascript}. Ver \url{https://developer.mozilla.org/en-US/docs/Web/API/Streams_API}} de \textit{Javascript}.
 
 Consultando el sitio web del \textit{Community Group} se puede encontrar una noticia del 23 de Abril de 2018 (publicada, por tanto, en pleno desarrollo de este proyecto) anunciando la creación de RDF.js, que tratará de unir los esfuerzos de distintas entidades (como la Universidad de Gante o el MIT) y alinear y publicar bajo un único paraguas proyectos como:
 
 \begin{itemize}
 	\item El citado rdflib.js
-	\item \textbf{RDF-Ext}\footnote{https://github.com/rdf-ext/rdf-ext}, una biblioteca Javascript para trabajar con RDF y datos enlazados que cumple con la especificación del \textit{RDFJS Representation Task Force}.
-	\item \textbf{N3.js}\footnote{https://github.com/rdfjs/N3.js}, una biblioteca que implementa la especificación de bajo nivel RDF.js y permite leer, procesar, almacenar y exportar ternas RDF de forma asíncrona en Javascript.
+	\item \textbf{RDF-Ext}\footnote{\url{https://github.com/rdf-ext/rdf-ext}}, una biblioteca \textit{Javascript} para trabajar con RDF y datos enlazados que cumple con la especificación del \textit{RDFJS Representation Task Force}.
+	\item \textbf{N3.js}\footnote{\url{https://github.com/rdfjs/N3.js}}, otra biblioteca \textit{Javascript} que implementa la especificación de bajo nivel RDF.js y permite leer, procesar, almacenar y exportar ternas RDF de forma asíncrona en \textit{Javascript}.
 \end{itemize} 
 
 Ante esta situación confusa y repleta de distintas implementaciones, se optó por utilizar canales de comunicación directos con sus autores. Existen varios grupos de discusión en Gitter, tales como:
 
 \begin{itemize}
-	\item rdfjs/public\footnote{https://gitter.im/rdfjs/public}
-	\item rdf-ext/discussions\footnote{https://gitter.im/rdf-ext/discussions}
+	\item rdfjs/public\footnote{\url{https://gitter.im/rdfjs/public}}
+	\item rdf-ext/discussions\footnote{\url{https://gitter.im/rdf-ext/discussions}}
 \end{itemize} 
 
-En ellos, el autor del proyecto tuvo la oportunidad de recibir indicaciones directamente de Thomas Bergwinkl y Michael Luggen, importantes miembros del grupo, quienes confirmaron que RDF-Ext es el camino a seguir en caso de tener que desarrollar un proyecto en Javascript que trabaje con RDF. Luggen también indicó que rdflib.js es la biblioteca más antigua de las citadas, iniciada por el propio Tim Berners-Lee (que, como se puede comprobar en la figura \ref{fig:gitter01}, aparece también en el grupo de conversación.)
+En ellos, el autor del proyecto tuvo la oportunidad de recibir indicaciones directamente de Thomas Bergwinkl y Michael Luggen, importantes miembros del grupo, quienes confirmaron que RDF-Ext es el camino a seguir en caso de tener que desarrollar un proyecto en \textit{Javascript} que trabaje con RDF. Luggen también indicó que rdflib.js es la biblioteca más antigua de las citadas, iniciada por el propio Tim Berners-Lee (que, como se puede comprobar en la figura \ref{fig:gitter01}, aparece también en el grupo de conversación.)
 
 \begin{figure}[h] 
 	\centering
@@ -122,61 +122,53 @@ En ellos, el autor del proyecto tuvo la oportunidad de recibir indicaciones dire
 
 \subsubsection{Manejo de SPARQL} \label{subsubsec:manejosparql}
 
-Como se ha visto en la subsección anterior, la situación actual de la implementación de RDF en Javascript es compleja. Con SPARQL, esta línea se mantiene.
+Como se ha visto en la subsección anterior, la situación actual de la implementación de RDF en \textit{Javascript} es compleja. Con SPARQL, esta línea se mantiene.
 
-El primer trabajo desarrollado en esta línea es \textbf{rdfstore-js}, de Antonio Garrote\footnote{https://github.com/antoniogarrote/rdfstore-js}, que consiste en una implementación pura en Javascript de un almacén de grafos RDF con soporte para el lenguaje de consulta y manipulación de datos SPARQL.
+El primer trabajo desarrollado en esta línea es \textbf{rdfstore-js}, de Antonio Garrote\footnote{\url{https://github.com/antoniogarrote/rdfstore-js}}, que consiste en una implementación pura en \textit{Javascript} de un almacén de grafos RDF con soporte para el lenguaje de consulta y manipulación de datos SPARQL.
 
-Lamentablemente, tal y como indica el propio autor, la implementación actual está lejos de estar completa. Por otra parte, revisando el repositorio, se puede comprobar que la última actualización del código fuente es de hace dos años. Existe un grupo de gitter sobre el proyecto, pero carente de actividad. Por tanto, no es descabellado asegurar que la biblioteca está obsoleta y ha sido discontinuada, lo que hace inviable su inclusión en el proyecto.
+Lamentablemente, tal y como indica el propio autor, la implementación actual está lejos de estar completa. Por otra parte, revisando el repositorio, se puede comprobar que la última actualización del código fuente es de hace dos años. Existe un grupo de Gitter sobre el proyecto, pero carente de actividad. Por tanto, no es descabellado asegurar que la biblioteca está obsoleta y ha sido discontinuada, lo que hace inviable su inclusión en el proyecto.
 
-Por otro lado, Ruben Taelman, miembro del grupo de discusión en Gitter sobre RDF-Ext, lidera otro proyecto, Comunica\footnote{https://github.com/comunica/comunica}: una plataforma de motores de consulta altamente modular y flexible para la web. Esta plataforma permite enviar consultas a distintos motores, entre ellos SPARQL. Entre sus características se encuentra la capacidad para lanzar consultas SPARQL 1.1 a endpoints externos y también a un almacén local en Javascript, lo que lo hace ideal para un proyecto como el que se trata en esta memoria.
+Por otro lado, Ruben Taelman, miembro del grupo de discusión en Gitter sobre RDF-Ext, lidera otro proyecto, Comunica\footnote{\url{https://github.com/comunica/comunica}}: una plataforma de motores de consulta en \textit{Javascript} altamente modular y flexible para la web. Esta plataforma permite enviar consultas a distintos motores, entre ellos SPARQL. Entre sus características se encuentra la capacidad para lanzar consultas SPARQL 1.1 a endpoints externos y también a un almacén local en \textit{Javascript}, lo que lo hace ideal para un proyecto como el que se trata en esta memoria.
 
 No obstante, es un producto en pleno desarrollo  en el que muchos de sus módulos aún no han sido publicados en una versión estable y, por tanto, \textbf{inestable y con defectos potenciales}.
 
 \subsection{Tecnologías de frontend web}
 
-La interfaz de usuario será una parte muy importante del proyecto, que pretende facilitar el aprendizaje de RDF y SPARQL a alumnos sin experiencia. Ello, unido a la necesidad de facilitar lo máximo posible la puesta en marcha de la herramienta, hace que las tecnologías de \textit{frontend} web cobren un papel especialmente relevante en este análisis.
+La interfaz de usuario será un aspecto muy importante del proyecto, que pretende facilitar el aprendizaje de RDF y SPARQL a alumnos sin experiencia. Ello, unido a la necesidad de facilitar lo máximo posible la puesta en marcha de la herramienta, hace que las tecnologías de \textit{frontend} web cobren un papel especialmente relevante en este análisis.
 
 El mundo del \textit{frontend} web ha cambiado mucho en los últimos años, y de hecho, la comunidad de desarrolladores aún se encuentra inmersa en una vorágine de cambios cuya velocidad es, en la mayor parte de los casos, infinitamente mayor que la capacidad de los proyectos y los propios desarrolladores para asimilarla.
 
-Atrás quedaron los días de servir interfaces de usuario en el servidor a través de JSP\footnote{Java Server Pages, tecnología para crear páginas web dinámicas en servidor en Java} o JSF\footnote{Java Server Faces, tecnología que simplifica el desarrollo de interfaces de usuario en aplicaciones Java EE} y de esas tímidas incursiones de Javascript en la capa de presentación a través de bibliotecas como JQuery\footnote{https://jquery.com/} o Ext Js\footnote{https://www.sencha.com/products/extjs/\#overview}.
+Atrás quedaron los días de servir interfaces de usuario en el servidor a través de JSP\footnote{\textit{Java Server Pages}, tecnología para crear páginas web dinámicas en servidor en Java} o JSF\footnote{\textit{Java Server Faces}, tecnología que simplifica el desarrollo de interfaces de usuario en aplicaciones \textit{Java EE}} y de esas tímidas incursiones de \textit{Javascript} en la capa de presentación a través de bibliotecas como \textit{JQuery}\footnote{\url{https://jquery.com/}} o Ext Js\footnote{\url{https://www.sencha.com/products/extjs/\#overview}}.
 
-En estos momentos, son tres los frameworks que aglutinan la mayor parte del desarrollo de frontend web:
-
-\begin{itemize}
-	\item \textbf{Angular}
-	\item \textbf{React}
-	\item \textbf{Vue}
-\end{itemize} 
-
-En las siguientes subsecciones se analizan someramente.
+En estos momentos, son tres los marcos de trabajo que aglutinan la mayor parte del desarrollo de \textit{frontend} web:\textbf{\textit{Angular}}, \textbf{\textit{React}} y \textbf{Vue}. En las siguientes subsecciones se analizan someramente.
 
 \subsubsection{Angular}
 
-Angular es un framework basado en Typescript y creado por Google en 2009, pensado para la construcción de aplicaciones web altamente interactivas. Entre sus características se encuentran las siguientes:
+Angular es un marco de trabajo basado en \textit{Typescript} y creado por \textit{Google} en 2009, pensado para la construcción de aplicaciones web altamente interactivas. Entre sus características se encuentran las siguientes:
 
 \begin{itemize}
-	\item Orientado a componentes\footnote{Un componente es una unidad de encapsulación de código y responsabilidades que facilita la reutilización}.
-	\item Uso de Typescript.
+	\item Orientado a componentes\footnote{Un componente es una unidad de encapsulado de código y responsabilidades que facilita la reutilización}.
+	\item Uso de \textit{Typescript}.
 	\item Sistema de plantillas en HTML con directivas.
-	\item Basado en el patrón MVC\footnote{Modelo, Vista, Controlador.}.
+	\item Basado en el patrón MVC\footnote{Modelo, Vista, Controlador. Ver \url{https://developer.mozilla.org/en-US/docs/Web/Apps/Fundamentals/Modern_web_app_architecture/MVC_architecture}}.
 	\item Incluye inyección de dependencias\footnote{Patrón en el cual un objeto (servicio) proporciona las dependencias necesarias a otro objeto (cliente)}.
 	\item Varias opciones para la gestión de estado.
 	\item Curva de aprendizaje pronunciada.
 	\item Tamaño pesado.
-	\item Publicado bajo licencia MIT.
+	\item Publicado bajo licencia MIT\footnote{\url{https://opensource.org/licenses/MIT}}.
 \end{itemize}
 
 \subsubsection{React}
 
-React es una biblioteca Javascript para construir interfaces de usuario desarrollada y mantenida por Facebook desde 2013.
+React es una biblioteca \textit{Javascript} para construir interfaces de usuario desarrollada y mantenida por \textit{Facebook} desde 2013.
 
 \begin{itemize}
 	\item Orientado a componentes.
-	\item Uso de Javascript ES6.
-	\item Sistema de plantillas en JSX.
+	\item Uso de \textit{Javascript} ES6.
+	\item Sistema de plantillas en JSX\footnote{Una extensión de sintaxis para \textit{Javascript}. Ver \url{https://reactjs.org/docs/introducing-jsx.html}}.
 	\item Basado en el patrón MVC.
 	\item Virtual DOM: permite organizar documentos HTML en un árbol más sencillo de procesar por un navegador web.
-	\item Gestión de estado con Redux.
+	\item Gestión de estado con \textit{Redux}.
 	\item Curva de aprendizaje pronunciada.
 	\item Tamaño medio.
 	\item Publicado bajo licencia MIT.
@@ -184,11 +176,11 @@ React es una biblioteca Javascript para construir interfaces de usuario desarrol
 
 \subsubsection{Vue}
 
-Vue es uno de los frameworks que más rápidamente está creciendo en popularidad y uso desde 2014. Su primera versión fue publicada por un antiguo trabajador de Google, Evan You.
+Vue es uno de los marcos de trabajo que más rápidamente está creciendo en popularidad y uso desde 2014. Su primera versión fue publicada por un antiguo trabajador de Google, Evan You.
 
 \begin{itemize}
 	\item Orientado a componentes.
-	\item Uso de Javascript ES5/ES6.
+	\item Uso de \textit{Javascript} ES5/ES6.
 	\item Sistema de plantillas en HTML con directivas.
 	\item \textit{Single File Components}, con separación de responsabilidades.
 	\item Basado en el patrón MVVM\footnote{Modelo, Vista, Vista-Modelo, que facilita la separación del desarrollo de la interfaz de usuario de la lógica de negocio o \textit{backend}}.
@@ -201,9 +193,9 @@ Vue es uno de los frameworks que más rápidamente está creciendo en popularidad y
 
 \subsubsection{Comparativa de frameworks}
 
-Tras un análisis de las características de los tres frameworks, se puede comprobar que técnicamente no hay grandes diferencias en cuanto a funcionalidad provista o patrones empleados, pero sí en cuanto a diseño y facilidad de uso. Angular es pesado y complejo, React es el más demandado laboralmente (ver \ref{fig:techmagic}) pero su curva de aprendizaje es pronunciada y Vue es el framework más ligero y sencillo de usar y aprender, siendo recomendado para proyectos con equipos pequeños o unipersonales. 
+Tras un análisis de las características de los tres marcos de trabajo, se puede comprobar que técnicamente no hay grandes diferencias en cuanto a funcionalidad provista o patrones empleados, pero sí en cuanto a diseño y facilidad de uso. Angular es pesado y complejo, React es el más demandado laboralmente (ver \ref{fig:techmagic}) pero su curva de aprendizaje es pronunciada y Vue es el más ligero y sencillo de usar y aprender, siendo recomendado para proyectos con equipos pequeños o unipersonales. 
 
-En cuanto a popularidad según el número de estrellas en Github (tabla \ref{tab:fwgithub}), se puede concluir que React y Vue son los más populares, quedando Angular bastante por detrás.
+En cuanto a popularidad según el número de estrellas en Github (tabla \ref{tab:fwgithub}), se puede concluir que React y Vue son los más populares, quedando Angular a una distancia considerable.
 
 \begin{center}
 	\begin{table}[htb]
@@ -216,12 +208,12 @@ En cuanto a popularidad según el número de estrellas en Github (tabla \ref{tab:f
 			Vue & 112 650  \\ 
 			\bottomrule
 		\end{tabular}
-		\caption{Estrellas en Github de los principales frameworks Javascript en Septiembre de 2018}
+		\caption{Estrellas en Github de los principales marcos de trabajo \textit{Javascript} en Septiembre de 2018}
 		\label{tab:fwgithub}
 	\end{table}
 \end{center}
 
-Por otra parte, a la vista una encuesta de stateofjs.com en 2017 (ver figura \ref{fig:stateofjs}) sobre una muestra de más de 28.000 desarrolladores de todo el mundo, si bien React es el jugador dominante, Vue está haciendo grandes progresos en detrimento de Angular, lo que podría suponer un desafío para el liderazgo de React en 2018 y años posteriores.
+Por otra parte, a la vista una encuesta de \textit{stateofjs.com} en 2017 (ver figura \ref{fig:stateofjs}) sobre una muestra de más de 28.000 desarrolladores de todo el mundo, si bien React es el jugador dominante, Vue está haciendo grandes progresos en detrimento de Angular, lo que podría suponer un desafío para el liderazgo de React en 2018 y años posteriores.
 
 
 \begin{figure}[h] 
@@ -238,7 +230,7 @@ Por otra parte, a la vista una encuesta de stateofjs.com en 2017 (ver figura \re
 	\caption{Ofertas de trabajo por \textit{framework} JS según Medium.com a través de Indeed.com\cite{techmagic01}} \label{fig:techmagic}
 \end{figure}
 
-Cabe destacar en esta memoria que Vue fue propuesto como alternativa para el desarrollo del proyecto por los miembros del \textit{W3C RDFJS Community Group}, como puede comprobarse en la figura \ref{fig:gitter02}.
+Cabe destacar en esta memoria que\textbf{ Vue fue propuesto como alternativa para el desarrollo del proyecto por los miembros del \textit{W3C RDFJS Community Group}}, como puede comprobarse en la figura \ref{fig:gitter02}.
 
 \begin{figure}[h] 
 	\centering
@@ -257,26 +249,26 @@ Una vez analizados los trabajos previos existentes en \ref{trabajosprevios} y la
 
 
 \begin{itemize}
-	\item En primer lugar, será necesario utilizar un sistema de control de versiones para el código desarrollado. Actualmente, el más utilizado es \textit{git}, y la plataforma con mayor número de desarrolladores, \textit{Github} (28 millones, según la propia Github\footnote{https://github.com/search?q=type:user\&type=Users}). Una cuenta gratuita bastará para alojar el código fuente y la documentación del proyecto, si bien \textit{Github} ofrece cuentas privadas con duración limitada para estudiantes universitarios.
+	\item En primer lugar, será necesario utilizar un sistema de control de versiones para el código desarrollado. Actualmente, el más utilizado es \textit{git}, y la plataforma con mayor número de desarrolladores, Github (28 millones, según la propia Github\footnote{\url{https://github.com/search?q=type:user\&type=Users}}). Una cuenta gratuita bastará para alojar el código fuente y la documentación del proyecto, si bien \textit{Github} ofrece cuentas privadas con duración limitada para estudiantes universitarios.
 	\item Para llevar a cabo la planificación y evolución diaria de las tareas, se utilizará un plan gratuito de \textit{Trello} (lo cual se detalla en profundidad en la subsección \ref{subsec:agileplanning})
-	\item A la vista de los objetivos del proyecto, Javascript ES6 parece la tecnología más adecuada para su desarrollo. Dada la inexperiencia del autor en esta tecnología, se proponen las siguientes referencias bibliográficas y de formación \textit{online}:
+	\item A la vista de los objetivos del proyecto, \textit{Javascript} ES6 parece la tecnología más adecuada para su desarrollo. Dada la inexperiencia del autor en esta tecnología, se proponen las siguientes referencias bibliográficas y de formación \textit{online}:
 	 \begin{itemize}
 	 	\item \textit{Get Programming With Javascript Next}, JD Isaacks\cite{isaacks01}.
-	 	\item Curso en la plataforma Udemy\footnote{https://www.udemy.com}: \textit{ES6 Javascript: The Complete Developer's Guide}, Stephen Grider\cite{grider01}.
-	 	\item Curso en la plataforma Udemy: Working with Javascript Streams\cite{stoneriver01}.
+	 	\item Curso en la plataforma Udemy\footnote{\url{https://www.udemy.com}}: \textit{ES6 Javascript: The Complete Developer's Guide}, Stephen Grider\cite{grider01}.
+	 	\item Curso en la plataforma Udemy: \textit{Working with Javascript Streams}\cite{stoneriver01}.
 	 \end{itemize}
-	\item Analizadas las distintas implementaciones de RDF y SPARQL en Javascript y, siguiendo las recomendaciones del \textit{W3C RDFJS Community Group}, se propone el uso inicial de los siguientes recursos:
+	\item Analizadas las distintas implementaciones de RDF y SPARQL en \textit{Javascript} y, siguiendo las recomendaciones del \textit{W3C RDFJS Community Group}, se propone el uso inicial de los siguientes recursos:
 		 \begin{itemize}
 		\item RDF-Ext como biblioteca para trabajar con la API de RDF, siguiendo los estándares existentes.
 		\item Comunica para las consultas SPARQL, dado que aún con los riesgos inherentes que conlleva la utilización de un producto aún en desarrollo, es la única plataforma que puede responder a las necesidades del proyecto.
 	\end{itemize}
-	\item Tras el estudio de la situación actual de los framerworks de front-end Javascript y, teniendo en cuenta asimismo las recomendaciones del\textit{ W3C RDFJS Community Group}, se opta por Vue para el proyecto dada su gran proyección y su curva de aprendizaje suave. En concreto, se propone utilizar los siguientes recursos:
+	\item Tras el estudio de la situación actual de los marcos de trabajo de frontend Javascript y, teniendo en cuenta asimismo las recomendaciones del\textit{ W3C RDFJS Community Group}, se opta por Vue para el proyecto dada su gran proyección y su curva de aprendizaje suave. En concreto, se propone utilizar los siguientes recursos:
 	 \begin{itemize}
 		\item Curso en la plataforma Udemy:\textit{ Vue JS 2 - The Complete Guide}, Maximilian Schwarzmüller\cite{max01}, un referente en la comunidad de desarrolladores de Vue.
 		\item Curso en la plataforma Udemy:\textit{ The Ultimate Vue JS 2 Developers Course}, Anthony Gore\cite{gore01}. Otro referente importante.
 		\item \textit{Vue.js Design Patterns and Best Practices}, Paul Halliday\cite{halliday01}.
 	\end{itemize}
-	\item Como entorno de desarrollo, el autor de este proyecto ya contaba con una licencia de estudiante de WebStorm de Jetbrains\footnote{https://www.jetbrains.com/webstorm/}, uno de los entornos integrados de desarrollo (IDE) más completos y modernos para Javascript existentes en la actualidad. Soporta Javascript de forma nativa, depuración con el navegador y frameworks como Vue, React o Angular, además de facilidades de pruebas unitarias, análisis estático de código, análisis de rendimiento, etc.
+	\item Como entorno de desarrollo, el autor de este proyecto ya contaba con una licencia de estudiante de WebStorm de Jetbrains\footnote{\url{https://www.jetbrains.com/webstorm/}}, uno de los entornos integrados de desarrollo (IDE) más completos y modernos para \textit{Javascript }existentes en la actualidad. Soporta \textit{Javascript} de forma nativa, depuración con el navegador y marcos de trabajo como Vue, React o Angular, además de facilidades de pruebas unitarias, análisis estático de código, análisis de rendimiento, etc.
 
 \end{itemize}
 

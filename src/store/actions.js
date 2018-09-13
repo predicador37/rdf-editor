@@ -1,4 +1,3 @@
-import RdfConstructs from '../utils/RdfConstructs'
 // TODO convention: parameters must be of type string
 
 const addTriple = (context, {subject, predicate, object}) => {

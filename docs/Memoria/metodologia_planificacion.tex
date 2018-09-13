@@ -4,7 +4,7 @@ La metodología y la planificación son dos labores obligadas en cualquier proyect
 
 \section{Metodología}
 
-Para acometer este proyecto, se han valorado dos familias de metodologías de desarrollo de \textit{software}:
+Para acometer este proyecto, se han valorado dos familias de metodologías de desarrollo de software:
 
 \begin{enumerate}
 	\item Metodologías en cascada (\textit{Waterfall})
@@ -26,7 +26,7 @@ Es decir, se basa en la separación entre diseño y construcción (o entre creativi
 
 La propuesta de Royce,tal y como se desprende de la lectura del artículo original, describía el modelo en cascada como la \blockquote[{\cite{royce01}}]{descripción más simple} que solo funcionaría para los proyectos más sencillos. Irónicamente, este mensaje malentendido ha sido el origen de la popularidad de la metodología en cascada, que hoy en día se sigue promoviendo en muchos casos por inercia, desconocimiento, comodidad o ilusión de control sobre el proyecto.
  
-Lamentablemente, en la \textit{Ingeniería de Software} los pesos de diseño y construcción están invertidos con respecto a otras ingenierías, siendo el \textit{software} un dominio de cambio y alta inestabilidad. El desarrollo de \textit{software} es, intrínsecamente, una labor creativa; y la creatividad no es fácilmente predecible. Esto ha dado lugar a que los desarrollos tradicionales adolezcan de ciertos problemas{\cite{larman01}}:
+Lamentablemente, en la Ingeniería de Software los pesos de diseño y construcción están invertidos con respecto a otras ingenierías, siendo el software un dominio de cambio y alta inestabilidad. El desarrollo de software es, intrínsecamente, una labor creativa; y la creatividad no es fácilmente predecible. Esto ha dado lugar a que los desarrollos tradicionales adolezcan de ciertos problemas{\cite{larman01}}:
 
 \begin{itemize}
 	\item Existencia de muchos requisitos vagos o especulativos y diseño detallado por adelantado.
@@ -38,13 +38,12 @@ Lamentablemente, en la \textit{Ingeniería de Software} los pesos de diseño y con
 	\item Se basa en estimaciones y planificación ``fiables''.
 \end{itemize}
 
-Entre los estudios que ratifican las afirmaciones anteriores, cabe citar los siguientes:
+Entre los estudios que ratifican las afirmaciones anteriores, cabe citar, entre otros, los siguientes:
 
 \begin{itemize}
 	\item Informe Chaos 2015\cite{chaos15}.
 	\item \textit{Dr. Dobb's Journal article The Non'Existent Software Crisis: Debunking the Chaos Report}\cite{ambler01}.
 	\item Encuesta de Gartner\cite{mieritz01}.
-    \item TODO
 \end{itemize}
 
 Por tanto, atendiendo a esta exposición y considerando que el proyecto en cuestión presentaba un alto nivel de incertidumbre debido a su alto componente en investigación del estado tecnológico actual, se ha optado por utilizar un enfoque metodológico incremental e iterativo, puesto que:
@@ -55,7 +54,7 @@ Por tanto, atendiendo a esta exposición y considerando que el proyecto en cuesti
 	\item Fuerza a que los inevitables cambios en requisitos sucedan en fases tempranas del proyecto.
 \end{itemize}
 
-Entre sus características es posible citar:
+Entre las características de este enfoque incremental e iterativo, es posible citar:
 
 \begin{itemize}
 	\item Se trabaja sobre subconjuntos de funcionalidad (\textit{features}).
@@ -216,7 +215,7 @@ Con respecto a la planificación inicial, se tiene que:
 
 \begin{itemize}
 	\item El proyecto se ha retrasado un total de ocho semanas.
-	\item El período de formación llevó al menos dos semanas más de lo esperado (en realidad, el aprendizaje del \textit{framework Vue} ha estado presente a lo largo de prácticamente todo el desarrollo del proyecto).
+	\item El período de formación llevó al menos dos semanas más de lo esperado (en realidad, el aprendizaje del marco de trabajo Vue ha estado presente a lo largo de prácticamente todo el desarrollo del proyecto).
 	\item El desarrollo del producto ha consumido seis semanas más de las previstas inicialmente.
 	\item La memoria se ha redactado en dos semanas menos con respecto a la estimación inicial.
 \end{itemize} 
@@ -224,11 +223,11 @@ Con respecto a la planificación inicial, se tiene que:
 Las desviaciones surgidas con respecto a la planificación inicial tienen su explicación en los siguientes motivos:
 
 \begin{itemize}
-	\item El alto grado de incertidumbre a la hora de estimar la planificación inicial, dado que se desconocía cuál era la situación actual del ecosistema tecnológico de \textit{front-end web} y su integración con las tecnologías de la Web Semántica.
-	\item La curva de aprendizaje de \textit{Vue}, si bien es considerada más suave que la de sus competidores (\textit{React, Angular}) fue mayor de lo esperado. El bajo grado de familiarización del autor del proyecto con las tecnologías de \textit{front-end} y, especialmente, \textit{Javascript ES6+}, no facilitó el aprendizaje.
-	\item El\textbf{ bajo nivel de madurez de las bibliotecas existentes} para la manipulación de RDF en Javascript, así como la heterogeneidad y poca estabilidad de estas implementaciones, ha suscitado muchas dudas sobre cuáles utilizar y cómo enfocar su integración con \textit{frameworks} más maduros como \textit{Vue}.
-	\item La \textbf{práctica ausencia de bibliotecas} o componentes de interacción con SPARQL \textbf{conformes a la especificación estándar de la interfaz} \textit{rdf.js}{\cite{rdfjs01}} (que por otra parte, es un borrador de 2017) ha puesto en peligro la viabilidad del proyecto. La plataforma finalmente utilizada, \textit{Comunica}{\cite{comunica01}}, aún no tiene una versión estable muchos de sus módulos (concretamente, el endpoint SPARQL utilizado para el proyecto no la tiene), con lo que ha sido necesario estar en contacto directo con sus autores y colaborar con ellos en la revisión de defectos o \textit{bugs} y dependiendo por tanto de sus tiempos de respuesta (hay que tener en cuenta que la plataforma es \textit{opensource} y por tanto no existe acuerdo de nivel de servicio alguno.)
-	\item La dificultad existente en llevar a cabo un análisis de requisitos a través de una plataforma online de colaboración como puede ser \textit{Skype}: para constatar este hecho no hay más que verificar el cambio de rumbo del proyecto una vez mantenida la reunión presencial, que sirvió para definir objetivos más claros y comprender las necesidades del Departamento.
+	\item El alto grado de incertidumbre a la hora de estimar la planificación inicial, dado que se desconocía cuál era la situación actual del ecosistema tecnológico de \textit{frontend} web y su integración con las tecnologías de la Web Semántica.
+	\item La curva de aprendizaje de Vue, si bien es considerada más suave que la de sus competidores (React, Angular) fue mayor de lo esperado. El bajo grado de familiarización del autor del proyecto con las tecnologías de \textit{frontend} y, especialmente, \textit{Javascript ES6+}, no facilitó el aprendizaje.
+	\item El\textbf{ bajo nivel de madurez de las bibliotecas existentes} para la manipulación de RDF en \textit{Javascript}, así como la heterogeneidad y poca estabilidad de estas implementaciones, ha suscitado muchas dudas sobre cuáles utilizar y cómo enfocar su integración con marcos de trabajo más maduros como Vue.
+	\item La \textbf{práctica ausencia de bibliotecas} o componentes de interacción con SPARQL \textbf{conformes a la especificación estándar de la interfaz} \textit{rdf.js}{\cite{rdfjs01}} (que por otra parte, es un borrador de 2017) ha puesto en peligro la viabilidad del proyecto. La plataforma finalmente utilizada, Comunica{\cite{comunica01}}, aún no tiene una versión estable muchos de sus módulos (concretamente, el \textit{endpoint} SPARQL utilizado para el proyecto no la tiene), con lo que ha sido necesario estar en contacto directo con sus autores y colaborar con ellos en la revisión de defectos o \textit{bugs} y dependiendo por tanto de sus tiempos de respuesta (hay que tener en cuenta que la plataforma es \textit{opensource} y por tanto no existe acuerdo de nivel de servicio alguno.)
+	\item La dificultad existente en llevar a cabo un análisis de requisitos a través de una plataforma online de colaboración como puede ser Skype: para constatar este hecho no hay más que verificar el cambio de rumbo del proyecto una vez mantenida la reunión presencial, que sirvió para definir objetivos más claros y comprender las necesidades del Departamento.
 \end{itemize} 
 
 A pesar de todo ello, el autor de este proyecto está satisfecho con el nivel de conocimiento adquirido en el ámbito de todas las tecnologías empleadas y el tiempo consumido para obtener como resultado un producto desplegado en producción y listo para utilizar.
@@ -236,7 +235,7 @@ A pesar de todo ello, el autor de este proyecto está satisfecho con el nivel de 
 
 \subsection{Planificación ágil} \label{subsec:agileplanning}
 
-Si bien para la planificación global del proyecto se han utilizado herramientas tales como el \textit{diagrama de Gantt}, para gestionar el trabajo del día a día otro enfoque ha sido necesario. En el contexto de metodologías ágiles de desarrollo de software de tipo incremental e iterativo como Extreme Programming, \textbf{las tareas de planificación adquieren un carácter adaptativo} muy distinto del que presenta una planificación tradicional con una metodología de desarrollo en cascada, por ejemplo.
+Si bien para la planificación global del proyecto se han utilizado herramientas tales como el \textit{diagrama de Gantt}, para gestionar el trabajo del día a día otro enfoque ha sido necesario. En el contexto de metodologías ágiles de desarrollo de software de tipo incremental e iterativo como \textit{Extreme Programming}, \textbf{las tareas de planificación adquieren un carácter adaptativo} muy distinto del que presenta una planificación tradicional con una metodología de desarrollo en cascada, por ejemplo.
 
 La planificación ágil es un proceso en continua evolución, también iterativo e incremental como las metodologías a las que pertenece, basada en ciclos del tipo:
 
@@ -248,7 +247,7 @@ La planificación ágil es un proceso en continua evolución, también iterativo e i
 
 En este caso, la estimación de tareas se llevó a cabo de forma heurística, utilizando la experiencia del autor y el conocimiento del contexto existente en el momento de la estimación. En base a ello, la priorización (ordenación) de las tareas tenía lugar inmediatamente, relegando a la estimación a un segundo plano.
 
-Para gestionar estas tareas, se ha optado por utilizar como herramienta Kanban. Un tablero Kanban puede definirse como un dispositivo de señalización que introduce el flujo de trabajo de un proceso a un ritmo manejable. Presenta las siguientes características:
+Para gestionar estas tareas, se ha optado por utilizar como herramienta Kanban\footnote{\url{https://es.atlassian.com/agile/kanban}}. Un tablero Kanban puede definirse como un dispositivo de señalización que introduce el flujo de trabajo de un proceso a un ritmo manejable. Presenta las siguientes características:
 
 
 \begin{itemize}

@@ -1,12 +1,12 @@
 export default {
   foaf: {
     name: 'foaf',
-    url: 'https://ist.githubusercontent.com/predicador37/cad4fe8295d8227017fe337733c51245/raw/a988c2fe7cd4ee9efe07395a228007ee16e7e67e/foaf.ttl',
+    url: 'https://gist.githubusercontent.com/predicador37/cad4fe8295d8227017fe337733c51245/raw/a988c2fe7cd4ee9efe07395a228007ee16e7e67e/foaf.ttl',
     active: false
   },
   dc: {
-    name: 'dublin core',
-    url: 'http://purl.org/dc/terms/',
+    name: 'dc',
+    url: 'https://gist.githubusercontent.com/predicador37/ee548d0c8d55d1d53ca112c80463f2ec/raw/4751cd2cb12eadcde2e9b039c3c6773c78876e93/dc.ttl',
     active: false
   },
   rdf: {

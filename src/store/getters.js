@@ -55,7 +55,7 @@ const getDefaultResources = (state) => (resource) => {
     if (state.rdfConstructs[key].type === resource) {
       results.push(state.rdfConstructs[key].value)
     }
-   })
+  })
   return results
 }
 

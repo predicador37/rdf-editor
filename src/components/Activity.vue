@@ -2,7 +2,7 @@
 <div id="activity">
   <v-container fluid>
     <v-layout row wrap>
-      <v-flex px-3 py-3 md6 xs12>
+      <v-flex px-3 py-3 md12 xs12>
         <v-card height="100%">
           <v-card-title primary-title>
             <div class="headline"> Carga de actividad</div>
@@ -10,7 +10,7 @@
 
           <v-card-text>
             <p>Si lo deseas, puedes importar una actividad desde un archivo de texto en formato Markdown.</p>
-            <file-loader @load-error="handleError($event)" @load="setActivity($event)" @file-loaded="handleFileLoaded($event)"></file-loader>
+            <file-loader @load-error="handleError($event)" @load="handleLoadEvent($event)" accepted="text/markdown"></file-loader>
           </v-card-text>
           <v-snackbar
             v-model="snackbar"
@@ -27,7 +27,9 @@
           </v-snackbar>
         </v-card>
       </v-flex>
-      <v-flex px-3 py-3 md6 xs12>
+    </v-layout>
+    <v-layout row wrap>
+      <v-flex px-3 py-3 md12 xs12>
         <v-card height="100%">
           <v-card-title primary-title>
             <div class="headline"> Contenido de la actividad</div>
@@ -61,7 +63,8 @@
     data () {
       return {
         snackbar: false,
-        snackbarMessage: 'Archivo importado en el almacén',
+        successMessage: 'Archivo importado con éxito',
+        snackbarMessage: 'Archivo importado con éxito',
         color: 'primary'
       }
     },
@@ -71,10 +74,15 @@
         this.color = 'error'
         this.snackbar = true
       },
-      handleFileLoaded (event) {
-        this.snackbarMessage = event
-        this.color = 'success'
-        this.snackbar = true
+      handleLoadEvent (event) {
+        try {
+          this.setActivity(event)
+          this.snackbarMessage = this.successMessage
+          this.color = 'success'
+          this.snackbar = true
+        } catch (error) {
+          this.handleError(error)
+        }
       }
     }
   }

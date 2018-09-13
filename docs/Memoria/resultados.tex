@@ -1,3 +1,41 @@
 \chapter{Resultados}
 
-<....>
+El presente proyecto ha generado los siguientes entregables:
+
+\begin{itemize}  
+	\item Código fuente de la aplicación desarrollada en Javascript / Vue.
+	\item Código fuente de las baterías de pruebas en Javascript / Jest.
+	\item Código fuente de la presente memoria en \LaTeX y binario en PDF.
+	\item Aplicación desplegada en Firebase en \url{https://unedtfg-198720.firebaseapp.com/#/}
+	\item Tablero Trello con notas del proyecto en \url{https://trello.com/b/OXm3Sa2R/tfg-tecnolog\%C3\%ADas-sem\%C3\%A1nticas-uned} (en el momento de redacción de la presente memoria, de acceso privado).
+\end{itemize}
+
+El repositorio público en Github que alberga todo el código fuente citado es:
+
+
+\centerline{\url{https://github.com/predicador37/rdf-editor}}
+
+En general, el producto obtenido presenta una interfaz sobria, ordenada y efectiva que permite un rápido acceso a todas sus funcionalidades de consulta, carga de datos, modelado, etc. Es perfectamente válido para su trabajo con datos reales extraídos de otros conjuntos de datos de mayor tamaño y utilizable desde el primer momento sin requerir de más herramientas que un sencillo navegador compatible con \textit{Javascript 2015} (cualquiera de los navegadores más utilizados en sus últimas versiones lo es). También se ha generado, además de la documentación contenida en la presente memoria, un tablero Trello con notas interesantes, recursos bibliográficos, estructuración de tareas a bajo nivel, etc.
+
+En el cuadro \ref{verif-objetivos} se analiza en qué medida y de qué manera se ha tratado de dar cumplimiento a los objetivos marcados. 
+
+
+\vspace*{\baselineskip}
+\begin{center}
+	\begin{table}[htb]
+		\centering
+		\begin{tabular}{p{1cm}p{7cm}p{7cm}}
+			\toprule
+			id & Objetivo & Respuesta \\ \midrule
+			
+			1 &  Facilitar el aprendizaje y la \textbf{familiarización con tecnologías de la Web Semántica} a usuarios inexpertos. & Para verificar el cumplimiento de este objetivo será necesario utilizar la aplicación en producción con actividades reales de alumnos.  \\ \midrule
+			2 & Reducir al máximo los requisitos de uso de la herramienta para alcanzar el mayor público objetivo posible. & La herramienta no requiere de instalación para su uso; una vez desplegada en un servidor web, cuenta con ejemplos cargados por defecto con los que el alumno puede empezar a trabajar inmediatamente. \\ \midrule
+			3 & Ofrecer a los Equipos Docentes la posibilidad de \textbf{distribuir actividades formativas} auto-contenidas para que los alumnos trabajen sobre ellas en la herramienta. & La aplicación incorpora un módulo para cargar actividades manualmente desde texto en formato Markdown o a través de un servicio web remoto. Ver MOD-1 en \ref{sec:arquitectura-de-módulos} \\ \midrule
+			4 & Agrupar en un solo producto \textbf{funcionalidades básicas de edición y consulta sobre grafos RDF}, de cara a cubrir las expectativas educativas en este ámbito. & El sistema desarrollado consta de varios módulos, entre ellos uno de modelado básico y otro de consultas SPARQL, que el alumno puede utilizar de forma razonablemente autónoma. Ver MOD-4, MOD-6 en \ref{sec:arquitectura-de-módulos} \\ \midrule
+			5 & Permitir a los alumnos comprobar \textit{in situ} los efectos de sus acciones sobre un grafo RDF y ofrecerles la \textbf{flexibilidad suficiente} como para permitirles dar rienda suelta a su creatividad e inquietudes. & El grafo por defecto que proporciona la aplicación vuelve a recargarse cada vez que se refresca el navegador. El alumno es libre de realizar las operaciones que desee, incluso de índole destructiva, y el estado inicial de la aplicación se restablecerá fácilmente. Ver MOD-4, MOD-5 en \ref{sec:arquitectura-de-módulos} \\ \midrule
+			6 & Obtener un MVP que pueda ser evolucionado y poner su código a disposición de la comunidad educativa para revertir sobre ella su valor aportado. & El propio sistema es un MVP preparado para ser evolucionado con distintas características y mejoras sobre las desarrolladas inicialmente. \\ 
+			\bottomrule
+		\end{tabular}
+		\caption{Verificación del cumplimiento de los objetivos iniciales.}\label{verif-objetivos}
+	\end{table}
+\end{center}

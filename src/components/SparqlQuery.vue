@@ -8,7 +8,7 @@
     solo
     v-model="query"
     name="sparql_query"
-    auto-grow="true"
+    :auto-grow="true"
     label="Consulta SPARQL"
     value="SELECT ?s ?p ?o WHERE {?s ?p ?o .} LIMIT 100"
     hint="Consulta de ejemplo"
@@ -18,7 +18,7 @@
   <v-divider class="my-3"></v-divider>
   <div class="subheading my-3"> Cargar consulta</div>
 <div>
-    <file-loader title='Desde archivo' @load="loadSparqlQuery($event)" :extensions="['rq']" @file-loaded="snackbar = true"></file-loader>
+    <file-loader title='Desde archivo' @load="loadSparqlQuery($event)" :extensions="['rq']"></file-loader>
 </div>
   <div>
     <url-loader  title='Desde URL' @load="loadSparqlQuery($event)" @url-loaded="snackbar = true"></url-loader>
@@ -54,12 +54,16 @@
         if (this.external) {
           try {
             results = await this.executeExternalSparqlQuery(query, this.endpointURL)
-            console.log('wey ya')
           } catch (error) {
             this.$emit('error', error.message)
           }
         } else {
-          results = await this.executeInternalSparqlQuery(query)
+          try {
+            results = await this.executeInternalSparqlQuery(query)
+          } catch (error) {
+            console.log('THERE IS AN INTERNAL ERROR')
+            this.$emit('error', error.message)
+          }
         }
         this.$emit('emit-results', results)
         this.loading = false
@@ -84,7 +88,14 @@
               }).on('end', function () {
                 console.log(JSON.stringify(results))
                 resolve(results)
+              }).on('error', function (error) {
+                console.log('query error')
+                reject(error)
               })
+            })
+            .catch((error) => {
+              console.log('THIS IS THE ERROR')
+              reject(error)
             })
         })
       },
@@ -112,7 +123,7 @@
       }
     },
     beforeMount () {
-      //this.query = this.prefixes + 'SELECT ?s WHERE {?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>  <http://www.w3.org/2002/07/owl#Class> .} LIMIT 100'
+      // this.query = this.prefixes + 'SELECT ?s WHERE {?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>  <http://www.w3.org/2002/07/owl#Class> .} LIMIT 100'
       this.query = this.prefixes + 'SELECT ?s ?p ?o WHERE {?s ?p ?o .} LIMIT 100'
     }
   }

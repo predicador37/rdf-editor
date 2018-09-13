@@ -2,7 +2,7 @@
 <div id="vocabulary">
   <v-container fluid>
     <v-layout row wrap>
-      <v-flex px-3 py-3 md6 xs12>
+      <v-flex px-3 py-3 md12 xs12>
         <v-card height="100%">
           <v-card-title primary-title>
             <div class="headline"> Precargar vocabularios</div>
