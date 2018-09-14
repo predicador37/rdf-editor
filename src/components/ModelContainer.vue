@@ -15,7 +15,7 @@
         <v-layout row wrap>
           <v-flex pr-3 py-3 md6 xs12>
 
-                <resource-list  name="Clase" :type="rdfConstructs.owl_Class" :resources="classes" @add-resource="handleAddResource($event, rdfConstructs.owl_Class.value)" @change-resource="handleChangeResource($event)" @remove-resource="handleRemoveResource($event)" @edit-resource="handleEditResource($event)"></resource-list>
+                <resource-list  name="Clase" :baseUrl="baseUrl" :type="rdfConstructs.owl_Class" :resources="classes" @add-resource="handleAddResource($event, rdfConstructs.owl_Class.value)" @add-subclass="handleAddSubclass($event)" @change-resource="handleChangeResource($event)" @remove-resource="handleRemoveResource($event)" @edit-resource="handleEditResource($event)"></resource-list>
 
           </v-flex>
           <v-flex fixed  py-3 md6 xs12>
@@ -39,7 +39,19 @@
       </v-card>
     </v-tab-item>
   </v-tabs>
-
+  <v-snackbar
+    v-model="snackbar"
+    :color="color"
+  >
+    {{ snackbarMessage }}
+    <v-btn
+      dark
+      flat
+      @click="snackbar = false"
+    >
+      Cerrar
+    </v-btn>
+  </v-snackbar>
 </div>
 </template>
 
@@ -63,6 +75,10 @@
         editableClassData: ['rdfs_subClassOf', 'owl_equivalentClass', 'owl_disjointWith', 'rdfs_label', 'rdfs_comment', 'rdfs_seeAlso'],
         renderDetail: false,
         currentResource: '',
+        snackbar: false,
+        successMessage: 'Grafo modificado con éxito',
+        snackbarMessage: 'Grafo modificado con éxito',
+        color: 'primary',
         items: {
           name: 'Thing',
           children: [
@@ -92,7 +108,14 @@
         this.$set(this.relatedClasses, relatedClass, classes)
       },
       handleAddResource (resourceName, resourceType) {
-        this.addTriple({'subject': this.baseUrl + resourceName, 'predicate': this.rdfConstructs.rdf_type.value, 'object': resourceType})
+        try {
+          this.addTriple({'subject': resourceName, 'predicate': this.rdfConstructs.rdf_type.value, 'object': resourceType})
+          this.snackbarMessage = this.successMessage
+          this.color = 'success'
+          this.snackbar = true
+        } catch (error) {
+          this.handleError(error.message)
+        }
         // resourceType = resourceType.split('#')[1].toLowerCase()
         // using a string concatenation as parameter: 'add'+type to call the methods dynamically
         // this['add' + resourceType.charAt(0).toUpperCase() + resourceType.slice(1)](this.baseUrl + resourceName) // addClass
@@ -106,6 +129,29 @@
         this.getResources({'predicate': this.rdfConstructs.rdf_type.value, 'object': this.rdfConstructs.rdfs_Class.value}).then((results) => {
           this.classes.push(...results)
         })
+      },
+      handleAddProperty (subject, object, property) {
+        try {
+          this.addTriple({'subject': subject, 'predicate': property, 'object': object})
+          this.snackbarMessage = this.successMessage
+          this.color = 'success'
+          this.snackbar = true
+        } catch (error) {
+          this.handleError(error.message)
+        }
+        this.getResources({'predicate': this.rdfConstructs.rdf_type.value, 'object': this.rdfConstructs.owl_Class.value}).then((results) => {
+          this.classes = results
+        })
+        this.getResources({'predicate': this.rdfConstructs.rdf_type.value, 'object': this.rdfConstructs.rdfs_Class.value}).then((results) => {
+          this.classes.push(...results)
+        })
+      },
+      handleAddSubclass ({'resource': subject, 'parentClass': object}) {
+        console.log('HEY MAN')
+        console.log(subject)
+        console.log(object)
+        this.handleAddResource(subject, this.rdfConstructs.owl_Class.value)
+        this.handleAddProperty(subject, object, this.rdfConstructs.rdfs_subClassOf.value)
       },
       handleAddLiteralProperty (triple) {
         this.addClassLiteralProperty({subject: triple.resource, predicate: this.rdfConstructs[triple.propertyName].value, object: triple.literal})
@@ -142,7 +188,14 @@
         this.renderDetail = false
       },
       handleEditResource ({oldResource, resource}) {
-        this.editResource({'oldResource': oldResource, 'newResource': resource})
+        try {
+          this.editResource({'oldResource': oldResource, 'newResource': resource})
+          this.snackbarMessage = this.successMessage
+          this.color = 'success'
+          this.snackbar = true
+        } catch (error) {
+          this.handleError(error.message)
+        }
         console.log(JSON.stringify(this.dataset))
         this.getResources({'predicate': this.rdfConstructs.rdf_type.value, 'object': this.rdfConstructs.owl_Class.value}).then((results) => {
           this.classes = results
@@ -159,6 +212,11 @@
         for (const item of this.editableClassData) {
           this.getRelatedClasses(item)
         }
+      },
+      handleError (event) {
+        this.snackbarMessage = event
+        this.color = 'error'
+        this.snackbar = true
       }
     },
     beforeMount () {

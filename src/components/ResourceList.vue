@@ -13,7 +13,7 @@
               middle
               right
               color="pink"
-              @click.native.stop="dialog = !dialog"
+              @click.native.stop="openAddDialog()"
             >
 
               <v-icon>add</v-icon>
@@ -95,6 +95,18 @@
                   <v-spacer></v-spacer>
                   <v-btn flat color="primary" @click.native.stop="editResourceHandler(oldResource, resourceToEdit)">Guardar</v-btn>
                 </v-card-actions>
+                <v-dialog v-model="subclassDialog" max-width="500px">
+                  <v-card height="100%">
+                    <v-card-text>
+                      <v-text-field v-model="newResourceName" label="subclase"></v-text-field>
+                      <small class="grey--text">Añadir subclase de {{classToSubclass}}</small>
+                    </v-card-text>
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                      <v-btn flat color="primary" @click.native="addSubclassHandler(newResourceName, classToSubclass)">Guardar</v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
               </v-card>
             </v-dialog>
       </v-card-text>
@@ -107,6 +119,10 @@
   export default {
     props: {
       name: {
+        type: String,
+        required: true
+      },
+      baseUrl: {
         type: String,
         required: true
       },
@@ -126,7 +142,9 @@
         dialog: false,
         deleteDialog: false,
         editDialog: false,
+        subclassDialog: false,
         resourceToDelete: '',
+        classToSubclass: '',
         resourceToEdit: '',
         oldResource: '',
         newResourceName: '',
@@ -134,7 +152,7 @@
         actions: [
           {title: 'Editar', method: 'openEditDialog'},
           {title: 'Eliminar ', method: 'openDeleteDialog'},
-          {title: 'Añadir subclase', method: ''}
+          {title: 'Añadir subclase', method: 'openAddSubclassDialog'}
         ],
         items2: {
           name: 'Thing',
@@ -158,6 +176,12 @@
         this.newResourceName = ''
         this.dialog = false
       },
+      addSubclassHandler (resource, parentClass) {
+        // emit event to parent with the resourceName
+        this.$emit('add-subclass', {resource, parentClass})
+        this.newResourceName = ''
+        this.subclassDialog = false
+      },
       deleteResourceHandler (resource) {
         this.$emit('remove-resource', resource)
         this.deleteDialog = false
@@ -165,6 +189,10 @@
       editResourceHandler (oldResource, resource) {
         this.$emit('edit-resource', {oldResource, resource})
         this.editDialog = false
+      },
+      openAddDialog () {
+        this.newResourceName = this.baseUrl
+        this.dialog = !this.dialog
       },
       openDeleteDialog (resource) {
         this.resourceToDelete = resource
@@ -174,6 +202,11 @@
         this.resourceToEdit = resource
         this.oldResource = resource
         this.editDialog = !this.editDialog
+      },
+      openAddSubclassDialog (resource) {
+        this.classToSubclass = resource
+        this.newResourceName = this.baseUrl
+        this.subclassDialog = !this.subclassDialog
       },
       executeAction (action, itemValue) {
         console.log(action.method)

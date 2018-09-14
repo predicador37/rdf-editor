@@ -1,7 +1,9 @@
 // TODO convention: parameters must be of type string
 
 const addTriple = (context, {subject, predicate, object}) => {
-  if (subject != null && predicate != null && object != null) {
+  if (subject !== null && subject !== '' && predicate != null && object != null) {
+    console.log('SUBJECT')
+    console.log(subject)
     context.commit('ADD_QUAD_FROM_IRI', {
       subject: subject, // subject must be an IRI
       predicate: predicate,
@@ -21,7 +23,7 @@ const removeResource = (context, resource) => {
 }
 
 const editResource = (context, {oldResource, newResource}) => {
-  if (oldResource != null && newResource != null) {
+  if (oldResource != null && newResource != null && newResource !== '') {
     context.getters.getTriplesMatchingSubject(oldResource).forEach((triple) => {
       context.dispatch('removeQuad', {subject: triple.subject.value, predicate: triple.predicate.value, object: triple.object.value})
       context.dispatch('addTriple', {subject: newResource, predicate: triple.predicate.value, object: triple.object.value})
