@@ -24,10 +24,16 @@
               <v-card-text>
                 <v-text-field v-model="newResourceName" :label="name"></v-text-field>
                 <small class="grey--text">Añadir {{name}}</small>
+                <v-select
+                  :items="types"
+                  v-model="newResourceType"
+                  :value="defaultType"
+                  label="Tipo de recurso"
+                ></v-select>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn flat color="primary" @click.native="addResourceHandler">Guardar</v-btn>
+                <v-btn flat color="primary" @click.native="addResourceHandler(newResourceName, newResourceType.value)">Guardar</v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>
@@ -99,11 +105,11 @@
                   <v-card height="100%">
                     <v-card-text>
                       <v-text-field v-model="newResourceName" label="subclase"></v-text-field>
-                      <small class="grey--text">Añadir subclase de {{classToSubclass}}</small>
+                      <small class="grey--text">Añadir sub{{name.toLowerCase()}} de {{resourceToSubresource}}</small>
                     </v-card-text>
                     <v-card-actions>
                       <v-spacer></v-spacer>
-                      <v-btn flat color="primary" @click.native="addSubclassHandler(newResourceName, classToSubclass)">Guardar</v-btn>
+                      <v-btn flat color="primary" @click.native="addSubresourceHandler(newResourceName, resourceToSubresource)">Guardar</v-btn>
                     </v-card-actions>
                   </v-card>
                 </v-dialog>
@@ -129,6 +135,10 @@
       resources: {
         type: Array,
         required: true
+      },
+      types: {
+        type: Array,
+        required: true
       }
     },
     components: {
@@ -138,21 +148,22 @@
       return {
         text: 'prueba',
         headers: [],
-        type: this.resourceType,
+        defaultType: null,
         dialog: false,
         deleteDialog: false,
         editDialog: false,
         subclassDialog: false,
         resourceToDelete: '',
-        classToSubclass: '',
+        resourceToSubresource: '',
         resourceToEdit: '',
         oldResource: '',
         newResourceName: '',
+        newResourceType: '',
         classes: [],
         actions: [
           {title: 'Editar', method: 'openEditDialog'},
           {title: 'Eliminar ', method: 'openDeleteDialog'},
-          {title: 'Añadir subclase', method: 'openAddSubclassDialog'}
+          {title: 'Añadir sub' + this.name.toLowerCase(), method: 'openAddSubresourceDialog'}
         ],
         items2: {
           name: 'Thing',
@@ -170,15 +181,15 @@
       }
     },
     methods: {
-      addResourceHandler () {
+      addResourceHandler (newResourceName, newResourceType) {
         // emit event to parent with the resourceName
-        this.$emit('add-resource', this.newResourceName)
+        this.$emit('add-resource', {newResourceName, newResourceType})
         this.newResourceName = ''
         this.dialog = false
       },
-      addSubclassHandler (resource, parentClass) {
+      addSubresourceHandler (resource, parentResource) {
         // emit event to parent with the resourceName
-        this.$emit('add-subclass', {resource, parentClass})
+        this.$emit('add-subresource', {resource, parentResource})
         this.newResourceName = ''
         this.subclassDialog = false
       },
@@ -203,8 +214,8 @@
         this.oldResource = resource
         this.editDialog = !this.editDialog
       },
-      openAddSubclassDialog (resource) {
-        this.classToSubclass = resource
+      openAddSubresourceDialog (resource) {
+        this.resourceToSubresource = resource
         this.newResourceName = this.baseUrl
         this.subclassDialog = !this.subclassDialog
       },
@@ -222,6 +233,8 @@
     created () {
       this.classes = this.resources  // Copy prop to local variable
       this.headers.push({'text': this.name, 'value': this.name})
+      this.defaultType = this.types[0]
+      this.newResourceType = this.types[0]
       console.log(this.headers)
     }
   }

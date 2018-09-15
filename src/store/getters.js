@@ -45,6 +45,10 @@ const getTriplesMatchingObject = (state) => (object) => {
   return state.n3store.getQuads(null, null, rdf.namedNode(object), null)
 }
 
+const getTriplesMatchingSubjectAndObject = (state) => ({subject, object}) => {
+  return state.n3store.getQuads(rdf.namedNode(subject), null, rdf.namedNode(object), null)
+}
+
 const getStoreQuads = (state) => (s, p, o, g) => {
   return state.n3store.getQuads(s, p, o, g)
 }
@@ -70,6 +74,7 @@ export default {
   getSubjectListByPredicateAndObject,
   getSubjectListByPredicate,
   getObjectListByPredicateAndSubject,
+  getTriplesMatchingSubjectAndObject,
   getTriplesMatchingSubject,
   getTriplesMatchingObject,
   getStoreQuads,
