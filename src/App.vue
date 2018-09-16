@@ -30,7 +30,15 @@
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title v-text="title"></v-toolbar-title>
       <v-spacer></v-spacer>
-
+      <v-tooltip left>
+      <v-btn icon
+             slot="activator"
+             @click.stop="dialog = !dialog"
+      >
+        <v-icon>mdi-book-open-page-variant</v-icon>
+      </v-btn>
+        <span>Ver actividad</span>
+      </v-tooltip>
     </v-toolbar>
     <v-content>
 
@@ -65,15 +73,33 @@
         </v-flex>
       </v-layout>
     </v-footer>
+    <v-dialog v-model="dialog" max-width="1000px">
+      <v-card height="100%">
+        <v-card-title primary-title>
+          <div class="headline"> Contenido de la actividad</div>
+        </v-card-title>
+        <v-card-text>
+          <markdown-viewer v-if="activity" class="pa-3" :mdText="activity"></markdown-viewer>
+          <p v-else>Aún no se ha cargado ninguna actividad.</p>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn flat color="primary" @click.native="dialog=!dialog">Cerrar</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-app>
 </template>
 
 <script>
+  import {mapGetters} from 'vuex'
+  import MarkdownViewer from '@/components/MarkdownViewer'
   export default {
 
     data () {
       return {
         drawer: null,
+        dialog: false,
         miniVariant: false,
         clipped: false,
         items: [{
@@ -114,6 +140,10 @@
         title: 'RDFplay'
       }
     },
-    name: 'App'
+    computed: {...mapGetters(['activity'])},
+    name: 'App',
+    components: {
+      'markdown-viewer': MarkdownViewer
+    },
   }
 </script>

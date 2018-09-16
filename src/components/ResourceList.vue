@@ -231,7 +231,6 @@
 
     name: 'ResourceList',
     created () {
-
       this.classes = this.resources  // Copy prop to local variable
       this.headers.push({'text': this.name, 'value': this.name})
       this.defaultType = this.types[0]
