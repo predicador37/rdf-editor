@@ -27,13 +27,14 @@
       app
       dark
       class="primary">
-      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+      <v-toolbar-side-icon aria-label="Menú" @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title v-text="title"></v-toolbar-title>
       <v-spacer></v-spacer>
       <v-tooltip left>
       <v-btn icon
              slot="activator"
              @click.stop="dialog = !dialog"
+             aria-label="Ver actividad"
       >
         <v-icon>mdi-book-open-page-variant</v-icon>
       </v-btn>

@@ -5,7 +5,7 @@
         <v-flex px-3 py-3 md12 xs12>
           <v-card height="100%">
             <v-card-title primary-title>
-              <div class="headline"> Carga de actividad</div>
+              <h1 class="headline"> Carga de actividad</h1>
             </v-card-title>
             <v-card-text>
               <p>Si lo deseas, puedes importar una actividad desde un archivo de texto en formato Markdown.</p>
@@ -32,7 +32,7 @@
         <v-flex px-3 py-3 md12 xs12>
           <v-card height="100%">
             <v-card-title primary-title>
-              <div class="headline"> Contenido de la actividad</div>
+              <h1 class="headline"> Contenido de la actividad</h1>
             </v-card-title>
             <v-card-text>
               <markdown-viewer class="pa-3" :mdText="activity"></markdown-viewer>

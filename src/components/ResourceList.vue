@@ -2,8 +2,8 @@
   <div>
     <v-card height="100%">
       <v-card-title primary-title>
-        <div class="headline"> {{name}}
-        </div>
+        <h1 class="headline"> {{name}}
+        </h1>
         <v-fab-transition>
           <v-btn
             absolute
@@ -13,6 +13,7 @@
             middle
             right
             color="pink"
+            aria-label="Añadir recurso"
             @click.native.stop="openAddDialog()"
           >
             <v-icon>add</v-icon>
@@ -58,6 +59,7 @@
                     slot="activator"
                     light
                     icon
+                    aria-label="Menú de acciones para recurso"
                   >
                     <v-icon>more_vert</v-icon>
                   </v-btn>

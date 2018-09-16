@@ -7,7 +7,7 @@
             <v-container fill-height fluid>
               <v-layout align-center>
                 <v-flex>
-                  <h3 class="display-3">{{welcome_message}}</h3>
+                  <h1 class="display-3">{{welcome_message}}</h1>
                   <span class="subheading">{{welcome_description}}</span>
                   <v-divider class="my-3"></v-divider>
                   <div class="title mb-3"> ¡Elige con qué quieres trabajar!</div>

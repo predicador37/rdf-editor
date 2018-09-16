@@ -5,7 +5,7 @@
         <v-flex px-3 py-3 md6 xs12>
           <v-card height="100%">
             <v-card-title primary-title>
-              <div class="headline"> Importar grafo</div>
+              <h1 class="headline"> Importar grafo</h1>
             </v-card-title>
             <v-card-text>
               <p>Si lo deseas, puedes importar un grafo desde un archivo de texto en formato N3 o Turtle.</p>
@@ -43,7 +43,7 @@
         <v-flex px-3 py-3 md6 xs12>
           <v-card height="100%">
             <v-card-title primary-title>
-              <div class="headline"> Exportar grafo</div>
+              <h1 class="headline"> Exportar grafo</h1>
             </v-card-title>
             <v-card-text>
               <p>Asimismo, puedes exportar tu grafo de trabajo a un archivo de texto en formato JSON-ld o Turtle.</p>
@@ -64,7 +64,7 @@
         <v-flex px-3 py-3 md6 xs12>
           <v-card height="100%">
             <v-card-title primary-title>
-              <div class="headline"> Añadir a grafo</div>
+              <h1 class="headline"> Añadir a grafo</h1>
             </v-card-title>
             <v-card-text>
               <p>También es posible importar las tripletas de un grafo externo al grafo de trabajo.</p>

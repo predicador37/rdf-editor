@@ -5,7 +5,7 @@
         <v-flex px-3 py-3 md6 xs12>
           <v-card>
             <v-card-title primary-title>
-              <div class="headline"> Consulta</div>
+              <h1 class="headline"> Consulta</h1>
             </v-card-title>
             <v-card-text>
               <sparql-query @emit-results="handleEmittedResults($event)" @error="handleError($event)"></sparql-query>
@@ -15,7 +15,7 @@
         <v-flex fixed px-3 py-3 md6 xs12>
           <v-card>
             <v-card-title primary-title>
-              <div class="headline">Resultados</div>
+              <h1 class="headline">Resultados</h1>
             </v-card-title>
             <sparql-results v-if="renderResults" :results="queryResults"></sparql-results>
           </v-card>

@@ -5,7 +5,7 @@
         <v-flex px-3 py-3 md6 xs12>
           <v-card height="100%">
             <v-card-title primary-title>
-              <div class="headline">Poblamiento</div>
+              <h1 class="headline">Poblamiento</h1>
             </v-card-title>
             <v-card-text>
               <p>Desde aquí podrás añadir ternas arbitrarias a tu grafo. Puedes introducir cualquier URI en los

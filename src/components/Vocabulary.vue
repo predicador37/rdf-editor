@@ -5,7 +5,7 @@
         <v-flex px-3 py-3 md12 xs12>
           <v-card height="100%">
             <v-card-title primary-title>
-              <div class="headline"> Precargar vocabularios</div>
+              <h1 class="headline"> Precargar vocabularios</h1>
             </v-card-title>
             <v-card-text>
               <p>Desde aquí puedes precargar algunos de los vocabularios más utilizados en tu grafo para poder

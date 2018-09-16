@@ -5,7 +5,7 @@
       <v-flex px-3 py-3 md12 xs12>
         <v-card height="100%">
           <v-card-title primary-title>
-            <div class="headline"> Acerca de RDFplay</div>
+            <h1 class="headline"> Acerca de RDFplay</h1>
           </v-card-title>
 
           <v-card-text>

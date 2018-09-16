@@ -17,7 +17,7 @@
                 </v-list-tile-title>
               </v-list-tile-content>
               <v-tooltip top>
-                <v-btn slot="activator" icon ripple @click.native.stop="addPropertyHandler(item)">
+                <v-btn aria-label="Añadir propiedad" slot="activator" icon ripple @click.native.stop="addPropertyHandler(item)">
                   <v-icon color="primary lighten-1">add</v-icon>
                 </v-btn>
                 <span>Añadir</span>
@@ -62,6 +62,7 @@
                     slot="activator"
                     light
                     icon
+                    aria-label="Menú de acciones para propiedad"
                   >
                     <v-icon>more_vert</v-icon>
                   </v-btn>

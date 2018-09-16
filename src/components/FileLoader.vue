@@ -3,7 +3,7 @@
     <span class="btn-txt">{{ title }}
       <i class="mdi mdi-upload mdi-18px"></i>
     </span>
-    <input name="file-upload" type="file"
+    <input aria-label="Subida de archivo" name="file-upload" type="file"
            :accept="accepted"
            @change="fileSelected">
     <v-progress-circular
