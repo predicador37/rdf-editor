@@ -1,79 +1,89 @@
 <template>
-<div id="model">
-  <v-tabs icons-and-text>
-    <v-tabs-slider color="primary"></v-tabs-slider>
-    <v-tab href="#tab-1">
-      Clases
-      <v-icon>mdi-file-tree</v-icon>
-    </v-tab>
-    <v-tab href="#tab-2">
-      Propiedades
-      <v-icon>mdi-format-list-bulleted</v-icon>
-    </v-tab>
-    <v-tab-item key="1" id="tab-1">
-      <v-container fluid>
-        <v-layout row wrap>
-          <v-flex pr-3 py-3 md6 xs12>
-
-                <resource-list  name="Clase" :baseUrl="baseUrl" :types="[rdfConstructs.owl_Class]" :resources="classes" @add-resource="handleAddResource($event)" @add-subresource="handleAddSubresource($event)" @change-resource="handleChangeResource($event)" @remove-resource="handleRemoveResource($event)" @edit-resource="handleEditResource($event)"></resource-list>
-
-          </v-flex>
-          <v-flex fixed  py-3 md6 xs12>
-
-            <resource-detail  name="Clase" v-if="renderDetail" :resource="currentResource" :editable-class-data="editableClassData" :rdfConstructs="rdfConstructs" :relatedClasses="relatedClasses" @add-literal-property="handleAddLiteralProperty($event)" @remove-resource="handleRemoveQuad($event)"  @edit-literal-property="handleEditLiteralProperty($event)"></resource-detail>
-
-          </v-flex>
-        </v-layout>
-      </v-container>
-    </v-tab-item>
-    <v-tab-item key="2" id="tab-2">
-      <v-container fluid>
-        <v-layout row wrap>
-          <v-flex pr-3 py-3 md6 xs12>
-
-            <resource-list  name="Propiedad" :baseUrl="baseUrl" :types="[rdfConstructs.owl_DatatypeProperty, rdfConstructs.owl_ObjectProperty]" :resources="properties" @add-resource="handleAddResource($event)" @add-subresource="handleAddSubresource($event)" @change-resource="handleChangeResource($event)" @remove-resource="handleRemoveResource($event)" @edit-resource="handleEditResource($event)"></resource-list>
-
-          </v-flex>
-          <v-flex fixed  py-3 md6 xs12>
-
-            <resource-detail name="Propiedad" v-if="renderDetail" :resource="currentResource" :editable-class-data="editablePropertyData" :rdfConstructs="rdfConstructs" :relatedClasses="relatedPropertyClasses" @add-literal-property="handleAddLiteralProperty($event)" @remove-resource="handleRemoveQuad($event)"  @edit-literal-property="handleEditLiteralProperty($event)"></resource-detail>
-
-          </v-flex>
-        </v-layout>
-      </v-container>
-    </v-tab-item>
-    <v-tab-item key="3" id="tab-3">
-      <v-card flat>
-        <v-card-text>Texto de prueba</v-card-text>
-      </v-card>
-    </v-tab-item>
-  </v-tabs>
-  <v-snackbar
-    v-model="snackbar"
-    :color="color"
-  >
-    {{ snackbarMessage }}
-    <v-btn
-      dark
-      flat
-      @click="snackbar = false"
+  <div id="model">
+    <v-tabs icons-and-text>
+      <v-tabs-slider color="primary"></v-tabs-slider>
+      <v-tab href="#tab-1">
+        Clases
+        <v-icon>mdi-file-tree</v-icon>
+      </v-tab>
+      <v-tab href="#tab-2">
+        Propiedades
+        <v-icon>mdi-format-list-bulleted</v-icon>
+      </v-tab>
+      <v-tab-item key="1" id="tab-1">
+        <v-container fluid>
+          <v-layout row wrap>
+            <v-flex pr-3 py-3 md6 xs12>
+              <resource-list name="Clase" :baseUrl="baseUrl" :types="[rdfConstructs.owl_Class]" :resources="classes"
+                             @add-resource="handleAddResource($event)" @add-subresource="handleAddSubresource($event)"
+                             @change-resource="handleChangeResource($event)"
+                             @remove-resource="handleRemoveResource($event)"
+                             @edit-resource="handleEditResource($event)"></resource-list>
+            </v-flex>
+            <v-flex fixed py-3 md6 xs12>
+              <resource-detail name="Clase" v-if="renderDetail" :resource="currentResource"
+                               :editable-class-data="editableClassData" :rdfConstructs="rdfConstructs"
+                               :relatedClasses="relatedClasses" @add-literal-property="handleAddLiteralProperty($event)"
+                               @remove-resource="handleRemoveTriple($event)"
+                               @edit-literal-property="handleEditLiteralProperty($event)"></resource-detail>
+            </v-flex>
+          </v-layout>
+        </v-container>
+      </v-tab-item>
+      <v-tab-item key="2" id="tab-2">
+        <v-container fluid>
+          <v-layout row wrap>
+            <v-flex pr-3 py-3 md6 xs12>
+              <resource-list name="Propiedad" :baseUrl="baseUrl"
+                             :types="[rdfConstructs.owl_DatatypeProperty, rdfConstructs.owl_ObjectProperty]"
+                             :resources="properties" @add-resource="handleAddResource($event)"
+                             @add-subresource="handleAddSubresource($event)"
+                             @change-resource="handleChangeResource($event)"
+                             @remove-resource="handleRemoveResource($event)"
+                             @edit-resource="handleEditResource($event)"></resource-list>
+            </v-flex>
+            <v-flex fixed py-3 md6 xs12>
+              <resource-detail name="Propiedad" v-if="renderDetail" :resource="currentResource"
+                               :editable-class-data="editablePropertyData" :rdfConstructs="rdfConstructs"
+                               :relatedClasses="relatedPropertyClasses"
+                               @add-literal-property="handleAddLiteralProperty($event)"
+                               @remove-resource="handleRemoveTriple($event)"
+                               @edit-literal-property="handleEditLiteralProperty($event)"></resource-detail>
+            </v-flex>
+          </v-layout>
+        </v-container>
+      </v-tab-item>
+      <v-tab-item key="3" id="tab-3">
+        <v-card flat>
+          <v-card-text>Texto de prueba</v-card-text>
+        </v-card>
+      </v-tab-item>
+    </v-tabs>
+    <v-snackbar
+      v-model="snackbar"
+      :color="color"
     >
-      Cerrar
-    </v-btn>
-  </v-snackbar>
-</div>
+      {{ snackbarMessage }}
+      <v-btn
+        dark
+        flat
+        @click="snackbar = false"
+      >
+        Cerrar
+      </v-btn>
+    </v-snackbar>
+  </div>
 </template>
 
 <script>
   import ResourceList from '@/components/ResourceList'
   import ResourceDetail from '@/components/ResourceDetail'
-  import Treeview from '@/components/Treeview'
   import {mapActions, mapGetters} from 'vuex'
+
   export default {
     components: {
       'resource-list': ResourceList,
-      'resource-detail': ResourceDetail,
-      'v-treeview': Treeview
+      'resource-detail': ResourceDetail
     },
     name: 'ModelContainer',
     data () {
@@ -97,35 +107,45 @@
             {
               name: 'Organization'
             },
-            {name: 'Address',
+            {
+              name: 'Address',
               children: [{
                 name: 'Thoroughfare type'
               },
-                {name: 'Thoroughfare number'}]}
+                {name: 'Thoroughfare number'}]
+            }
           ]
         }
       }
     },
     computed: {...mapGetters(['rdfConstructs', 'baseUrl', 'getSubjectListByPredicateAndObject', 'getSubjectListByPredicate', 'getObjectListByPredicateAndSubject', 'getTriplesMatchingSubjectAndObject'])},
     methods: {
-      ...mapActions(['addTriple', 'addClassLiteralProperty', 'editClassLiteralProperty', 'removeResource', 'removeQuad', 'editResource']),
+      ...mapActions(['addTriple', 'addResourceLiteralProperty', 'editResourceLiteralProperty', 'removeResource', 'removeTriple', 'editResource']),
       async getResources ({predicate, object}) {
         let resources = await this.getSubjectListByPredicateAndObject({predicate, object})
         return resources
-        // TODO: order array
-        // TODO: generalize classes to resources
       },
       async getRelatedClasses (relatedClass) {
-        let classes = await this.getObjectListByPredicateAndSubject({predicate: this.rdfConstructs[relatedClass].value, subject: this.currentResource})
+        let classes = await this.getObjectListByPredicateAndSubject({
+          predicate: this.rdfConstructs[relatedClass].value,
+          subject: this.currentResource
+        })
         this.$set(this.relatedClasses, relatedClass, classes)
       },
       async getRelatedPropertyClasses (relatedClass) {
-        let classes = await this.getObjectListByPredicateAndSubject({predicate: this.rdfConstructs[relatedClass].value, subject: this.currentResource})
+        let classes = await this.getObjectListByPredicateAndSubject({
+          predicate: this.rdfConstructs[relatedClass].value,
+          subject: this.currentResource
+        })
         this.$set(this.relatedPropertyClasses, relatedClass, classes)
       },
       handleAddResource (event) {
         try {
-          this.addTriple({'subject': event.newResourceName, 'predicate': this.rdfConstructs.rdf_type.value, 'object': event.newResourceType})
+          this.addTriple({
+            'subject': event.newResourceName,
+            'predicate': this.rdfConstructs.rdf_type.value,
+            'object': event.newResourceType
+          })
           this.snackbarMessage = this.successMessage
           this.color = 'success'
           this.snackbar = true
@@ -146,7 +166,10 @@
         this.refreshResources()
       },
       handleAddSubresource ({'resource': subject, 'parentResource': object}) {
-        let parentType = this.getObjectListByPredicateAndSubject({'predicate': this.rdfConstructs.rdf_type.value, 'subject': object})
+        let parentType = this.getObjectListByPredicateAndSubject({
+          'predicate': this.rdfConstructs.rdf_type.value,
+          'subject': object
+        })
         this.handleAddResource({'newResourceName': subject, 'newResourceType': parentType._v[0].value})
         if (parentType._v[0].value === this.rdfConstructs.owl_Class) {
           this.handleAddProperty(subject, object, this.rdfConstructs.rdfs_subClassOf.value)
@@ -156,7 +179,11 @@
         this.refreshResources()
       },
       handleAddLiteralProperty (triple) {
-        this.addClassLiteralProperty({subject: triple.resource, predicate: this.rdfConstructs[triple.propertyName].value, object: triple.literal})
+        this.addResourceLiteralProperty({
+          subject: triple.resource,
+          predicate: this.rdfConstructs[triple.propertyName].value,
+          object: triple.literal
+        })
         for (const item of this.editableClassData) {
           this.getRelatedClasses(item)
         }
@@ -174,8 +201,8 @@
           this.getRelatedPropertyClasses(item)
         }
       },
-      handleRemoveQuad ({subject, predicate, object}) {
-        this.removeQuad({subject, predicate, object})
+      handleRemoveTriple({subject, predicate, object}) {
+        this.removeTriple({subject, predicate, object})
         this.refreshResources()
         this.handleChangeResource(this.currentResource)
       },
@@ -198,7 +225,12 @@
         this.handleChangeResource(resource)
       },
       handleEditLiteralProperty ({subject, predicate, object, newObject}) {
-        this.editClassLiteralProperty({'subject': subject, 'predicate': this.rdfConstructs[predicate].value, 'object': object, 'newObject': newObject})
+        this.editResourceLiteralProperty({
+          'subject': subject,
+          'predicate': this.rdfConstructs[predicate].value,
+          'object': object,
+          'newObject': newObject
+        })
         for (const item of this.editableClassData) {
           this.getRelatedClasses(item)
         }
@@ -212,16 +244,28 @@
         this.snackbar = true
       },
       refreshResources () {
-        this.getResources({'predicate': this.rdfConstructs.rdf_type.value, 'object': this.rdfConstructs.owl_Class.value}).then((results) => {
+        this.getResources({
+          'predicate': this.rdfConstructs.rdf_type.value,
+          'object': this.rdfConstructs.owl_Class.value
+        }).then((results) => {
           this.classes = results
         })
-        this.getResources({'predicate': this.rdfConstructs.rdf_type.value, 'object': this.rdfConstructs.rdfs_Class.value}).then((results) => {
+        this.getResources({
+          'predicate': this.rdfConstructs.rdf_type.value,
+          'object': this.rdfConstructs.rdfs_Class.value
+        }).then((results) => {
           this.classes.push(...results)
         })
-        this.getResources({'predicate': this.rdfConstructs.rdf_type.value, 'object': this.rdfConstructs.owl_ObjectProperty.value}).then((results) => {
+        this.getResources({
+          'predicate': this.rdfConstructs.rdf_type.value,
+          'object': this.rdfConstructs.owl_ObjectProperty.value
+        }).then((results) => {
           this.properties = results
         })
-        this.getResources({'predicate': this.rdfConstructs.rdf_type.value, 'object': this.rdfConstructs.owl_DatatypeProperty.value}).then((results) => {
+        this.getResources({
+          'predicate': this.rdfConstructs.rdf_type.value,
+          'object': this.rdfConstructs.owl_DatatypeProperty.value
+        }).then((results) => {
           this.properties.push(...results)
         })
       }

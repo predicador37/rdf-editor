@@ -8,12 +8,8 @@
     class="elevation-1"
   >
     <template slot="items" slot-scope="props">
-      <td v-for="(item, key, index) in props.item"> {{ item }} </td>
-      <!--<td >{{ (props.item.get('?s') && props.item.get('?s').value) ? props.item.get('?s').value : 'Undefined'}}</td>-->
-      <!--<td >{{ (props.item.get('?p') && props.item.get('?p').value) ? props.item.get('?p').value : 'Undefined' }}</td>-->
-      <!--<td>{{ (props.item.get('?o') && props.item.get('?o').value) ? props.item.get('?o').value : 'Undefined' }}</td>-->
+      <td v-for="(item, key, index) in props.item"> {{ item }}</td>
     </template>
-
   </v-data-table>
 </template>
 

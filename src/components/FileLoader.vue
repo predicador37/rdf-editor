@@ -1,7 +1,11 @@
 <template>
   <div class="v-btn btn-primary jbtn-file">
-    <span class="btn-txt">{{ title }} <i class="mdi mdi-upload mdi-18px"></i></span><input name="file-upload"
-    type="file" :accept="accepted" @change="fileSelected">
+    <span class="btn-txt">{{ title }}
+      <i class="mdi mdi-upload mdi-18px"></i>
+    </span>
+    <input name="file-upload" type="file"
+           :accept="accepted"
+           @change="fileSelected">
     <v-progress-circular
       v-if="loading"
       indeterminate
@@ -23,7 +27,9 @@
         type: Number
       },
       extensions: {
-        default: function () { return ['md'] },
+        default: function () {
+          return ['md']
+        },
         type: Array
       },
       accepted: {
@@ -53,7 +59,6 @@
         }
         reader.readAsText(file)
         this.loading = false
-        // this.$emit('file-loaded', 'El fichero se ha cargado en el almacenamiento interno.')
       }
     },
     data () {
@@ -70,6 +75,7 @@
     position: relative;
     overflow: hidden;
   }
+
   .jbtn-file input[type=file] {
     position: absolute;
     top: 0;
@@ -84,6 +90,7 @@
     display: block;
 
   }
+
   .btn-txt {
     padding: 20px;
   }

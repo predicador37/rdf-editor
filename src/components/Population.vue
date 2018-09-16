@@ -1,62 +1,57 @@
 <template>
-<div id="population">
-  <v-container fluid>
-    <v-layout row wrap>
-      <v-flex px-3 py-3 md6 xs12>
-        <v-card height="100%">
-          <v-card-title primary-title>
-            <div class="headline">Poblamiento</div>
-          </v-card-title>
+  <div id="population">
+    <v-container fluid>
+      <v-layout row wrap>
+        <v-flex px-3 py-3 md6 xs12>
+          <v-card height="100%">
+            <v-card-title primary-title>
+              <div class="headline">Poblamiento</div>
+            </v-card-title>
+            <v-card-text>
+              <p>Desde aquí podrás añadir ternas arbitrarias a tu grafo. Puedes introducir cualquier URI en los
+                distintos elementos del formulario, si bien se presentarán algunas sugerencias preparadas para crear
+                instancias de clases ya existentes.</p>
+              <v-text-field
+                label="Introduce un recurso como sujeto"
+                v-model="subject"
+              ></v-text-field>
+              <v-combobox
+                v-model="predicate"
+                :items="predicates"
+                item-text="value"
+                item-value="value"
+                label="Selecciona un recurso como predicado"
+                :search-input.sync="predicateSearchInput"
+              ></v-combobox>
 
-          <v-card-text>
-            <p>Desde aquí podrás añadir ternas arbitrarias a tu grafo. Puedes introducir cualquier URI en los distintos elementos del formulario, si bien se presentarán algunas sugerencias preparadas para crear instancias de clases ya existentes.</p>
-            <v-text-field
-              label="Introduce un recurso como sujeto"
-              v-model="subject"
-            ></v-text-field>
-
-            <v-combobox
-              v-model="predicate"
-              :items="predicates"
-              item-text="value"
-              item-value="value"
-              label="Selecciona un recurso como predicado"
-              :search-input.sync="predicateSearchInput"
-            ></v-combobox>
-
-            <v-combobox
-              v-model="object"
-              :items="objects"
-              item-text="value"
-              item-value="value"
-              label="Selecciona un recurso como objeto"
-              :search-input.sync="objectSearchInput"
-            ></v-combobox>
-            <v-btn type="submit" variant="primary" @click="addTripleToGraph()">Añadir instancia</v-btn>
-
-
-
-            </v-select>
-
-          </v-card-text>
-          <v-snackbar
-            v-model="snackbar"
-            :color="color"
-          >
-            {{ snackbarMessage }}
-            <v-btn
-              dark
-              flat
-              @click="snackbar = false"
+              <v-combobox
+                v-model="object"
+                :items="objects"
+                item-text="value"
+                item-value="value"
+                label="Selecciona un recurso como objeto"
+                :search-input.sync="objectSearchInput"
+              ></v-combobox>
+              <v-btn type="submit" variant="primary" @click="addTripleToGraph()">Añadir instancia</v-btn>
+            </v-card-text>
+            <v-snackbar
+              v-model="snackbar"
+              :color="color"
             >
-              Cerrar
-            </v-btn>
-          </v-snackbar>
-        </v-card>
-      </v-flex>
-    </v-layout>
-  </v-container>
-</div>
+              {{ snackbarMessage }}
+              <v-btn
+                dark
+                flat
+                @click="snackbar = false"
+              >
+                Cerrar
+              </v-btn>
+            </v-snackbar>
+          </v-card>
+        </v-flex>
+      </v-layout>
+    </v-container>
+  </div>
 </template>
 
 <script>
@@ -84,14 +79,10 @@
       async getSubjects ({predicate, object}) {
         let resources = await this.getSubjectListByPredicateAndObject({predicate, object})
         return resources
-    // TODO: order array
-    // TODO: generalize classes to resources
       },
       async getObjects ({predicate, subject}) {
         let resources = await this.getObjectListByPredicateAndSubject({predicate, subject})
         return resources
-        // TODO: order array
-        // TODO: generalize classes to resources
       },
       addTripleToGraph () {
         try {
@@ -124,7 +115,6 @@
       this.getObjects({'predicate': null, 'subject': null}).then((results) => {
         this.subjects.push(...results)
       })
-
       this.objects = this.getDefaultResources('class')
       this.getSubjects({'predicate': this.rdfConstructs.rdf_type.value, 'object': this.rdfConstructs.owl_Class.value}).then((results) => {
         this.objects.push(...results)

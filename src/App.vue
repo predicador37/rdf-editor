@@ -144,6 +144,6 @@
     name: 'App',
     components: {
       'markdown-viewer': MarkdownViewer
-    },
+    }
   }
 </script>

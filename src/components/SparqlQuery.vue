@@ -1,29 +1,31 @@
 <template>
-<div>
-  <v-switch v-model="external" value="false" input-value="false" label="Usar Endpoint SPARQL remoto"></v-switch>
-  <v-text-field v-if="external" :disabled="!external" v-model="endpointURL" value="" label="Introduce la URL del endpoint SPARQL remoto"></v-text-field>
-
-<div class="py-3">
-  <v-textarea
-    solo
-    v-model="query"
-    name="sparql_query"
-    :auto-grow="true"
-    label="Consulta SPARQL"
-    value="SELECT ?s ?p ?o WHERE {?s ?p ?o .} LIMIT 100"
-    hint="Consulta de ejemplo"
-  ></v-textarea>
-</div>
-  <v-btn color="primary" type="submit" variant="primary" :loading="loading" @click.native="executeSparqlQuery(query)">Lanzar consulta</v-btn>
-  <v-divider class="my-3"></v-divider>
-  <div class="subheading my-3"> Cargar consulta</div>
-<div>
-    <file-loader title='Desde archivo' @load="loadSparqlQuery($event)" :extensions="['rq']"></file-loader>
-</div>
   <div>
-    <url-loader  title='Desde URL' @load="loadSparqlQuery($event)" @url-loaded="snackbar = true"></url-loader>
-</div>
-</div>
+    <v-switch v-model="external" value="false" input-value="false" label="Usar Endpoint SPARQL remoto"></v-switch>
+    <v-text-field v-if="external" :disabled="!external" v-model="endpointURL" value=""
+                  label="Introduce la URL del endpoint SPARQL remoto"></v-text-field>
+    <div class="py-3">
+      <v-textarea
+        solo
+        v-model="query"
+        name="sparql_query"
+        :auto-grow="true"
+        label="Consulta SPARQL"
+        value="SELECT ?s ?p ?o WHERE {?s ?p ?o .} LIMIT 100"
+        hint="Consulta de ejemplo"
+      ></v-textarea>
+    </div>
+    <v-btn color="primary" type="submit" variant="primary" :loading="loading" @click.native="executeSparqlQuery(query)">
+      Lanzar consulta
+    </v-btn>
+    <v-divider class="my-3"></v-divider>
+    <div class="subheading my-3"> Cargar consulta</div>
+    <div>
+      <file-loader title='Desde archivo' @load="loadSparqlQuery($event)" :extensions="['rq']"></file-loader>
+    </div>
+    <div>
+      <url-loader title='Desde URL' @load="loadSparqlQuery($event)" @url-loaded="snackbar = true"></url-loader>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -123,7 +125,6 @@
       }
     },
     beforeMount () {
-      // this.query = this.prefixes + 'SELECT ?s WHERE {?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>  <http://www.w3.org/2002/07/owl#Class> .} LIMIT 100'
       this.query = this.prefixes + 'SELECT ?s ?p ?o WHERE {?s ?p ?o .} LIMIT 100'
     }
   }

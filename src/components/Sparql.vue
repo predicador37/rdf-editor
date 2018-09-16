@@ -1,42 +1,38 @@
 <template>
-<div id="sparql">
-  <v-container fluid>
-    <v-layout row wrap>
-      <v-flex px-3 py-3 md6 xs12>
-        <v-card>
-          <v-card-title primary-title>
-            <div class="headline"> Consulta</div>
-          </v-card-title>
-
-          <v-card-text>
-            <sparql-query @emit-results="handleEmittedResults($event)" @error="handleError($event)"></sparql-query>
-          </v-card-text>
-        </v-card>
-
-      </v-flex>
-      <v-flex fixed  px-3 py-3 md6 xs12>
-        <v-card>
-          <v-card-title primary-title>
-            <div class="headline">Resultados</div>
-          </v-card-title>
-       <sparql-results v-if="renderResults" :results="queryResults"></sparql-results>
-        </v-card>
-        <v-dialog v-model="errorDialog" persistent max-width="500">
+  <div id="sparql">
+    <v-container fluid>
+      <v-layout row wrap>
+        <v-flex px-3 py-3 md6 xs12>
           <v-card>
-            <v-card-title class="headline"><span class="red--text">Ha ocurrido un error</span></v-card-title>
-            <v-card-text>  {{ errorMessage }}</v-card-text>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="red darken-1" flat @click.native.stop="errorDialog = false">Cerrar</v-btn>
-            </v-card-actions>
+            <v-card-title primary-title>
+              <div class="headline"> Consulta</div>
+            </v-card-title>
+            <v-card-text>
+              <sparql-query @emit-results="handleEmittedResults($event)" @error="handleError($event)"></sparql-query>
+            </v-card-text>
           </v-card>
-        </v-dialog>
-      </v-flex>
-    </v-layout>
-  </v-container>
-
-
-</div>
+        </v-flex>
+        <v-flex fixed px-3 py-3 md6 xs12>
+          <v-card>
+            <v-card-title primary-title>
+              <div class="headline">Resultados</div>
+            </v-card-title>
+            <sparql-results v-if="renderResults" :results="queryResults"></sparql-results>
+          </v-card>
+          <v-dialog v-model="errorDialog" persistent max-width="500">
+            <v-card>
+              <v-card-title class="headline"><span class="red--text">Ha ocurrido un error</span></v-card-title>
+              <v-card-text> {{ errorMessage }}</v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="red darken-1" flat @click.native.stop="errorDialog = false">Cerrar</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </v-flex>
+      </v-layout>
+    </v-container>
+  </div>
 </template>
 
 <script>

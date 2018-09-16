@@ -1,3 +1,7 @@
+/**
+ * Contains all the vuex mutations used to change the state of the application.
+ **/
+
 import DataFactory from 'rdf-ext'
 import {Parser, Store, Writer} from 'n3'
 import Serializer from 'rdf-serializer-jsonld-ext'
@@ -12,28 +16,36 @@ const ADD_QUAD_FROM_IRI = (state, {subject, predicate, object}) => {
 }
 
 /**
- * Elimina una tripleta a partir de un IRI generado desde los parámetros de entrada
- * @param state
- * @param subject
- * @param predicate
- * @param object
- * @constructor
+ * Removes a quad given its subject, predicate and object.
+ * @param state: object with the internal store state.
+ * @param subject: a subject resource URI.
+ * @param predicate: a predicate resource URI.
+ * @param object: an object resource URI.
  */
 const REMOVE_QUAD_FROM_IRI = (state, {subject, predicate, object}) => {
   state.n3store.removeQuad(rdf.quad(rdf.namedNode(subject), rdf.namedNode(predicate), rdf.literal(object)))
   state.n3store.removeQuad(rdf.quad(rdf.namedNode(subject), rdf.namedNode(predicate), rdf.namedNode(object)))
 }
 
+/**
+ * Edits a quad literal object given its subject, predicate and object and the new literal value for the object.
+ * @param state: object with the internal store state.
+ * @param subject: a subject resource URI.
+ * @param predicate: a predicate resource URI.
+ * @param object: a string with a literal object.
+ * @param newObject: a string with the new literal for the object.
+ */
 const EDIT_QUAD_WITH_OBJECT_LITERAL_FROM_IRI = (state, {subject, predicate, object, newObject}) => {
   state.n3store.removeQuad(rdf.quad(rdf.namedNode(subject), rdf.namedNode(predicate), rdf.literal(object)))
   state.n3store.removeQuad(rdf.quad(rdf.namedNode(subject), rdf.namedNode(predicate), rdf.namedNode(object)))
-  console.log(subject)
-  console.log(predicate)
-  console.log(object)
-  console.log(newObject)
   state.n3store.addQuad(rdf.quad(rdf.namedNode(subject), rdf.namedNode(predicate), rdf.literal(newObject)))
 }
 
+/**
+ * Removes all triples in the graph related to a given resource URI.
+ * @param state: object with the internal store state.
+ * @param resource: an URI of the resource to be removed.
+ */
 const REMOVE_RESOURCE_FROM_IRI = (state, resource) => {
   let results = state.n3store.getQuads(rdf.namedNode(resource), null, null, null)
   for (var quad of results) {
@@ -49,55 +61,78 @@ const REMOVE_RESOURCE_FROM_IRI = (state, resource) => {
   }
 }
 
+/**
+ * Adds a quad literal object given its subject, predicate and object.
+ * @param state: object with the internal store state.
+ * @param subject: a subject resource URI.
+ * @param predicate: a predicate resource URI.
+ * @param object: a string with a literal object.
+ */
 const ADD_QUAD_WITH_OBJECT_LITERAL_FROM_IRI = (state, {subject, predicate, object}) => {
   state.n3store.addQuad(rdf.quad(rdf.namedNode(subject), rdf.namedNode(predicate), rdf.literal(object)))
 }
 
+/**
+ * Imports a graph in Turtle, N3, N-Tiples or TriG format.
+ * @param state: object with the internal store state.
+ * @param content: a string the graph in Turtle, N3, N-Triples or TriG format.
+ */
 const IMPORT_N3 = (state, {content, store}) => {
   const turtleParser = new N3Parser()
   let quads = turtleParser.parse(content)
   state[store] = new Store(quads)
-  console.log(JSON.stringify(state[store].getQuads()))
 }
 
+/**
+ * Adds or appends a graph in Turtle, N3, N-Tiples or TriG format to the existing graph.
+ * @param state: object with the internal store state.
+ * @param content: a string the graph in Turtle, N3, N-Triples or TriG format.
+ * @param store: a string with the name of the store in which the content will be loaded.
+ */
 const ADD_N3 = (state, {content, store}) => {
-  console.log('add n3')
   const turtleParser = new N3Parser()
   let quads = turtleParser.parse(content)
   state[store].addQuads(quads)
   // console.log(JSON.stringify(state[store].getQuads()))
 }
 
+/**
+ * Deletes from the existing graph all triples existing in a graph in Turtle, N3, N-Triples or TriG format.
+ * @param state: object with the internal store state.
+ * @param content: a string the graph in Turtle, N3, N-Triples or TriG format.
+ * @param store: a string with the name of the store in which the content will be loaded.
+ */
 const DEL_N3 = (state, {content, store}) => {
-  console.log('del n3')
   const turtleParser = new N3Parser()
   let quads = turtleParser.parse(content)
   state[store].removeQuads(quads)
-  // console.log(JSON.stringify(state[store].getQuads()))
 }
 
+/**
+ * Sets an activity string variable with a given content in Markdown format.
+ * @param state: object with the internal store state.
+ * @param content: a string with the content of the activity to be set in Markdown format.
+ */
 const SET_ACTIVITY = (state, content) => {
   state.activity = content
 }
 
+/**
+ * Exports the current graph to JSON-Ld format.
+ * @param state: object with the internal store state.
+ */
 const EXPORT_JSON_LD = (state) => {
   // create a prefix map and fill it
   const prefixMap = rdf.prefixMap({
     ex: rdf.namedNode('http://www.uned.es#example')
   })
-  // TODO change this
   let quadStream = require('streamify-array')(state.n3store.getQuads())
-  // let quadStream = state.dataset.toStream()
-
   // create a JSON-LD serializer instance which returns strings and compacts the JSON-LD
   const serializer = new JsonLdSerializer({outputFormat: 'string', compact: true})
   // forward the quads to the serializer
   const jsonStream = serializer.import(quadStream)
-
   prefixMap.export(quadStream)
-
   let result
-
   jsonStream.on('data', (data) => {
     result = data
   })
@@ -114,9 +149,12 @@ const EXPORT_JSON_LD = (state) => {
   })
 }
 
+/**
+ * Exports the current graph to Turtle format.
+ * @param state: object with the internal store state.
+ */
 const EXPORT_TURTLE = (state) => {
   // create a prefix map and fill it
-
   const prefix = { prefixes: { ex: 'http://www.uned.es/example#' } }
   const writer = N3Writer(prefix)
   state.n3store.getQuads().forEach((quad) => {
@@ -135,6 +173,12 @@ const EXPORT_TURTLE = (state) => {
   })
 }
 
+/**
+ * Sets a given vocabulary state to active or inactive.
+ *  @param state: object with the internal store state.
+ * @param vocabulary: a string containing the name of the vocabulary which state will be set.
+ * @param active: a boolean indicating the state of the given vocabulary.
+ */
 const SET_VOCABULARY_STATE = (state, {vocabulary, active}) => {
   state.vocabularies[vocabulary].active = active
 }

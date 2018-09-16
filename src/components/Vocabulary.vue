@@ -1,37 +1,38 @@
 <template>
-<div id="vocabulary">
-  <v-container fluid>
-    <v-layout row wrap>
-      <v-flex px-3 py-3 md12 xs12>
-        <v-card height="100%">
-          <v-card-title primary-title>
-            <div class="headline"> Precargar vocabularios</div>
-          </v-card-title>
-
-          <v-card-text>
-            <p>Desde aquí puedes precargar algunos de los vocabularios más utilizados en tu grafo para poder utilizarlos posteriormente en tus consultas SPARQL.</p>
-
-              <v-switch v-for="vocab in vocabularies" v-model="selectedVocabulary[vocab.name]" :key="vocab.name" @change="changeVocabularyState(vocab.name)"  :value="vocab.active" :label="vocab.name" :false-value="{name: vocab.name, method: 'delN3', url: vocab.url, active: false}" :true-value="{name: vocab.name, method: 'addN3', url: vocab.url, active: true}"></v-switch>
-
-          </v-card-text>
-          <v-snackbar
-            v-model="snackbar"
-            :color="color"
-          >
-            {{ snackbarMessage }}
-            <v-btn
-              dark
-              flat
-              @click="snackbar = false"
+  <div id="vocabulary">
+    <v-container fluid>
+      <v-layout row wrap>
+        <v-flex px-3 py-3 md12 xs12>
+          <v-card height="100%">
+            <v-card-title primary-title>
+              <div class="headline"> Precargar vocabularios</div>
+            </v-card-title>
+            <v-card-text>
+              <p>Desde aquí puedes precargar algunos de los vocabularios más utilizados en tu grafo para poder
+                utilizarlos posteriormente en tus consultas SPARQL.</p>
+              <v-switch v-for="vocab in vocabularies" v-model="selectedVocabulary[vocab.name]" :key="vocab.name"
+                        @change="changeVocabularyState(vocab.name)" :value="vocab.active" :label="vocab.name"
+                        :false-value="{name: vocab.name, method: 'delN3', url: vocab.url, active: false}"
+                        :true-value="{name: vocab.name, method: 'addN3', url: vocab.url, active: true}"></v-switch>
+            </v-card-text>
+            <v-snackbar
+              v-model="snackbar"
+              :color="color"
             >
-              Cerrar
-            </v-btn>
-          </v-snackbar>
-        </v-card>
-      </v-flex>
-    </v-layout>
-  </v-container>
-</div>
+              {{ snackbarMessage }}
+              <v-btn
+                dark
+                flat
+                @click="snackbar = false"
+              >
+                Cerrar
+              </v-btn>
+            </v-snackbar>
+          </v-card>
+        </v-flex>
+      </v-layout>
+    </v-container>
+  </div>
 </template>
 
 <script>
@@ -65,9 +66,6 @@
           this.setVocabularyState({'vocabulary': this.selectedVocabulary[vocab].name, 'active': !this.selectedVocabulary[vocab].name})
         })
       }
-        // todo implement enableVocabulary and disableVocabulary
-        // add vocabulary to graph from URL
-        // delete vocabulary from graph
     },
     beforeMount () {
       this.vocabularyList = this.vocabularies

@@ -1,3 +1,7 @@
+/**
+ * Contains all the vuex getters used to retrieve the state of the application.
+ **/
+
 import DataFactory from 'rdf-ext'
 
 let rdf = DataFactory
@@ -16,6 +20,13 @@ const baseUrl = state => state.baseUrl
 
 const activity = state => state.activity
 
+/**
+ * Retrieves a subject list for a given object and predicate asynchronously.
+ * @param state: object with the internal store state.
+ * @param predicate: a predicate resource URI.
+ * @param object: an object resource URI.
+ * @returns {function({predicate?: *, object?: *}): Promise<any>}
+ */
 const getSubjectListByPredicateAndObject = (state) => ({predicate, object}) => {
   return new Promise((resolve, reject) => {
     let subjects = state.n3store.getSubjects(predicate, object, null)
@@ -23,6 +34,12 @@ const getSubjectListByPredicateAndObject = (state) => ({predicate, object}) => {
   })
 }
 
+/**
+ * Retrieves a subject list for a given predicate asynchronously.
+ * @param state: object with the internal store state.
+ * @param predicate: a predicate resource URI.
+ * @returns {function(*=): Promise<any>}
+ */
 const getSubjectListByPredicate = (state) => (predicate) => {
   return new Promise((resolve, reject) => {
     let subjects = state.n3store.getSubjects(predicate, null, null)
@@ -30,6 +47,13 @@ const getSubjectListByPredicate = (state) => (predicate) => {
   })
 }
 
+/**
+ * Retrieves an object list for a given predicate and subject asynchronously.
+ * @param state: object with the internal store state.
+ * @param predicate: a predicate resource URI.
+ * @param subject: a subject resource URI.
+ * @returns {function({predicate?: *, subject?: *}): Promise<any>}
+ */
 const getObjectListByPredicateAndSubject = (state) => ({predicate, subject}) => {
   return new Promise((resolve, reject) => {
     let objects = state.n3store.getObjects(subject, predicate, null)
@@ -37,26 +61,60 @@ const getObjectListByPredicateAndSubject = (state) => ({predicate, subject}) => 
   })
 }
 
+/**
+ * Retrieves a list of triples matching a given subject.
+ * @param state: object with the internal store state.
+ * @param subject: a subject resource URI.
+ * @returns {function(*=): (*|Array)}
+ */
 const getTriplesMatchingSubject = (state) => (subject) => {
   return state.n3store.getQuads(rdf.namedNode(subject), null, null, null)
 }
 
+/**
+ * Retrieves a list of triples matching a given object.
+ * @param state: object with the internal store state.
+ * @param object: an object resource URI.
+ * @returns {function(*=): (*|Array)}
+ */
 const getTriplesMatchingObject = (state) => (object) => {
   return state.n3store.getQuads(null, null, rdf.namedNode(object), null)
 }
 
+/**
+ * Retrieves a list of triples matching a given subject and object.
+ * @param state: object with the internal store state.
+ * @param object: an object resource URI.
+ * @param subject: a subject resource URI.
+ * @returns {function(*=): (*|Array)}
+ */
 const getTriplesMatchingSubjectAndObject = (state) => ({subject, object}) => {
   return state.n3store.getQuads(rdf.namedNode(subject), null, rdf.namedNode(object), null)
 }
 
+/**
+ * Retrieves all quads from the internal store.
+ * @param state: object with the internal store state.
+ * @param s: a subject resource URI.
+ * @param p: a predicate resource URI.
+ * @param o: an object resource URI.
+ * @param g: a graph.
+ * @returns {function(*=, *=, *=, *=): (*|Array)}
+ */
 const getStoreQuads = (state) => (s, p, o, g) => {
   return state.n3store.getQuads(s, p, o, g)
 }
 
-const getDefaultResources = (state) => (resource) => {
+/**
+ * Retrieves all default resources loaded in rdfConstructs given a type (property or class).
+ * @param state
+ * @param resourceType: the type ot the desired resources.
+ * @returns {function(*): Array}
+ */
+const getDefaultResources = (state) => (resourceType) => {
   let results = []
   Object.keys(state.rdfConstructs).forEach((key) => {
-    if (state.rdfConstructs[key].type === resource) {
+    if (state.rdfConstructs[key].type === resourceType) {
       results.push(state.rdfConstructs[key].value)
     }
   })

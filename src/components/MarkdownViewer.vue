@@ -11,7 +11,7 @@
      },
      props: {
        mdText: {
-         default: '# Markdown example text',
+         default: '# Sin contenido',
          type: String
        }
      }
