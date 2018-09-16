@@ -26,8 +26,8 @@ export default {
     text: 'rdfs:subPropertyOf',
     value:
       'http://www.w3.org/2000/01/rdf-schema#subPropertyOf',
-    desc: 'Subpropiedad',
-    desc_plural: 'Subpropiedades',
+    desc: 'Subpropiedad de',
+    desc_plural: 'Subpropiedad de',
     type: 'property'
   },
   rdfs_domain: {
@@ -86,9 +86,23 @@ export default {
     desc_plural: 'Equivalente a',
     type: 'property'
   },
+  owl_equivalentProperty: {
+    text: 'owl:equivalentProperty',
+    value: 'http://www.w3.org/2002/07/owl#equivalentProperty',
+    desc: 'Equivalente a',
+    desc_plural: 'Equivalente a',
+    type: 'property'
+  },
   owl_disjointWith: {
     text: 'owl:disjointWith',
     value: 'http://www.w3.org/2002/07/owl#disjointWith',
+    desc: 'Disjunta con',
+    desc_plural: 'Disjunta con',
+    type: 'property'
+  },
+  owl_propertyDisjointWith: {
+    text: 'owl:propertyDisjointWith',
+    value: 'http://www.w3.org/2002/07/owl#propertyDisjointWith',
     desc: 'Disjunta con',
     desc_plural: 'Disjunta con',
     type: 'property'

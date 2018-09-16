@@ -7,6 +7,7 @@ import Activity from '@/components/Activity'
 import Vocabulary from '@/components/Vocabulary'
 import Population from '@/components/Population'
 import Sparql from '@/components/Sparql'
+import About from '@/components/About'
 
 Vue.use(Router)
 
@@ -46,6 +47,11 @@ export default new Router({
       path: '/population',
       name: 'Population',
       component: Population
-    }
+    },
+    {
+      path: '/about',
+      name: 'About',
+      component: About
+    },
   ]
 })

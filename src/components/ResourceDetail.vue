@@ -2,7 +2,7 @@
 <div>
   <v-card height="100%">
     <v-card-title primary-title>
-      <div class="headline"> Propiedades de clase  {{resource.split('#')[1]}}
+      <div class="headline"> Descripción de {{name.toLowerCase()}} {{resource.split('#')[1]}}
       </div>
     </v-card-title>
     <v-card-text>
@@ -104,6 +104,10 @@
   export default {
     name: 'ResourceDetail',
     props: {
+      name: {
+        type: String,
+        required: true
+      },
       resource: {
         type: String,
         required: true
@@ -176,6 +180,9 @@
         this.currentLiteral = null
         this.resourceToEdit = ''
       }
+    },
+    beforeMount () {
+      console.log(JSON.stringify(this.relatedClasses))
     }
     // watch: {
     //   resourceName: function (newVal, oldVal) { // watch it

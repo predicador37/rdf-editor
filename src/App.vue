@@ -38,8 +38,32 @@
 
     </v-content>
 
-    <v-footer app>
-      <span>UNED &copy; 2017</span>
+    <v-footer app dark class="primary">
+      <v-layout
+        justify-center
+        row
+        wrap
+      >
+      <v-spacer></v-spacer>
+        <v-flex>
+          <v-btn
+            color="white"
+            flat
+            round
+            href="http://portal.uned.es"
+          >
+            &copy; UNED {{ new Date().getFullYear() }}
+          </v-btn>
+          <v-btn
+            color="white"
+            flat
+            round
+            to="/about"
+          >
+           Acerca de {{title}}
+          </v-btn>
+        </v-flex>
+      </v-layout>
     </v-footer>
   </v-app>
 </template>

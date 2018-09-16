@@ -7,8 +7,8 @@
       <v-icon>mdi-file-tree</v-icon>
     </v-tab>
     <v-tab href="#tab-2">
-      Relaciones
-      <v-icon>mdi-human-male-female</v-icon>
+      Propiedades
+      <v-icon>mdi-format-list-bulleted</v-icon>
     </v-tab>
     <v-tab-item key="1" id="tab-1">
       <v-container fluid>
@@ -20,18 +20,27 @@
           </v-flex>
           <v-flex fixed  py-3 md6 xs12>
 
-            <resource-detail v-if="renderDetail" :resource="currentResource" :editable-class-data="editableClassData" :rdfConstructs="rdfConstructs" :relatedClasses="relatedClasses" @add-literal-property="handleAddLiteralProperty($event)" @remove-resource="handleRemoveQuad($event)"  @edit-literal-property="handleEditLiteralProperty($event)"></resource-detail>
+            <resource-detail  name="Clase" v-if="renderDetail" :resource="currentResource" :editable-class-data="editableClassData" :rdfConstructs="rdfConstructs" :relatedClasses="relatedClasses" @add-literal-property="handleAddLiteralProperty($event)" @remove-resource="handleRemoveQuad($event)"  @edit-literal-property="handleEditLiteralProperty($event)"></resource-detail>
 
           </v-flex>
         </v-layout>
       </v-container>
     </v-tab-item>
     <v-tab-item key="2" id="tab-2">
-      <v-card flat>
-        <v-card-text>
-          <v-treeview :items="items"></v-treeview>
-        </v-card-text>
-      </v-card>
+      <v-container fluid>
+        <v-layout row wrap>
+          <v-flex pr-3 py-3 md6 xs12>
+
+            <resource-list  name="Propiedad" :baseUrl="baseUrl" :types="[rdfConstructs.owl_DatatypeProperty, rdfConstructs.owl_ObjectProperty]" :resources="properties" @add-resource="handleAddResource($event)" @add-subresource="handleAddSubresource($event)" @change-resource="handleChangeResource($event)" @remove-resource="handleRemoveResource($event)" @edit-resource="handleEditResource($event)"></resource-list>
+
+          </v-flex>
+          <v-flex fixed  py-3 md6 xs12>
+
+            <resource-detail name="Propiedad" v-if="renderDetail" :resource="currentResource" :editable-class-data="editablePropertyData" :rdfConstructs="rdfConstructs" :relatedClasses="relatedPropertyClasses" @add-literal-property="handleAddLiteralProperty($event)" @remove-resource="handleRemoveQuad($event)"  @edit-literal-property="handleEditLiteralProperty($event)"></resource-detail>
+
+          </v-flex>
+        </v-layout>
+      </v-container>
     </v-tab-item>
     <v-tab-item key="3" id="tab-3">
       <v-card flat>
@@ -73,7 +82,9 @@
         properties: [],
         subclasses: [],
         relatedClasses: {},
+        relatedPropertyClasses: {},
         editableClassData: ['rdfs_subClassOf', 'owl_equivalentClass', 'owl_disjointWith', 'rdfs_label', 'rdfs_comment', 'rdfs_seeAlso'],
+        editablePropertyData: ['rdfs_subPropertyOf', 'owl_equivalentProperty', 'owl_propertyDisjointWith', 'rdfs_label', 'rdfs_comment', 'rdfs_seeAlso'],
         renderDetail: false,
         currentResource: '',
         snackbar: false,
@@ -107,6 +118,10 @@
       async getRelatedClasses (relatedClass) {
         let classes = await this.getObjectListByPredicateAndSubject({predicate: this.rdfConstructs[relatedClass].value, subject: this.currentResource})
         this.$set(this.relatedClasses, relatedClass, classes)
+      },
+      async getRelatedPropertyClasses (relatedClass) {
+        let classes = await this.getObjectListByPredicateAndSubject({predicate: this.rdfConstructs[relatedClass].value, subject: this.currentResource})
+        this.$set(this.relatedPropertyClasses, relatedClass, classes)
       },
       handleAddResource (event) {
         try {
@@ -145,12 +160,18 @@
         for (const item of this.editableClassData) {
           this.getRelatedClasses(item)
         }
+        for (const item of this.editablePropertyData) {
+          this.getRelatedPropertyClasses(item)
+        }
       },
       handleChangeResource (resource) {
         this.renderDetail = true
         this.currentResource = resource
         for (const item of this.editableClassData) {
           this.getRelatedClasses(item)
+        }
+        for (const item of this.editablePropertyData) {
+          this.getRelatedPropertyClasses(item)
         }
       },
       handleRemoveQuad ({subject, predicate, object}) {
@@ -180,6 +201,9 @@
         this.editClassLiteralProperty({'subject': subject, 'predicate': this.rdfConstructs[predicate].value, 'object': object, 'newObject': newObject})
         for (const item of this.editableClassData) {
           this.getRelatedClasses(item)
+        }
+        for (const item of this.editablePropertyData) {
+          this.getRelatedPropertyClasses(item)
         }
       },
       handleError (event) {
