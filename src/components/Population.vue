@@ -18,11 +18,19 @@
               <v-combobox
                 v-model="predicate"
                 :items="predicates"
-                item-text="value"
+                item-text="text"
                 item-value="value"
                 label="Selecciona un recurso como predicado"
                 :search-input.sync="predicateSearchInput"
-              ></v-combobox>
+              >
+                <template slot="selection" slot-scope="data">
+                  {{ stripPrefix(data.item) }}
+                </template>
+                <template slot="item" slot-scope="data">
+                  {{ stripPrefix(data.item) }}
+                </template>
+
+              </v-combobox>
 
               <v-combobox
                 v-model="object"
@@ -31,7 +39,14 @@
                 item-value="value"
                 label="Selecciona un recurso como objeto"
                 :search-input.sync="objectSearchInput"
-              ></v-combobox>
+              >
+                <template slot="selection" slot-scope="data">
+                  {{ stripPrefix(data.item) }}
+                </template>
+                <template slot="item" slot-scope="data">
+                  {{ stripPrefix(data.item) }}
+                </template>
+              </v-combobox>
               <v-btn type="submit" variant="primary" @click="addTripleToGraph()">Añadir instancia</v-btn>
             </v-card-text>
             <v-snackbar
@@ -106,6 +121,13 @@
         this.snackbarMessage = event
         this.color = 'success'
         this.snackbar = true
+      },
+      stripPrefix (uri) {
+        if (typeof uri === 'object'){
+          return uri.value.substring(uri.value.lastIndexOf('/') + 1, uri.value.length)
+        } else {
+          return uri.substring(uri.lastIndexOf('/') + 1, uri.length)
+        }
       }
     },
     beforeMount () {
@@ -129,6 +151,7 @@
       this.getSubjects({'predicate': this.rdfConstructs.rdf_type.value, 'object': this.rdfConstructs.owl_ObjectProperty.value}).then((results) => {
         this.predicates.push(...results)
       })
+      console.log(JSON.stringify(this.predicates))
     }
   }
 </script>

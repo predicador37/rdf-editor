@@ -10,6 +10,7 @@
         Propiedades
         <v-icon>mdi-format-list-bulleted</v-icon>
       </v-tab>
+      <v-tabs-items :touchless="true">
       <v-tab-item key="1" id="tab-1">
         <v-container fluid>
           <v-layout row wrap>
@@ -23,7 +24,7 @@
             <v-flex fixed py-3 md6 xs12>
               <resource-detail name="Clase" v-if="renderDetail" :resource="currentResource"
                                :editable-class-data="editableClassData" :rdfConstructs="rdfConstructs"
-                               :relatedClasses="relatedClasses" @add-literal-property="handleAddLiteralProperty($event)"
+                               :relatedClasses="relatedClasses" @add-class-property="handleAddClassProperty($event)"
                                @remove-resource="handleRemoveTriple($event)"
                                @edit-literal-property="handleEditLiteralProperty($event)"></resource-detail>
             </v-flex>
@@ -46,18 +47,14 @@
               <resource-detail name="Propiedad" v-if="renderDetail" :resource="currentResource"
                                :editable-class-data="editablePropertyData" :rdfConstructs="rdfConstructs"
                                :relatedClasses="relatedPropertyClasses"
-                               @add-literal-property="handleAddLiteralProperty($event)"
+                               @add-class-property="handleAddClassProperty($event)"
                                @remove-resource="handleRemoveTriple($event)"
                                @edit-literal-property="handleEditLiteralProperty($event)"></resource-detail>
             </v-flex>
           </v-layout>
         </v-container>
       </v-tab-item>
-      <v-tab-item key="3" id="tab-3">
-        <v-card flat>
-          <v-card-text>Texto de prueba</v-card-text>
-        </v-card>
-      </v-tab-item>
+      </v-tabs-items>
     </v-tabs>
     <v-snackbar
       v-model="snackbar"
@@ -166,24 +163,46 @@
         this.refreshResources()
       },
       handleAddSubresource ({'resource': subject, 'parentResource': object}) {
-        let parentType = this.getObjectListByPredicateAndSubject({
-          'predicate': this.rdfConstructs.rdf_type.value,
-          'subject': object
-        })
-        this.handleAddResource({'newResourceName': subject, 'newResourceType': parentType._v[0].value})
-        if (parentType._v[0].value === this.rdfConstructs.owl_Class) {
-          this.handleAddProperty(subject, object, this.rdfConstructs.rdfs_subClassOf.value)
-        } else {
-          this.handleAddProperty(subject, object, this.rdfConstructs.rdfs_subPropertyOf.value)
+        try {
+          let parentType = this.getObjectListByPredicateAndSubject({
+            'predicate': this.rdfConstructs.rdf_type.value,
+            'subject': object
+          })
+          this.handleAddResource({'newResourceName': subject, 'newResourceType': parentType._v[0].value})
+          if (parentType._v[0].value === this.rdfConstructs.owl_Class) {
+            this.handleAddProperty(subject, object, this.rdfConstructs.rdfs_subClassOf.value)
+          } else {
+            this.handleAddProperty(subject, object, this.rdfConstructs.rdfs_subPropertyOf.value)
+          }
+          this.snackbarMessage = this.successMessage
+          this.color = 'success'
+          this.snackbar = true
+        } catch (error) {
+          this.handleError(error.message)
         }
         this.refreshResources()
       },
-      handleAddLiteralProperty (triple) {
-        this.addResourceLiteralProperty({
-          subject: triple.resource,
-          predicate: this.rdfConstructs[triple.propertyName].value,
-          object: triple.literal
-        })
+      handleAddClassProperty (triple) {
+        try {
+          if (triple.datatype === 'literal') {
+            this.addResourceLiteralProperty({
+              subject: triple.resource,
+              predicate: this.rdfConstructs[triple.propertyName].value,
+              object: triple.literal
+            })
+          } else if (triple.datatype === 'uri') {
+            this.addTriple({
+              'subject': triple.resource,
+              'predicate': this.rdfConstructs[triple.propertyName].value,
+              'object': triple.literal
+            })
+          }
+          this.snackbarMessage = this.successMessage
+          this.color = 'success'
+          this.snackbar = true
+        } catch (error) {
+          this.handleError(error.message)
+        }
         for (const item of this.editableClassData) {
           this.getRelatedClasses(item)
         }
@@ -201,13 +220,27 @@
           this.getRelatedPropertyClasses(item)
         }
       },
-      handleRemoveTriple({subject, predicate, object}) {
-        this.removeTriple({subject, predicate, object})
+      handleRemoveTriple ({subject, predicate, object}) {
+        try {
+          this.removeTriple({subject, predicate, object})
+          this.snackbarMessage = this.successMessage
+          this.color = 'success'
+          this.snackbar = true
+        } catch (error) {
+          this.handleError(error.message)
+        }
         this.refreshResources()
         this.handleChangeResource(this.currentResource)
       },
       handleRemoveResource (resource) {
-        this.removeResource(resource)
+        try {
+          this.removeResource(resource)
+          this.snackbarMessage = this.successMessage
+          this.color = 'success'
+          this.snackbar = true
+        } catch (error) {
+          this.handleError(error.message)
+        }
         this.refreshResources()
         this.handleChangeResource(this.currentResourceName)
         this.renderDetail = false
@@ -225,12 +258,19 @@
         this.handleChangeResource(resource)
       },
       handleEditLiteralProperty ({subject, predicate, object, newObject}) {
-        this.editResourceLiteralProperty({
-          'subject': subject,
-          'predicate': this.rdfConstructs[predicate].value,
-          'object': object,
-          'newObject': newObject
-        })
+        try {
+          this.editResourceLiteralProperty({
+            'subject': subject,
+            'predicate': this.rdfConstructs[predicate].value,
+            'object': object,
+            'newObject': newObject
+          })
+          this.snackbarMessage = this.successMessage
+          this.color = 'success'
+          this.snackbar = true
+        } catch (error) {
+          this.handleError(error.message)
+        }
         for (const item of this.editableClassData) {
           this.getRelatedClasses(item)
         }

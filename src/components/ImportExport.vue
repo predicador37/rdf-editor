@@ -122,6 +122,7 @@
       handleError (event) {
         this.snackbarMessage = event
         this.color = 'error'
+        this.loading = false
         this.snackbar = true
       },
       handleFileLoaded (event) {

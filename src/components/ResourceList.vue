@@ -164,20 +164,7 @@
           {title: 'Editar', method: 'openEditDialog'},
           {title: 'Eliminar ', method: 'openDeleteDialog'},
           {title: 'Añadir sub' + this.name.toLowerCase(), method: 'openAddSubresourceDialog'}
-        ],
-        items2: {
-          name: 'Thing',
-          children: [
-            {
-              name: 'Organization'
-            },
-            {name: 'Address',
-              children: [{
-                name: 'Thoroughfare type'
-              },
-              {name: 'Thoroughfare number'}]}
-          ]
-        }
+        ]
       }
     },
     methods: {

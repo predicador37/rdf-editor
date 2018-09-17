@@ -10,7 +10,15 @@
 
           <v-card-text>
             <p><span v-html="description"></span></p>
-            <v-list three-line>
+            <v-card v-for="(item, index) in info" :key="index">
+              <v-card-title primary-title>
+                <div>
+                  <h3 class="headline mb-0">{{item.title}}</h3>
+                  <div>{{item.subtitle}}.</div>
+                </div>
+              </v-card-title>
+            </v-card>
+           <!-- <v-list three-line>
               <template v-for="(item, index) in info">
                 <v-subheader
                   v-if="item.header"
@@ -36,7 +44,7 @@
                   </v-list-tile-content>
                 </v-list-tile>
               </template>
-            </v-list>
+            </v-list>-->
           </v-card-text>
         </v-card>
       </v-flex>
