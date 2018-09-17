@@ -115,6 +115,10 @@
         type: String,
         required: true
       },
+      baseUrl: {
+        type: String,
+        required: true
+      },
       resource: {
         type: String,
         required: true
@@ -152,6 +156,7 @@
     },
     methods: {
       addPropertyHandler (property) {
+        this.currentLiteral = this.baseUrl
         this.currentProperty = property
         this.currentPropertyType = this.rdfConstructs[property].datatype
         this.dialogText = this.rdfConstructs[property].desc

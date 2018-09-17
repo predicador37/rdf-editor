@@ -89,7 +89,7 @@
         objectSearchInput: null
       }
     },
-    computed: {...mapGetters(['rdfConstructs', 'getDefaultResources', 'getSubjectListByPredicateAndObject', 'getObjectListByPredicateAndSubject'])},
+    computed: {...mapGetters(['rdfConstructs', 'baseUrl', 'getDefaultResources', 'getSubjectListByPredicateAndObject', 'getObjectListByPredicateAndSubject'])},
     methods: { ...mapActions(['addTriple']),
       async getSubjects ({predicate, object}) {
         let resources = await this.getSubjectListByPredicateAndObject({predicate, object})
@@ -110,6 +110,12 @@
         } catch (error) {
           this.handleError(error.message)
           console.log(error)
+        } finally {
+          this.subject = null
+          this.predicate = null
+          this.object = null
+          this.predicateSearchInput = null
+          this.objectSearchInput = null
         }
       },
       handleError (event) {
@@ -123,7 +129,7 @@
         this.snackbar = true
       },
       stripPrefix (uri) {
-        if (typeof uri === 'object'){
+        if (typeof uri === 'object') {
           return uri.value.substring(uri.value.lastIndexOf('/') + 1, uri.value.length)
         } else {
           return uri.substring(uri.lastIndexOf('/') + 1, uri.length)
@@ -131,6 +137,7 @@
       }
     },
     beforeMount () {
+      this.subject = this.baseUrl
       this.getSubjects({'predicate': null, 'object': null}).then((results) => {
         this.subjects = results
       })

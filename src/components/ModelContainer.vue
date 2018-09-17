@@ -22,7 +22,7 @@
                              @edit-resource="handleEditResource($event)"></resource-list>
             </v-flex>
             <v-flex fixed py-3 md6 xs12>
-              <resource-detail name="Clase" v-if="renderDetail" :resource="currentResource"
+              <resource-detail name="Clase"  :baseUrl="baseUrl" v-if="renderDetail" :resource="currentResource"
                                :editable-class-data="editableClassData" :rdfConstructs="rdfConstructs"
                                :relatedClasses="relatedClasses" @add-class-property="handleAddClassProperty($event)"
                                @remove-resource="handleRemoveTriple($event)"
@@ -44,7 +44,7 @@
                              @edit-resource="handleEditResource($event)"></resource-list>
             </v-flex>
             <v-flex fixed py-3 md6 xs12>
-              <resource-detail name="Propiedad" v-if="renderDetail" :resource="currentResource"
+              <resource-detail name="Propiedad"  :baseUrl="baseUrl" v-if="renderDetail" :resource="currentResource"
                                :editable-class-data="editablePropertyData" :rdfConstructs="rdfConstructs"
                                :relatedClasses="relatedPropertyClasses"
                                @add-class-property="handleAddClassProperty($event)"
