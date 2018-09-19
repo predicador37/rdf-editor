@@ -12,7 +12,7 @@ module.exports = {
       .url(devServer)
       .waitForElementVisible('#app', 5000)
       .assert.elementPresent('#home-editor')
-      .assert.containsText('h3', 'Editor de ontologías de la UNED')
+      .assert.containsText('h1', 'Editor de ontologías de la UNED')
       .assert.elementCount('a', 9)
       .end()
   },

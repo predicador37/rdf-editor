@@ -19,7 +19,7 @@ En palabras del propio Berners-Lee: \blockquote[{\cite{bernerslee01}}]{Con un di
 
 \section{Linked Data}
 
-Estrechamente relacionado con la Web Semántica se encuentra el concepto de datos enlazados o \textit{Linked Data}, también propuesto por Berners-Lee en 2006\cite{bernerslee02} en lo que se considera como su introducción oficial y formal. Se trata de un movimiento respaldado por el propio W3C que se centra en conectar conjuntos de datos a lo largo de la Web y que puede verse como un subconjunto de la Web Semántica.
+Estrechamente relacionado con la Web Semántica se encuentra el concepto de datos enlazados o \textit{Linked Data}, también propuesto por Berners-Lee en 2006\cite{bernerslee02} en la que se considera como su introducción oficial y formal. Se trata de un movimiento respaldado por el propio W3C\footnote{\textit{World Wide Web Consortium}: \url{https://www.w3c.es/}} que se centra en conectar conjuntos de datos a lo largo de la Web y que puede verse como un subconjunto de la Web Semántica.
 
 Se basa, por tanto, en dos aspectos clave:
 
@@ -32,11 +32,11 @@ La Web Semántica es el fin y los datos enlazados proporcionan el medio para alca
 
 \section{RDF}
 
-Las tecnologías de la Web Semántica permiten, por tanto, almacenar conocimiento en forma de conceptos y relaciones a través de ternas o tripletas, modelar dominios de conocimiento con vocabularios estándar y ofrecer potentes facilidades de consulta sobre dichos modelos. Dentro de estas tecnologías, RDF es, sin duda, el bloque de construcción fundamental en la Web Semántica (como HTML lo ha sido para la Web).
+Las tecnologías de la Web Semántica permiten, por tanto, almacenar conocimiento en forma de conceptos y relaciones a través de ternas o tripletas, modelar dominios de conocimiento con vocabularios estándar y ofrecer potentes facilidades de consulta sobre dichos modelos. Dentro de estas tecnologías, RDF es, sin duda, el bloque de construcción fundamental (como HTML lo ha sido para la Web).
 
-RDF fue propuesto por el W3C en 1999\cite{Lassila:99:RDF} como un estándar para crear y procesar metadatos con el objetivo de describir recursos independientemente de su dominio de aplicación, ayudando por tanto a promover la interoperabilidad entre aplicaciones.
+RDF fue propuesto por el W3C en 1999\cite{Lassila:99:RDF} como un estándar para crear y procesar metadatos con el objetivo de describir recursos independientemente de su dominio de aplicación, ayudando, por tanto, a promover la interoperabilidad entre aplicaciones.
 
-Sin embargo, con la llegada de la Web Semántica el alcance de RDF creció, y ya no sólo se usa para codificar metadatos sobre recursos web, sino también \textbf{para describir cualquier recurso así como sus relaciones} en el mundo real.
+Sin embargo, con la llegada de la Web Semántica, el alcance de RDF creció y ya no sólo se usa para codificar metadatos sobre recursos web, sino también \textbf{para describir cualquier recurso así como sus relaciones} en el mundo real.
 
 El nuevo alcance de RDF quedó reflejado en las especificaciones publicadas en 2004 por el \textit{RDF Core Working Group}\footnote{Recomendaciones del W3C, https://www.w3.org/2001/sw/RDFCore/}, ahora actualizadas a fecha de 2014\footnote{Versiones actualizadas de las recomendaciones del W3C, https://www.w3.org/2011/rdf-wg/wiki/Main\_Page}, de las que se pueden extraer las siguientes definiciones de RDF:
 
@@ -67,9 +67,9 @@ Sujeto - Predicado - Objeto
 
 En donde \textit{Sujeto} y \textit{Objeto} representan dos conceptos o ``cosas'' en el mundo (también denominados \textbf{recursos}) y \textit{Predicado} la relación que los conecta.
 
-Los nombres de estos recursos (así como de los predicados) han de ser globales y deberían identificarse por un \textit{Uniform Resource Idenfifier} (URI).
+Los nombres de estos recursos (así como de los predicados) han de ser globales y deberían identificarse unívocamente por un \textit{Uniform Resource Idenfifier} (URI).
 
-Por tanto, un modelo RDF puede expresarse como una colección de tripletas o un grafo, dado que estas no son más que grafos dirigidos. Los sujetos y objetos serían los nodos del grafo y los predicados sus aristas.
+Por tanto, un modelo RDF puede expresarse como una colección de tripletas o un grafo, dado que aquellas no son más que grafos dirigidos. Los sujetos y objetos serían los nodos del grafo y los predicados sus aristas.
 
 Otra nomenclatura utilizada para representar una terna sería la siguiente:
 
@@ -77,9 +77,11 @@ Otra nomenclatura utilizada para representar una terna sería la siguiente:
 	Recurso - Propiedad - Valor de la propiedad
 \end{center}
 
-En donde el valor de la propiedad u Objeto también puede ser un literal, que consiste simplemente en un dato textual bruto.
+En donde el valor de la propiedad u \textit{Objeto} también puede ser un literal, que consiste simplemente en un dato textual bruto.
 
 Cabe destacar que una terna RDF sólo puede modelar relaciones binarias. Para modelar una relación n-aria, suelen utilizarse recursos intermedios como nodos en blanco, que no son más que sujetos u objetos que no tienen un URI como identificador (nodos sin nombre o anónimos).
+
+\pagebreak
 
 En resumen:
 
@@ -99,7 +101,6 @@ En resumen:
 	\end{table}
 \end{center}
 
-\pagebreak
 
 A continuación se muestran dos ejemplos de tripletas:
 
@@ -135,7 +136,7 @@ Gracias a RDF, es posible construir la Web Semántica y enlazar conjuntos de dato
 
 Su principal ventaja frente a los modelos y bases de datos relacionales es una mayor facilidad para evolucionar los grafos, algo que en un sistema relacional es complejo (dado que requiere de modificaciones en las estructuras de almacenamiento de datos y sus consultas asociadas). En otras palabras, su \textbf{flexibilidad para modelar lo inesperado}.
 
-Un ejemplo claro a nivel global es Wikidata\footnote{https://www.wikidata.org/wiki/Wikidata:Main\_Page}, una base de datos de conocimiento abierta que puede ser leída y editada tanto por personas como por máquinas. Wikidata actúa como un almacén centralizado para datos estructurados de otros proyectos hermanos como Wikipedia, Wikisource, etc. En el momento de redacción de esta memoria, cuenta con  50,035,140 elementos de datos que cualquiera puede editar.
+Un ejemplo claro a nivel global es \textit{Wikidata}\footnote{https://www.wikidata.org/wiki/Wikidata:Main\_Page}, una base de datos de conocimiento abierta que puede ser leída y editada tanto por personas como por máquinas.\textit{ Wikidata} actúa como un almacén centralizado para datos estructurados de otros proyectos hermanos como \textit{Wikipedia}, \textit{Wikisource}, etc. En el momento de redacción de esta memoria, cuenta con  50.035.140 elementos de datos que cualquiera puede editar.
  
 De una forma más concreta, es destacable el importante rol de RDF y las tecnologías de la Web Semántica en ámbitos de \textbf{búsqueda y clasificación bibliográfica o documental}, pudiendo citarse como ejemplo la publicación en RDF del \textit{Diccionario de Lugares Geográficos} y el \textit{Diccionario y Tesauro de Materias} del Patrimonio Cultural de España, gestionado en la actualidad por el Ministerio de Educación, Cultura y Deporte del Gobierno de España\footnote{https://www.mecd.gob.es/cultura-mecd/areas-cultura/museos/destacados/2015/tesauros.html}.
 
@@ -153,8 +154,6 @@ Entre sus características, cabe citar:
 	\item Ejecución de uniones complejas sobre bases de datos dispersas en una única consulta.
 	\item Transformación de datos RDF desde un vocabulario a otro.
 \end{itemize}
-
-\pagebreak
 
 La estructura básica de una consulta SPARQL es la siguiente:
 
@@ -175,9 +174,9 @@ WHERE {
 ORDER BY ...
 \end{lstlisting} 
 
-No es objeto de este proyecto profundizar en la sintaxis del lenguaje, pero sí se incluye a continuación un ejemplo de consulta:
+No es objeto de este proyecto profundizar en la sintaxis del lenguaje, pero sí se incluye a continuación un ejemplo de consulta simple:
 
-\begin{lstlisting}[basicstyle=\tiny, caption={Consulta que devuelve todos los nombres de personas mencionadas en un grafo.},captionpos=b]
+\begin{lstlisting}[basicstyle=\tiny, caption={Consulta devolviendo todos los nombres de personas mencionadas en un grafo.},captionpos=b]
 PREFIX foaf:  <http://xmlns.com/foaf/0.1/>
 SELECT ?name
 WHERE {

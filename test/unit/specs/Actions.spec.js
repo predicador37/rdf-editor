@@ -7,7 +7,6 @@ import RdfConstructs from '../../../src/utils/RdfConstructs'
 import consts from '../../../src/store/consts'
 import getters from '../../../src/store/getters'
 
-let rdf = DataFactory
 let baseUrl = consts.baseUrl
 // TODO refactor all tests to n3 store (no more match)
 describe('actions', () => {
@@ -84,7 +83,7 @@ describe('actions', () => {
       let actualOldComment = results[0].id
       expect(actualOldComment).toBe(expectedOldComment)
     })
-    store.dispatch('editClassLiteralProperty', {'subject': baseUrl + 'Analista', 'predicate': RdfConstructs.rdfs_comment.value, 'object': expectedOldComment, 'newObject': 'prueba'})
+    store.dispatch('editResourceLiteralProperty', {'subject': baseUrl + 'Analista', 'predicate': RdfConstructs.rdfs_comment.value, 'object': expectedOldComment, 'newObject': 'prueba'})
     getters.getObjectListByPredicateAndSubject(store.state)({'predicate': RdfConstructs.rdfs_comment.value, 'subject': baseUrl + 'Analista'}).then((results) => {
       let actualNewComment = results[0].id
       expect(actualNewComment).toBe(expectedNewComment)
@@ -102,7 +101,7 @@ describe('actions', () => {
       let actualOldComments = results.length
       expect(actualOldComments).toBe(expectedOldComments)
     })
-    store.dispatch('addClassLiteralProperty', {'subject': baseUrl + 'Analista', 'predicate': RdfConstructs.rdfs_comment.value, 'object': newComment})
+    store.dispatch('addResourceLiteralProperty', {'subject': baseUrl + 'Analista', 'predicate': RdfConstructs.rdfs_comment.value, 'object': newComment})
     getters.getObjectListByPredicateAndSubject(store.state)({'predicate': RdfConstructs.rdfs_comment.value, 'subject': baseUrl + 'Analista'}).then((results) => {
       let actualNewComments = results.length
       expect(actualNewComments).toBe(expectedNewComments)
@@ -113,7 +112,7 @@ describe('actions', () => {
     const clonedStoreConfig = deepClone(storeConfig)
     const store = new Vuex.Store(clonedStoreConfig)
     let actualOldSize = store.state.n3store.size
-    let expectedOldSize = 11
+    let expectedOldSize = 17
     let content = '@prefix wd: <http://www.wikidata.org/entity/> .\n' +
       '@prefix iaej-geo: <http://data.ia.uned.es/ej/geog/> .\n' +
       '@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n' +
@@ -169,7 +168,7 @@ describe('actions', () => {
     const clonedStoreConfig = deepClone(storeConfig)
     const store = new Vuex.Store(clonedStoreConfig)
     let actualOldSize = store.state.n3store.size
-    let expectedOldSize = 11
+    let expectedOldSize = 17
     let content = '@prefix wd: <http://www.wikidata.org/entity/> .\n' +
       '@prefix iaej-geo: <http://data.ia.uned.es/ej/geog/> .\n' +
       '@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n' +
@@ -216,7 +215,7 @@ describe('actions', () => {
       'wd:Q34261 rdfs:label "Puerto Príncipe"@es .'
     store.dispatch('addN3', {'content': content, 'store': 'n3store'})
     let actualNewSize = store.state.n3store.size
-    let expectedNewSize = 14
+    let expectedNewSize = 20
     expect(actualOldSize).toBe(expectedOldSize)
     expect(actualNewSize).toBe(expectedNewSize)
   })
@@ -226,7 +225,7 @@ describe('actions', () => {
     const clonedStoreConfig = deepClone(storeConfig)
     const store = new Vuex.Store(clonedStoreConfig)
     let actualOldSize = store.state.n3store.size
-    let expectedOldSize = 11
+    let expectedOldSize = 17
     let content = '@prefix wd: <http://www.wikidata.org/entity/> .\n' +
       '@prefix iaej-geo: <http://data.ia.uned.es/ej/geog/> .\n' +
       '@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n' +
@@ -273,12 +272,12 @@ describe('actions', () => {
       'wd:Q34261 rdfs:label "Puerto Príncipe"@es .'
     store.dispatch('addN3', {'content': content, 'store': 'n3store'})
     let actualNewSize = store.state.n3store.size
-    let expectedNewSize = 14
+    let expectedNewSize = 20
     expect(actualOldSize).toBe(expectedOldSize)
     expect(actualNewSize).toBe(expectedNewSize)
     store.dispatch('delN3', {'content': content, 'store': 'n3store'})
     let actualAfterDeleteSize = store.state.n3store.size
-    let expectedAfterDeleteSize = 11
+    let expectedAfterDeleteSize = 17
     expect(actualAfterDeleteSize).toBe(expectedAfterDeleteSize)
   })
 

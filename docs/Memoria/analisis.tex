@@ -1,12 +1,12 @@
 \chapter{Análisis}
 
-La captura de requisitos es quizá una de las labores más complicadas a la hora de desarrollar un sistema de información, debido a las ``diferencias de impedancia'' existentes entre un analista y un usuario de negocio. En el caso particular de este proyecto, el hecho de que el usuario fuera a su vez el Director del mismo ha supuesto una ayuda considerable. No obstante, a continuación se detallan las estrategias que supusieron una mejora considerable en los niveles de concreción del alcance a delimitar.
+La captura de requisitos es quizá una de las labores más complicadas a la hora de desarrollar un sistema de información, debido a las ``diferencias de impedancia'' existentes entre un analista y un usuario de negocio. En el caso particular de este proyecto, el hecho de que el usuario fuera a su vez el Director del mismo ha supuesto una ayuda considerable. No obstante, a continuación se detallan las estrategias que supusieron una mejora sustancial en los niveles de concreción del alcance a delimitar.
 
 \section{Captura y documentación de requisitos}
 
 \subsection{Captura de requisitos}
 
-La técnica de captura de requisitos utilizada para este proyecto ha sido, fundamentalmente, \textbf{la entrevista} con el tutor. Se eligió esta técnica por los siguientes motivos:
+La técnica de captura de requisitos utilizada para este proyecto ha sido, fundamentalmente, \textbf{la entrevista} con el Director de proyecto. Se eligió esta técnica por los siguientes motivos:
 
 \begin{itemize}  
 	\item La entrevista, bien a distancia o presencial (y especialmente esta última), permite una mayor implicación del usuario en la captura de requisitos.
@@ -15,9 +15,9 @@ La técnica de captura de requisitos utilizada para este proyecto ha sido, fundam
 	\item Es claramente la técnica más obvia, directa y accesible en el contexto de la realización del proyecto.
 \end{itemize}
 
-Concretamente, se han llevado a cabo varias entrevistas utilizando la plataforma colaborativa Skype y una presencial, en la que el autor de este proyecto se ha desplazado a la sede del departamento en Madrid con objeto de conseguir una comunicación más fluida y un mayor entendimiento a la hora de consensuar las necesidades y funcionalidades requeridas del producto.
+Concretamente, se han llevado a cabo varias entrevistas utilizando la plataforma colaborativa \textit{Skype} y una presencial, en la que el autor de este proyecto se desplazó a la sede del departamento en Madrid con objeto de conseguir una comunicación más fluida y un mayor entendimiento a la hora de consensuar las necesidades y funcionalidades requeridas del producto.
 
-La primera entrevista a distancia propició un intercambio de documentos e ideas que desembocó en la elaboración del documento del anteproyecto. El resto de entrevistas a través de Skype sirvieron para concretar en mayor medida las tareas a realizar y el enfoque del proyecto. Sin embargo, no fue hasta que no tuvo lugar la reunión presencial cuando realmente se le dio al proyecto su orientación final, con unos objetivos claramente definidos y una posibilidad para cumplir los hitos propuestos.
+La primera entrevista a distancia propició un intercambio de documentos e ideas que desembocó en la elaboración del documento del anteproyecto. El resto de entrevistas a través de \textit{Skype} sirvieron para concretar en mayor medida las tareas a realizar y el enfoque del proyecto. Sin embargo, no fue hasta que no tuvo lugar la reunión presencial cuando realmente se orientaron los trabajos definitivamente, con unos objetivos claramente definidos y una posibilidad para cumplir los hitos propuestos.
 
 A continuación se resumen todas las sesiones de captura de requisitos:
 
@@ -33,7 +33,7 @@ A continuación se resumen todas las sesiones de captura de requisitos:
 	2 & 21/02/17 & Consolidación de ideas y aportación de más documentación (vídeos sobre prototipos de cuaderno, documentos de texto con descripciones, etc.)  \\
 	3 & 28/03/18 & Primera demo a modo de POC con un entorno capaz de añadir tripletas.  \\ \midrule
 	4 & 10/07/18 & Reunión presencial con demostración \textit{in-situ} de los módulos de modelado e importación/exportación. Tiene lugar una tormenta de ideas y se enfoca el proyecto de otro modo, modificando sus objetivos hacia una herramienta formativa..  \\ \midrule
-	5 & 4/08/18 & Revisión de los últimos avances con la integración de un endpoint SPARQL en el frontend y planificación del resto de funcionalidade requeridas.  \\ 
+	5 & 4/08/18 & Revisión de los últimos avances con la integración de un endpoint SPARQL en el \textit{frontend }y planificación del resto de funcionalidade requeridas.  \\ 
 	\bottomrule
 \end{tabular}
 \caption{Sesiones de entrevistas}
@@ -71,7 +71,7 @@ La plantilla sigue la siguiente estructura:
 	\item Postcondiciones: qué debe ser cierto después de ejecutar el caso de uso.
 \end{enumerate}
 
-Los requisitos fueron capturados inicialmente como notas manuscritas y convertidos en necesidades de alto nivel en la plataforma Trello. A partir de ahí, dichas necesidades se refinaron para dar lugar a la batería de casos de uso incluida en \ref{sec:53}.
+Los requisitos fueron capturados inicialmente como notas manuscritas y convertidos en necesidades de alto nivel en la plataforma \textit{Trello}. A partir de ahí, dichas necesidades se refinaron para dar lugar a la batería de casos de uso incluida en \ref{sec:53}.
 
 \section{Necesidades}
 
@@ -108,7 +108,7 @@ Este nuevo enfoque se tradujo en la siguiente instantánea de necesidades de alto
 \item Permitir el lanzamiento de consultas SPARQL sobre el grafo local y visualización de resultados.
 \item Permitir el lanzamiento de consultas SPARQL sobre endpoints remotos y visualización de resultados.
 \item Ofrecer funcionalidad de carga de consultas SPARQL predefinidas desde archivo de texto.
-\item Incorporar módulo para añadir un texto con la definición de la actividad a realizar en formato Markdown.
+\item Incorporar módulo para añadir un texto con la definición de la actividad a realizar en formato \textit{Markdown}.
 \item Permitir la importación de tripletas desde archivos o URL.
 \item Permitir la incorporación (append) de tripletas al grafo local desde archivos o URL.
 \item Ofrecer un panel para cargar en el grafo vocabularios comunes predefinidos.
@@ -117,11 +117,11 @@ Este nuevo enfoque se tradujo en la siguiente instantánea de necesidades de alto
 
 \section{Casos de uso} \label{sec:53}
 
-\subsection{Dar de alta una nueva clase}\label{sec:dar-de-alta-una-nueva-clase}
+\subsection{Dar de alta una nueva clase o propiedad}\label{sec:dar-de-alta-una-nueva-clase}
 
 \subsubsection{Descripción breve}
 
-Este caso de uso permite a un usuario añadir una nueva clase a su grafo a través de una tripleta que tendrá como sujeto el nombre de la clase, como objeto el recurso \textit{owl:Class} y como predicado el recurso \textit{rdf:type}. 
+Este caso de uso permite a un usuario añadir una nueva clase/propiedad a su grafo a través de una tripleta que tendrá como sujeto el nombre de la clase/propiedad), como objeto el recurso \textit{owl:Class},  \textit{owl:DatatypeProperty} o \textit{owl:ObjectProperty} (según el caso) y como predicado el recurso \textit{rdf:type}. Se agrupan clases y propiedades en el mismo caso de uso porque son idénticos salvo por el tipo de recursos utilizados para dar de alta las ternas.
 
 \subsubsection{Actores}
 
@@ -129,29 +129,29 @@ El actor principal es el usuario de la aplicación (fundamentalmente dirigida a u
 
 \subsubsection{Disparadores}
 
-El caso de usa comienza cuando el usuario pulsa en el botón flotante + asociado a la tarjeta del listado de clases.
+El caso de usa comienza cuando el usuario pulsa en el botón flotante + asociado a la tarjeta del listado de clases/propiedades.
 
 \subsubsection{Flujo de eventos}
 \begin{enumerate}
 	\item Flujo básico
 	\begin{enumerate}
-		\item El usuario pulsa en el botón flotante + asociado a la tarjeta del listado de clases.
-		\item Aparece un cuadro de diálogo donde el usuario debe introducir el nombre de la clase.
-		\item El usuario introduce el URI del recurso que quiere dar de alta como clase y pulsa en guardar.
-		\item El nuevo recurso de tipo clase se crea y aparece en el listado de clases.
+		\item El usuario pulsa en el botón flotante + asociado a la tarjeta del listado de clases/propiedades.
+		\item Aparece un cuadro de diálogo donde el usuario debe introducir el nombre de la clase/propiedad.
+		\item El usuario introduce el URI del recurso que quiere dar de alta como clase/propiedad y pulsa en guardar.
+		\item El nuevo recurso de tipo clase/propiedad se crea y aparece en el listado de clases/propiedades.
 	\end{enumerate}
 	\item Flujo alternativo 1
 \begin{enumerate}
-	\item El usuario pulsa en el botón flotante + asociado a la tarjeta del listado de clases.
-	\item Aparece un cuadro de diálogo donde el usuario debe introducir el nombre de la clase.
-	\item El usuario introduce (o no) el URI del recurso que quiere dar de alta como clase y pulsa fuera del cuadro de diálogo.
+	\item El usuario pulsa en el botón flotante + asociado a la tarjeta del listado de clases/propiedades.
+	\item Aparece un cuadro de diálogo donde el usuario debe introducir el nombre de la clase/propiedad.
+	\item El usuario introduce (o no) el URI del recurso que quiere dar de alta como clase/propiedad y pulsa fuera del cuadro de diálogo.
 	\item El cuadro de diálogo se cierra y no hay ningún cambio en los recursos.
 \end{enumerate}
 	\item Flujo alternativo 2
 	\begin{enumerate}
-		\item El usuario pulsa en el botón flotante + asociado a la tarjeta del listado de clases.
-		\item Aparece un cuadro de diálogo donde el usuario debe introducir el nombre de la clase.
-		\item El usuario introduce el URI del recurso que quiere dar de alta como clase y pulsa en guardar.
+		\item El usuario pulsa en el botón flotante + asociado a la tarjeta del listado de clases/propiedades.
+		\item Aparece un cuadro de diálogo donde el usuario debe introducir el nombre de la clase/propiedad.
+		\item El usuario introduce el URI del recurso que quiere dar de alta como clase/propiedad y pulsa en guardar.
 		\item Ocurre un error en el guardado del recurso que le es comunicado al usuario a través de una notificación en pantalla.
 	\end{enumerate}
 
@@ -163,7 +163,7 @@ Ninguno.
 
 \subsubsection{Precondiciones}
 
-El usuario debe haber navegado previamente hasta la sección de modelado, bien a través de la pantalla de bienvenida, bien a través de la barra de navegación lateral.
+El usuario debe haber navegado previamente hasta la sección de modelado, bien a través de la pantalla de bienvenida, bien a través de la barra de navegación lateral y haber seleccionado una de las pestañas existentes (clases o propiedades).
 
 \subsubsection{Postcondiciones}
 
@@ -173,11 +173,11 @@ Ninguna.
 
 Ninguna.
 
-\subsection{Editar una clase existente}\label{sec:editar-una-clase-existente}
+\subsection{Editar una clase o propiedad existente}\label{sec:editar-una-clase-existente}
 
 \subsubsection{Descripción breve}
 
-Este caso de uso permite a un usuario editar el recurso asociado a una clase existente en su grafo y cambiar su URI.
+Este caso de uso permite a un usuario editar el recurso asociado a una clase o propiedad existente en su grafo y cambiar su URI.
 
 \subsubsection{Actores}
 
@@ -185,27 +185,27 @@ El actor principal es el usuario de la aplicación (fundamentalmente dirigida a u
 
 \subsubsection{Disparadores}
 
-El caso de usa comienza cuando el usuario pulsa en el icono de menú asociado a la clase que quiere editar y selecciona la acción ``Editar''.
+El caso de uso comienza cuando el usuario pulsa en el icono de menú asociado a la clase/propiedad que quiere editar y selecciona la acción ``Editar''.
 
 \subsubsection{Flujo de eventos}
 \begin{enumerate}
 	\item Flujo básico
 	\begin{enumerate}
-		\item El usuario pulsa en el icono de menú asociado a la clase que quiere editar y selecciona la acción ``Editar''.
+		\item El usuario pulsa en el icono de menú asociado a la clase/propiedad que quiere editar y selecciona la acción ``Editar''.
 		\item Aparece un cuadro de diálogo con el URI del recurso actual que el usuario puede modificar.
 		\item El usuario modifica (o no) el URI del recurso  y pulsa en guardar.
 		\item El recurso ha sido modificado y su cambio se ve reflejado en el listado.
 	\end{enumerate}
 \item Flujo alternativo 1
 \begin{enumerate}
-	\item El usuario pulsa en el icono de menú asociado a la clase que quiere editar y selecciona la acción ``Editar''.
+	\item El usuario pulsa en el icono de menú asociado a la clase/propiedad que quiere editar y selecciona la acción ``Editar''.
 	\item Aparece un cuadro de diálogo con el URI del recurso actual que el usuario puede modificar.
 	\item El usuario modifica (o no) el URI del recurso  y pulsa fuera del cuadro de diálogo.
 	\item El cuadro de diálogo se cierra y no hay ningún cambio en los recursos.
 \end{enumerate}
 	\item Flujo alternativo 2
 	\begin{enumerate}
-		\item El usuario pulsa en el icono de menú asociado a la clase que quiere editar y selecciona la acción ``Editar''.
+		\item El usuario pulsa en el icono de menú asociado a la clase/propiedad que quiere editar y selecciona la acción ``Editar''.
 		\item Aparece un cuadro de diálogo con el URI del recurso actual que el usuario puede modificar.
 		\item El usuario modifica (o no) el URI del recurso  y pulsa en guardar.
 		\item Ocurre un error en el guardado del recurso que le es comunicado al usuario a través de una notificación en pantalla.
@@ -219,7 +219,7 @@ Ninguno.
 
 \subsubsection{Precondiciones}
 
-El usuario debe haber navegado previamente hasta la sección de modelado, bien a través de la pantalla de bienvenida, bien a través de la barra de navegación lateral.
+El usuario debe haber navegado previamente hasta la sección de modelado, bien a través de la pantalla de bienvenida, bien a través de la barra de navegación lateral y haber seleccionado una de las dos pestañas disponibles (clases o propiedades).
 
 \subsubsection{Postcondiciones}
 
@@ -229,11 +229,11 @@ Ninguna.
 
 Ninguna.
 
-\subsection{Eliminar una clase existente}\label{sec:eliminar-una-clase-existente}
+\subsection{Eliminar una clase o propiedad existente}\label{sec:eliminar-una-clase-existente}
 
 \subsubsection{Descripción breve}
 
-Este caso de uso permite a un usuario eliminar el recurso asociado a una clase existente en su grafo.
+Este caso de uso permite a un usuario eliminar el recurso asociado a una clase/propiedad existente en su grafo.
 
 \subsubsection{Actores}
 
@@ -241,34 +241,34 @@ El actor principal es el usuario de la aplicación (fundamentalmente dirigida a u
 
 \subsubsection{Disparadores}
 
-El caso de usa comienza cuando el usuario pulsa en el icono de menú asociado a la clase que quiere editar y selecciona la acción ``Eliminar''.
+El caso de usa comienza cuando el usuario pulsa en el icono de menú asociado a la clase/propiedad que quiere editar y selecciona la acción ``Eliminar''.
 
 \subsubsection{Flujo de eventos}
 \begin{enumerate}
 	\item Flujo básico
 	\begin{enumerate}
-		\item El usuario pulsa en el icono de menú asociado a la clase que quiere editar y selecciona la acción ``Eliminar''.
+		\item El usuario pulsa en el icono de menú asociado a la clase/propiedad que quiere editar y selecciona la acción ``Eliminar''.
 		\item Aparece un cuadro de diálogo advirtiendo al usuario de que si confirma el cambio, no podrá volver a recuperar el recurso del grafo.
 		\item El usuario elige confirmar.
 		\item El recurso y su detalle asociado desaparecen del listado.
 	\end{enumerate}
 \item Flujo alternativo 1
 \begin{enumerate}
-	\item El usuario pulsa en el icono de menú asociado a la clase que quiere editar y selecciona la acción ``Eliminar''.
+	\item El usuario pulsa en el icono de menú asociado a la clase/propiedad que quiere editar y selecciona la acción ``Eliminar''.
 	\item Aparece un cuadro de diálogo advirtiendo al usuario de que si confirma el cambio, no podrá volver a recuperar el recurso del grafo.
 	\item El usuario pulsa fuera del cuadro de diálogo.
 	\item El cuadro de diálogo se cierra y no hay ningún cambio en los recursos.
 \end{enumerate}
 	\item Flujo alternativo 2
 	\begin{enumerate}
-		\item El usuario pulsa en el icono de menú asociado a la clase que quiere editar y selecciona la acción ``Eliminar''.
+		\item El usuario pulsa en el icono de menú asociado a la clase/propiedad que quiere editar y selecciona la acción ``Eliminar''.
 	\item Aparece un cuadro de diálogo advirtiendo al usuario de que si confirma el cambio, no podrá volver a recuperar el recurso del grafo.
 	\item El usuario elige cancelar.
 	\item El recurso y su detalle siguen apareciendo y no son eliminados.
 	\end{enumerate}
 	\item Flujo alternativo 3
 \begin{enumerate}
-	\item El usuario pulsa en el icono de menú asociado a la clase que quiere editar y selecciona la acción ``Eliminar''.
+	\item El usuario pulsa en el icono de menú asociado a la clase/propiedad que quiere editar y selecciona la acción ``Eliminar''.
 	\item Aparece un cuadro de diálogo advirtiendo al usuario de que si confirma el cambio, no podrá volver a recuperar el recurso del grafo.
 	\item El usuario elige confirmar.
 	\item  Ocurre un error en el borrado del recurso que le es comunicado al usuario a través de una notificación en pantalla.
@@ -282,7 +282,7 @@ Ninguno.
 
 \subsubsection{Precondiciones}
 
-El usuario debe haber navegado previamente hasta la sección de modelado, bien a través de la pantalla de bienvenida, bien a través de la barra de navegación lateral.
+El usuario debe haber navegado previamente hasta la sección de modelado, bien a través de la pantalla de bienvenida, bien a través de la barra de navegación lateral y haber seleccionado una de las pestañas existentes (clases o propiedades).
 
 \subsubsection{Postcondiciones}
 
@@ -292,11 +292,11 @@ Una vez eliminada un recurso de tipo clase, se eliminan también todas las triple
 
 Ninguna.
 
-\subsection{Dar de alta una nueva anotación o propiedad estándar de una clase}\label{sec:dar-de-alta-una-nueva-anotacion-o-propiedad-estandar-de-una-clase}
+\subsection{Dar de alta una nueva anotación de una clase o propiedad}\label{sec:dar-de-alta-una-nueva-anotacion-o-propiedad-estandar-de-una-clase}
 
 \subsubsection{Descripción breve}
 
-Este caso de uso permite a un usuario añadir una nueva propiedad de una clase a su grafo. Tan sólo se podrán añadir propiedades entre las previamente configuradas en el código fuente de la aplicación (es decir, han de fijarse de manera previa, si bien su extensión es sencilla). La configuración por defecto ofrece una lista de las propiedades más utilizadas.
+Este caso de uso permite a un usuario añadir una nueva anotación de una clase/propiedad a su grafo. Tan sólo se podrán añadir anotaciones o propiedades descriptivas de entre las previamente configuradas en el código fuente de la aplicación (es decir, han de fijarse de manera previa, si bien su extensión es sencilla). La configuración por defecto ofrece una lista de las propiedades más utilizadas.
 
 \subsubsection{Actores}
 
@@ -304,29 +304,29 @@ El actor principal es el usuario de la aplicación (fundamentalmente dirigida a u
 
 \subsubsection{Disparadores}
 
-El caso de usa comienza cuando el usuario pulsa en el signo + asociado al nombre de la propiedad a la que quiere dar un valor.
+El caso de usa comienza cuando el usuario pulsa en el signo + asociado al nombre de la anotación a la que quiere dar un valor.
 
 \subsubsection{Flujo de eventos}
 \begin{enumerate}
 	\item Flujo básico
 	\begin{enumerate}
-		\item El usuario pulsa en el botón flotante + asociado a la tarjeta del listado de clases.
-		\item Aparece un cuadro de diálogo donde el usuario debe introducir el nombre de la clase.
-		\item El usuario introduce el URI del recurso que quiere dar de alta como clase y pulsa en guardar.
-		\item El nuevo recurso de tipo clase se crea y aparece en el listado de clases.
+		\item El usuario pulsa en el botón flotante + asociado al panel de anotaciones.
+		\item Aparece un cuadro de diálogo donde el usuario debe introducir el nombre de la anotación.
+		\item El usuario introduce el URI del recurso que quiere dar de alta como anotación y pulsa en guardar.
+		\item El nuevo recurso se crea y aparece en el listado de anotaciones correspondiente.
 	\end{enumerate}
 	\item Flujo alternativo 1
 	\begin{enumerate}
-		\item El usuario pulsa en el botón flotante + asociado a la tarjeta del listado de clases.
-		\item Aparece un cuadro de diálogo donde el usuario debe introducir el nombre de la clase.
-		\item El usuario introduce (o no) el URI del recurso que quiere dar de alta como clase y pulsa fuera del cuadro de diálogo.
+		\item El usuario pulsa en el botón flotante + asociado al panel de anotaciones.
+		\item Aparece un cuadro de diálogo donde el usuario debe introducir el nombre de la anotación.
+		\item El usuario introduce (o no) el URI del recurso que quiere dar de alta como anotación y pulsa fuera del cuadro de diálogo.
 		\item El cuadro de diálogo se cierra y no hay ningún cambio en los recursos.
 	\end{enumerate}
 	\item Flujo alternativo 2
 	\begin{enumerate}
-		\item El usuario pulsa en el botón flotante + asociado a la tarjeta del listado de clases.
-		\item Aparece un cuadro de diálogo donde el usuario debe introducir el nombre de la clase.
-		\item El usuario introduce el URI del recurso que quiere dar de alta como clase y pulsa en guardar.
+		\item El usuario pulsa en el botón flotante + asociado al panel de anotaciones.
+		\item Aparece un cuadro de diálogo donde el usuario debe introducir el nombre de la anotación.
+		\item El usuario introduce el URI del recurso que quiere dar de alta como anotación y pulsa en guardar.
 		\item Ocurre un error en el guardado del recurso que le es comunicado al usuario a través de una notificación en pantalla.
 	\end{enumerate}
 	
@@ -338,7 +338,7 @@ Ninguno.
 
 \subsubsection{Precondiciones}
 
-El usuario debe haber navegado previamente hasta la sección de modelado, bien a través de la pantalla de bienvenida, bien a través de la barra de navegación lateral, y haber seleccionado previamente una clase de entre el listado de clases (en la tarjeta de la izquierda) para poder añadirle una propiedad.
+El usuario debe haber navegado previamente hasta la sección de modelado, bien a través de la pantalla de bienvenida, bien a través de la barra de navegación lateral, y haber seleccionado previamente una clase o propiedad de entre el listado de clases/propiedades (en la tarjeta de la izquierda) para poder añadirle una anotación.
 
 \subsubsection{Postcondiciones}
 
@@ -348,11 +348,11 @@ Ninguna.
 
 Ninguna.
 
-\subsection{Editar una propiedad o anotación de una clase}\label{sec:editar-una-propiedad-o-anotacion-de-una-clase}
+\subsection{Editar una anotación de una clase/propiedad}\label{sec:editar-una-propiedad-o-anotacion-de-una-clase}
 
 \subsubsection{Descripción breve}
 
-Este caso de uso permite a un usuario editar el recurso asociado a una propiedad o anotación de una clase existente en su grafo y cambiar su URI. Tan sólo se podrá editar una propiedad o anotación de entre las previamente configuradas en el código fuente de la aplicación (es decir, han de fijarse de manera previa, si bien su extensión es sencilla).
+Este caso de uso permite a un usuario editar el recurso asociado a una anotación de una clase/propiedad existente en su grafo y cambiar su URI. Tan sólo se podrá editar una anotación de entre las previamente configuradas en el código fuente de la aplicación (es decir, han de fijarse de manera previa, si bien su extensión es sencilla).
 
 \subsubsection{Actores}
 
@@ -360,27 +360,27 @@ El actor principal es el usuario de la aplicación (fundamentalmente dirigida a u
 
 \subsubsection{Disparadores}
 
-El caso de usa comienza cuando el usuario pulsa en el icono de menú asociado a la propiedad de clase que quiere editar y selecciona la acción ``Editar''.
+El caso de usa comienza cuando el usuario pulsa en el icono de menú asociado a la anotación de clase/propiedad que quiere editar y selecciona la acción ``Editar''.
 
 \subsubsection{Flujo de eventos}
 \begin{enumerate}
 	\item Flujo básico
 \begin{enumerate}
-	\item El usuario pulsa en el icono de menú asociado a la propiedad de la clase que quiere editar y selecciona la acción ``Editar''.
+	\item El usuario pulsa en el icono de menú asociado a la anotación de la clase/propiedad que quiere editar y selecciona la acción ``Editar''.
 	\item Aparece un cuadro de diálogo con el URI del recurso actual que el usuario puede modificar.
 	\item El usuario modifica (o no) el URI del recurso  y pulsa en guardar.
 	\item El recurso ha sido modificado y su cambio se ve reflejado en el listado de detalle de la propiedad.
 \end{enumerate}
 \item Flujo alternativo 1
 \begin{enumerate}
-	\item El usuario pulsa en el icono de menú asociado a la propiedad de la clase que quiere editar y selecciona la acción ``Editar''.
+	\item El usuario pulsa en el icono de menú asociado a la anotación de la clase/propiedad que quiere editar y selecciona la acción ``Editar''.
 	\item Aparece un cuadro de diálogo con el URI del recurso actual que el usuario puede modificar.
 	\item El usuario modifica (o no) el URI del recurso  y pulsa fuera del cuadro de diálogo.
 	\item El cuadro de diálogo se cierra y no hay ningún cambio en los recursos.
 \end{enumerate}
 \item Flujo alternativo 2
 \begin{enumerate}
-	\item El usuario pulsa en el icono de menú asociado a la propiedad de la clase que quiere editar y selecciona la acción ``Editar''.
+	\item El usuario pulsa en el icono de menú asociado a la anotación de la clase/propiedad que quiere editar y selecciona la acción ``Editar''.
 	\item Aparece un cuadro de diálogo con el URI del recurso actual que el usuario puede modificar.
 	\item El usuario modifica (o no) el URI del recurso  y pulsa en guardar.
 	\item Ocurre un error en el guardado del recurso que le es comunicado al usuario a través de una notificación en pantalla.
@@ -394,7 +394,7 @@ Ninguno.
 
 \subsubsection{Precondiciones}
 
-El usuario debe haber navegado previamente hasta la sección de modelado, bien a través de la pantalla de bienvenida, bien a través de la barra de navegación lateral, y haber seleccionado previamente una clase de entre el listado de clases (en la tarjeta de la izquierda) para poder editar una de sus propiedades a través del menú.
+El usuario debe haber navegado previamente hasta la sección de modelado, bien a través de la pantalla de bienvenida, bien a través de la barra de navegación lateral, y haber seleccionado previamente una clase/propiedad de entre el listado de clases/propiedades (en la tarjeta de la izquierda) para poder editar una de sus anotaciones a través del menú.
 
 \subsubsection{Postcondiciones}
 
@@ -404,11 +404,11 @@ Ninguna.
 
 Ninguna.
 
-\subsection{Eliminar una propiedad o anotación de una clase}\label{sec:eliminar-una-propiedad-o-anotacion-de-una-clase}
+\subsection{Eliminar una anotación de una clase/propiedad}\label{sec:eliminar-una-propiedad-o-anotacion-de-una-clase}
 
 \subsubsection{Descripción breve}
 
-Este caso de uso permite a un usuario eliminar el recurso asociado a una propiedad o anotación de una clase existente en su grafo. Tan sólo se podrá eliminar una propiedad o anotación de entre las previamente configuradas en el código fuente de la aplicación (es decir, han de fijarse de manera previa, si bien su extensión es sencilla).
+Este caso de uso permite a un usuario eliminar el recurso asociado a una anotación de una clase existente en su grafo. Tan sólo se podrá eliminar una anotación de entre las previamente configuradas en el código fuente de la aplicación (es decir, han de fijarse de manera previa, si bien su extensión es sencilla).
 
 \subsubsection{Actores}
 
@@ -416,34 +416,34 @@ El actor principal es el usuario de la aplicación (fundamentalmente dirigida a u
 
 \subsubsection{Disparadores}
 
-El caso de usa comienza cuando el usuario pulsa en el icono de menú asociado a la propiedad de clase que quiere editar y selecciona la acción ``Eliminar''.
+El caso de usa comienza cuando el usuario pulsa en el icono de menú asociado a la anotación de clase/propiedad que quiere editar y selecciona la acción ``Eliminar''.
 
 \subsubsection{Flujo de eventos}
 \begin{enumerate}
 	\item Flujo básico
 	\begin{enumerate}
-		\item El usuario pulsa en el icono de menú asociado a la propiedad de la clase que quiere editar y selecciona la acción ``Eliminar''.
+		\item El usuario pulsa en el icono de menú asociado a la anotación de la clase/propiedad que quiere editar y selecciona la acción ``Eliminar''.
 		\item Aparece un cuadro de diálogo advirtiendo al usuario de que si confirma el cambio, no podrá volver a recuperar el recurso del grafo.
 	\item El usuario pulsa fuera del cuadro de diálogo.
 	\item El cuadro de diálogo se cierra y no hay ningún cambio en los recursos.
 	\end{enumerate}
 	\item Flujo alternativo 1
 	\begin{enumerate}
-		\item El usuario pulsa en el icono de menú asociado a la propiedad de la clase que quiere editar y selecciona la acción ``Eliminar''.
+		\item El usuario pulsa en el icono de menú asociado a la anotación de la clase/propiedad que quiere editar y selecciona la acción ``Eliminar''.
 		\item Aparece un cuadro de diálogo advirtiendo al usuario de que si confirma el cambio, no podrá volver a recuperar el recurso del grafo.
 	\item El usuario pulsa fuera del cuadro de diálogo.
 	\item El cuadro de diálogo se cierra y no hay ningún cambio en los recursos.
 	\end{enumerate}
 	\item Flujo alternativo 2
 	\begin{enumerate}
-		\item El usuario pulsa en el icono de menú asociado a la propiedad de la clase que quiere editar y selecciona la acción ``Editar''.
+		\item El usuario pulsa en el icono de menú asociado a la anotación de la clase/propiedad que quiere editar y selecciona la acción ``Editar''.
 		\item Aparece un cuadro de diálogo advirtiendo al usuario de que si confirma el cambio, no podrá volver a recuperar el recurso del grafo.
 	\item El usuario elige cancelar.
 	\item El recurso y su detalle siguen apareciendo y no son eliminados.
 	\end{enumerate}
 	\item Flujo alternativo 3
 \begin{enumerate}
-	\item El usuario pulsa en el icono de menú asociado a la propiedad de la clase que quiere editar y selecciona la acción ``Eliminar''.
+	\item El usuario pulsa en el icono de menú asociado a la anotación de la clase/propiedad que quiere editar y selecciona la acción ``Eliminar''.
 	\item Aparece un cuadro de diálogo advirtiendo al usuario de que si confirma el cambio, no podrá volver a recuperar el recurso del grafo.
 	\item El usuario elige confirmar.
 	\item  Ocurre un error en el borrado del recurso que le es comunicado al usuario a través de una notificación en pantalla.
@@ -457,7 +457,7 @@ Ninguno.
 
 \subsubsection{Precondiciones}
 
-El usuario debe haber navegado previamente hasta la sección de modelado, bien a través de la pantalla de bienvenida, bien a través de la barra de navegación lateral, y haber seleccionado previamente una clase de entre el listado de clases (en la tarjeta de la izquierda) para poder editar una de sus propiedades a través del menú.
+El usuario debe haber navegado previamente hasta la sección de modelado, bien a través de la pantalla de bienvenida, bien a través de la barra de navegación lateral, y haber seleccionado previamente una clase/propiedad de entre el listado de clases/propiedades (en la tarjeta de la izquierda) para poder editar una de sus propiedades a través del menú.
 
 \subsubsection{Postcondiciones}
 

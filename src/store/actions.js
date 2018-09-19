@@ -12,8 +12,6 @@
 
 const addTriple = (context, {subject, predicate, object}) => {
   if (subject !== null && subject !== '' && predicate != null && object != null) {
-    console.log('SUBJECT')
-    console.log(subject)
     context.commit('ADD_QUAD_FROM_IRI', {
       subject: subject, // subject must be an IRI
       predicate: predicate,

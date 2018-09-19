@@ -156,18 +156,51 @@ El proyecto puede desplegarse en cualquier servidor web o HTTP (como Apache\foot
 
 El entorno de demostración del proyecto es accesible con conexión a Internet a través de la siguiente URL: \url{https://unedtfg-198720.firebaseapp.com/#/}
 
+\subsection{Estructuras soportadas para el modelado}
 
-\subsection{Detalles de implementación relevantes}
+Dado el abrumador número de ontologías disponibles, para la implementación de la funcionalidad de modelado en el presente proyecto se ha optado por incluir en memoria un subconjunto de ternas pertenecientes a los vocabularios más utilizados. Usando como referencia \cite{evanstaylor01}, las sugerencias del Director del proyecto y criterios relacionados con el alcance de la funcionalidad implementable para esta primera versión, se ha decidido dar soporte a las estructuras listadas en el cuadro \ref{tab:model-constructs}
+
+	\begin{table}
+	\centering
+	\begin{tabular}{p{4cm}p{10cm}}
+		\toprule
+		Recurso &  Descripción \\ \midrule
+		rdf:type &  Permite definir una relación entre una instancia y su clase correspondiente. \\ \midrule
+		rdf:Class & Categoría para clasificar recursos.  \\ \midrule
+		rdfs:subClassOf & Indica que todas las instancias de una clase lo son también de la clase padre. \\ \midrule
+		rdfs:subPropertyOf &  Indica que un recurso asociado a otro con una propiedad también lo está por su propiedad padre. \\ \midrule
+		rdfs:domain & Colección de tipos que usan una propiedad. \\ \midrule
+		rdfs:range &  Tipos de valores que puede tomar una propiedad. \\ \midrule
+		owl:Thing &  El conjunto de \textbf{todos} los individuos. \\ \midrule
+		owl:Class & Categoría para clasificar recursos o individuos. Es subclase de \textit{rdf:Class}.  \\ \midrule
+		owl:DatatypeProperty & Relaciona individuos con literales. \\ \midrule
+		owl:ObjectProperty & Relaciona individuos con otros individuos. \\ \midrule
+		rdf:XMLLiteral &  Clase de todos los valores literales de XML. \\ \midrule
+		owl:equivalentClass & Enlaza dos clases que contienen exactamente el mismo conjunto de individuos. \\ \midrule
+		owl:equivalentProperty & Indica que dos propiedades tienen la misma extensión (conjunto de instancias asociadas).  \\ \midrule
+		owl:disjointWith &  Implica que los conjuntos de individuos de las clases que relaciona no tienen ninguna instancia en común. \\ \midrule
+		owl:propertyDisjointWith &  Implica que los conjuntos de individuos de las propiedades que relaciona no tienen ninguna instancia en común.\\ \midrule
+		rdfs:label & Proporciona una versión legible del nombre de un recurso. \\ \midrule
+		rdfs:comment & Proporciona una versión legible de la descripción de un recurso. \\ \midrule
+		rdfs:seeAlso & Indica que el recurso relacionado podría proporcionar información adicional sobre el sujeto. \\ 
+		
+		\bottomrule
+	\end{tabular}
+	\caption{Estructuras soportadas para el modelado.}\label{tab:model-constructs}
+\end{table}
+
+
+\subsection{Otros detalles de implementación relevantes}
 
 Sin pretender entrar a fondo en los detalles de la implementación, que puede consultarse en el repositorio de código fuente del proyecto en: \url{https://github.com/predicador37/rdf-editor}, sí se ha considerado conveniente documentar determinadas decisiones:
 
 	\begin{itemize}
-	\item En el módulo de \textbf{modelado}, el listado de recursos se ha implementado mediante una tabla para permitir su paginado, debido a que el número de clases o propiedades puede ser elevado en un modelo más o menos complejo. Por otra parte, los detalles de anotaciones (propiedades de clase, por ejemplo) se han implementado con listas expandibles, lo que permite una visualización compacta sin necesidad de una tabla (ya que se estima que el número de estas anotaciones no será muy elevado).
-	\item En el módulo de \textbf{vocabularios}, la selección de estos se ha implementado como un conjunto de interruptores o\textit{ switches on/off}. Esto le permite al usuario cargar o descargar los vocabularios de forma sencilla, como si de una configuración se tratase (tal es la idea).
+	\item En el módulo de \textbf{modelado}, el listado de recursos se ha implementado mediante una tabla para permitir su paginado, debido a que el número de clases o propiedades puede ser elevado en un modelo más o menos complejo. Por otra parte, los detalles de anotaciones (propiedades de clase, por ejemplo) se implementaron inicialmente con listas expandibles, pero finalmente se optó por paneles expandibles y tablas para permitir una mejor experiencia de usuario en dispositivos móviles.
+	\item En el módulo de \textbf{vocabularios}, la selección de estos se ha implementado como un conjunto de interruptores o\textit{ switches on/off}. Esto le permite al usuario cargar o descargar los vocabularios de forma sencilla, como si de una configuración se tratase (tal es la idea). No obstante, es necesario disponer de red y de servicios con CORS correctamente configurado para que su carga sea posible.
 	\item En el módulo de \textbf{poblamiento}, se tiene lo siguiente:
 		\begin{itemize}
 		\item El campo ``sujeto'' se implementa como una entrada de texto libre, puesto que lo más probable es que se trate de un individuo nuevo.
-		\item Los campos ``predicado'' y ``objeto'' ofrecen un selector con autocompletado que permite la introducción de nuevos términos. De esta forma, el usuario puede aprovechar los términos ya introducidos en la aplicación (bien por defecto bien a través de otros medios) o añadir los suyos propios, si bien ha de tener prevista su definición en el grafo.
+		\item Los campos ``predicado'' y ``objeto'' ofrecen un selector con autocompletado que permite la introducción de nuevos términos. De esta forma, el usuario puede aprovechar los términos ya introducidos en la aplicación (bien por defecto bien a través de otros medios) o añadir los suyos propios, si bien ha de tener prevista su definición en el grafo. Los URIs de los elementos mostrados se han recortado para permitir una mejor visualización en dispositivos móviles.
 	\end{itemize}
 \item En el módulo de actividades, la importación a Markdown se realiza mediante la biblioteca vue-markdown\footnote{https://github.com/miaolz123/vue-markdown}, que a su vez utiliza markdown-it\footnote{https://github.com/markdown-it/markdown-it}. Esta última biblioteca implementa un procesador del formato Markdown con buen rendimiento y conforme a la especificación CommonMark Spec 0.28\footnote{\url{https://spec.commonmark.org/}}, si bien añade extensiones de sintaxis (como tablas y tachados de Github Flavored Markdown\footnote{La sintaxis de Markdown propuesta por Github, que añade características como tablas, estilo de texto, etc. Ver \url{https://help.github.com/articles/basic-writing-and-formatting-syntax/\#styling-text}}) y otros aspectos.
 	
