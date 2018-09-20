@@ -41,11 +41,11 @@ Entre los almacenes de ternas más utilizados, se pueden citar \textit{OpenLink V
 En el caso del presente proyecto, se valoraron dos alternativas:
 
 \begin{itemize}  
-	\item \textbf{RDF-Ext Dataset\footnote{\url{https://github.com/rdf-ext/rdf-store-dataset}}} un simple conjunto de datos cargado en memoria y conforme con la especificación estándar. Este almacén presentaba limitaciones en cuanto a rendimiento y número de tripletas a almacenar, además de estar pensado para operaciones síncronas.
-	\item \textbf{N3.js:\footnote{\url{https://github.com/rdfjs/N3.js/}}} La bilioteca N3 ofrece, además de almacenamiento de tripletas en memoria en \textit{Javascript} nativo, facilidades de serialización y procesado con formatos estándar como \textit{Turtle, N3, N-Triples y TriG}. Si bien su conformidad con la especificación de interfaces\textit{ RDF.js} no es completa, sí está presente en gran parte de sus módulos (\textit{DataFactory, StreamParser, StreamWriter y Store}).
+	\item \textit{\textbf{RDF-Ext Dataset\footnote{\url{https://github.com/rdf-ext/rdf-store-dataset}}}} un simple conjunto de datos cargado en memoria y conforme con la especificación estándar. Este almacén presentaba limitaciones en cuanto a rendimiento y número de tripletas a almacenar, además de estar pensado para operaciones síncronas.
+	\item \textit{\textbf{N3.js:\footnote{\url{https://github.com/rdfjs/N3.js/}}}} La bilioteca \textit{N3} ofrece, además de almacenamiento de tripletas en memoria en \textit{Javascript} nativo, facilidades de serialización y procesado con formatos estándar como \textit{Turtle, N3, N-Triples y TriG}. Si bien su conformidad con la especificación de interfaces\textit{ RDF.js} no es completa, sí está presente en gran parte de sus módulos (\textit{DataFactory, StreamParser, StreamWriter y Store}).
 \end{itemize}
 
-Confirmadas las limitaciones de \textit{RDF-Ext Dataset} y consultado con el \textit{W3C RDFJS Community Group}, se opta finalmente por utilizar \textbf{N3.js} (lo que supuso adaptar ligeramente la implementación del proyecto al nuevo \textit{storage}).
+Confirmadas las limitaciones de \textit{RDF-Ext Dataset} y consultado con el \textit{W3C RDFJS Community Group}, se opta finalmente por utilizar \textbf{\textit{N3.js}} (lo que supuso adaptar ligeramente la implementación del proyecto al nuevo \textit{storage}).
 
 
 \subsection{Procesador y Serializador RDF (\textit{parser/serializer})}
@@ -54,7 +54,7 @@ En muchos casos, los módulos para importación y exportación de datos en RDF son 
 
 \subsubsection{RDF/XML}
 
-Se trata de una representación en XML, comúnmente criticada por su dificultad de lectura por parte de personas. Entre sus otras críticas están las limitaciones impuestas por las reglas de nomenclatura de XML o los problemas encontrados para procesar este formato con herramientas populares.\cite{ducharme01}. Para poder codificar un grafo RDF en XML, tanto los nodos como los predicados han de ser representados en términos de XML (elementos, atributos, contenido de elementos y valores de atributos). 
+Se trata de una representación en XML, comúnmente criticada por su dificultad de lectura por parte de personas. Entre sus otras críticas están las limitaciones impuestas por sus reglas de nomenclatura o los problemas encontrados para procesar este formato con herramientas populares.\cite{ducharme01}. Para poder codificar un grafo RDF en XML, tanto los nodos como los predicados han de ser representados en términos de XML (elementos, atributos, contenido de elementos y valores de atributos). 
 
 Conceptualmente, se construye a partir de un conjunto de descripciones más pequeñas, cada una de las cuales traza un camino a lo largo de un grafo RDF. Estos caminos se describen en términos de los nodos (sujetos) y enlaces (predicados), que los conectan con otros nodos (objetos).
 
@@ -103,15 +103,15 @@ Ejemplo\footnote{\url{https://www.w3.org/TR/n-triples/}}:
 
 \textit{N3}, abreviatura de \textit{Notation 3}, fue un proyecto personal de Tim Berners-Lee\cite{ducharme01}. Es muy similar a \textit{N-Triples}, pero añadiendo características adicionales como atajos, un formato más claro, o la condensación de muchas de las repeticiones de este formato.
 
-A pesar de todo, N3 nunca se convirtió en un estándar y sus características adicionales frente a \textit{N-Triples} no tuvieron mucha aceptación.
+A pesar de todo, \textit{N3} nunca se convirtió en un estándar y sus características adicionales frente a \textit{N-Triples} no tuvieron mucha aceptación.
 
 \subsubsection{\textit{Turtle}}
 
-El formato Turtle permite escribir un grafo RDF en texto de una forma más compacta que RDF/XML y más sencilla de leer que N-Triples. Su gramática es un subconjunto de la especificación del lenguaje de consulta SPARQL 1.1, compartiendo ambas nombres de terminales y producciones en la medida de lo posible.
+El formato Turtle permite escribir un grafo RDF en texto de una forma más compacta que RDF/XML y más sencilla de leer que \textit{N-Triples}. Su gramática es un subconjunto de la especificación del lenguaje de consulta SPARQL 1.1, compartiendo ambas nombres de terminales y producciones en la medida de lo posible.
 
 En estos momentos, es el formato de serialización más popular entre las comunidades de desarrolladores\cite{yu01}.
 
-A continuación se muestra un ejemplo de serialización en Turtle\footnote{https://www.w3.org/TR/turtle/}:
+A continuación se muestra un ejemplo de serialización en \textit{Turtle}\footnote{https://www.w3.org/TR/turtle/}:
 
 \begin{lstlisting}[basicstyle=\tiny, language=XML, caption={Ejemplo de Turtle del W3C.},captionpos=b]
 
@@ -225,9 +225,12 @@ Sin entrar en detalles, el funcionamiento de \textit{Vuex} se ciñe a las siguien
 	\item Las mutaciones pueden ser ejecutadas de manera asíncrona a través de \textbf{acciones}.
 \end{itemize}
 
+\noindent\begin{minipage}{\linewidth}
+
 El estado de la aplicación puede resumirse con las entidades mostradas en el cuadro \ref{tab:estado}. Por otra parte, se han definido las acciones y mutaciones necesarias para modificar dicho estado. En el cuadro \ref{tab:actions} se resumen las acciones a implementar con la funcionalidad requerida (no se incluyen las mutaciones por considerarse que no aportan nada en cuanto a diseño que no aporten ya las acciones).
 
 Es interesante también enumerar los \textit{getters} (ver cuadro \ref{tab:getters}), o métodos de consulta que permiten extraer información del estado de la aplicación sin acceder directamente a sus estructuras de datos.
+\end{minipage}
 
 \begin{table}
 	\centering
@@ -275,9 +278,9 @@ Es interesante también enumerar los \textit{getters} (ver cuadro \ref{tab:getter
 		ACC-4 & Eliminar terna & Elimina una terna del grafo pasando como parámetros su sujeto, predicado y objeto. \\ \midrule
 		ACC-5 & Editar literal &  Modifica la definición de un literal o cadena de texto utilizado como objeto en una propiedad. \\ \midrule
 		ACC-6 & Añadir literal &  Añade una terna con un literal o cadena de texto como objeto. \\ \midrule
-		ACC-7 & Importar N3 & Importa un grafo en formato \textit{N3, Turtle, TriG o N-Triples}. \\ \midrule
-		ACC-8 & Añadir N3 &  Añade al grafo existente otro en formato \textit{N3, Turtle, TriG o N-Triples}. \\ \midrule
-		ACC-9 & Eliminar N3 & Elimina del grafo local las ternas existentes en otro grafo en formato \textit{N3, Turtle, TriG o N-Triples} \\ \midrule
+		ACC-7 & Importar \textit{N3} & Importa un grafo en formato \textit{N3, Turtle, TriG o N-Triples}. \\ \midrule
+		ACC-8 & Añadir \textit{N3} &  Añade al grafo existente otro en formato \textit{N3, Turtle, TriG o N-Triples}. \\ \midrule
+		ACC-9 & Eliminar \textit{N3} & Elimina del grafo local las ternas existentes en otro grafo en formato \textit{N3, Turtle, TriG o N-Triples} \\ \midrule
 		ACC-10 & Cargar actividad & Carga el contenido de una actividad en formato Markdown. \\ \midrule
 		ACC-11 & Exportar a \textit{JSON-LD} &  Exporta el grafo local a un archivo en formato \textit{JSON-LD}. \\ \midrule
 		ACC-12 & Exportar a Turtle &  Exporta el grafo local a un archivo en formato \textit{Turtle}. \\ \midrule
@@ -336,6 +339,9 @@ Para poder dar cumplimiento a los requisitos de la aplicación, se definen en el 
 			COMP-12 & Cargador de URLs &  Componente reutilizable para importar datos desde URL. \\ \midrule
 			COMP-13 & Cargador de Vocabularios & Componente reutilizable para habilitar o deshabilitar vocabularios. \\ \midrule
 			COMP-14 & Visor de \textit{markdown} & Componente reutilizable para visualizar\textit{ markdown} renderizado en HTML. \\ 
+			COMP-15 & Poblamiento & Componente a modo de formulario para poblar el grafo. \\ \midrule
+			COMP-16 & Acerca de & Componente con información relevante sobre la aplicación. \\ \midrule
+			COMP-18 & Ayuda & Componente contenedor del manual de usuario. \\ 
 			\bottomrule
 		\end{tabular}
 		\caption{Listado de componentes de la aplicación.}
@@ -353,7 +359,7 @@ En la figura \ref{fig:componentes} se muestra un diagrama UML 2.0 con la jerarqu
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.4]{componentes}
+	\includegraphics[scale=0.3]{componentes}
 	\caption{Jerarquía de componentes de la aplicación.}\label{fig:componentes}
 \end{figure}
 

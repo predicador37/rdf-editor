@@ -45,7 +45,7 @@ La accesibilidad web tiene como objetivo extender el uso de la web al mayor núme
 
 Actualmente, la legislación española (\textit{Real Decreto 1494/2007 de 12 de noviembre, por el que se aprueba el Reglamento sobre las condiciones básicas para el acceso de las personas con discapacidad a las tecnologías, productos y servicios relacionados con la sociedad de la información y medios de comunicación social}\footnote{\url{https://www.boe.es/buscar/act.php?id=BOE-A-2007-19968}}) establece que la\textit{``Norma UNE 139803:2012: Requisitos de accesibilidad para contenidos en la Web''} define los requisitos de accesibilidad para los contenidos web. Esta norma es equivalente a los criterios WCAG 2.0\footnote{Web Content Accesibility Guidelines 2.0, \url{https://www.w3.org/TR/WCAG20/}}.
 
-Para verificar el grado de accesibilidad de la aplicación se ha utilizado el complemento Axe\footnote{\url{https://www.deque.com/axe/}} para el navegador Firefox.Es una de las herramientas más utilizadas por la comunidad de desarrolladores, abierta y flexible, que permite validar si el HTML generado es conforme a las pautas WCAG 2.0 (y, por tanto, a la norma obligada en España).
+Para verificar el grado de accesibilidad de la aplicación se ha utilizado el complemento Axe\footnote{\url{https://www.deque.com/axe/}} para el navegador \textit{Firefox}. Es una de las herramientas más utilizadas por la comunidad de desarrolladores, abierta y flexible, que permite validar si el HTML generado es conforme a las pautas WCAG 2.0 (y, por tanto, a la norma obligada en España).
 
 Validar la accesibilidad de una aplicación 100\% \textit{Javascript} es complejo, dado que su contenido y el árbol del documento (DOM\footnote{Document Object Model, una API para documentos HTML y XML. Ver \url{https://www.w3.org/TR/WD-DOM/introduction.html}}) se generan dinámicamente. No obstante, el funcionamiento a modo de complemento de navegador de la herramienta utilizada ha permitido facilitar esta tarea y su aplicación en los distintos módulos de la aplicación (ver ejemplo en figura \ref{fig:acc01})
 
@@ -63,7 +63,7 @@ Otra herramienta comúnmente utilizada para la validación de la accesibilidad en 
 	\caption{Validación de accesibilidad con \textit{Axe} para \textit{Mozilla Firefox}.}\label{fig:acc02}
 \end{figure}
 
-Lighthouse proporciona otros indicadores que no son relevantes aquí, puesto que no era el propósito de este proyecto desarrollar la aplicación resultante como una PWA (\textit{Progressive Web Application}). En cuanto al pobre rendimiento mostrado en el indicador correspondiente, este depende de muchos factores; el factor principal es el alojamiento de la aplicación en una plataforma gratuita y el elevado tamaño a descargar debido a las bibliotecas de \textit{Comunica}, que han de incluirse en su totalidad mientras se encuentren en versiones inestables.
+\textit{Lighthouse} proporciona otros indicadores que no son relevantes aquí, puesto que no era el propósito de este proyecto desarrollar la aplicación resultante como una PWA (\textit{Progressive Web Application}). En cuanto al pobre rendimiento mostrado en el indicador correspondiente, este depende de muchos factores: los factores principales son el alojamiento de la aplicación en una plataforma gratuita y el elevado tamaño a descargar debido a las bibliotecas de \textit{Comunica}, que han de incluirse en su totalidad mientras se encuentren en versiones inestables.
 
 \section{Visualización en dispositivos móviles}
 
@@ -97,7 +97,7 @@ La biblioteca \textit{Eslint}, que realiza análisis estático de código en cada c
 
 Es importante destacar que la aplicación desarrollada, al ejecutarse completamente en el navegador del usuario, puede presentar importantes limitaciones de rendimiento debido fundamentalmente al uso de memoria RAM.
 
-Conjuntos de datos del orden de \textit{Kilobytes} son manejables, pero las pruebas de carga de un fichero TTL de 22 \textit{Megabytes} revelan un consumo final de RAM de en torno a 500 MB, así como la \textbf{inviabilidad de lanzar consultas sin limitar los resultados a dicho grafo}.
+Conjuntos de datos del orden de \textit{Kilo bytes} son manejables, pero las pruebas de carga de un fichero TTL de 22 \textit{Mega bytes} revelan un consumo final de RAM de en torno a 500 MB, así como la \textbf{inviabilidad de lanzar consultas sin limitar los resultados a dicho grafo}.
 
 \begin{figure}[h]
 	\centering

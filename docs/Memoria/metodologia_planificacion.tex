@@ -1,6 +1,6 @@
 \chapter{Metodología y Planificación}
 
-La metodología y la planificación son dos labores obligadas en cualquier proyecto de ingeniería. No obstante, cabe aquí citar la siguiente frase atribuida a Dwight D. Eissenhower: \blockquote[{\cite{eissenhower01}}]{Plans are worthless, but planning is everything.} Hay que tener en cuenta que una planificación es tan sólo una guía inicial para conseguir una organización más depurada durante el tiempo de desarrollo. La planificación debe ser una herramienta flexible de ayuda, y no un instrumento rígido que condicione otras características del sistema tales como su calidad. En las siguientes secciones se analizan con más detalle estos asuntos.
+La metodología y la planificación son obligadas en cualquier proyecto de ingeniería. No obstante, cabe aquí citar la siguiente frase atribuida a Dwight D. Eissenhower: \blockquote[{\cite{eissenhower01}}]{Plans are worthless, but planning is everything.} Hay que tener en cuenta que una planificación es tan sólo una guía inicial para conseguir una organización más depurada durante el tiempo de desarrollo. La planificación debe ser una herramienta flexible de ayuda, y no un instrumento rígido que condicione otras características del sistema tales como su calidad. Las metodologías ágiles ofrecen mecanismos para conseguir flexibilizar el proceso de planificación. En las siguientes secciones se analizan con más detalle estos asuntos.
 
 \section{Metodología}
 
@@ -24,7 +24,7 @@ La metodología de desarrollo en cascada surgió como idea en un artículo de Winst
 
 Es decir, se basa en la separación entre diseño y construcción (o entre creatividad y repetición).
 
-La propuesta de Royce, tal y como se desprende de la lectura del artículo original, describía el modelo en cascada como la \blockquote[{\cite{royce01}}]{descripción más simple} que solo funcionaría para los proyectos más sencillos. Irónicamente, este mensaje malentendido ha sido el origen de la popularidad de la metodología en cascada, que hoy en día se sigue promoviendo en muchos casos por inercia, desconocimiento, comodidad o ilusión de control sobre el proyecto.
+La propuesta de Royce, tal y como se desprende de la lectura del artículo original, describía el modelo en cascada como la \blockquote[{\cite{royce01}}]{descripción más simple} que solo funcionaría para los proyectos más sencillos. Irónicamente, este mensaje malentendido ha sido el origen de la popularidad de dicha metodología, que hoy en día se sigue promoviendo en muchos casos por inercia, desconocimiento, comodidad o ilusión de control sobre el proyecto.
  
 Lamentablemente, en la Ingeniería de Software los pesos de diseño y construcción están invertidos con respecto a otras ingenierías, siendo el software un dominio de cambio y alta inestabilidad. El desarrollo de software es, intrínsecamente, una labor creativa; y la creatividad no es fácilmente predecible. Esto ha dado lugar a que los desarrollos tradicionales adolezcan de ciertos problemas{\cite{larman01}}:
 
@@ -38,15 +38,17 @@ Lamentablemente, en la Ingeniería de Software los pesos de diseño y construcción
 	\item Se basa en estimaciones y planificación ``fiables''.
 \end{itemize}
 
+\noindent\begin{minipage}{\linewidth}
 Entre los estudios que ratifican las afirmaciones anteriores, cabe citar, entre otros, los siguientes:
 
 \begin{itemize}
 	\item \textit{Informe Chaos 2015}\cite{chaos15}.
 	\item \textit{Dr. Dobb's Journal article The Non'Existent Software Crisis: Debunking the Chaos Report}\cite{ambler01}.
-	\item Encuesta de \textit{Gartner}\cite{mieritz01}.
+	\item Encuesta de \textit{Gartner} (2012)\cite{mieritz01}.
 \end{itemize}
+\end{minipage}
 
-Por tanto, atendiendo a esta exposición y considerando que el proyecto en cuestión presentaba un alto nivel de incertidumbre debido a su alto componente en investigación del estado tecnológico actual, se ha optado por utilizar un enfoque metodológico incremental e iterativo, puesto que:
+Por tanto, atendiendo a esta exposición y considerando que el proyecto en cuestión presentaba un alto nivel de incertidumbre debido a un importante componente en investigación del estado tecnológico actual, se ha optado por utilizar un enfoque metodológico incremental e iterativo, puesto que:
 
 \begin{itemize}
 	\item Facilita llevar a cabo proyectos pequeños.
@@ -68,7 +70,7 @@ La referencia más clara en este ámbito es \textit{Extreme Programming}, de Kent 
 
 Su aplicación al desarrollo de este proyecto ha sido flexible; por ejemplo, no se han definido ciclos estrictos por la propia naturaleza inestable de la dedicación al desarrollo del mismo, pero sí que ha realizado un diseño evolutivo soportado sobre un número suficiente de pruebas unitarias así como una planificación incremental y adaptativa a las problemáticas que iban surgiendo.
 
-Prueba del acierto a la hora de elegir esta metodología es el cambio de necesidades y requisitos funcionales que tuvo lugar en la reunión presencial mantenida con el tutor, donde \textbf{la metodología aportó que no fuera necesario descartar ningún desarrollo o trabajo realizado hasta la fecha}. Permitió realizar una gestión del cambio efectiva, re-orientando el trabajo a tiempo sin impactar en el diseño ni en la implementación existente. Finalmente, tanto la organización como la planificación de las tareas han sido lo suficientemente flexibles para conseguir un ritmo adecuado de desarrollo, reduciendo los puntos de bloqueo.
+Prueba del acierto a la hora de elegir esta metodología es el cambio de necesidades y requisitos funcionales que tuvo lugar en la reunión presencial mantenida con el tutor, donde \textbf{la metodología aportó que no fuera necesario descartar ningún desarrollo o trabajo realizado hasta la fecha}. Permitió realizar una gestión del cambio efectiva, reorientando el trabajo a tiempo sin impactar en el diseño ni en la implementación existente. Finalmente, tanto la organización como la planificación de las tareas han sido lo suficientemente flexibles para conseguir un ritmo adecuado de desarrollo, reduciendo los puntos de bloqueo.
 
 \section{Planificación}
 
@@ -240,14 +242,14 @@ Si bien para la planificación global del proyecto se han utilizado herramientas 
 La planificación ágil es un proceso en continua evolución, también iterativo e incremental como las metodologías a las que pertenece, basada en ciclos del tipo:
 
 \begin{enumerate}
-	\item Añadir tareas
-	\item Estimar tareas
-	\item Priorizar tareas
+	\item Añadir tareas.
+	\item Estimar tareas.
+	\item Priorizar tareas.
 \end{enumerate}
 
 En este caso, la estimación de tareas se llevó a cabo de forma heurística, utilizando la experiencia del autor y el conocimiento del contexto existente en el momento de la estimación. En base a ello, la priorización (ordenación) de las tareas tenía lugar inmediatamente, relegando a la estimación a un segundo plano.
 
-Para gestionar estas tareas, se optó por utilizar como herramienta Kanban\footnote{\url{https://es.atlassian.com/agile/kanban}}. Un tablero Kanban puede definirse como un dispositivo de señalización que introduce el flujo de trabajo de un proceso a un ritmo manejable. Presenta las siguientes características:
+Para gestionar estas tareas, se optó por utilizar como herramienta \textit{Kanban}\footnote{\url{https://es.atlassian.com/agile/kanban}}. Un tablero \textit{Kanban} puede definirse como un dispositivo de señalización que introduce el flujo de trabajo de un proceso a un ritmo manejable. Presenta las siguientes características:
 
 
 \begin{itemize}
@@ -281,7 +283,7 @@ Básicamente, consiste en utilizar una tabla con varias columnas para visualizar 
 	\end{table}
 \end{center}
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.25]{trello}
 	\caption{Ejemplo de tablero Trello}

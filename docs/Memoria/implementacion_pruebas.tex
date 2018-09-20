@@ -79,7 +79,7 @@ El proyecto de trabajo se ha generado usando la herramienta \textit{vue-cli}\foo
 
 La propia web de \textit{Vuetify} presenta un asistente para elegir la plantilla más adecuada basándose en diversos parámetros introducidos por el usuario, tales como: experiencia con \textit{Vue}, tipo de interfaz (web, móvil, escritorio), necesidad o no de generar estructuras de pruebas unitarias, etc. Dadas las necesidades de este proyecto, se optó por elegir una plantilla para programadores con poca experiencia en \textit{Vue}, para la web y con estructuras de pruebas unitarias (y no con posicionamiento web). 
 
-El resultado fue la plantilla \textit{webpack}\footnote{Webpack es un empaquetador de módulos para JS. Ver \url{https://github.com/vuetifyjs/webpack} y \url{https://webpack.js.org/}}, que presenta las siguientes características:
+El resultado obtenido fue la plantilla \textit{webpack}\footnote{Webpack es un empaquetador de módulos para JS. Ver \url{https://github.com/vuetifyjs/webpack} y \url{https://webpack.js.org/}}, que presenta las siguientes características:
 
 \begin{itemize}
 	\item Desarrollo:
@@ -123,8 +123,10 @@ De manera predeterminada, es posible ejecutar los siguientes comandos:
 
 \subsection{Despliegue del proyecto}\label{sec:despliegue-del-proyecto}
 
-Para desplegar la aplicación a modo de demostración se ha optado por utilizar \textit{Firebase}\footnote{\url{https://firebase.google.com/}}, una plataforma de desarrollo de \textit{Google}, a modo de PaaS\footnote{\textit{Platform as a Service}: entorno de desarrollo e implementación en la nube.}. Si bien \textit{Firebase} provee de muchos servicios en la nube (como base de datos, autenticación, almacenamiento, etc.) para este proyecto tan solo ha sido necesario utilizar el servicio de alojamiento. Para ello, basta con incluir un par de sencillos ficheros de configuración con el siguiente contenido:
+Para desplegar la aplicación a modo de demostración se ha optado por utilizar \textit{Firebase}\footnote{\url{https://firebase.google.com/}}, una plataforma de desarrollo de \textit{Google}, a modo de PaaS\footnote{\textit{Platform as a Service}: entorno de desarrollo e implementación en la nube.}. Si bien \textit{Firebase} provee de muchos servicios (como base de datos, autenticación, almacenamiento, etc.), para este proyecto tan solo ha sido necesario utilizar el servicio de alojamiento. Para ello, basta con incluir un par de sencillos ficheros de configuración con el siguiente contenido:
 
+\noindent\begin{minipage}{\linewidth}
+	
 \begin{lstlisting}[caption={Configuración de Firebase},captionpos=b]
 
 {
@@ -138,6 +140,7 @@ Para desplegar la aplicación a modo de demostración se ha optado por utilizar \t
 	}
 }
 \end{lstlisting} 
+\end{minipage}
 
 \begin{lstlisting}[caption={Configuración de proyecto en Firebase},captionpos=b]
 
@@ -169,24 +172,24 @@ Dado el abrumador número de ontologías disponibles\footnote{Ejemplo: lista de on
 	\begin{tabular}{p{4cm}p{10cm}}
 		\toprule
 		Recurso &  Descripción \\ \midrule
-		rdf:type &  Permite definir una relación entre una instancia y su clase correspondiente. \\ \midrule
-		rdf:Class & Categoría para clasificar recursos.  \\ \midrule
-		rdfs:subClassOf & Indica que todas las instancias de una clase lo son también de la clase padre. \\ \midrule
-		rdfs:subPropertyOf &  Indica que un recurso asociado a otro con una propiedad también lo está por su propiedad padre. \\ \midrule
-		rdfs:domain & Colección de tipos que usan una propiedad. \\ \midrule
-		rdfs:range &  Tipos de valores que puede tomar una propiedad. \\ \midrule
-		owl:Thing &  El conjunto de \textbf{todos} los individuos. \\ \midrule
-		owl:Class & Categoría para clasificar recursos o individuos. Es subclase de \textit{rdf:Class}.  \\ \midrule
-		owl:DatatypeProperty & Relaciona individuos con literales. \\ \midrule
-		owl:ObjectProperty & Relaciona individuos con otros individuos. \\ \midrule
-		rdf:XMLLiteral &  Clase de todos los valores literales de XML. \\ \midrule
-		owl:equivalentClass & Enlaza dos clases que contienen exactamente el mismo conjunto de individuos. \\ \midrule
-		owl:equivalentProperty & Indica que dos propiedades tienen la misma extensión (conjunto de instancias asociadas).  \\ \midrule
-		owl:disjointWith &  Implica que los conjuntos de individuos de las clases que relaciona no tienen ninguna instancia en común. \\ \midrule
-		owl:propertyDisjointWith &  Implica que los conjuntos de individuos de las propiedades que relaciona no tienen ninguna instancia en común.\\ \midrule
-		rdfs:label & Proporciona una versión legible del nombre de un recurso. \\ \midrule
-		rdfs:comment & Proporciona una versión legible de la descripción de un recurso. \\ \midrule
-		rdfs:seeAlso & Indica que el recurso relacionado podría proporcionar información adicional sobre el sujeto. \\ 
+		\textit{rdf:type} &  Permite definir una relación entre una instancia y su clase correspondiente. \\ \midrule
+		\textit{rdf:Class} & Categoría para clasificar recursos.  \\ \midrule
+		\textit{rdfs:subClassOf} & Indica que todas las instancias de una clase lo son también de la clase padre. \\ \midrule
+		\textit{rdfs:subPropertyOf} &  Indica que un recurso asociado a otro con una propiedad también lo está por su propiedad padre. \\ \midrule
+		\textit{rdfs:domain} & Colección de tipos que usan una propiedad. \\ \midrule
+		\textit{rdfs:range} &  Tipos de valores que puede tomar una propiedad. \\ \midrule
+		\textit{owl:Thing} &  El conjunto de \textbf{todos} los individuos. \\ \midrule
+		\textit{owl:Class} & Categoría para clasificar recursos o individuos. Es subclase de \textit{rdf:Class}.  \\ \midrule
+		\textit{owl:DatatypeProperty} & Relaciona individuos con literales. \\ \midrule
+		\textit{owl:ObjectProperty} & Relaciona individuos con otros individuos. \\ \midrule
+		\textit{rdf:XMLLiteral} &  Clase de todos los valores literales de XML. \\ \midrule
+		\textit{owl:equivalentClass} & Enlaza dos clases que contienen exactamente el mismo conjunto de individuos. \\ \midrule
+		\textit{owl:equivalentProperty} & Indica que dos propiedades tienen la misma extensión (conjunto de instancias asociadas).  \\ \midrule
+		\textit{owl:disjointWith} &  Implica que los conjuntos de individuos de las clases que relaciona no tienen ninguna instancia en común. \\ \midrule
+		\textit{owl:propertyDisjointWith} &  Implica que los conjuntos de individuos de las propiedades que relaciona no tienen ninguna instancia en común.\\ \midrule
+		\textit{rdfs:label} & Proporciona una versión legible del nombre de un recurso. \\ \midrule
+		\textit{rdfs:comment} & Proporciona una versión legible de la descripción de un recurso. \\ \midrule
+		\textit{rdfs:seeAlso} & Indica que el recurso relacionado podría proporcionar información adicional sobre el sujeto. \\ 
 		
 		\bottomrule
 	\end{tabular}
@@ -207,7 +210,7 @@ Sin pretender entrar a fondo en los detalles de la implementación, que puede con
 		\item El campo ``sujeto'' se implementa como una entrada de texto libre, puesto que lo más probable es que se trate de un individuo nuevo.
 		\item Los campos ``predicado'' y ``objeto'' ofrecen un selector con autocompletado que permite la introducción de nuevos términos. De esta forma, el usuario puede aprovechar los términos ya introducidos en la aplicación (bien por defecto bien a través de otros medios) o añadir los suyos propios, si bien ha de tener prevista su definición en el grafo. Los URIs de los elementos mostrados se han recortado para permitir una mejor visualización en dispositivos móviles.
 	\end{itemize}
-\item En el módulo de actividades, la importación a Markdown se realiza mediante la biblioteca \textit{vue-markdown}\footnote{https://github.com/miaolz123/vue-markdown}, que a su vez utiliza \textit{markdown-it}\footnote{https://github.com/markdown-it/markdown-it}. Esta última biblioteca implementa un procesador del formato \textit{Markdown} con buen rendimiento y conforme a la especificación \textit{CommonMark Spec} 0.28\footnote{\url{https://spec.commonmark.org/}}, si bien añade extensiones de sintaxis (como tablas y tachados de \textit{Github Flavored Markdown}\footnote{La sintaxis de Markdown propuesta por Github, que añade características como tablas, estilo de texto, etc. Ver \url{https://help.github.com/articles/basic-writing-and-formatting-syntax/\#styling-text}}) y otros aspectos.
+\item En el módulo de actividades, la importación a \textit{Markdown} se realiza mediante la biblioteca \textit{vue-markdown}\footnote{https://github.com/miaolz123/vue-markdown}, que a su vez utiliza \textit{markdown-it}\footnote{https://github.com/markdown-it/markdown-it}. Esta última biblioteca implementa un procesador del formato \textit{Markdown} con buen rendimiento y conforme a la especificación \textit{CommonMark Spec} 0.28\footnote{\url{https://spec.commonmark.org/}}, si bien añade extensiones de sintaxis (como tablas y tachados de \textit{Github Flavored Markdown}\footnote{La sintaxis de Markdown propuesta por Github, que añade características como tablas, estilo de texto, etc. Ver \url{https://help.github.com/articles/basic-writing-and-formatting-syntax/\#styling-text}}) y otros aspectos.
 	
 \end{itemize}
 
@@ -284,7 +287,7 @@ No obstante lo anterior, y con un interés meramente informativo, se incluyen en 
 
 \subsection{Pruebas extremo a extremo (\textit{end-to-end})}
 
-Las pruebas extremo a extremo (o \textit{end-to-end}) permiten probar la interfaz de usuario a través de un navegador automatizado. En su forma más básica, este tipo de pruebas permite comprobar la existencia de determinados elementos en el DOM\footnote{Document Object Model} de la aplicación web, así como verificar que su contenido es correcto.
+Las pruebas extremo a extremo (o \textit{end-to-end}) permiten probar la interfaz de usuario a través de un navegador automatizado. En su forma más básica, este tipo de pruebas ayuda a comprobar la existencia de determinados elementos en el DOM\footnote{Document Object Model} de la aplicación web, así como verificar que su contenido es correcto.
 
 Para el presente proyecto se ha optado por codificar una prueba extremo a extremo por cada módulo definido en la sección \ref{sec:arquitectura-de-módulos}, a modo de \textit{sanity check} o prueba de cordura. En el cuadro \ref{tab:test-e2e} se detalla un listado de los mismos relacionados con sus correspondientes módulos:
 

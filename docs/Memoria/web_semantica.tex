@@ -10,7 +10,7 @@ Para lograr tan ambicioso objetivo, los agentes inteligentes necesitarían tener 
 
 \begin{itemize}  
 	\item  \textbf{RDF} (\textit{Resource Description Framework}), que permite expresar conocimiento en forma de tripletas o ternas (a modo de sujeto, verbo y objeto en una oración) utilizando URIs (\textit{Uniform Resource Indicators}\footnote{Cadenas de caracteres que identifican los recursos de una red de forma unívoca.}).
-	\item \textbf{XML} (\textit{eXtensible Markup Language}), un metalenguaje que permite crear lenguajes de etiquetado o marcado y documentos a su vez convenientemente etiquetados y con estructura arbitraria.
+	\item \textbf{XML} (\textit{extensible Markup Language}), un metalenguaje que permite crear lenguajes de etiquetado o marcado y documentos a su vez convenientemente etiquetados y con estructura arbitraria.
 \end{itemize}
 
 Sin embargo, un tercer pilar era necesario para resolver la problemática de la existencia de distintos identificadores en distintas bases de datos relacionadas con el mismo significado conceptual. Gracias a las \textbf{ontologías}, documentos que definen formalmente las relaciones entre distintos términos, estas diferencias podían ser salvadas bien mediante el uso de términos estandarizados bien mediante la definición de relaciones conceptuales de igualdad o similitud entre dichos términos.
@@ -45,11 +45,11 @@ El nuevo alcance de RDF quedó reflejado en las especificaciones publicadas en 20
 \begin{center}
 	\begin{table}[htb]
 		\centering
-		\begin{tabular}{p{3cm}p{10cm}}
+		\begin{tabular}{p{3cm}p{12cm}}
 			\toprule
 			Recomendación & Definición \\ \midrule
-			RDF Primer & Un marco de trabajo para expresar información sobre recursos. \\ \midrule
-			RDF Concepts \& Syntax & Un marco de trabajo para representar información en la Web. \\ 
+			\textit{RDF Primer} & Un marco de trabajo para expresar información sobre recursos. \\ \midrule
+			\textit{RDF Concepts \& Syntax} & Un marco de trabajo para representar información en la Web. \\ 
 			\bottomrule
 		\end{tabular}
 		\caption{Definiciones de RDF en las recomendaciones del W3C}
@@ -105,7 +105,7 @@ En resumen:
 A continuación se muestran dos ejemplos de tripletas:
 
 \vspace*{\baselineskip}
-\begin{center}
+
 	\begin{table}[htb]
 		\tiny
 		\centering
@@ -119,7 +119,7 @@ A continuación se muestran dos ejemplos de tripletas:
 		\caption{Ejemplos de tripletas reales}
 		\label{tabejternas}
 	\end{table}
-\end{center}
+
 
 \subsection{Aplicaciones prácticas de RDF}
 
@@ -146,6 +146,7 @@ Tal y como SQL provee (al menos, relativamente) un de un estándar de consulta  p
 
 SPARQL es un acrónimo recursivo para \textit{SPARQL Protocol And RDF Query Language}; es a la vez un lenguaje de consulta de grafos RDF y un protocolo, dado que permite exponer servicios web que acepten consultas en dicho lenguaje.
 
+\noindent\begin{minipage}{\linewidth}
 Entre sus características, cabe citar:
 
 \begin{itemize}  
@@ -154,6 +155,7 @@ Entre sus características, cabe citar:
 	\item Ejecución de uniones complejas sobre bases de datos dispersas en una única consulta.
 	\item Transformación de datos RDF desde un vocabulario a otro.
 \end{itemize}
+\end{minipage}
 
 La estructura básica de una consulta SPARQL es la siguiente:
 
