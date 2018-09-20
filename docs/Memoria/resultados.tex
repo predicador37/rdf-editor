@@ -3,19 +3,19 @@
 El presente proyecto ha generado los siguientes entregables:
 
 \begin{itemize}  
-	\item Código fuente de la aplicación desarrollada en Javascript / Vue.
-	\item Código fuente de las baterías de pruebas en Javascript / Jest.
+	\item Código fuente de la aplicación desarrollada en \textit{Javascript / Vue}.
+	\item Código fuente de las baterías de pruebas en \textit{Javascript / Jest}.
 	\item Código fuente de la presente memoria en \LaTeX y binario en PDF.
-	\item Aplicación desplegada en Firebase en \url{https://unedtfg-198720.firebaseapp.com/#/}
-	\item Tablero Trello con notas del proyecto en \url{https://trello.com/b/OXm3Sa2R/tfg-tecnolog\%C3\%ADas-sem\%C3\%A1nticas-uned} (en el momento de redacción de la presente memoria, de acceso privado).
+	\item Aplicación desplegada en \textit{Firebase} en \url{https://unedtfg-198720.firebaseapp.com/#/}
+	\item Tablero \textit{Trello} con notas del proyecto en \url{https://trello.com/b/OXm3Sa2R/tfg-tecnolog\%C3\%ADas-sem\%C3\%A1nticas-uned} (en el momento de redacción de la presente memoria, de acceso privado).
 \end{itemize}
 
-El repositorio público en Github que alberga todo el código fuente citado es:
+El repositorio público en \textit{Github} que alberga todo el código fuente citado es:
 
 
 \centerline{\url{https://github.com/predicador37/rdf-editor}}
 
-En general, el producto obtenido presenta una interfaz sobria, ordenada y efectiva que permite un rápido acceso a todas sus funcionalidades de consulta, carga de datos, modelado, etc. Es perfectamente válido para su trabajo con datos reales extraídos de otros conjuntos de datos de mayor tamaño y utilizable desde el primer momento sin requerir de más herramientas que un sencillo navegador compatible con \textit{Javascript 2015} (cualquiera de los navegadores más utilizados en sus últimas versiones lo es). También se ha generado, además de la documentación contenida en la presente memoria, un tablero Trello con notas interesantes, recursos bibliográficos, estructuración de tareas a bajo nivel, etc.
+En general, el producto obtenido presenta una interfaz sobria, ordenada y efectiva que permite un rápido acceso a todas sus funcionalidades de consulta, carga de datos, modelado, etc. Es perfectamente válido para su trabajo con datos reales extraídos de otros conjuntos de datos de mayor tamaño y utilizable desde el primer momento sin requerir de más herramientas que un sencillo navegador compatible con \textit{Javascript 2015} (cualquiera de los navegadores más utilizados en sus últimas versiones lo es). También se ha generado, además de la documentación contenida en la presente memoria, un tablero \textit{Trello} con notas interesantes, recursos bibliográficos, estructuración de tareas a bajo nivel, etc.
 
 En el cuadro \ref{verif-objetivos} se analiza en qué medida y de qué manera se ha tratado de dar cumplimiento a los objetivos marcados. 
 
@@ -29,7 +29,7 @@ En el cuadro \ref{verif-objetivos} se analiza en qué medida y de qué manera se h
 			
 			1 &  Facilitar el aprendizaje y la \textbf{familiarización con tecnologías de la Web Semántica} a usuarios inexpertos. & Para verificar el cumplimiento de este objetivo será necesario utilizar la aplicación en producción con actividades reales de alumnos.  \\ \midrule
 			2 & Reducir al máximo los requisitos de uso de la herramienta para alcanzar el mayor público objetivo posible. & La herramienta no requiere de instalación para su uso; una vez desplegada en un servidor web, cuenta con ejemplos cargados por defecto con los que el alumno puede empezar a trabajar inmediatamente. \\ \midrule
-			3 & Ofrecer a los Equipos Docentes la posibilidad de \textbf{distribuir actividades formativas} auto-contenidas para que los alumnos trabajen sobre ellas en la herramienta. & La aplicación incorpora un módulo para cargar actividades manualmente desde texto en formato Markdown o a través de un servicio web remoto. Ver MOD-1 en \ref{sec:arquitectura-de-módulos} \\ \midrule
+			3 & Ofrecer a los Equipos Docentes la posibilidad de \textbf{distribuir actividades formativas} auto-contenidas para que los alumnos trabajen sobre ellas en la herramienta. & La aplicación incorpora un módulo para cargar actividades manualmente desde texto en formato \textit{Markdown} o a través de un servicio web remoto. Ver MOD-1 en \ref{sec:arquitectura-de-módulos} \\ \midrule
 			4 & Agrupar en un solo producto \textbf{funcionalidades básicas de edición y consulta sobre grafos RDF}, de cara a cubrir las expectativas educativas en este ámbito. & El sistema desarrollado consta de varios módulos, entre ellos uno de modelado básico y otro de consultas SPARQL, que el alumno puede utilizar de forma razonablemente autónoma. Ver MOD-4, MOD-6 en \ref{sec:arquitectura-de-módulos} \\ \midrule
 			5 & Permitir a los alumnos comprobar \textit{in situ} los efectos de sus acciones sobre un grafo RDF y ofrecerles la \textbf{flexibilidad suficiente} como para permitirles dar rienda suelta a su creatividad e inquietudes. & El grafo por defecto que proporciona la aplicación vuelve a recargarse cada vez que se refresca el navegador. El alumno es libre de realizar las operaciones que desee, incluso de índole destructiva, y el estado inicial de la aplicación se restablecerá fácilmente. Ver MOD-4, MOD-5 en \ref{sec:arquitectura-de-módulos} \\ \midrule
 			6 & Obtener un MVP que pueda ser evolucionado y poner su código a disposición de la comunidad educativa para revertir sobre ella su valor aportado. & El propio sistema es un MVP preparado para ser evolucionado con distintas características y mejoras sobre las desarrolladas inicialmente. \\ 
@@ -67,9 +67,9 @@ Lighthouse proporciona otros indicadores que no son relevantes aquí, puesto que 
 
 \section{Visualización en dispositivos móviles}
 
-La biblioteca de componentes utilizada, \textit{Vuetify}, es ``mobile friendly'', lo que facilita el desarrollo de una aplicación visualizable en dispositivos móviles. Sin embargo, no basta tan solo con utilizar la biblioteca; determinados componentes como listas tienen implementadas características de elipsis de contenidos que hacen que su visualización en un dispositivo móvil no sea la más adecuada.
+La biblioteca de componentes utilizada, \textit{Vuetify}, es \textit{``mobile friendly''}, lo que facilita el desarrollo de una aplicación visualizable en dispositivos móviles. Sin embargo, no basta tan solo con utilizar la biblioteca; determinados componentes como listas tienen implementadas características de elipsis de contenidos que hacen que su visualización en un dispositivo móvil no sea la más adecuada.
 
-Dado que durante todo el proceso de desarrollo la aplicación ha estado desplegada en Firebase y por tanto accesible desde Internet, se ha podido revisar y mejorar la visualización en dispositivos móviles de forma incremental e iterativa. El resultado final consiste en una aplicación perfectamente visualizable en un dispositivo móvil, tal y como se puede comprobar manualmente o a través de herramientas de validación como \textit{Google Mobile Friendly Test}\footnote{\url{https://search.google.com/test/mobile-friendly}} (ver figura \ref{fig:mobile01}).
+Dado que durante todo el proceso de desarrollo la aplicación ha estado desplegada en \textit{Firebase} y por tanto accesible desde Internet, se ha podido revisar y mejorar la visualización en dispositivos móviles de forma incremental e iterativa. El resultado final consiste en una aplicación perfectamente visualizable en un dispositivo móvil, tal y como se puede comprobar manualmente o a través de herramientas de validación como \textit{Google Mobile Friendly Test}\footnote{\url{https://search.google.com/test/mobile-friendly}} (ver figura \ref{fig:mobile01}).
 
 \begin{figure}[h]
 	\centering
@@ -85,10 +85,24 @@ Dado que durante todo el proceso de desarrollo la aplicación ha estado desplegad
 
 Como medida fundamental de calidad del código fuente se ha elegido la complejidad ciclomática, un indicador que arroja datos sobre la futura facilidad de mantenimiento del mismo.
 
-La biblioteca \textit{Eslint}, que realiza análisis estático de código en cada compilación y es utilizada en el proyecto, permite configurar distintas reglas. Además de las incorporadas por defecto, se ha configurado la regla de complejidad con un valor máximo de 10. Como se puede comprobar en la figura \ref{fig:eslint01}), no hay ninguna regla invalidante a la hora de compilar y ejecutar la aplicación en el momento de finalización de su desarrollo.
+La biblioteca \textit{Eslint}, que realiza análisis estático de código en cada compilación y es utilizada en el proyecto, permite configurar distintas reglas. Además de las incorporadas por defecto\footnote{Ver reglas por defecto en \url{https://eslint.org/docs/rules/}}, se ha configurado la regla de complejidad con un valor máximo de 10. Como se puede comprobar en la figura \ref{fig:eslint01}), no hay ninguna regla invalidante a la hora de compilar y ejecutar la aplicación en el momento de finalización de su desarrollo.
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.25]{eslint}
 	\caption{Compilación y análisis estático con \textit{Eslint}}.\label{fig:eslint01}
 \end{figure}
+
+\section{Rendimiento}
+
+Es importante destacar que la aplicación desarrollada, al ejecutarse completamente en el navegador del usuario, puede presentar importantes limitaciones de rendimiento debido fundamentalmente al uso de memoria RAM.
+
+Conjuntos de datos del orden de \textit{Kilobytes} son manejables, pero las pruebas de carga de un fichero TTL de 22 \textit{Megabytes} revelan un consumo final de RAM de en torno a 500 MB, así como la \textbf{inviabilidad de lanzar consultas sin limitar los resultados a dicho grafo}.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width = 500pt]{rendimiento_import_22}
+	\caption{Memoria utilizada para un conjunto de datos de 22 MB.}
+\end{figure}
+
+Sin embargo, dado que el objetivo del presente proyecto no es competir con bases de datos RDF y \textit{backends} SPARQL que contengan millones de tripletas sino facilitar el aprendizaje sobre grafos sencillos, estas limitaciones no se consideran problemáticas siempre y cuando se tengan en cuenta a la hora de trabajar con distintos conjuntos de datos.

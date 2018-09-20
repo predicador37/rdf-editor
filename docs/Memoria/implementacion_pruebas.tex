@@ -7,7 +7,7 @@ La implementación del diseño del software se compara habitualmente con la constr
 
 \subsection{Estándar Javascript}
 
-Desde su nacimiento en 1995 de la mano de Netscape como lenguaje de \textit{scripting} para mejorar la experiencia final del usuario de Internet a través de un navegador, \textit{Javascript} ha evolucionado hasta convertirse en la tecnología dominante en el desarrollo de \textit{frontend} web. 
+Desde su nacimiento en 1995 de la mano de \textit{Netscape} como lenguaje de \textit{scripting} para mejorar la experiencia final del usuario de Internet a través de un navegador, \textit{Javascript} ha evolucionado hasta convertirse en la tecnología dominante en el desarrollo de \textit{frontend} web. 
 
 Es importante describir dicha evolución a través de sus distintos estándares (\textit{ECMAScript}) para contextualizar el presente desarrollo:
 
@@ -17,41 +17,43 @@ Es importante describir dicha evolución a través de sus distintos estándares (\t
 	\item ES2016 y posteriores, que van incorporando más mejoras como la gestión de eventos asíncronos con \textit{async/await}.
 \end{itemize}
 
-Aunque los navegadores están haciendo grandes progresos con su compatibilidad total con ES6, aún no es recomendable utilizarlo en forma nativa. Para resolver este problema surgen los transpiladores o \textit{transpilers} como Babel\footnote{\url{https://babeljs.io/}} (utilizado en este proyecto), que traducen el lenguaje programado en un estándar más moderno como \textit{ES2015+} a \textit{``Vanilla ES5''}, de tal manera que el código pueda ser ejecutado en cualquier navegador.
+Aunque los navegadores están haciendo grandes progresos con su compatibilidad total con ES6, aún no es recomendable utilizarlo en forma nativa. Para resolver este problema surgen los transpiladores o \textit{transpilers} como Babel\footnote{\url{https://babeljs.io/}} (utilizado en el presente proyecto), que traducen el lenguaje programado en un estándar más moderno como \textit{ES2015+} a \textit{``Vanilla ES5''}, de tal manera que el código pueda ser ejecutado en cualquier navegador.
 
 A la vista de lo expuesto, se plantea la implementación de la presente aplicación en ES6+ (es decir, ES6 y posteriores), pero efectuando un \textit{transpiling} a ES5 para minimizar cualquier problema de compatibilidad con los distintos navegadores.
 
 \subsection{Entorno}
 
-Hoy en día, no es posible hablar de desarrollo profesional y moderno en \textit{Javascript} sin hablar de Node.js\footnote{\url{https://nodejs.org}}. Node.js es un entorno de ejecución para Javascript construido con el motor V8 de Chrome\footnote{El motor de alto rendimiento de Google para \textit{Javascript} escrito en C++. Ver \url{https://developers.google.com/v8/}} y orientado a eventos asíncronos. Está diseñado para construir aplicaciones de red escalables. Introdujo un sistema de módulos que ha sido la base de la reutilización de bibliotecas de código en Javascript a través del repositorio npm\footnote{\url{https://docs.npmjs.com/getting-started/what-is-npm}}, con en torno a 600.000 paquetes de código abierto disponibles para la comunidad de desarrolladores.
+Hoy en día, no es posible hablar de desarrollo profesional y moderno en \textit{Javascript} sin hablar de \textit{Node.js}\footnote{\url{https://nodejs.org}}.\textit{ Node.js} es un entorno de ejecución para \textit{Javascript} construido con el motor V8 de \textit{Chrome}\footnote{El motor de alto rendimiento de Google para \textit{Javascript} escrito en C++. Ver \url{https://developers.google.com/v8/}} y orientado a eventos asíncronos. Está diseñado para construir aplicaciones de red escalables. Introdujo un sistema de módulos que ha sido la base de la reutilización de bibliotecas de código en \textit{Javascript }a través del repositorio \textit{npm}\footnote{\url{https://docs.npmjs.com/getting-started/what-is-npm}}, con en torno a 600.000 paquetes de código abierto disponibles para la comunidad de desarrolladores.
 
 En la implementación de esta aplicación se han utilizado las siguientes versiones de estos componentes, cuya instalación previa es necesaria para la construcción y ejecución de la misma:
 
+\noindent\begin{minipage}{\linewidth}
 	\begin{itemize}
-	\item Node.js 10.7.0
-	\item npm 6.1.0
+	\item\textit{ Node.js 10.7.0}
+	\item \textit{npm 6.1.0}
 
 \end{itemize}
+\end{minipage}
 
-Tanto Node como npm pueden descargarse e instalarse en múltiples sistemas operativos desde sus respectivas páginas web.
+Tanto \textit{Node} como \textit{npm} pueden descargarse e instalarse en múltiples sistemas operativos desde sus respectivas páginas web.
 
 \subsection{Estructura del proyecto}
 
 El proyecto presenta la siguiente estructura jerárquica de directorios:
 
 \begin{itemize}
-	\item \textbf{build}: contiene los archivos de configuración de Webpack, tanto para el servidor de desarrollo como para el entorno de producción.
-	\item \textbf{config}: contiene los archivos de configuración del proyecto por entorno (\textit{dev, test, pro}). Si bien no es conveniente modificarlo, para la presente aplicación tuvo que añadirse el soporte para \textit{babel-polyfill} para permitir la correcta ejecución de determinados paquetes en todos los navegadores.
-	\item \textbf{dist}: contiene los archivos que deberán ser desplegados en la plataforma de producción (por ejemplo, Firebase).
-	\item \textbf{docs}: notas del proyecto en Markdown y código fuente en \LaTeX de esta memoria.
+	\item \textbf{build}: contiene los archivos de configuración de \textit{Webpack}\footnote{Un empaquetador de módulos JS.}, tanto para el servidor de desarrollo como para el entorno de producción.
+	\item \textbf{config}: contiene los archivos de configuración del proyecto por entorno (\textit{dev, test, pro}). Si bien no es conveniente modificarlo, para la presente aplicación tuvo que añadirse el soporte para la biblioteca \textit{babel-polyfill} para permitir la correcta ejecución de determinados paquetes en todos los navegadores.
+	\item \textbf{dist}: contiene los archivos que deberán ser desplegados en la plataforma de producción (por ejemplo,\textit{ Firebase}).
+	\item \textbf{docs}: notas del proyecto en \textit{Markdown} y código fuente en \LaTeX de esta memoria.
 	\item \textbf{node\_modules}: contiene todos los paquetes y dependencias de npm necesarios para ejecutar el proyecto.
 	\item \textbf{src}: contiene el código fuente de la aplicación y está estructurado, a su vez, de la siguiente forma:
 	\begin{itemize}
-		\item \textbf{components}: contiene los distintos componentes de la aplicación, siendo App.vue el principal.
+		\item \textbf{components}: contiene los distintos componentes de la aplicación, siendo \textit{App.vue} el principal.
 		\item \textbf{fonts}: contiene las fuentes necesarias para visualizar correctamente \textit{Material Design}.
-		\item \textbf{router}: contiene la configuración de vue-router, un enrutador para Vue.js.
-		\item \textbf{services}: contiene la configuración única de servicios para recuperar información de APIs REST a través de bibliotecas como axios\footnote{Un cliente HTTP basado en promesas para Node.js. Ver \url{https://github.com/axios/axios}}
-		\item \textbf{store}: contiene la lógica necesaria para mantener el estado único de la aplicación mediante Vuex (ficheros de acciones, mutaciones, getters y el propio almacén.)
+		\item \textbf{router}: contiene la configuración de \textit{vue-router}, un enrutador para \textit{Vue.js}.
+		\item \textbf{services}: contiene la configuración única de servicios para recuperar información de APIs \textit{Rest} a través de bibliotecas como \textit{axios}\footnote{Un cliente HTTP basado en promesas para Node.js. Ver \url{https://github.com/axios/axios}}
+		\item \textbf{store}: contiene la lógica necesaria para mantener el estado único de la aplicación mediante \textit{Vuex} (ficheros de acciones, mutaciones, getters y el propio almacén.)
 		\item \textbf{utils}: contiene utilidades o información por defecto necesaria para el correcto funcionamiento de la aplicación.
 	\end{itemize}
 	\item \textbf{static}: recursos estáticos que son copiados directamente.
@@ -62,44 +64,46 @@ El proyecto presenta la siguiente estructura jerárquica de directorios:
 Además, en el directorio raíz de la estructura del proyecto se pueden encontrar, entre otros, los siguientes archivos de configuración relevantes:
 
 \begin{itemize}
-	\item \textbf{.babelrc}: configuración del \textit{transpiler} Babel.
+	\item \textbf{.babelrc}: configuración del \textit{transpiler Babel}.
 	\item \textbf{.gitignore}: archivos de proyecto que no deberán subirse al repositorio (binarios, temporales, etc.)
-	\item \textbf{.eslintrc.js}: configuración del analizador estático de estilo y sintaxis ESlint.
+	\item \textbf{.eslintrc.js}: configuración del analizador estático de estilo y sintaxis \textit{ESlint}.
 	\item \textbf{package.json}: contiene la configuración de la tarea de construcción y la especificación de dependencias del proyecto.
-	\item \textbf{.firebaserc}: configuración de proyecto de Firebase
-	\item \textbf{firebase.json}: configuración de despliegue en Firebase (ver subsección \ref{sec:despliegue-del-proyecto}).
+	\item \textbf{.firebaserc}: configuración de proyecto de \textit{Firebase}.
+	\item \textbf{firebase.json}: configuración de despliegue en \textit{Firebase} (ver subsección \ref{sec:despliegue-del-proyecto}).
 	
 \end{itemize}
 
 \subsection{Construcción del proyecto}
 
-El proyecto de trabajo se ha generado usando la herramienta vue-cli\footnote{\url{https://cli.vuejs.org/}} en su versión 2 (durante el tiempo de desarrollo de este proyecto se publicó la versión 3). Esta herramienta permite generar proyectos configurados a partir de una plantilla y selección de parámetros. En concreto, se utilizó una plantilla propuesta por Vuetify\footnote{\url{https://vuetifyjs.com}}, una biblioteca de componentes de interfaz de usuario basada en \textit{Material Design}\footnote{Un sistema de diseño para desarrollar interfaces de usuario impulsado por Google. Ver \url{https://material.io/}} para Vue. Se eligió esta biblioteca por ser una de las más usadas entre la comunidad de usuarios, disponer de un amplio catálogo de componentes implementados y presentar líneas de trabajo prometedoras para finales de este año (con la previsión de publicación de nuevos componentes y de mejora de los actuales).
+El proyecto de trabajo se ha generado usando la herramienta \textit{vue-cli}\footnote{\url{https://cli.vuejs.org/}} en su versión 2 (durante el tiempo de desarrollo de este proyecto se publicó la versión 3). Esta herramienta permite generar proyectos configurados a partir de una plantilla y selección de parámetros. En concreto, se utilizó una plantilla propuesta por Vuetify\footnote{\url{https://vuetifyjs.com}}, una biblioteca de componentes de interfaz de usuario basada en \textit{Material Design}\footnote{Un sistema de diseño para desarrollar interfaces de usuario impulsado por \textit{Google}. Ver \url{https://material.io/}} para \textit{Vue}. Se eligió esta biblioteca por ser una de las más usadas entre la comunidad de usuarios, disponer de un amplio catálogo de componentes implementados y presentar líneas de trabajo prometedoras para finales de este año (con la previsión de publicación de nuevos componentes y de mejora de los actuales).
 
-La propia web de Vuetify presenta un asistente para elegir la plantilla más adecuada basándose en diversos parámetros introducidos por el usuario, tales como: experiencia con Vue, tipo de interfaz (web, móvil, escritorio), necesidad o no de generar estructuras de pruebas unitarias, etc. Dadas las necesidades de este proyecto, se optó por elegir una plantilla para programadores con poca experiencia en Vue, para la web y con estructuras de pruebas unitarias (y no con posicionamiento web). 
+La propia web de \textit{Vuetify} presenta un asistente para elegir la plantilla más adecuada basándose en diversos parámetros introducidos por el usuario, tales como: experiencia con \textit{Vue}, tipo de interfaz (web, móvil, escritorio), necesidad o no de generar estructuras de pruebas unitarias, etc. Dadas las necesidades de este proyecto, se optó por elegir una plantilla para programadores con poca experiencia en \textit{Vue}, para la web y con estructuras de pruebas unitarias (y no con posicionamiento web). 
 
-El resultado fue la plantilla webpack\footnote{Webpack es un empaquetador de módulos para JS. Ver \url{https://github.com/vuetifyjs/webpack} y \url{https://webpack.js.org/}}, que presenta las siguientes características:
+El resultado fue la plantilla \textit{webpack}\footnote{Webpack es un empaquetador de módulos para JS. Ver \url{https://github.com/vuetifyjs/webpack} y \url{https://webpack.js.org/}}, que presenta las siguientes características:
 
 \begin{itemize}
 	\item Desarrollo:
 	\begin{itemize}
-		\item Incluye Webpack y vue-loader para SFC (\textit{Single File Components})
-		\item Recarga en caliente con preservación de estado
-		\item Análisis estático de estilo con ESlint\footnote{\url{https://eslint.org/}} al guardar
+		\item Incluye \textit{Webpack} y \textit{vue-loader} para SFC\footnote{\textit{Single File Components}}.
+		\item Recarga en caliente con preservación de estado.
+		\item Análisis estático de estilo con \textit{ESlint}\footnote{\url{https://eslint.org/}} al guardar.
 	\end{itemize}
 	\item Construcción:
 		\begin{itemize}
-		\item Minificación de JS con UglifyJS\footnote{\url{https://github.com/mishoo/UglifyJS}}
-		\item Minificación de HTML con html-minifier
-		\item Minificación de CSS con cssnano
-		\item Compilación de recursos estáticos con hashes de versiones para cacheo eficiente
+		\item Minificación de JS con \textit{UglifyJS}\footnote{\url{https://github.com/mishoo/UglifyJS}}.
+		\item Minificación de HTML con \textit{html-minifier}.
+		\item Minificación de CSS con \textit{cssnano}.
+		\item Compilación de recursos estáticos con hashes de versiones para cacheo eficiente.
 		\end{itemize}
 	\item Pruebas:
 		\begin{itemize}
-		\item Soporte de ES2015+ en archivos de test
-		\item Jest\footnote{\url{https://jestjs.io/}} como plataforma de testing
-		\item End-to-end\footnote{Las pruebas end-to-end o extremo a extremo permiten verificar el flujo de trabajo completo de una aplicación web. Son más lentos que los unitarios y difíciles de depurar, pero comprueban la funcionalidad completa de la aplicación.} con Nightwatch\footnote{\url{http://nightwatchjs.org/}}.
+		\item Soporte de \textit{ES2015+} en archivos de test.
+		\item \textit{Jest}\footnote{\url{https://jestjs.io/}} como plataforma de testing.
+		\item \textit{End-to-end}\footnote{Las pruebas \textit{end-to-end }o extremo a extremo permiten verificar el flujo de trabajo completo de una aplicación web. Son más lentos que los unitarios y difíciles de depurar, pero comprueban la funcionalidad completa de la aplicación.} con \textit{Nightwatch}\footnote{\url{http://nightwatchjs.org/}}.
 	\end{itemize}
 \end{itemize}
+
+\noindent\begin{minipage}{\linewidth}
 
 \subsection{Ejecución del proyecto}
 
@@ -111,15 +115,15 @@ De manera predeterminada, es posible ejecutar los siguientes comandos:
 	\item \textbf{npm run build}: construye el proyecto para desplegar en producción (con compresión).
 	\item \textbf{npm run build --report}: construye el proyecto para producción y visualiza el informe del analizador de empaquetado.
 	\item \textbf{npm run unit}: ejecuta las pruebas unitarias.
-	\item \textbf{npm run e2e}: ejecuta las pruebas end-to-end.
+	\item \textbf{npm run e2e}: ejecuta las pruebas \textit{end-to-end}.
 	\item \textbf{npm test}: ejecuta todas las pruebas.
 	
 \end{itemize}
-
+\end{minipage}
 
 \subsection{Despliegue del proyecto}\label{sec:despliegue-del-proyecto}
 
-Para desplegar la aplicación a modo de demostración se ha optado por utilizar Firebase\footnote{\url{https://firebase.google.com/}}, una plataforma de desarrollo de Google, a modo de PaaS. Si bien Firebase provee de muchos servicios en la nube (como base de datos, autenticación, almacenamiento, etc.) para este proyecto tan solo ha sido necesario utilizar el servicio de hosting. Para ello, basta con incluir un par de sencillos ficheros de configuración con el siguiente contenido:
+Para desplegar la aplicación a modo de demostración se ha optado por utilizar \textit{Firebase}\footnote{\url{https://firebase.google.com/}}, una plataforma de desarrollo de \textit{Google}, a modo de PaaS\footnote{\textit{Platform as a Service}: entorno de desarrollo e implementación en la nube.}. Si bien \textit{Firebase} provee de muchos servicios en la nube (como base de datos, autenticación, almacenamiento, etc.) para este proyecto tan solo ha sido necesario utilizar el servicio de alojamiento. Para ello, basta con incluir un par de sencillos ficheros de configuración con el siguiente contenido:
 
 \begin{lstlisting}[caption={Configuración de Firebase},captionpos=b]
 
@@ -144,7 +148,7 @@ Para desplegar la aplicación a modo de demostración se ha optado por utilizar Fi
 }
 \end{lstlisting}
 
-El proyecto puede desplegarse en cualquier servidor web o HTTP (como Apache\footnote{Apache Web Server es el servidor HTTP con mayor cuota de mercado. Ver \url{https://news.netcraft.com/archives/2018/07/19/july-2018-web-server-survey.html}}, por ejemplo). Para ello, será necesario seguir los siguientes pasos:
+El proyecto puede desplegarse en cualquier servidor web o HTTP (como Apache\footnote{\textit{Apache Web Server} es el servidor HTTP con mayor cuota de mercado. Ver \url{https://news.netcraft.com/archives/2018/07/19/july-2018-web-server-survey.html}}, por ejemplo). Para ello, será necesario seguir los siguientes pasos:
 
 	\begin{itemize}
 	\item \textbf{npm run build:} Construcción del proyecto en /dist.
@@ -158,7 +162,7 @@ El entorno de demostración del proyecto es accesible con conexión a Internet a t
 
 \subsection{Estructuras soportadas para el modelado}
 
-Dado el abrumador número de ontologías disponibles, para la implementación de la funcionalidad de modelado en el presente proyecto se ha optado por incluir en memoria un subconjunto de ternas pertenecientes a los vocabularios más utilizados. Usando como referencia \cite{evanstaylor01}, las sugerencias del Director del proyecto y criterios relacionados con el alcance de la funcionalidad implementable para esta primera versión, se ha decidido dar soporte a las estructuras listadas en el cuadro \ref{tab:model-constructs}
+Dado el abrumador número de ontologías disponibles\footnote{Ejemplo: lista de ontologías de Protégé en \url{https://protegewiki.stanford.edu/wiki/Protege_Ontology_Library}}, para la implementación de la funcionalidad de modelado en el presente proyecto se ha optado por incluir en memoria un subconjunto de ternas pertenecientes a los vocabularios más utilizados. Usando como referencia \cite{evanstaylor01}, las sugerencias del Director del proyecto y criterios relacionados con el alcance de la funcionalidad implementable para esta primera versión, se ha decidido dar soporte a las estructuras listadas en el cuadro \ref{tab:model-constructs}
 
 	\begin{table}
 	\centering
@@ -196,13 +200,14 @@ Sin pretender entrar a fondo en los detalles de la implementación, que puede con
 
 	\begin{itemize}
 	\item En el módulo de \textbf{modelado}, el listado de recursos se ha implementado mediante una tabla para permitir su paginado, debido a que el número de clases o propiedades puede ser elevado en un modelo más o menos complejo. Por otra parte, los detalles de anotaciones (propiedades de clase, por ejemplo) se implementaron inicialmente con listas expandibles, pero finalmente se optó por paneles expandibles y tablas para permitir una mejor experiencia de usuario en dispositivos móviles.
+	\item En este mismo módulo, el soporte para literales se ha reducido a las propiedades \textit{rdfs:label} y \textit{rdfs:comments}. Asimismo, el resto de propiedades tan solo soportan recursos en forma de URI (igualmente que en el módulo de poblamiento). Esta decisión viene motivada por la necesidad de reducir el alcance del proyecto y simplificar la herramienta de modelado, si bien una mejora en este sentido se incluye como futura línea de trabajo en la sección \ref{sec:lineas-de-trabajo-futuras}.
 	\item En el módulo de \textbf{vocabularios}, la selección de estos se ha implementado como un conjunto de interruptores o\textit{ switches on/off}. Esto le permite al usuario cargar o descargar los vocabularios de forma sencilla, como si de una configuración se tratase (tal es la idea). No obstante, es necesario disponer de red y de servicios con CORS correctamente configurado para que su carga sea posible.
 	\item En el módulo de \textbf{poblamiento}, se tiene lo siguiente:
 		\begin{itemize}
 		\item El campo ``sujeto'' se implementa como una entrada de texto libre, puesto que lo más probable es que se trate de un individuo nuevo.
 		\item Los campos ``predicado'' y ``objeto'' ofrecen un selector con autocompletado que permite la introducción de nuevos términos. De esta forma, el usuario puede aprovechar los términos ya introducidos en la aplicación (bien por defecto bien a través de otros medios) o añadir los suyos propios, si bien ha de tener prevista su definición en el grafo. Los URIs de los elementos mostrados se han recortado para permitir una mejor visualización en dispositivos móviles.
 	\end{itemize}
-\item En el módulo de actividades, la importación a Markdown se realiza mediante la biblioteca vue-markdown\footnote{https://github.com/miaolz123/vue-markdown}, que a su vez utiliza markdown-it\footnote{https://github.com/markdown-it/markdown-it}. Esta última biblioteca implementa un procesador del formato Markdown con buen rendimiento y conforme a la especificación CommonMark Spec 0.28\footnote{\url{https://spec.commonmark.org/}}, si bien añade extensiones de sintaxis (como tablas y tachados de Github Flavored Markdown\footnote{La sintaxis de Markdown propuesta por Github, que añade características como tablas, estilo de texto, etc. Ver \url{https://help.github.com/articles/basic-writing-and-formatting-syntax/\#styling-text}}) y otros aspectos.
+\item En el módulo de actividades, la importación a Markdown se realiza mediante la biblioteca \textit{vue-markdown}\footnote{https://github.com/miaolz123/vue-markdown}, que a su vez utiliza \textit{markdown-it}\footnote{https://github.com/markdown-it/markdown-it}. Esta última biblioteca implementa un procesador del formato \textit{Markdown} con buen rendimiento y conforme a la especificación \textit{CommonMark Spec} 0.28\footnote{\url{https://spec.commonmark.org/}}, si bien añade extensiones de sintaxis (como tablas y tachados de \textit{Github Flavored Markdown}\footnote{La sintaxis de Markdown propuesta por Github, que añade características como tablas, estilo de texto, etc. Ver \url{https://help.github.com/articles/basic-writing-and-formatting-syntax/\#styling-text}}) y otros aspectos.
 	
 \end{itemize}
 
@@ -215,7 +220,7 @@ La codificación de pruebas unitarias ayuda a resolver diversos problemas inheren
 \begin{itemize}
 	\item Extensión innecesaria del alcance: muchas veces se tiende a desarrollar funcionalidad extra como previsión de uso en el futuro. Esto lleva a generar productos software con un alto porcentaje de funcionalidades que no se utilicen. Las pruebas unitarias ayudan al desarrollador a centrarse en lo que realmente debe hacer el sistema y a conseguir un ritmo adecuado de trabajo.
 	\item Cohesión y acoplamiento: si una prueba unitaria resulta difícil de escribir, lo más probable es que se trate de un problema del diseño y no de la prueba en sí.
-	\item Confianza: una suite de pruebas unitarias funcionando generan confianza en que el código desarrollado hace lo que debe hacer de forma correcta.
+	\item Confianza: una \textit{suite} de pruebas unitarias funcionando generan confianza en que el código desarrollado hace lo que debe hacer de forma correcta.
 \end{itemize}
 
 
@@ -228,7 +233,7 @@ Con objeto de aportar el máximo valor posible con un esfuerzo razonable, se ha o
 
 En los cuadros \ref{tab:test-actions} y \ref{tab:test-getters} se muestran sendos listados de las pruebas codificadas (indicando qué se está probando) y los \textit{actions} y \textit{getters} relacionados. No se ha considerado necesario probar la exportación a distintos formatos por tratarse de una característica intrínseca de la biblioteca utilizada (y por lo tanto, probada en dicha biblioteca) cuyo tratamiento no ha sido modificado en esta aplicación.
 
-La propia biblioteca \textit{jest} incluye herramientas para calcular la cobertura de pruebas unitarias, que en este caso, según dichas herramientas, resulta ser de en torno a un 40\% para el código relacionado con el estado de la aplicación. Sin embargo, \textbf{este indicador falsea la cobertura real}, puesto que carencias en la integración de \textit{jest} con Vuex impiden considerar como válidas las pruebas de las llamadas a las mutaciones, por ejemplo, que sí están siendo probadas pero no aparecen reflejadas en este indicador.
+La propia biblioteca \textit{jest} incluye herramientas para calcular la cobertura de pruebas unitarias, que en este caso, según dichas herramientas, resulta ser de en torno a un 40\% para el código relacionado con el estado de la aplicación. Sin embargo, \textbf{este indicador falsea la cobertura real}, puesto que carencias en la integración de \textit{jest} con \textit{Vuex} impiden considerar como válidas las pruebas de las llamadas a las mutaciones, por ejemplo, que sí están siendo probadas pero no aparecen reflejadas en este indicador.
 
 No obstante lo anterior, y con un interés meramente informativo, se incluyen en la figura \ref{fig:cobertura} los resultados mostrados por \textit{jest}.
 
@@ -251,7 +256,7 @@ No obstante lo anterior, y con un interés meramente informativo, se incluyen en 
 		PU-6 & Importar N3 & Se incluye cadena de texto simulando un fichero en formato Turtle, se importa y se comprueba que el número de ternas del grafo coincide con las importadas. & ACC-7 \\ \midrule
 		PU-7 & Añadir N3 & Se incluye cadena de texto simulando un fichero en formato Turtle, se añade al grafo actual y se comprueba que el número de ternas del grafo resultante es la suma de las que tenía anteriormente más las importadas. & ACC-8 \\ \midrule
 		PU-8 & Eliminar N3 & Se incluye cadena de texto simulando un fichero en formato Turtle, se añaden las ternas al grafo, se cuenta el número total de ternas, se eliminan de nuevo del grafo actual y se comprueba que el número de ternas del grafo resultante es el original. & ACC-9 \\ \midrule
-		PU-9 & Importar actividad & Se importa una actividad en formato Markdown y se comprueba que la variable de estado que aloja su contenido deja de estar vacía. & ACC-10 \\ \midrule
+		PU-9 & Importar actividad & Se importa una actividad en formato \textit{Markdown} y se comprueba que la variable de estado que aloja su contenido deja de estar vacía. & ACC-10 \\ \midrule
 		PU-10 & Cargar vocabulario & Se verifica que el cambio de estado de un vocabulario de inactivo a activo ocurre, consultando el mismo tras la operación. & ACC-13 \\ 
 		\bottomrule
 	\end{tabular}
@@ -260,10 +265,10 @@ No obstante lo anterior, y con un interés meramente informativo, se incluyen en 
 
 	\begin{table}
 	\centering
-	\begin{tabular}{p{2cm}p{3cm}p{8cm}p{2cm}}		
+	\begin{tabular}{p{1.2cm}p{5cm}p{8cm}p{1.2cm}}		
 		\toprule
 		ID & Prueba & Descripción & \textit{Getter} \\ \midrule
-		PU-11 & Recuperar listado de sujetos por predicado y objeto & Se recuperan todos los sujetos de tipo owl:Class y se comprueba que son cuatro. & GET-1\\ \midrule
+		PU-11 & Recuperar listado de sujetos por predicado y objeto & Se recuperan todos los sujetos de tipo owl:Class y se comprueba que el número devuelto es correcto. & GET-1\\ \midrule
 		PU-12 & Recuperar listado de sujetos por predicado & Se recupera una lista de sujetos de tipo anotación, por ejemplo, y se comprueba que se devuelve el número de correcto de resultados. & GET-2 \\ \midrule
 		PU-13 & Recuperar listado de objetos por predicado y sujeto & Se recuperan todos los objetos para el sujeto ``Analista'' y el predicado etiqueta, y se comprueba que el número devuelvo es el correcto.  &GET-3 \\ \midrule
 		PU-14 & Recuperar listado de ternas para un sujeto dado & Se recupera un listado de ternas para el sujeto ``Analista'' y se comprueba que el número devuelto es el correcto. & GET-4 \\ \midrule
@@ -279,7 +284,7 @@ No obstante lo anterior, y con un interés meramente informativo, se incluyen en 
 
 \subsection{Pruebas extremo a extremo (\textit{end-to-end})}
 
-Las pruebas extremo a extremo (o end-to-end) permiten probar la interfaz de usuario a través de un navegador automatizado. En su forma más básica, este tipo de pruebas permite comprobar la existencia de determinados elementos en el DOM\footnote{Document Object Model} de la aplicación web, así como verificar que su contenido es correcto.
+Las pruebas extremo a extremo (o \textit{end-to-end}) permiten probar la interfaz de usuario a través de un navegador automatizado. En su forma más básica, este tipo de pruebas permite comprobar la existencia de determinados elementos en el DOM\footnote{Document Object Model} de la aplicación web, así como verificar que su contenido es correcto.
 
 Para el presente proyecto se ha optado por codificar una prueba extremo a extremo por cada módulo definido en la sección \ref{sec:arquitectura-de-módulos}, a modo de \textit{sanity check} o prueba de cordura. En el cuadro \ref{tab:test-e2e} se detalla un listado de los mismos relacionados con sus correspondientes módulos:
 
