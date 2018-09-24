@@ -7,23 +7,23 @@ Un diseño cuidadoso puede suponer un gran ahorro a la hora de llevar a cabo el m
 Independientemente de la tecnología elegida para su implementación, una aplicación semántica genérica se caracteriza por una arquitectura concreta que se va a proceder a detallar. Dicha arquitectura está basada en componentes que pueden ser proporcionados por uno o varios productos de mercado. Es común encontrar los siguientes:
 
 \begin{itemize}  
-	\item \textbf{Almacén de ternas} (\textit{store}): no es más que una base de datos que permite el almacenamiento y extracción de ternas RDF, así como consolidar información procedente de distintas fuentes de datos.
-	\item \textbf{Procesador/Serializador} (\textit{parser/serializer}): un procesador RDF lee ficheros de texto y los interpreta como ternas RDF; un serializador realiza el proceso inverso.
+	\item \textbf{Almacén de ternas} (\textit{store}): no es más que una base de datos que permite el almacenamiento y extracción de ternas \gls{RDF}, así como consolidar información procedente de distintas fuentes de datos.
+	\item \textbf{Procesador/Serializador} (\textit{parser/serializer}): un procesador \gls{RDF} lee ficheros de texto y los interpreta como ternas \gls{RDF}; un serializador realiza el proceso inverso.
 	\item \textbf{Motor de consultas} (\textit{query engine}): provee a la aplicación de la funcionalidad de recuperación de información en base a consultas estructuradas.
 \end{itemize}
 
 A continuación se estudian con más detalle, ofreciendo ejemplos de los más utilizados y el caso concreto del proyecto que atañe a esta memoria.
 
-\subsection{Almacén RDF (\textit{store})}
+\subsection{Almacén \gls{RDF} (\textit{store})}
 
-El almacén de ternas es un componente esencial para salvaguardar conjuntos de datos en ternas independientemente de su origen (un fichero serializado, el resultado de una consulta, etc.). Conceptualmente, el equivalente en una base de datos relacional sería una tabla con tres columnas (\textit{Sujeto - Predicado - Objeto}). Sin embargo, parece evidente que un almacén RDF esté optimizado para el almacenamiento y recuperación de ternas RDF.
+El almacén de ternas es un componente esencial para salvaguardar conjuntos de datos en ternas independientemente de su origen (un fichero serializado, el resultado de una consulta, etc.). Conceptualmente, el equivalente en una base de datos relacional sería una tabla con tres columnas (\textit{Sujeto - Predicado - Objeto}). Sin embargo, parece evidente que un almacén \gls{RDF} esté optimizado para el almacenamiento y recuperación de ternas \gls{RDF}.
 
 Comparados con una base de datos relacional, sin embargo, son más flexibles y requieren de menor coste de uso y mantenimiento. Más concretamente:
 
 \begin{itemize}  
 	\item \textbf{Flexibilidad:} su esquema flexible permite realizar cambios sin paradas ni rediseños, cosa que no ocurre con una base de datos relacional.
-	\item \textbf{Estandarización:} el nivel de estandarización de RDF y SPARQL es mucho mayor que el de SQL. Es prácticamente inmediato sustituir un almacén de tripletas por otro, mientras que en el caso de las bases de datos relacionales es necesario tener en cuenta los distintos dialectos e implementaciones de SQL según el fabricante.
-	\item \textbf{Expresividad:} es mucho más sencillo modelar datos complejos y con elevado número de relaciones entre ellos en RDF que en SQL. Ocurre al contrario si los datos son de naturaleza tabular, naturalmente.
+	\item \textbf{Estandarización:} el nivel de estandarización de \gls{RDF} y \gls{SPARQL} es mucho mayor que el de \gls{SQL}. Es prácticamente inmediato sustituir un almacén de tripletas por otro, mientras que en el caso de las bases de datos relacionales es necesario tener en cuenta los distintos dialectos e implementaciones de \gls{SQL} según el fabricante.
+	\item \textbf{Expresividad:} es mucho más sencillo modelar datos complejos y con elevado número de relaciones entre ellos en \gls{RDF} que en \gls{SQL}. Ocurre al contrario si los datos son de naturaleza tabular, naturalmente.
 \end{itemize}
 
 No todo son ventajas en la comparación:
@@ -42,25 +42,25 @@ En el caso del presente proyecto, se valoraron dos alternativas:
 
 \begin{itemize}  
 	\item \textit{\textbf{RDF-Ext Dataset\footnote{\url{https://github.com/rdf-ext/rdf-store-dataset}}}} un simple conjunto de datos cargado en memoria y conforme con la especificación estándar. Este almacén presentaba limitaciones en cuanto a rendimiento y número de tripletas a almacenar, además de estar pensado para operaciones síncronas.
-	\item \textit{\textbf{N3.js:\footnote{\url{https://github.com/rdfjs/N3.js/}}}} La bilioteca \textit{N3} ofrece, además de almacenamiento de tripletas en memoria en \textit{Javascript} nativo, facilidades de serialización y procesado con formatos estándar como \textit{Turtle, N3, N-Triples y TriG}. Si bien su conformidad con la especificación de interfaces\textit{ RDF.js} no es completa, sí está presente en gran parte de sus módulos (\textit{DataFactory, StreamParser, StreamWriter y Store}).
+	\item \textit{\textbf{N3.js:\footnote{\url{https://github.com/rdfjs/N3.js/}}}} La bilioteca \textit{N3.js} ofrece, además de almacenamiento de tripletas en memoria en \textit{Javascript} nativo, facilidades de serialización y procesado con formatos estándar como \textit{Turtle, \gls{N3}, N-Triples y TriG}. Si bien su conformidad con la especificación de interfaces\textit{ RDF.js} no es completa, sí está presente en gran parte de sus módulos (\textit{DataFactory, StreamParser, StreamWriter y Store}).
 \end{itemize}
 
-Confirmadas las limitaciones de \textit{RDF-Ext Dataset} y consultado con el \textit{W3C RDFJS Community Group}, se opta finalmente por utilizar \textbf{\textit{N3.js}} (lo que supuso adaptar ligeramente la implementación del proyecto al nuevo \textit{storage}).
+Confirmadas las limitaciones de \textit{RDF-Ext Dataset} y consultado con el \textit{\gls{W3C} RDFJS Community Group}, se opta finalmente por utilizar \textbf{\textit{N3.js}} (lo que supuso adaptar ligeramente la implementación del proyecto al nuevo \textit{storage}).
 
 
-\subsection{Procesador y Serializador RDF (\textit{parser/serializer})}
+\subsection{Procesador y Serializador \gls{RDF} (\textit{parser/serializer})}
 
-En muchos casos, los módulos para importación y exportación de datos en RDF son proporcionados por el propio almacén. Sin entrar a valorar su sintaxis dada su complejidad específica y por considerarse fuera del interés de este proyecto, sí se va a proceder a identificar y caracterizar los formatos de serialización más comunes.
+En muchos casos, los módulos para importación y exportación de datos en \gls{RDF} son proporcionados por el propio almacén. Sin entrar a valorar su sintaxis dada su complejidad específica y por considerarse fuera del interés de este proyecto, sí se va a proceder a identificar y caracterizar los formatos de serialización más comunes.
 
-\subsubsection{RDF/XML}
+\subsubsection{\gls{RDF}/\gls{XML}}
 
-Se trata de una representación en XML, comúnmente criticada por su dificultad de lectura por parte de personas. Entre sus otras críticas están las limitaciones impuestas por sus reglas de nomenclatura o los problemas encontrados para procesar este formato con herramientas populares.\cite{ducharme01}. Para poder codificar un grafo RDF en XML, tanto los nodos como los predicados han de ser representados en términos de XML (elementos, atributos, contenido de elementos y valores de atributos). 
+Se trata de una representación en \gls{XML}, comúnmente criticada por su dificultad de lectura por parte de personas. Entre sus otras críticas están las limitaciones impuestas por sus reglas de nomenclatura o los problemas encontrados para procesar este formato con herramientas populares.\cite{ducharme01}. Para poder codificar un grafo \gls{RDF} en \gls{XML}, tanto los nodos como los predicados han de ser representados en términos de \gls{XML} (elementos, atributos, contenido de elementos y valores de atributos). 
 
-Conceptualmente, se construye a partir de un conjunto de descripciones más pequeñas, cada una de las cuales traza un camino a lo largo de un grafo RDF. Estos caminos se describen en términos de los nodos (sujetos) y enlaces (predicados), que los conectan con otros nodos (objetos).
+Conceptualmente, se construye a partir de un conjunto de descripciones más pequeñas, cada una de las cuales traza un camino a lo largo de un grafo \gls{RDF}. Estos caminos se describen en términos de los nodos (sujetos) y enlaces (predicados), que los conectan con otros nodos (objetos).
 
-A continuación se muestra un ejemplo de serialización en RDF/XML\footnote{\url{https://www.w3.org/TR/rdf-syntax-grammar/\#example3}}:
+A continuación se muestra un ejemplo de serialización en \gls{RDF}/\gls{XML}\footnote{\url{https://www.w3.org/TR/rdf-syntax-grammar/\#example3}}:
 
-\begin{lstlisting}[basicstyle=\tiny, language=XML, caption={Ejemplo de RDF/XML del W3C.},captionpos=b]
+\begin{lstlisting}[basicstyle=\tiny, language=XML, caption={Ejemplo de \gls{RDF}/\gls{XML} del \gls{W3C}.},captionpos=b]
 
 <rdf:Description rdf:about="http://www.w3.org/TR/rdf-syntax-grammar">
 <ex:editor>
@@ -93,27 +93,25 @@ Se trata de una notación muy simple pero verbosa, donde cada línea representa un
 
 Ejemplo\footnote{\url{https://www.w3.org/TR/n-triples/}}:
 
-\begin{lstlisting}[basicstyle=\tiny, language=XML, caption={Ejemplo de N-Triples del W3C.},captionpos=b]
+\begin{lstlisting}[basicstyle=\tiny, language=XML, caption={Ejemplo de \textit{N-Triples} del \gls{W3C}.},captionpos=b]
 
 <http://example.org/#spiderman> <http://www.perceive.net/schemas/relationship/enemyOf> <http://example.org/#green-goblin> .
 
 \end{lstlisting}
 
-\subsubsection{\textit{N3}}
+\subsubsection{\gls{N3}}
 
-\textit{N3}, abreviatura de \textit{Notation 3}, fue un proyecto personal de Tim Berners-Lee\cite{ducharme01}. Es muy similar a \textit{N-Triples}, pero añadiendo características adicionales como atajos, un formato más claro, o la condensación de muchas de las repeticiones de este formato.
+\textit{\gls{N3}} fue un proyecto personal de Tim Berners-Lee\cite{ducharme01}. Es muy similar a \textit{N-Triples}, pero añadiendo características adicionales como atajos, un formato más claro, o la condensación de muchas de las repeticiones de este formato.
 
-A pesar de todo, \textit{N3} nunca se convirtió en un estándar y sus características adicionales frente a \textit{N-Triples} no tuvieron mucha aceptación.
+A pesar de todo, \textit{\gls{N3}} nunca se convirtió en un estándar y sus características adicionales frente a \textit{N-Triples} no tuvieron mucha aceptación.
 
 \subsubsection{\textit{Turtle}}
 
-El formato Turtle permite escribir un grafo RDF en texto de una forma más compacta que RDF/XML y más sencilla de leer que \textit{N-Triples}. Su gramática es un subconjunto de la especificación del lenguaje de consulta SPARQL 1.1, compartiendo ambas nombres de terminales y producciones en la medida de lo posible.
-
-En estos momentos, es el formato de serialización más popular entre las comunidades de desarrolladores\cite{yu01}.
+El formato Turtle permite escribir un grafo \gls{RDF} en texto de una forma más compacta que \gls{RDF}/\gls{XML} y más sencilla de leer que \textit{N-Triples}. Su gramática es un subconjunto de la especificación del lenguaje de consulta \gls{SPARQL} 1.1, compartiendo ambas nombres de terminales y producciones en la medida de lo posible. En estos momentos, es el formato de serialización más popular entre las comunidades de desarrolladores\cite{yu01}.
 
 A continuación se muestra un ejemplo de serialización en \textit{Turtle}\footnote{https://www.w3.org/TR/turtle/}:
 
-\begin{lstlisting}[basicstyle=\tiny, language=XML, caption={Ejemplo de Turtle del W3C.},captionpos=b]
+\begin{lstlisting}[basicstyle=\tiny, language=XML, caption={Ejemplo de Turtle del \gls{W3C}.},captionpos=b]
 
 @base <http://example.org/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -135,14 +133,14 @@ foaf:name "Spiderman" .
 
 \subsubsection{Procesadores y serializadores en el proyecto}
 
-El almacén seleccionado, \textbf{\textit{N3.js}, proporciona procesadores y serializadores} para los principales formatos citados: \textit{N3, N-Triples, Turtle y TriG} (una extensión de este último).
+El almacén seleccionado, \textbf{\textit{N3.js}, proporciona procesadores y serializadores} para los principales formatos citados: \textit{\gls{N3}, N-Triples, Turtle y TriG} (una extensión de este último).
 
-No se ha considerado necesario diseñar ningún serializador o procesador personalizado, al estar ya incluidos los formatos más comunes utilizados por desarrolladores (nótese la ausencia deliberada de RDF/XML).
+No se ha considerado necesario diseñar ningún serializador o procesador personalizado, al estar ya incluidos los formatos más comunes utilizados por desarrolladores (nótese la ausencia deliberada de \gls{RDF}/\gls{XML}).
 
 
-\subsection{Motor de consulta RDF (\textit{query engine})}
+\subsection{Motor de consulta \gls{RDF} (\textit{query engine})}
 
-El motor de consulta es un componente íntimamente ligado al almacén de ternas. El W3C fijó un estándar para consultas: SPARQL (presentado en \ref{sec:sparql}), cuya especificación está en su versión 1.1 desde 2013.
+El motor de consulta es un componente íntimamente ligado al almacén de ternas. El \gls{W3C} fijó un estándar para consultas: \gls{SPARQL} (presentado en \ref{sec:sparql}), cuya especificación está en su versión 1.1 desde 2013.
 
 Desde el punto de vista de la arquitectura de una aplicación semántica, es deseable que el motor de consultas, además de cumplir con la especificación, esté íntimamente integrado con el almacén de ternas para ofrecer un rendimiento aceptable.
 
@@ -151,11 +149,11 @@ Los principales proveedores de almacenes de ternas ofrecen también motores de co
 
 \subsubsection{Motor de consultas en el proyecto}\label{sec:motor-de-consultas-en-el-proyecto}
 
-En el caso del presente proyecto, integrar un motor de consultas no fue sencillo. El componente \textit{N3.js} no ofrece dichas funcionalidades, con lo que fue necesario estudiar la viabilidad de incorporar un motor local totalmente desarrollado en \textit{Javascript}.
+En el caso del presente proyecto, integrar un motor de consultas no fue sencillo. El componente \textit{N3.js} no ofrece dichas funcionalidades, con lo que fue necesario estudiar la viabilidad de incorporar un motor local desarrollado completamente en \textit{Javascript}.
 
-Tras el estudio de los trabajos previos desarrollados (\ref{subsec:consulta}) y la  situación actual (\ref{subsubsec:manejosparql}), se llegó a la conclusión de que la plataforma \textit{Comunica} se posicionaba como el producto abierto más prometedor para satisfacer las necesidades de consulta SPARQL.
+Tras el estudio de los trabajos previos desarrollados (\ref{subsec:consulta}) y la  situación actual (\ref{subsubsec:manejosparql}), se llegó a la conclusión de que la plataforma \textit{Comunica} se posicionaba como el producto abierto más prometedor para satisfacer las necesidades de consulta \gls{SPARQL}.
 
-Comunica proporciona las herramientas necesarias para crear una aplicación combinando múltiples bloques de construcción independientes. Su propósito es ofrecer una implementación modular de un cliente \textit{Triple Pattern Fragment} o\textit{ Linked Data Fragment}\footnote{\url{http://linkeddatafragments.org/in-depth/\#tpf}}, un tipo de fragmento que consiste en:
+\textit{Comunica} proporciona las herramientas necesarias para crear una aplicación combinando múltiples bloques de construcción independientes. Su propósito es ofrecer una implementación modular de un cliente \textit{Triple Pattern Fragment} o\textit{ Linked Data Fragment}\footnote{\url{http://linkeddatafragments.org/in-depth/\#tpf}}, un tipo de fragmento que consiste en:
 
 \begin{itemize}  
 	\item \textbf{Datos} que corresponden a un patrón de tripleta.
@@ -163,7 +161,7 @@ Comunica proporciona las herramientas necesarias para crear una aplicación combi
 	\item \textbf{Controles} que llevan al resto de fragmentos del mismo conjunto de datos.
 \end{itemize}
 
-De forma resumida, un cliente que soporta este tipo de fragmentos puede resolver múltiples consultas SPARQL de forma eficiente.
+De forma resumida, un cliente que soporta este tipo de fragmentos puede resolver múltiples consultas \gls{SPARQL} de forma eficiente.
 
 \textit{Comunica} consta de los siguientes componentes:
 
@@ -182,11 +180,11 @@ De forma resumida, un cliente que soporta este tipo de fragmentos puede resolver
 Para el presente proyecto, han sido necesarios dos actores:
 
 \begin{itemize}  
-	\item \textbf{actor-init-sparql:} se trata de un cliente que permite resolver consultas sobre interfaces heterogéneos. En concreto, este módulo inicializa un motor \textit{Comunica} con actores que evalúan consultas SPARQL.
-	\item \textbf{actor-init-sparql-rdfjs:} permite lanzar consultas SPARQL a fuentes que implementan la interfaz \textit{Source}\footnote{\url{http://rdf.js.org/\#source-interface}}. Una de esas fuentes es \textit{N3.js}, el \textit{store} utilizado para almacenar ternas en el proyecto.
+	\item \textbf{actor-init-sparql:} se trata de un cliente que permite resolver consultas sobre interfaces heterogéneos. En concreto, este módulo inicializa un motor \textit{Comunica} con actores que evalúan consultas \gls{SPARQL}.
+	\item \textbf{actor-init-sparql-rdfjs:} permite lanzar consultas \gls{SPARQL} a fuentes que implementan la interfaz \textit{Source}\footnote{\url{http://rdf.js.org/\#source-interface}}. Una de esas fuentes es \textit{N3.js}, el \textit{store} utilizado para almacenar ternas en el proyecto.
 \end{itemize}
 
-Es decir, se utiliza un módulo para lanzar consultas a \textit{endpoints} SPARQL remotos y otro para la fuente o almacén local. Estos módulos \textbf{aún están en desarrollo y no han alcanzado una versión estable} a fecha de redacción de la presente memoria, con lo que se van adquiriendo nuevas funcionalidades y corrigiendo defectos a lo largo del tiempo de desarrollo de este proyecto. Por ejemplo:
+Es decir, se utiliza un módulo para lanzar consultas a \textit{endpoints} \gls{SPARQL} remotos y otro para la fuente o almacén local. Estos módulos \textbf{aún están en desarrollo y no han alcanzado una versión estable} a fecha de redacción de la presente memoria, con lo que se van adquiriendo nuevas funcionalidades y corrigiendo defectos a lo largo del tiempo de desarrollo de este proyecto. Por ejemplo:
 
 \begin{itemize}  
 	\item En Julio de 2018 el motor de consulta no soportaba la palabra clave SERVICE, característica implementada en Agosto
@@ -221,13 +219,13 @@ Sin entrar en detalles, el funcionamiento de \textit{Vuex} se ciñe a las siguien
 \begin{itemize}  
 	\item Existe un único estado compartido por todos los componentes de la aplicación, independientemente de que cada componente tenga su propio estado individual.
 	\item El acceso al estado centralizado se realiza a través de \textbf{getters}.
-	\item El estado sólo puede ser modificado mediante de \textbf{mutaciones síncronas}.
-	\item Las mutaciones pueden ser ejecutadas de manera asíncrona a través de \textbf{acciones}.
+	\item El estado sólo puede ser modificado mediante de \textbf{mutaciones síncronas} (\textit{mutations}).
+	\item Las mutaciones pueden ser ejecutadas de manera asíncrona a través de \textbf{acciones} (\textit{actions}).
 \end{itemize}
 
 \noindent\begin{minipage}{\linewidth}
 
-El estado de la aplicación puede resumirse con las entidades mostradas en el cuadro \ref{tab:estado}. Por otra parte, se han definido las acciones y mutaciones necesarias para modificar dicho estado. En el cuadro \ref{tab:actions} se resumen las acciones a implementar con la funcionalidad requerida (no se incluyen las mutaciones por considerarse que no aportan nada en cuanto a diseño que no aporten ya las acciones).
+El estado de la aplicación puede resumirse con las entidades mostradas en el cuadro \ref{tab:estado}. Por otra parte, se han definido las acciones y mutaciones necesarias para modificar dicho estado. En el cuadro \ref{tab:actions} se resumen las acciones a implementar con la funcionalidad requerida (no se incluyen las mutaciones por considerarse que no aportan valor añadido en cuanto a diseño que no aporten ya las acciones).
 
 Es interesante también enumerar los \textit{getters} (ver cuadro \ref{tab:getters}), o métodos de consulta que permiten extraer información del estado de la aplicación sin acceder directamente a sus estructuras de datos.
 \end{minipage}
@@ -237,11 +235,11 @@ Es interesante también enumerar los \textit{getters} (ver cuadro \ref{tab:getter
 	\begin{tabular}{p{3cm}p{10cm}}
 		\toprule
 		Estado & Descripción \\ \midrule
-		Bloques de construcción RDF &  Contiene los bloques más comunes utilizados para modelar un dominio de información en RDF (ej: clases, propiedades, etc.) \\ \midrule
+		Bloques de construcción \gls{RDF} &  Contiene los bloques más comunes utilizados para modelar un dominio de información en \gls{RDF} (ej: clases, propiedades, etc.) \\ \midrule
 		Almacén de ternas &  Estructura de datos de tipo almacén que albergará las ternas que componen el grafo. \\ \midrule
 		Actividad &  Contiene el contenido de la actividad académica a realizar. \\ \midrule
-		Prefijos & Contiene los prefijos más comunes utilizados para precargar en las consultas SPARQL. \\ \midrule
-		Vocabularios &  Contiene las definiciones y URLs de los vocabularios más comunes para posibilitar su descarga al grafo en el módulo correspondiente. \\
+		Prefijos & Contiene los prefijos más comunes utilizados para precargar en las consultas \gls{SPARQL}. \\ \midrule
+		Vocabularios &  Contiene las definiciones y \gls{URL}s de los vocabularios más comunes para posibilitar su descarga al grafo en el módulo correspondiente. \\
 		\bottomrule
 	\end{tabular}
 	\caption{Estado de la aplicación.}
@@ -252,7 +250,7 @@ Es interesante también enumerar los \textit{getters} (ver cuadro \ref{tab:getter
 	\centering
 	\begin{tabular}{p{2cm}p{11cm}}
 		\toprule
-		ID & Getter \\ \midrule
+		ID & \textit{Getter} \\ \midrule
 		GET-1 & Recuperar listado de sujetos por predicado y objeto. \\ \midrule
 		GET-2 & Recuperar listado de sujetos por predicado. \\ \midrule
 		GET-3 & Recuperar listado de objetos por predicado y sujeto. \\ \midrule
@@ -278,11 +276,11 @@ Es interesante también enumerar los \textit{getters} (ver cuadro \ref{tab:getter
 		ACC-4 & Eliminar terna & Elimina una terna del grafo pasando como parámetros su sujeto, predicado y objeto. \\ \midrule
 		ACC-5 & Editar literal &  Modifica la definición de un literal o cadena de texto utilizado como objeto en una propiedad. \\ \midrule
 		ACC-6 & Añadir literal &  Añade una terna con un literal o cadena de texto como objeto. \\ \midrule
-		ACC-7 & Importar \textit{N3} & Importa un grafo en formato \textit{N3, Turtle, TriG o N-Triples}. \\ \midrule
-		ACC-8 & Añadir \textit{N3} &  Añade al grafo existente otro en formato \textit{N3, Turtle, TriG o N-Triples}. \\ \midrule
-		ACC-9 & Eliminar \textit{N3} & Elimina del grafo local las ternas existentes en otro grafo en formato \textit{N3, Turtle, TriG o N-Triples} \\ \midrule
+		ACC-7 & Importar \textit{N3} & Importa un grafo en formato \textit{\gls{N3}, Turtle, TriG o N-Triples}. \\ \midrule
+		ACC-8 & Añadir \textit{\gls{N3}} &  Añade al grafo existente otro en formato \textit{\gls{N3}, Turtle, TriG o N-Triples}. \\ \midrule
+		ACC-9 & Eliminar \textit{\gls{N3}} & Elimina del grafo local las ternas existentes en otro grafo en formato \textit{\gls{N3}, Turtle, TriG o N-Triples} \\ \midrule
 		ACC-10 & Cargar actividad & Carga el contenido de una actividad en formato Markdown. \\ \midrule
-		ACC-11 & Exportar a \textit{JSON-LD} &  Exporta el grafo local a un archivo en formato \textit{JSON-LD}. \\ \midrule
+		ACC-11 & Exportar a \textit{\gls{JSON-LD}} &  Exporta el grafo local a un archivo en formato \textit{\gls{JSON-LD}}. \\ \midrule
 		ACC-12 & Exportar a Turtle &  Exporta el grafo local a un archivo en formato \textit{Turtle}. \\ \midrule
 		ACC-13 & Modificar estado de un vocabulario & Activa o desactiva uno de los vocabularios precargados. \\
 		\bottomrule
@@ -295,9 +293,9 @@ Es interesante también enumerar los \textit{getters} (ver cuadro \ref{tab:getter
  
 \subsection{Arquitectura de módulos}\label{sec:arquitectura-de-módulos}
 
-En el cuadro \ref{tab:modulos} se plantea el desglose de la aplicación en módulos independientes que dan respuesta a las necesidades expuestas.
+En el cuadro \ref{tab:modulos} se plantea el desglose de la aplicación en módulos independientes que dan respuesta a las necesidades expuestas y a los casos de uso concretos.
 
-\begin{table}
+\begin{table}[h]
 	\centering
 	\begin{tabular}{p{2cm}p{3cm}p{3cm}p{5cm}}
 		\toprule
@@ -305,7 +303,7 @@ En el cuadro \ref{tab:modulos} se plantea el desglose de la aplicación en módulo
 		MOD-1 & Actividades & 7 & \ref{sec:cargar-una-actividad} \\ \midrule
 		MOD-2 & Vocabularios & 10 & \ref{sec:cargar-un-vocabulario}, \ref{sec:des-cargar-un-vocabulario} \\ \midrule
 		MOD-3 & Importar/exportar &  8, 9 & \ref{sec:importar-grafo}, \ref{sec:anadir-a-grafo}, \ref{sec:exportar-grafo} \\ \midrule
-		MOD-4 & Modelado & 1, 2 & \ref{sec:dar-de-alta-una-nueva-clase}, \ref{sec:editar-una-clase-existente}, \ref{sec:eliminar-una-clase-existente}, \ref{sec:dar-de-alta-una-nueva-anotacion-o-propiedad-estandar-de-una-clase}, \ref{sec:editar-una-propiedad-o-anotacion-de-una-clase}, \ref{sec:eliminar-una-propiedad-o-anotacion-de-una-clase} \\ \midrule
+		MOD-4 & Modelado & 1, 2 & \ref{sec:dar-de-alta-una-nueva-clase}, \ref{sec:editar-una-clase-existente}, \ref{sec:eliminar-una-clase-existente}, \ref{sec:dar-de-alta-una-nueva-anotacion-o-propiedad-estandar-de-una-clase}, \ref{sec:editar-una-propiedad-o-anotacion-de-una-clase}, \ref{sec:eliminar-una-propiedad-o-anotacion-de-una-clase}, \ref{sec:dar-de-alta-un-nuevo-sub-recurso} \\ \midrule
 		MOD-5 & Poblamiento & 3 & \ref{sec:poblar-el-grafo-con-una-tripleta} \\ \midrule
 		MOD-6 & Consulta &  4, 5, 6 & \ref{sec:lanzar-consulta-a-grafo-local}, \ref{sec:lanzar-consulta-a-grafo-remoto} \\ 
 		\bottomrule
@@ -322,23 +320,23 @@ Para poder dar cumplimiento a los requisitos de la aplicación, se definen en el 
 
 	\begin{table}
 		\centering
-		\begin{tabular}{p{2cm}p{3cm}p{10cm}}
+		\begin{tabular}{p{2cm}p{5cm}p{8cm}}
 			\toprule
 			ID & Componente & Responsabilidad \\ \midrule
 			COMP-1 & Contenedor de aplicación &  Estructura básica de la aplicación (cabecera, pie, barra lateral). \\ \midrule
 			COMP-2 & Bienvenida &  Entrada a la aplicación con ayuda y descripción general. \\ \midrule
 			COMP-3 & Contenedor de modelo &  Contiene los componentes de edición del modelo.\\ \midrule
 			COMP-4 & Contenedor de importación/exportación & Contiene los componentes de importación y exportación de datos. \\ \midrule
-			COMP-5 & Contenedor de consultas SPARQL &  Contiene los componentes de ejecución y visualización de resultados de consultas SPARQL. \\ \midrule
+			COMP-5 & Contenedor de consultas \gls{SPARQL} &  Contiene los componentes de ejecución y visualización de resultados de consultas \gls{SPARQL}. \\ \midrule
 			COMP-6 & Contenedor de actividades &  Contiene los componentes de carga y visualización de actividades. \\ \midrule
 			COMP-7 & Listado de recursos &  Componente reutilizable para listar recursos en una tabla de datos. \\ \midrule
 			COMP-8 & Detalle de recursos &  Componente reutilizable para visualizar detalles de recursos. \\ \midrule
-			COMP-9 & Lanzador de consultas SPARQL & Componente reutilizable para lanzar consultas SPARQL \\ \midrule
-			COMP-10 & Listado de resultados de consultas SPARQL & Componente reutilizable para mostrar resultados de una consulta SPARQL.\\ \midrule
+			COMP-9 & Lanzador de consultas \gls{SPARQL} & Componente reutilizable para lanzar consultas \gls{SPARQL} \\ \midrule
+			COMP-10 & Listado de resultados de consultas \gls{SPARQL} & Componente reutilizable para mostrar resultados de una consulta \gls{SPARQL}.\\ \midrule
 			COMP-11 & Cargador de archivos &  Componente reutilizable para importar datos desde archivo. \\ \midrule
-			COMP-12 & Cargador de URLs &  Componente reutilizable para importar datos desde URL. \\ \midrule
+			COMP-12 & Cargador de \gls{URL}s &  Componente reutilizable para importar datos desde \gls{URL}. \\ \midrule
 			COMP-13 & Cargador de Vocabularios & Componente reutilizable para habilitar o deshabilitar vocabularios. \\ \midrule
-			COMP-14 & Visor de \textit{markdown} & Componente reutilizable para visualizar\textit{ markdown} renderizado en HTML. \\ 
+			COMP-14 & Visor de \textit{markdown} & Componente reutilizable para visualizar\textit{ markdown} renderizado en \gls{HTML}. \\ 
 			COMP-15 & Poblamiento & Componente a modo de formulario para poblar el grafo. \\ \midrule
 			COMP-16 & Acerca de & Componente con información relevante sobre la aplicación. \\ \midrule
 			COMP-18 & Ayuda & Componente contenedor del manual de usuario. \\ 
@@ -349,12 +347,12 @@ Para poder dar cumplimiento a los requisitos de la aplicación, se definen en el 
 	\end{table}
 
 
-En la figura \ref{fig:componentes} se muestra un diagrama UML 2.0 con la jerarquía de componentes de la aplicación, que muestra convenientemente las relaciones entre los mismos distinguiéndose tres niveles:
+En la figura \ref{fig:componentes} se muestra un diagrama \gls{UML} 2.0\cite{fowler01} con la jerarquía de componentes de la aplicación, que muestra convenientemente las relaciones entre los mismos distinguiéndose tres niveles:
 
 \begin{itemize}
 	\item Componente raíz de la aplicación, del que dependen todos los demás (actúa de enrutador).
-	\item Componentes intermedios o contenedores, no reutilizables.
-	\item Componentes finales reutilizables.
+	\item Componentes intermedios o contenedores, no reutilizables. Se encargan de gestionar las entradas y salidas de los componentes reutilizables.
+	\item Componentes finales reutilizables. Son los últimos niveles de la jerarquía y realizan tareas muy concretas e independientes.
 \end{itemize}
 
 \begin{figure}[H]

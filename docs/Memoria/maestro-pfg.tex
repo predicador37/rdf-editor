@@ -13,6 +13,10 @@
 \usepackage{textcomp}
 \usepackage{csquotes}
 \usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage[automake,acronym,toc]{glossaries}
+\loadglsentries{glosario}
+\makeglossaries
 \usepackage{pgfgantt}
 \usepackage{array}
 \usepackage{wrapfig}
@@ -24,10 +28,12 @@
 \usepackage[authoryear]{natbib}
 \usepackage{nomencl}
 % the following is useful when we have the old nomencl.sty package
-\providecommand{\printnomenclature}{\printglossary}
-\providecommand{\makenomenclature}{\makeglossary}
+% \providecommand{\printnomenclature}{\printglossary}
+% \providecommand{\makenomenclature}{\makeglossary}
 \makenomenclature
-\onehalfspacing
+% \onehalfspacing
+% \renewcommand{\baselinestretch}{1.5}
+\linespread{1.25}
 \definecolor{barblue}{RGB}{153,204,254}
 \definecolor{groupblue}{RGB}{51,102,254}
 \definecolor{linkred}{RGB}{165,0,33}
@@ -41,6 +47,14 @@
 \titleformat{\chapter}[display]   
 {\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge}   
 \titlespacing*{\chapter}{0pt}{-10pt}{30pt}
+\usepackage{xcolor}
+\hypersetup{ % changes clickable url link colors
+	colorlinks,
+	linkcolor={red!50!black},
+	citecolor={blue!50!black},
+	urlcolor={blue!80!black}
+}
+
 \newenvironment{changemargin}[2]{%
 	\begin{list}{}{%
 			\setlength{\topsep}{0pt}%
@@ -88,6 +102,37 @@
 \lstset{aboveskip=1.5\baselineskip}
 \lstset{belowskip=1.5\baselineskip} 
 
+% Define a style the emphasizes the long form:
+
+\newacronymstyle{em-long-short}
+{%
+	\GlsUseAcrEntryDispStyle{long-short}%
+}%
+{%
+	\GlsUseAcrStyleDefs{long-short}%  
+	\renewcommand*{\genacrfullformat}[2]{%
+		\emph{\glsentrylong{##1}}##2\space
+		(\firstacronymfont{\glsentryshort{##1}})%
+	}%
+	\renewcommand*{\Genacrfullformat}[2]{%
+		\emph{\Glsentrylong{##1}}##2\space
+		(\firstacronymfont{\glsentryshort{##1}})%
+	}%
+	\renewcommand*{\genplacrfullformat}[2]{%
+		\emph{\glsentrylongpl{##1}}##2\space
+		(\firstacronymfont{\glsentryshortpl{##1}})%
+	}%
+	\renewcommand*{\Genplacrfullformat}[2]{%
+		\emph{\Glsentrylongpl{##1}}##2\space
+		(\firstacronymfont{\Glsentryshortpl{##1}})%
+	}%
+}
+
+
+\setacronymstyle{em-long-short}
+
+
+
 \begin{document}
 \include{cubierta}\thispagestyle{empty}
 
@@ -107,7 +152,7 @@
 
 \tableofcontents{}\cleardoublepage{}\markboth{\nomname}{\nomname}
 
-\printnomenclature{}
+% \printnomenclature{}
 
 \listoffigures
 
@@ -148,9 +193,14 @@
 \cleardoublepage{}
 
 
+\raggedright
+\fancyhead[LO]{\leftmark}
 \bibliographystyle{unsrt}
 \bibliography{biblio/biblio-pfg}
 
+
+\printglossary[type=\acronymtype,title=Acrónimos]
+\cleardoublepage{}
 
 \appendix
 \cleardoublepage{}\include{anexo_a}

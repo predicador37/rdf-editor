@@ -1,6 +1,6 @@
 \chapter{La Web Semántica}
 
-Cabe comenzar el desarrollo de la presente memoria con una breve introducción a los fundamentos de la Web Semántica y las tecnologías que la sustentan: RDF y SPARQL. Asimismo, queda definido también el término de datos enlazados o \textit{linked data}, estrechamente relacionado con estos conceptos y de gran importancia hoy en día en la difusión de datos estructurados a través de Internet.
+Cabe comenzar el desarrollo de la presente memoria con una breve introducción a los fundamentos de la Web Semántica y las tecnologías que la sustentan: \gls{RDF} y \gls{SPARQL}. Asimismo, queda definido también el término de datos enlazados o \textit{linked data}, estrechamente relacionado con estos conceptos y de gran importancia hoy en día en la difusión de datos estructurados a través de Internet.
 
 \section{Fundamentos}
 
@@ -8,18 +8,20 @@ La Web Semántica es un término originalmente acuñado por Tim Berners-Lee en el a
 
 Para lograr tan ambicioso objetivo, los agentes inteligentes necesitarían tener acceso a contenido y conocimiento estructurado, así como a las reglas de inferencia necesarias. En este contexto, la Web Semántica podía apoyarse en las siguientes tecnologías ya existentes:
 
+\begin{minipage}{\linewidth}
 \begin{itemize}  
-	\item  \textbf{RDF} (\textit{Resource Description Framework}), que permite expresar conocimiento en forma de tripletas o ternas (a modo de sujeto, verbo y objeto en una oración) utilizando URIs (\textit{Uniform Resource Indicators}\footnote{Cadenas de caracteres que identifican los recursos de una red de forma unívoca.}).
-	\item \textbf{XML} (\textit{extensible Markup Language}), un metalenguaje que permite crear lenguajes de etiquetado o marcado y documentos a su vez convenientemente etiquetados y con estructura arbitraria.
+	\item  \textbf{\gls{RDF}}, que permite expresar conocimiento en forma de tripletas o ternas (a modo de sujeto, verbo y objeto en una oración) utilizando URIs (\textit{Uniform Resource Indicators}\footnote{Cadenas de caracteres que identifican los recursos de una red de forma unívoca.}).
+	\item \textbf{\gls{XML}}, un metalenguaje que permite crear lenguajes de etiquetado o marcado y documentos a su vez convenientemente etiquetados y con estructura arbitraria.
 \end{itemize}
+\end{minipage}
 
 Sin embargo, un tercer pilar era necesario para resolver la problemática de la existencia de distintos identificadores en distintas bases de datos relacionadas con el mismo significado conceptual. Gracias a las \textbf{ontologías}, documentos que definen formalmente las relaciones entre distintos términos, estas diferencias podían ser salvadas bien mediante el uso de términos estandarizados bien mediante la definición de relaciones conceptuales de igualdad o similitud entre dichos términos.
 
-En palabras del propio Berners-Lee: \blockquote[{\cite{bernerslee01}}]{Con un diseño adecuado, la Web Semántica puede ayudar en la evolución del conocimiento humano como un todo.}
+En palabras del propio Berners-Lee:\textit{ \blockquote[{\cite{bernerslee01}}]{Con un diseño adecuado, la Web Semántica puede ayudar en la evolución del conocimiento humano como un todo.}}
 
 \section{Linked Data}
 
-Estrechamente relacionado con la Web Semántica se encuentra el concepto de datos enlazados o \textit{Linked Data}, también propuesto por Berners-Lee en 2006\cite{bernerslee02} en la que se considera como su introducción oficial y formal. Se trata de un movimiento respaldado por el propio W3C\footnote{\textit{World Wide Web Consortium}: \url{https://www.w3c.es/}} que se centra en conectar conjuntos de datos a lo largo de la Web y que puede verse como un subconjunto de la Web Semántica.
+Estrechamente relacionado con la Web Semántica se encuentra el concepto de datos enlazados o \textit{Linked Data}, también propuesto por Berners-Lee en 2006\cite{bernerslee02} en la que se considera como su introducción oficial y formal. Se trata de un movimiento respaldado por el propio \gls{W3C}\footnote{\url{https://www.w3c.es/}} que se centra en conectar conjuntos de datos a lo largo de la Web y que puede verse como un subconjunto de la Web Semántica.
 
 Se basa, por tanto, en dos aspectos clave:
 
@@ -30,15 +32,15 @@ Se basa, por tanto, en dos aspectos clave:
 
 La Web Semántica es el fin y los datos enlazados proporcionan el medio para alcanzar dicho fin.
 
-\section{RDF}
+\section{\gls{RDF}}
 
-Las tecnologías de la Web Semántica permiten, por tanto, almacenar conocimiento en forma de conceptos y relaciones a través de ternas o tripletas, modelar dominios de conocimiento con vocabularios estándar y ofrecer potentes facilidades de consulta sobre dichos modelos. Dentro de estas tecnologías, RDF es, sin duda, el bloque de construcción fundamental (como HTML lo ha sido para la Web).
+Las tecnologías de la Web Semántica permiten, por tanto, almacenar conocimiento en forma de conceptos y relaciones a través de ternas o tripletas, modelar dominios de conocimiento con vocabularios estándar y ofrecer potentes facilidades de consulta sobre dichos modelos. Dentro de estas tecnologías, \gls{RDF} es, sin duda, el bloque de construcción fundamental (como \gls{HTML} lo ha sido para la Web).
 
-RDF fue propuesto por el W3C en 1999\cite{Lassila:99:RDF} como un estándar para crear y procesar metadatos con el objetivo de describir recursos independientemente de su dominio de aplicación, ayudando, por tanto, a promover la interoperabilidad entre aplicaciones.
+\gls{RDF} fue propuesto por el W3C en 1999\cite{Lassila:99:RDF} como un estándar para crear y procesar metadatos con el objetivo de describir recursos independientemente de su dominio de aplicación, ayudando, por tanto, a promover la interoperabilidad entre aplicaciones.
 
-Sin embargo, con la llegada de la Web Semántica, el alcance de RDF creció y ya no sólo se usa para codificar metadatos sobre recursos web, sino también \textbf{para describir cualquier recurso así como sus relaciones} en el mundo real.
+Sin embargo, con la llegada de la Web Semántica, el alcance de \gls{RDF} creció y ya no sólo se usa para codificar metadatos sobre recursos web, sino también \textbf{para describir cualquier recurso así como sus relaciones} en el mundo real.
 
-El nuevo alcance de RDF quedó reflejado en las especificaciones publicadas en 2004 por el \textit{RDF Core Working Group}\footnote{Recomendaciones del W3C, https://www.w3.org/2001/sw/RDFCore/}, ahora actualizadas a fecha de 2014\footnote{Versiones actualizadas de las recomendaciones del W3C, https://www.w3.org/2011/rdf-wg/wiki/Main\_Page}, de las que se pueden extraer las siguientes definiciones de RDF:
+El nuevo alcance de \gls{RDF} quedó reflejado en las especificaciones publicadas en 2004 por el \textit{\gls{RDF} Core Working Group}\footnote{Recomendaciones del \gls{W3C}, \url{https://www.w3.org/2001/sw/RDFCore/}}, ahora actualizadas a fecha de 2014\footnote{Versiones actualizadas de las recomendaciones del \gls{W3C}, \url{https://www.w3.org/2011/rdf-wg/wiki/Main\_Page}}, de las que se pueden extraer las siguientes definiciones de \gls{RDF}:
 
 
 \vspace*{\baselineskip}
@@ -48,18 +50,18 @@ El nuevo alcance de RDF quedó reflejado en las especificaciones publicadas en 20
 		\begin{tabular}{p{3cm}p{12cm}}
 			\toprule
 			Recomendación & Definición \\ \midrule
-			\textit{RDF Primer} & Un marco de trabajo para expresar información sobre recursos. \\ \midrule
-			\textit{RDF Concepts \& Syntax} & Un marco de trabajo para representar información en la Web. \\ 
+			\textit{\gls{RDF} Primer} & Un marco de trabajo para expresar información sobre recursos. \\ \midrule
+			\textit{\gls{RDF} Concepts \& Syntax} & Un marco de trabajo para representar información en la Web. \\ 
 			\bottomrule
 		\end{tabular}
-		\caption{Definiciones de RDF en las recomendaciones del W3C}
+		\caption{Definiciones de \gls{RDF} en las recomendaciones del \gls{W3C}.}
 		\label{tabdefrdf}
 	\end{table}
 \end{center}
 
-\subsection{Modelo Abstracto de RDF}
+\subsection{Modelo Abstracto de \gls{RDF}}
 
-RDF ofrece un modelo abstracto que permite descomponer el conocimiento en pequeñas piezas llamadas sentencias (\textit{statements}), tripletas o ternas y que toman la forma:
+\gls{RDF} ofrece un modelo abstracto que permite descomponer el conocimiento en pequeñas piezas llamadas sentencias (\textit{statements}), tripletas o ternas y que toman la forma:
 
 \begin{center}
 Sujeto - Predicado - Objeto
@@ -67,9 +69,9 @@ Sujeto - Predicado - Objeto
 
 En donde \textit{Sujeto} y \textit{Objeto} representan dos conceptos o ``cosas'' en el mundo (también denominados \textbf{recursos}) y \textit{Predicado} la relación que los conecta.
 
-Los nombres de estos recursos (así como de los predicados) han de ser globales y deberían identificarse unívocamente por un \textit{Uniform Resource Idenfifier} (URI).
+Los nombres de estos recursos (así como de los predicados) han de ser globales y deberían identificarse unívocamente por un \gls{URI}.
 
-Por tanto, un modelo RDF puede expresarse como una colección de tripletas o un grafo, dado que aquellas no son más que grafos dirigidos. Los sujetos y objetos serían los nodos del grafo y los predicados sus aristas.
+Por tanto, un modelo \gls{RDF} puede expresarse como una colección de tripletas o un grafo, dado que aquellas no son más que grafos dirigidos. Los sujetos y objetos serían los nodos del grafo y los predicados sus aristas.
 
 Otra nomenclatura utilizada para representar una terna sería la siguiente:
 
@@ -79,7 +81,7 @@ Otra nomenclatura utilizada para representar una terna sería la siguiente:
 
 En donde el valor de la propiedad u \textit{Objeto} también puede ser un literal, que consiste simplemente en un dato textual bruto.
 
-Cabe destacar que una terna RDF sólo puede modelar relaciones binarias. Para modelar una relación n-aria, suelen utilizarse recursos intermedios como nodos en blanco, que no son más que sujetos u objetos que no tienen un URI como identificador (nodos sin nombre o anónimos).
+Cabe destacar que una terna \gls{RDF} sólo puede modelar relaciones binarias. Para modelar una relación n-aria, suelen utilizarse recursos intermedios como nodos en blanco, que no son más que sujetos u objetos que no tienen un \gls{URI} como identificador (nodos sin nombre o anónimos).
 
 \pagebreak
 
@@ -89,14 +91,14 @@ En resumen:
 \begin{center}
 	\begin{table}[htb]
 		\centering
-		\begin{tabular}{p{5cm}p{6cm}}
+		\begin{tabular}{p{6cm}p{6cm}}
 			\toprule
-			Sujeto & Puede ser un URI o un nodo en blanco. \\ \midrule
-			Predicado o Propiedad & Debe ser un URI. \\ \midrule
-			Objeto o Valor de la Propiedad & Puede ser un URI, un literal o un nodo en blanco. \\
+			Sujeto & Puede ser un \gls{URI} o un nodo en blanco. \\ \midrule
+			Predicado o Propiedad & Debe ser un \gls{URI}. \\ \midrule
+			Objeto o Valor de la Propiedad & Puede ser un \gls{URI}, un literal o un nodo en blanco. \\
 			\bottomrule
 		\end{tabular}
-		\caption{Resumen conceptual de ternas}
+		\caption{Resumen conceptual de ternas.}
 		\label{tabresterna}
 	\end{table}
 \end{center}
@@ -116,19 +118,19 @@ A continuación se muestran dos ejemplos de tripletas:
 		    http://www.uned.es/ia/example\#Analista & http://www.w3.org/2000/01/rdf-schema\#label & ``Analista Informático'' \\ 
 			\bottomrule
 		\end{tabular}
-		\caption{Ejemplos de tripletas reales}
+		\caption{Ejemplos de tripletas reales.}
 		\label{tabejternas}
 	\end{table}
 
 
 \subsection{Aplicaciones prácticas de RDF}
 
-Gracias a RDF, es posible construir la Web Semántica y enlazar conjuntos de datos. A continuación se enumeran algunas de sus aplicaciones reales:
+Gracias a \gls{RDF}, es posible construir la Web Semántica y enlazar conjuntos de datos. A continuación se enumeran algunas de sus aplicaciones reales:
 
 \begin{itemize}  
 	\item Añadir información legible a los motores de búsqueda.
 	\item Enriquecer un conjunto de datos enlazándolo con conjuntos de datos de terceros.
-	\item Facilitar el descubrimiento de APIs\footnote{\textit{Aplication Programming Interface}, en este caso referido a puntos accesibles a través de la Web.} a través de su entrelazado.
+	\item Facilitar el descubrimiento de \gls{API}s, en este caso referido a puntos accesibles a través de la Web a través de su entrelazado.
 	\item Construir agregaciones de datos sobre determinados temas.
 	\item Proporcionar un estándar de intercambio de datos entre bases de datos.
 	\item Enriquecer, describir y contextualizar los datos mediante un enfoque rico en metadatos.
@@ -136,15 +138,15 @@ Gracias a RDF, es posible construir la Web Semántica y enlazar conjuntos de dato
 
 Su principal ventaja frente a los modelos y bases de datos relacionales es una mayor facilidad para evolucionar los grafos, algo que en un sistema relacional es complejo (dado que requiere de modificaciones en las estructuras de almacenamiento de datos y sus consultas asociadas). En otras palabras, su \textbf{flexibilidad para modelar lo inesperado}.
 
-Un ejemplo claro a nivel global es \textit{Wikidata}\footnote{https://www.wikidata.org/wiki/Wikidata:Main\_Page}, una base de datos de conocimiento abierta que puede ser leída y editada tanto por personas como por máquinas.\textit{ Wikidata} actúa como un almacén centralizado para datos estructurados de otros proyectos hermanos como \textit{Wikipedia}, \textit{Wikisource}, etc. En el momento de redacción de esta memoria, cuenta con  50.035.140 elementos de datos que cualquiera puede editar.
+Un ejemplo claro a nivel global es \textit{Wikidata}\footnote{\url{https://www.wikidata.org/wiki/Wikidata:Main\_Page}}, una base de datos de conocimiento abierta que puede ser leída y editada tanto por personas como por máquinas.\textit{ Wikidata} actúa como un almacén centralizado para datos estructurados de otros proyectos hermanos como \textit{Wikipedia}, \textit{Wikisource}, etc. En el momento de redacción de esta memoria, cuenta con  50.035.140 elementos de datos que cualquiera puede editar.
  
-De una forma más concreta, es destacable el importante rol de RDF y las tecnologías de la Web Semántica en ámbitos de \textbf{búsqueda y clasificación bibliográfica o documental}, pudiendo citarse como ejemplo la publicación en RDF del \textit{Diccionario de Lugares Geográficos} y el \textit{Diccionario y Tesauro de Materias} del Patrimonio Cultural de España, gestionado en la actualidad por el Ministerio de Educación, Cultura y Deporte del Gobierno de España\footnote{https://www.mecd.gob.es/cultura-mecd/areas-cultura/museos/destacados/2015/tesauros.html}.
+De una forma más concreta, es destacable el importante rol de \gls{RDF} y las tecnologías de la Web Semántica en ámbitos de \textbf{búsqueda y clasificación bibliográfica o documental}, pudiendo citarse como ejemplo la publicación en \gls{RDF} del \textit{Diccionario de Lugares Geográficos} y el \textit{Diccionario y Tesauro de Materias} del Patrimonio Cultural de España, gestionado en la actualidad por el Ministerio de Educación, Cultura y Deporte del Gobierno de España\footnote{\url{https://www.mecd.gob.es/cultura-mecd/areas-cultura/museos/destacados/2015/tesauros.html}}.
 
-\section{SPARQL} \label{sec:sparql}
+\section{\gls{SPARQL}} \label{sec:sparql}
 
-Tal y como SQL provee (al menos, relativamente) un de un estándar de consulta  para las bases de datos relacionales, SPARQL ofrece un lenguaje de consulta estandarizado para grafos RDF. 
+Tal y como \gls{SQL} provee (al menos, relativamente) un de un estándar de consulta  para las bases de datos relacionales, \gls{SPARQL} ofrece un lenguaje de consulta estandarizado para grafos \gls{RDF}. 
 
-SPARQL es un acrónimo recursivo para \textit{SPARQL Protocol And RDF Query Language}; es a la vez un lenguaje de consulta de grafos RDF y un protocolo, dado que permite exponer servicios web que acepten consultas en dicho lenguaje.
+\gls{SPARQL} es un acrónimo recursivo para \textit{\gls{SPARQL} Protocol And \gls{RDF} Query Language}\cite{Seaborne:08:SQL}; es a la vez un lenguaje de consulta de grafos \gls{RDF} y un protocolo, dado que permite exponer servicios web que acepten consultas en dicho lenguaje.
 
 \noindent\begin{minipage}{\linewidth}
 Entre sus características, cabe citar:
@@ -153,13 +155,13 @@ Entre sus características, cabe citar:
 	\item Recuperación de valores de datos estructurados o semi-estructurados.
 	\item Exploración de conjuntos de datos a través de consultas sobre relaciones desconocidas.
 	\item Ejecución de uniones complejas sobre bases de datos dispersas en una única consulta.
-	\item Transformación de datos RDF desde un vocabulario a otro.
+	\item Transformación de datos \gls{RDF} desde un vocabulario a otro.
 \end{itemize}
 \end{minipage}
 
-La estructura básica de una consulta SPARQL es la siguiente:
+La estructura básica de una consulta \gls{SPARQL} es la siguiente:
 
-\begin{lstlisting}[basicstyle=\tiny, caption={Estructura básica de consulta SPARQL.},captionpos=b]
+\begin{lstlisting}[basicstyle=\tiny, caption={Estructura básica de consulta \gls{SPARQL}.},captionpos=b]
 
 # declaraciones de prefijos
 PREFIX foo: <http://example.com/resources/>

@@ -31,9 +31,9 @@ A continuación se resumen todas las sesiones de captura de requisitos:
 	\toprule
 	1 & 18/10/17 & Primer contacto y comunicación de ideas iniciales para la confección del anteproyecto  \\ \midrule
 	2 & 21/02/17 & Consolidación de ideas y aportación de más documentación (vídeos sobre prototipos de cuaderno, documentos de texto con descripciones, etc.)  \\
-	3 & 28/03/18 & Primera demo a modo de POC con un entorno capaz de añadir tripletas.  \\ \midrule
-	4 & 10/07/18 & Reunión presencial con demostración \textit{in-situ} de los módulos de modelado e importación/exportación. Tiene lugar una tormenta de ideas y se enfoca el proyecto de otro modo, modificando sus objetivos hacia una herramienta formativa..  \\ \midrule
-	5 & 4/08/18 & Revisión de los últimos avances con la integración de un endpoint SPARQL en el \textit{frontend }y planificación del resto de funcionalidade requeridas.  \\ 
+	3 & 28/03/18 & Primera demo a modo de \gls{POC} con un entorno capaz de añadir tripletas.  \\ \midrule
+	4 & 10/07/18 & Reunión presencial con demostración \textit{in-situ} de los módulos de modelado e importación/exportación. Tiene lugar una tormenta de ideas y se enfoca el proyecto de otro modo, modificando sus objetivos hacia una herramienta formativa.  \\ \midrule
+	5 & 4/08/18 & Revisión de los últimos avances con la integración de un endpoint \gls{SPARQL} en el \textit{frontend }y planificación del resto de funcionalidades requeridas.  \\ 
 	\bottomrule
 \end{tabular}
 \caption{Sesiones de entrevistas}
@@ -43,9 +43,9 @@ A continuación se resumen todas las sesiones de captura de requisitos:
 
 \subsection{Documentación}
 
-Para documentar la captura de requisitos, se utilizará la técnica de casos de uso. Se descarta la incorporación de diagramas UML de casos de uso, dado que dichos diagramas carecen de información esencial sobre los mismos (como qué actor lleva a cabo cada paso, o notas sobre el orden de ejecución de los pasos). Si bien pueden ser útiles como resumen o índice de contenidos, se decide prescindir de ellos dado que el número de casos de uso contemplados en el proyecto es manejable.\cite{fowler01}
+Para documentar la captura de requisitos, se utilizará la técnica de casos de uso. Se descarta la incorporación de diagramas \gls{UML} de casos de uso, dado que dichos diagramas carecen de información esencial sobre los mismos (como qué actor lleva a cabo cada paso, o notas sobre el orden de ejecución de los pasos). Si bien pueden ser útiles como resumen o índice de contenidos, se decide prescindir de ellos dado que el número de casos de uso contemplados en el proyecto es manejable.\cite{fowler01}
 
-Se utilizará una plantilla propuesta por Cockburn{\cite{cockburn01}}: el estilo RUP (\textit{Rational Unified Process}){\cite{rational01}}, atractivo y fácil de seguir pese al elevado número de apartados, modificado para plasmar los aspectos más relevantes del proyecto (por ejemplo, no se incluirá un campo \textit{ámbito} porque siempre va a estar referido al mismo sistema o aplicación). El motivo de no utilizar una tabla es meramente subjetivo, ya que el autor de esta memoria opina que puede oscurecer el contenido.
+Se utilizará una plantilla propuesta por Cockburn{\cite{cockburn01}}: el estilo \gls{RUP}{\cite{rational01}}, atractivo y fácil de seguir pese al elevado número de apartados, modificado para plasmar los aspectos más relevantes del proyecto (por ejemplo, no se incluirá un campo \textit{ámbito} porque siempre va a estar referido al mismo sistema o aplicación). El motivo de no utilizar una tabla es meramente subjetivo, ya que el autor de esta memoria opina que puede oscurecer el contenido.
 
 La plantilla sigue la siguiente estructura:
 
@@ -81,36 +81,36 @@ La reunión presencial marcó un punto de inflexión en cuanto a objetivos del proy
 
 A continuación se resumen, en lenguaje natural, las necesidades identificadas durante la primera fase de desarrollo del proyecto:
 \begin{enumerate}
-\item Permitir a usuarios de la UNED  de distintos colectivos etiquetar y generar sus propios cuadernos con información y metainformación semántica.
+\item Permitir a usuarios de la \gls{UNED}  de distintos colectivos etiquetar y generar sus propios cuadernos con información y metainformación semántica.
 \item Permitir a dichos usuarios realizar consultas sobre sus cuadernos.
-\item Desarrollar una interfaz web que permita al usuario gestionar tripletas RDF.
-\item Desarrollar un módulo de generación de consultas SPARQL a partir de consultas de lectura y escritura en formato JSON.
-\item Desarrollar los correspondientes productos de interés para el usuario: consultas exportadas en forma diversa (CSV, JSON) o embebidas en una plantilla HTML significativa para el usuario.
-\item Ofrecer la posibilidad de variar interfaces de entrada y exportadores en función de los distintos colectivos de usuario utilizando los metadatos sobre cuadernos RDF previamente almacenados en una base de datos relacional.
-\item Permitir mostrar en pantalla una serie de términos como punto de partida que el usuario pueda utilizar para construir ternas RDF y relaciones entre ellas.
-\item Permitir mostrar en pantalla una serie de términos como punto de partida que el usuario pueda utilizar para construir ternas RDF y relaciones entre ellas.
+\item Desarrollar una interfaz web que permita al usuario gestionar tripletas \gls{RDF}.
+\item Desarrollar un módulo de generación de consultas \gls{SPARQL} a partir de consultas de lectura y escritura en formato \gls{JSON}.
+\item Desarrollar los correspondientes productos de interés para el usuario: consultas exportadas en forma diversa (\gls{CSV}, \gls{JSON}) o embebidas en una plantilla \gls{HTML} significativa para el usuario.
+\item Ofrecer la posibilidad de variar interfaces de entrada y exportadores en función de los distintos colectivos de usuario utilizando los metadatos sobre cuadernos \gls{RDF} previamente almacenados en una base de datos relacional.
+\item Permitir mostrar en pantalla una serie de términos como punto de partida que el usuario pueda utilizar para construir ternas \gls{RDF} y relaciones entre ellas.
+\item Permitir mostrar en pantalla una serie de términos como punto de partida que el usuario pueda utilizar para construir ternas \gls{RDF} y relaciones entre ellas.
 \item Ofrecer al usuario una visualización sencilla y correcta de su modelo que proporciona una perspectiva adecuada sobre la que trabajar.
 \item Presentar una interfaz de mantenimiento del grafo: vocabulario e instancias (conceptualización y poblamiento de una ontología).
 \item Importar y exportar información estructurada en formatos semánticos estándar.
-\item Extender con vocabularios tales como SKOS y OWL. 
+\item Extender con vocabularios tales como \gls{SKOS} y \gls{OWL}. 
 \end{enumerate}
 
 \subsection{Captura final}
 
-Una vez celebrada la reunión presencial, se decidió darle otro enfoque al proyecto. Si bien la idea inicial era desarrollar un sistema que permitiese generar cuadernos a través de la manipulación de grafos, una vez presentada una maqueta o prueba de concepto con funcionalidades básicas de modelado el tutor propuso convertir la herramienta en un \textit{playground} o sistema de realización de actividades académicas con un enfoque docente orientado a facilitar el aprendizaje de las tecnologías de la Web Semántica (básicamente RDF y SPARQL) a personas con poco o ningún contacto con estas materias (por ejemplo, alumnos de los Grados de Ingeniería Informática o en Tecnologías de la Información de la UNED).
+Una vez celebrada la reunión presencial, se decidió darle otro enfoque al proyecto. Si bien la idea inicial era desarrollar un sistema que permitiese generar cuadernos a través de la manipulación de grafos, una vez presentada una maqueta o prueba de concepto con funcionalidades básicas de modelado el tutor propuso convertir la herramienta en un \textit{playground} o sistema de realización de actividades académicas con un enfoque docente orientado a facilitar el aprendizaje de las tecnologías de la Web Semántica (básicamente \gls{RDF} y \gls{SPARQL}) a personas con poco o ningún contacto con estas materias (por ejemplo, alumnos de los Grados de Ingeniería Informática o en Tecnologías de la Información de la \gls{UNED}).
 
 Este nuevo enfoque se tradujo en la siguiente instantánea de necesidades de alto nivel:
 
 \begin{enumerate}
-\item Permitir el modelado semántico con edición CRUD de clases, subclases y propiedades de clases (anotaciones básicas).
-\item Permitir la edición CRUD de relaciones o propiedades, subpropiedades, etc.
+\item Permitir el modelado semántico con edición \gls{CRUD} de clases, subclases y propiedades de clases (anotaciones básicas).
+\item Permitir la edición \gls{CRUD} de relaciones o propiedades, subpropiedades, etc.
 \item Ofrecer mecanismos de poblamiento del grafo.
-\item Permitir el lanzamiento de consultas SPARQL sobre el grafo local y visualización de resultados.
-\item Permitir el lanzamiento de consultas SPARQL sobre endpoints remotos y visualización de resultados.
-\item Ofrecer funcionalidad de carga de consultas SPARQL predefinidas desde archivo de texto.
+\item Permitir el lanzamiento de consultas \gls{SPARQL} sobre el grafo local y visualización de resultados.
+\item Permitir el lanzamiento de consultas \gls{SPARQL} sobre endpoints remotos y visualización de resultados.
+\item Ofrecer funcionalidad de carga de consultas \gls{SPARQL} predefinidas desde archivo de texto.
 \item Incorporar módulo para añadir un texto con la definición de la actividad a realizar en formato \textit{Markdown}.
-\item Permitir la importación de tripletas desde archivos o URL.
-\item Permitir la incorporación (append) de tripletas al grafo local desde archivos o URL.
+\item Permitir la importación de tripletas desde archivos o \gls{URL}.
+\item Permitir la incorporación (append) de tripletas al grafo local desde archivos o \gls{URL}.
 \item Ofrecer un panel para cargar en el grafo vocabularios comunes predefinidos.
 \item Presentar una interfaz fácil de usar y responsiva para el usuario, con una gestión de errores adecuada y suficiente.
 \end{enumerate}
@@ -137,21 +137,21 @@ El caso de usa comienza cuando el usuario pulsa en el botón flotante + asociado 
 	\begin{enumerate}
 		\item El usuario pulsa en el botón flotante + asociado a la tarjeta del listado de recursos.
 		\item Aparece un cuadro de diálogo donde el usuario debe introducir el nombre del recurso.
-		\item El usuario introduce el URI del recurso que quiere dar de alta como clase/propiedad y pulsa en guardar.
+		\item El usuario introduce el \gls{URI} del recurso que quiere dar de alta como clase/propiedad y pulsa en guardar.
 		\item El nuevo recurso de tipo clase/propiedad se crea y aparece en el listado de clases/propiedades.
 	\end{enumerate}
 	\item Flujo alternativo 1
 \begin{enumerate}
 	\item El usuario pulsa en el botón flotante + asociado a la tarjeta del listado de recursos (clases/propiedades).
 	\item Aparece un cuadro de diálogo donde el usuario debe introducir el nombre del recurso.
-	\item El usuario introduce (o no) el URI del recurso que quiere dar de alta como clase/propiedad y pulsa fuera del cuadro de diálogo.
+	\item El usuario introduce (o no) el \gls{URI} del recurso que quiere dar de alta como clase/propiedad y pulsa fuera del cuadro de diálogo.
 	\item El cuadro de diálogo se cierra y no hay ningún cambio en los recursos.
 \end{enumerate}
 	\item Flujo alternativo 2
 	\begin{enumerate}
 		\item El usuario pulsa en el botón flotante + asociado a la tarjeta del listado de recursos.
 		\item Aparece un cuadro de diálogo donde el usuario debe introducir el nombre del recurso.
-		\item El usuario introduce el URI del recurso que quiere dar de alta como clase/propiedad y pulsa en guardar.
+		\item El usuario introduce el \gls{URI} del recurso que quiere dar de alta como clase/propiedad y pulsa en guardar.
 		\item Ocurre un error en el guardado del recurso que le es comunicado al usuario a través de una notificación en pantalla.
 	\end{enumerate}
 
@@ -177,7 +177,7 @@ Ninguna.
 
 \subsubsection{Descripción breve}
 
-Este caso de uso permite a un usuario editar el recurso asociado a una clase o propiedad existente en su grafo y cambiar su URI.
+Este caso de uso permite a un usuario editar el recurso asociado a una clase o propiedad existente en su grafo y cambiar su \gls{URI}.
 
 \subsubsection{Actores}
 
@@ -192,22 +192,22 @@ El caso de uso comienza cuando el usuario pulsa en el icono de menú asociado al 
 	\item Flujo básico
 	\begin{enumerate}
 		\item El usuario pulsa en el icono de menú asociado al recurso que quiere editar y selecciona la acción ``Editar''.
-		\item Aparece un cuadro de diálogo con el URI del recurso actual que el usuario puede modificar.
-		\item El usuario modifica (o no) el URI del recurso  y pulsa en guardar.
+		\item Aparece un cuadro de diálogo con el \gls{URI} del recurso actual que el usuario puede modificar.
+		\item El usuario modifica (o no) el \gls{URI} del recurso  y pulsa en guardar.
 		\item El recurso ha sido modificado y su cambio se ve reflejado en el listado.
 	\end{enumerate}
 \item Flujo alternativo 1
 \begin{enumerate}
 	\item El usuario pulsa en el icono de menú asociado al recurso que quiere editar y selecciona la acción ``Editar''.
-	\item Aparece un cuadro de diálogo con el URI del recurso actual que el usuario puede modificar.
-	\item El usuario modifica (o no) el URI del recurso  y pulsa fuera del cuadro de diálogo.
+	\item Aparece un cuadro de diálogo con el \gls{URI} del recurso actual que el usuario puede modificar.
+	\item El usuario modifica (o no) el \gls{URI} del recurso  y pulsa fuera del cuadro de diálogo.
 	\item El cuadro de diálogo se cierra y no hay ningún cambio en los recursos.
 \end{enumerate}
 	\item Flujo alternativo 2
 	\begin{enumerate}
 		\item El usuario pulsa en el icono de menú asociado al recurso que quiere editar y selecciona la acción ``Editar''.
-		\item Aparece un cuadro de diálogo con el URI del recurso actual que el usuario puede modificar.
-		\item El usuario modifica el URI del recurso  y pulsa en guardar.
+		\item Aparece un cuadro de diálogo con el \gls{URI} del recurso actual que el usuario puede modificar.
+		\item El usuario modifica el \gls{URI} del recurso  y pulsa en guardar.
 		\item Ocurre un error en el guardado del recurso que le es comunicado al usuario a través de una notificación en pantalla.
 	\end{enumerate}
 	
@@ -312,21 +312,21 @@ El caso de usa comienza cuando el usuario pulsa en el signo + asociado al nombre
 	\begin{enumerate}
 		\item El usuario pulsa en el botón flotante + asociado al panel de anotaciones.
 		\item Aparece un cuadro de diálogo donde el usuario debe introducir el nombre de la anotación.
-		\item El usuario introduce el URI del recurso que quiere dar de alta como anotación y pulsa en guardar.
+		\item El usuario introduce el \gls{URI} del recurso que quiere dar de alta como anotación y pulsa en guardar.
 		\item El nuevo recurso se crea y aparece en el listado de anotaciones correspondiente.
 	\end{enumerate}
 	\item Flujo alternativo 1
 	\begin{enumerate}
 		\item El usuario pulsa en el botón flotante + asociado al panel de anotaciones.
 		\item Aparece un cuadro de diálogo donde el usuario debe introducir el nombre de la anotación.
-		\item El usuario introduce (o no) el URI del recurso que quiere dar de alta como anotación y pulsa fuera del cuadro de diálogo.
+		\item El usuario introduce (o no) el \gls{URI} del recurso que quiere dar de alta como anotación y pulsa fuera del cuadro de diálogo.
 		\item El cuadro de diálogo se cierra y no hay ningún cambio en los recursos.
 	\end{enumerate}
 	\item Flujo alternativo 2
 	\begin{enumerate}
 		\item El usuario pulsa en el botón flotante + asociado al panel de anotaciones.
 		\item Aparece un cuadro de diálogo donde el usuario debe introducir el nombre de la anotación.
-		\item El usuario introduce el URI del recurso que quiere dar de alta como anotación y pulsa en guardar.
+		\item El usuario introduce el \gls{URI} del recurso que quiere dar de alta como anotación y pulsa en guardar.
 		\item Ocurre un error en el guardado del recurso que le es comunicado al usuario a través de una notificación en pantalla.
 	\end{enumerate}
 	
@@ -352,7 +352,7 @@ Ninguna.
 
 \subsubsection{Descripción breve}
 
-Este caso de uso permite a un usuario editar el recurso asociado a una anotación de un recurso (clase/propiedad) existente en su grafo y cambiar su URI.
+Este caso de uso permite a un usuario editar el recurso asociado a una anotación de un recurso (clase/propiedad) existente en su grafo y cambiar su \gls{URI}.
 
 \subsubsection{Actores}
 
@@ -367,22 +367,22 @@ El caso de usa comienza cuando el usuario pulsa en el icono de menú asociado a l
 	\item Flujo básico
 \begin{enumerate}
 	\item El usuario pulsa en el icono de menú asociado a la anotación del recurso que quiere editar y selecciona la acción ``Editar''.
-	\item Aparece un cuadro de diálogo con el URI del recurso actual que el usuario puede modificar.
-	\item El usuario modifica el URI del recurso  y pulsa en guardar.
+	\item Aparece un cuadro de diálogo con el \gls{URI} del recurso actual que el usuario puede modificar.
+	\item El usuario modifica el \gls{URI} del recurso  y pulsa en guardar.
 	\item El recurso ha sido modificado y su cambio se ve reflejado en el listado de detalle de la propiedad.
 \end{enumerate}
 \item Flujo alternativo 1
 \begin{enumerate}
 	\item El usuario pulsa en el icono de menú asociado a la anotación del recurso que quiere editar y selecciona la acción ``Editar''.
-	\item Aparece un cuadro de diálogo con el URI del recurso actual que el usuario puede modificar.
-	\item El usuario modifica (o no) el URI del recurso  y pulsa fuera del cuadro de diálogo.
+	\item Aparece un cuadro de diálogo con el \gls{URI} del recurso actual que el usuario puede modificar.
+	\item El usuario modifica (o no) el \gls{URI} del recurso  y pulsa fuera del cuadro de diálogo.
 	\item El cuadro de diálogo se cierra y no hay ningún cambio en los recursos.
 \end{enumerate}
 \item Flujo alternativo 2
 \begin{enumerate}
 	\item El usuario pulsa en el icono de menú asociado a la anotación del recurso que quiere editar y selecciona la acción ``Editar''.
-	\item Aparece un cuadro de diálogo con el URI del recurso actual que el usuario puede modificar.
-	\item El usuario modifica el URI del recurso  y pulsa en guardar.
+	\item Aparece un cuadro de diálogo con el \gls{URI} del recurso actual que el usuario puede modificar.
+	\item El usuario modifica el \gls{URI} del recurso  y pulsa en guardar.
 	\item Ocurre un error en el guardado del recurso que le es comunicado al usuario a través de una notificación en pantalla.
 	\end{enumerate}
 	
@@ -436,7 +436,7 @@ El caso de usa comienza cuando el usuario pulsa en el icono de menú asociado a l
 	\end{enumerate}
 	\item Flujo alternativo 2
 	\begin{enumerate}
-		\item El usuario pulsa en el icono de menú asociado a la anotación del recurso que quiere eliminar y selecciona la acción ``Editar''.
+		\item El usuario pulsa en el icono de menú asociado a la anotación del recurso que quiere eliminar y selecciona la acción ``Eliminar''.
 		\item Aparece un cuadro de diálogo advirtiendo al usuario de que si confirma el cambio, no podrá volver a recuperar el recurso del grafo.
 	\item El usuario elige cancelar.
 	\item El recurso y su detalle siguen apareciendo y no son eliminados.
@@ -479,29 +479,29 @@ El actor principal es el usuario de la aplicación (fundamentalmente dirigida a u
 
 \subsubsection{Disparadores}
 
-El caso de usa comienza cuando el usuario selecciona un recurso en la tarjeta que los lista y pulsa en el icono del menú para seleccionar ``Añadir subclase''.
+El caso de usa comienza cuando el usuario selecciona un recurso en la tarjeta que los lista y pulsa en el icono del menú para seleccionar ``Añadir subclase/subpropiedad''.
 
 \subsubsection{Flujo de eventos}
 \begin{enumerate}
 	\item Flujo básico
 	\begin{enumerate}
-		\item El usuario selecciona un recurso en la tarjeta que los lista y pulsa en el icono del menú para seleccionar ``Añadir subclase''.
+		\item El usuario selecciona un recurso en la tarjeta que los lista y pulsa en el icono del menú para seleccionar ``Añadir subclase/subpropiedad''.
 		\item Aparece un cuadro de diálogo donde el usuario debe introducir el nombre del recurso derivado a crear.
-		\item El usuario introduce el URI del recurso que quiere dar de alta como derivado y pulsa en guardar.
+		\item El usuario introduce el \gls{URI} del recurso que quiere dar de alta como derivado y pulsa en guardar.
 		\item El nuevo recurso se crea y aparece en el listado de anotaciones correspondiente.
 	\end{enumerate}
 	\item Flujo alternativo 1
 	\begin{enumerate}
-		\item  El usuario selecciona un recurso en la tarjeta que los lista y pulsa en el icono del menú para seleccionar ``Añadir subclase''.
+		\item  El usuario selecciona un recurso en la tarjeta que los lista y pulsa en el icono del menú para seleccionar ``Añadir subclase/subpropiedad''.
 		\item Aparece un cuadro de diálogo donde el usuario debe introducir el nombre del recurso derivado a crear.
-		\item El usuario introduce (o no) el URI del recurso que quiere dar de alta como derivado y pulsa fuera del cuadro de diálogo.
+		\item El usuario introduce (o no) el \gls{URI} del recurso que quiere dar de alta como derivado y pulsa fuera del cuadro de diálogo.
 		\item El cuadro de diálogo se cierra y no hay ningún cambio en los recursos.
 	\end{enumerate}
 	\item Flujo alternativo 2
 	\begin{enumerate}
-		\item El usuario selecciona un recurso en la tarjeta que los lista y pulsa en el icono del menú para seleccionar ``Añadir subclase''.
+		\item El usuario selecciona un recurso en la tarjeta que los lista y pulsa en el icono del menú para seleccionar ``Añadir subclase/subpropiedad''.
 		\item Aparece un cuadro de diálogo donde el usuario debe introducir el nombre del recurso derivado a crear.
-		\item El usuario introduce el URI del recurso que quiere dar de alta como derivado y pulsa en guardar.
+		\item El usuario introduce el \gls{URI} del recurso que quiere dar de alta como derivado y pulsa en guardar.
 		\item Ocurre un error en el guardado del recurso que le es comunicado al usuario a través de una notificación en pantalla.
 	\end{enumerate}
 	
@@ -572,7 +572,7 @@ El usuario debe haber navegado previamente hasta la sección de Actividades a tra
 
 \subsubsection{Post-condiciones}
 
-La actividad se visualizará con el formato \textit{Markdown} interpretado en HTML en la tarjeta asociada al contenido de la misma.
+La actividad se visualizará con el formato \textit{Markdown} interpretado en \gls{HTML} en la tarjeta asociada al contenido de la misma.
 
 \subsubsection{Extensiones}
 
@@ -582,7 +582,7 @@ Ninguna.
 
 \subsubsection{Descripción breve}
 
-Este caso de uso permite a un usuario cargar en la aplicación los vocabularios más comunes de forma predefinida. Este conjunto de vocabularios es fácilmente extensible a través del código fuente y se carga mediante URLs externas.
+Este caso de uso permite a un usuario cargar en la aplicación los vocabularios más comunes de forma predefinida. Este conjunto de vocabularios es fácilmente extensible a través del código fuente y se carga mediante \gls{URL}s externas.
 
 \subsubsection{Actores}
 
@@ -599,7 +599,7 @@ El caso de usa comienza cuando el usuario pulsa en uno de los interruptores asoc
 		\item El usuario pulsa en un interruptor inactivo de un vocabulario.
 		\item El interruptor pasa a estar activo y el vocabulario cargado.
 	\end{enumerate}
-\noindent\begin{minipage}{\linewidth}
+\begin{minipage}{\linewidth}
 	\item Flujo alternativo 1
 	\begin{enumerate}
 		\item El usuario pulsa en un interruptor inactivo de un vocabulario.
@@ -612,7 +612,7 @@ El caso de usa comienza cuando el usuario pulsa en uno de los interruptores asoc
 
 \subsubsection{Requisitos especiales}
 
-Es necesario que haya conexión a Internet para poder descargar los vocabularios de las URLs precargadas así como que los servidores remotos donde residen los vocabularios presenten una configuración correcta de las cabeceras CORS (\textit{Cross-Origin Resource Sharing})\footnote{\url{https://developer.mozilla.org/es/docs/Web/HTTP/Access_control_CORS}}
+Es necesario que haya conexión a Internet para poder descargar los vocabularios de las \gls{URL}s precargadas así como que los servidores remotos donde residen los vocabularios presenten una configuración correcta de las cabeceras \gls{CORS}\footnote{\url{https://developer.mozilla.org/es/docs/Web/HTTP/Access_control_CORS}}
 
 \subsubsection{Pre-condiciones}
 
@@ -658,7 +658,7 @@ El caso de usa comienza cuando el usuario pulsa en uno de los interruptores asoc
 
 \subsubsection{Requisitos especiales}
 
-Es necesario que haya conexión a Internet para poder descargar los vocabularios de las URLs precargadas y así eliminarlos del grafo local.
+Es necesario que haya conexión a Internet para poder descargar los vocabularios de las \gls{URL}s precargadas y así eliminarlos del grafo local.
 
 \subsubsection{Precondiciones}
 
@@ -723,7 +723,7 @@ Ninguna.
 
 \subsubsection{Descripción breve}
 
-Este caso de uso permite a un usuario importar un grafo completo en los formatos \textit{N3, Turtle, TriG o N-Triples}. El grafo importado sustituirá al cargado por defecto en memoria por la aplicación.
+Este caso de uso permite a un usuario importar un grafo completo en los formatos \textit{\gls{N3}, Turtle, TriG o N-Triples}. El grafo importado sustituirá al cargado por defecto en memoria por la aplicación.
 
 \subsubsection{Actores}
 
@@ -731,26 +731,26 @@ El actor principal es el usuario de la aplicación (fundamentalmente dirigida a u
 
 \subsubsection{Disparadores}
 
-El caso de usa comienza cuando el usuario importa un grafo desde archivo o desde URL.
+El caso de usa comienza cuando el usuario importa un grafo desde archivo o desde \gls{URL}.
 
 \subsubsection{Flujo de eventos}
 \begin{enumerate}
 	\item Flujo básico
 	\begin{enumerate}
-		\item El usuario pulsa en importar desde archivo o rellena la URL del mismo y pulsa en el icono con forma de lupa.
+		\item El usuario pulsa en importar desde archivo o rellena la \gls{URL} del mismo y pulsa en el icono con forma de lupa.
 		\item El usuario selecciona el archivo a importar en caso de ser importación desde archivo.
 		\item Aparece un mensaje indicando el éxito de la operación y se carga el grafo en el almacén.
 	\end{enumerate}
 	\item Flujo alternativo 1
 	\begin{enumerate}
-		\item  El usuario pulsa en importar desde archivo o rellena la URL del mismo y pulsa en el icono con forma de lupa.
+		\item  El usuario pulsa en importar desde archivo o rellena la \gls{URL} del mismo y pulsa en el icono con forma de lupa.
 		\item El usuario selecciona o apunta a un archivo que supera el límite de tamaño permitido (configurable en la aplicación.)
 		\item Aparece un mensaje de error indicando que no es posible cargar el grafo.
 	\end{enumerate}
 \item Flujo alternativo 2
 \begin{enumerate}
-	\item El usuario rellena la URL del mismo y pulsa en el icono con forma de lupa.
-	\item La URL no está disponible o devuelve un error de descarga (por ejemplo, CORS, si el servidor no está preparado).
+	\item El usuario rellena la \gls{URL} del mismo y pulsa en el icono con forma de lupa.
+	\item La \gls{URL} no está disponible o devuelve un error de descarga (por ejemplo, \gls{CORS}, si el servidor no está preparado).
 	\item Aparece un mensaje de error indicando que no es posible cargar el grafo.
 \end{enumerate}
 	
@@ -758,7 +758,7 @@ El caso de usa comienza cuando el usuario importa un grafo desde archivo o desde
 
 \subsubsection{Requisitos especiales}
 
-Para cargar archivos desde una URL externa, el servidor remoto tiene que tener correctamente configuradas las cabeceras CORS (\textit{Cross-Origin Resource Sharing})\footnote{\url{https://developer.mozilla.org/es/docs/Web/HTTP/Access_control_CORS}}.
+Para cargar archivos desde una \gls{URL} externa, el servidor remoto tiene que tener correctamente configuradas las cabeceras \gls{CORS}\footnote{\url{https://developer.mozilla.org/es/docs/Web/HTTP/Access_control_CORS}}.
 
 \subsubsection{Precondiciones}
 
@@ -776,7 +776,7 @@ Ninguna.
 
 \subsubsection{Descripción breve}
 
-Este caso de uso es una leve modificación del anterior y permite a un usuario añadir un grafo externo al ya existente en el almacén en los formatos \textit{N3, Turtle, TriG o N-Triples}. El grafo importado no sustituirá al cargado por defecto en memoria por la aplicación, sino que pasará a formar parte de él.
+Este caso de uso es una leve modificación del anterior y permite a un usuario añadir un grafo externo al ya existente en el almacén en los formatos \textit{\gls{N3}, Turtle, TriG o N-Triples}. El grafo importado no sustituirá al cargado por defecto en memoria por la aplicación, sino que pasará a formar parte de él.
 
 \subsubsection{Actores}
 
@@ -784,27 +784,27 @@ El actor principal es el usuario de la aplicación (fundamentalmente dirigida a u
 
 \subsubsection{Disparadores}
 
-El caso de usa comienza cuando el usuario añade un grafo desde archivo o desde URL.
+El caso de usa comienza cuando el usuario añade un grafo desde archivo o desde \gls{URL}.
 
 \noindent\begin{minipage}{\linewidth}
 \subsubsection{Flujo de eventos}
 \begin{enumerate}
 	\item Flujo básico
 	\begin{enumerate}
-		\item El usuario pulsa en añadir desde archivo o rellena la URL del mismo y pulsa en el icono con forma de lupa.
+		\item El usuario pulsa en añadir desde archivo o rellena la \gls{URL} del mismo y pulsa en el icono con forma de lupa.
 		\item El usuario selecciona el archivo a añadir en caso de ser importación desde archivo.
 		\item Aparece un mensaje indicando el éxito de la operación y se añade el grafo en el almacén.
 	\end{enumerate}
 	\item Flujo alternativo 1
 	\begin{enumerate}
-		\item  El usuario pulsa en añadir a archivo o rellena la URL del mismo y pulsa en el icono con forma de lupa.
+		\item  El usuario pulsa en añadir a archivo o rellena la \gls{URL} del mismo y pulsa en el icono con forma de lupa.
 		\item El usuario selecciona o apunta a un archivo que supera el límite de tamaño permitido (configurable en la aplicación.)
 		\item Aparece un mensaje de error indicando que no es posible cargar el grafo.
 	\end{enumerate}
 	\item Flujo alternativo 2
 	\begin{enumerate}
-		\item El usuario rellena la URL del mismo y pulsa en el icono con forma de lupa.
-		\item La URL no está disponible o devuelve un error de descarga (por ejemplo, CORS, si el servidor no está preparado).
+		\item El usuario rellena la \gls{URL} del mismo y pulsa en el icono con forma de lupa.
+		\item La \gls{URL} no está disponible o devuelve un error de descarga (por ejemplo, \gls{CORS}, si el servidor no está preparado).
 		\item Aparece un mensaje de error indicando que no es posible añadir el grafo.
 	\end{enumerate}
 	
@@ -813,7 +813,7 @@ El caso de usa comienza cuando el usuario añade un grafo desde archivo o desde U
 
 \subsubsection{Requisitos especiales}
 
-Para cargar archivos desde una URL externa, el servidor remoto tiene que tener correctamente configuradas las cabeceras CORS (\textit{Cross-Origin Resource Sharing})\footnote{\url{https://developer.mozilla.org/es/docs/Web/HTTP/Access_control_CORS}}
+Para cargar archivos desde una \gls{URL} externa, el servidor remoto tiene que tener correctamente configuradas las cabeceras \gls{CORS}\footnote{\url{https://developer.mozilla.org/es/docs/Web/HTTP/Access_control_CORS}}
 
 \subsubsection{Precondiciones}
 
@@ -831,7 +831,7 @@ Ninguna.
 
 \subsubsection{Descripción breve}
 
-Este caso de uso  permite a un usuario exportar a un archivo de texto en formato \textit{Turtle} o \textit{JSON-LD} el grafo de trabajo.
+Este caso de uso  permite a un usuario exportar a un archivo de texto en formato \textit{Turtle} o \gls{JSON-LD} el grafo de trabajo.
 
 \subsubsection{Actores}
 
@@ -839,19 +839,19 @@ El actor principal es el usuario de la aplicación (fundamentalmente dirigida a u
 
 \subsubsection{Disparadores}
 
-El caso de usa comienza cuando el usuario pulsa en el botón de ``Exportar JSON-LD'' o ``Exportar Turtle''.
+El caso de usa comienza cuando el usuario pulsa en el botón de ``Exportar \gls{JSON-LD}'' o ``Exportar Turtle''.
 
 \noindent\begin{minipage}{\linewidth}
 \subsubsection{Flujo de eventos}
 \begin{enumerate}
 	\item Flujo básico
 	\begin{enumerate}
-		\item El usuario pulsa en el botón de ``Exportar JSON-LD'' o ``Exportar Turtle''.
+		\item El usuario pulsa en el botón de ``Exportar \gls{JSON-LD}'' o ``Exportar Turtle''.
 		\item El grafo se exporta y aparece un cuadro de diálogo para guardar el archivo.
 	\end{enumerate}
 	\item Flujo alternativo 1
 	\begin{enumerate}
-		\item El usuario pulsa en el botón de ``Exportar JSON-LD'' o ``Exportar Turtle''.
+		\item El usuario pulsa en el botón de ``Exportar \gls{JSON-LD}'' o ``Exportar Turtle''.
 		\item Ocurre un error inesperado que se muestra al usuario.
 	\end{enumerate}
 	
@@ -877,7 +877,7 @@ Ninguna.
 
 \subsubsection{Descripción breve}
 
-Este caso de uso  permite a un usuario lanzar una consulta SPARQL al grafo local cargado en memoria, bien desde un archivo con extensión \textit{``.rq''} o URL, bien desde un cuadro de texto.
+Este caso de uso  permite a un usuario lanzar una consulta \gls{SPARQL} al grafo local cargado en memoria, bien desde un archivo con extensión \textit{``.rq''} o \gls{URL}, bien desde un cuadro de texto.
 
 \subsubsection{Actores}
 
@@ -891,14 +891,14 @@ El caso de usa comienza cuando el usuario carga la consulta pulsa en el botón de
 \begin{enumerate}
 	\item Flujo básico
 	\begin{enumerate}
-		\item El usuario carga la consulta a lanzar, bien escribiéndola en el cuadro de texto, bien cargándola desde un archivo \textit{``.rq''} o URL donde se encuentre.
+		\item El usuario carga la consulta a lanzar, bien escribiéndola en el cuadro de texto, bien cargándola desde un archivo \textit{``.rq''} o \gls{URL} donde se encuentre.
 		\item El usuario pulsa en el botón de ``Lanzar Consulta''.
 		\item Los resultados de la consulta aparecen en la tabla de ``Resultados''.
 		
 	\end{enumerate}
 	\item Flujo alternativo 1
 	\begin{enumerate}
-			\item El usuario carga la consulta a lanzar, bien escribiéndola en el cuadro de texto, bien cargándola desde un archivo \textit{``.rq''} o URL donde se encuentre.
+			\item El usuario carga la consulta a lanzar, bien escribiéndola en el cuadro de texto, bien cargándola desde un archivo \textit{``.rq''} o \gls{URL} donde se encuentre.
 		\item El usuario pulsa en el botón de ``Lanzar Consulta''.
 		\item Ocurre un error inesperado o de sintaxis al lanzar la consulta y aparece un mensaje de error para el usuario.
 	\end{enumerate}
@@ -925,7 +925,7 @@ Ninguna.
 
 \subsubsection{Descripción breve}
 
-Este caso de uso  permite a un usuario lanzar una consulta SPARQL a un grafo ubicado en un \textit{endpoint} remoto, bien desde un archivo con extensión \textit{``.rq''} o URL, bien desde un cuadro de texto.
+Este caso de uso  permite a un usuario lanzar una consulta \gls{SPARQL} a un grafo ubicado en un \textit{endpoint} remoto, bien desde un archivo con extensión \textit{``.rq''} o \gls{URL}, bien desde un cuadro de texto.
 
 \subsubsection{Actores}
 
@@ -933,26 +933,26 @@ El actor principal es el usuario de la aplicación (fundamentalmente dirigida a u
 
 \subsubsection{Disparadores}
 
-El caso de usa comienza cuando el usuario activa la opción ``Usar \textit{endpoint} SPARQL remoto''.
+El caso de usa comienza cuando el usuario activa la opción ``Usar \textit{endpoint} \gls{SPARQL} remoto''.
 
 \subsubsection{Flujo de eventos}
 \begin{enumerate}
 	\item Flujo básico
 	\begin{enumerate}
-		\item El usuario activa la opción ``Usar \textit{endpoint} SPARQL remoto''.
-		\item El usuario introduce la URL del \textit{endpoint} remoto.
-		\item El usuario carga la consulta a lanzar, bien escribiéndola en el cuadro de texto, bien cargándola desde un archivo \textit{``.rq''} o URL donde se encuentre.
+		\item El usuario activa la opción ``Usar \textit{endpoint} \gls{SPARQL} remoto''.
+		\item El usuario introduce la \gls{URL} del \textit{endpoint} remoto.
+		\item El usuario carga la consulta a lanzar, bien escribiéndola en el cuadro de texto, bien cargándola desde un archivo \textit{``.rq''} o \gls{URL} donde se encuentre.
 		\item El usuario pulsa en el botón de ``Lanzar Consulta''.
 		\item Los resultados de la consulta al grafo remoto aparecen en la tabla de ``Resultados''.
 		
 	\end{enumerate}
 	\item Flujo alternativo 1
 	\begin{enumerate}
-		\item El usuario activa la opción ``Usar \textit{endpoint} SPARQL remoto''.
-		\item El usuario introduce la URL del \textit{endpoint} remoto.
-		\item El usuario carga la consulta a lanzar, bien escribiéndola en el cuadro de texto, bien cargándola desde un archivo \textit{``.rq''} o URL donde se encuentre.
+		\item El usuario activa la opción ``Usar \textit{endpoint} \gls{SPARQL} remoto''.
+		\item El usuario introduce la \gls{URL} del \textit{endpoint} remoto.
+		\item El usuario carga la consulta a lanzar, bien escribiéndola en el cuadro de texto, bien cargándola desde un archivo \textit{``.rq''} o \gls{URL} donde se encuentre.
 		\item El usuario pulsa en el botón de ``Lanzar Consulta''.
-		\item Ocurre un error inesperado, de URL o de sintaxis al lanzar la consulta y aparece un mensaje de error para el usuario.
+		\item Ocurre un error inesperado, de \gls{URL} o de sintaxis al lanzar la consulta y aparece un mensaje de error para el usuario.
 	\end{enumerate}
 	
 \end{enumerate}
@@ -963,7 +963,7 @@ Ninguno.
 
 \subsubsection{Precondiciones}
 
-Los endpoints remotos deben soportar el protocolo SPARQL y tener correctamente configuradas las cabeceras CORS.
+Los endpoints remotos deben soportar el protocolo \gls{SPARQL} y tener correctamente configuradas las cabeceras \gls{CORS}.
 
 \subsubsection{Postcondiciones}
 

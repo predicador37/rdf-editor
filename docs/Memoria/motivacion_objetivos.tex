@@ -15,27 +15,27 @@ Las tecnologías de la Web Semántica se caracterizan por un cambio de paradigma b
 		\begin{tabular}{p{5cm}p{5cm}}
 			\toprule
 			Mundo Relacional & Mundo Semántico \\ \midrule
-		    Registro de tabla & Nodo RDF \\ \midrule
-		    Columna de tabla & RDF propertyType \\ \midrule
+		    Registro de tabla & Nodo \gls{RDF} \\ \midrule
+		    Columna de tabla & \gls{RDF} propertyType \\ \midrule
 			Celda de tabla & Valor \\ \midrule
-			Consulta SQL & Consulta SPARQL \\ \midrule
+			Consulta \gls{SQL} & Consulta \gls{SPARQL} \\ \midrule
 			Modelo de datos & Ontología \\ 
 			\bottomrule
 		\end{tabular}
-		\caption{Comparativa paradigma relacional vs semántico}
+		\caption{Comparativa paradigma relacional vs semántico.}
 		\label{comprelsem}
 	\end{table}
 \end{center}
 
 \pagebreak
 
-Sin embargo, determinados indicadores pueden dar lugar a entender que la interiorización de los conceptos asociados a la Web Semántica no es sencilla. Por ejemplo: su uso casi exclusivamente académico con poca penetración en el mundo empresarial, su lenta velocidad de propagación, su soporte limitado en determinadas plataformas tecnológicas o incluso el tímido interés mostrado en el ámbito público (excluyendo honrosas excepciones como el académico o universitario, las iniciativas de datos abiertos o lo relativo a la biblioteconomía). Un ejemplo muy concreto, real y tangible de esta escasa penetración es el reducido número de artículos (cuatro) presentado en \textit{workshops} como SemStats\footnote{SemStats es un \textit{workshop} de celebración anual centrado en el estado actual de las tecnologías de la Web Semántica aplicadas a la estadística pública. Ver \url{http://semstats.org/}}\cite{semstats2018}, de cuyo \textit{Program Comittee} este autor forma parte:
+Sin embargo, determinados indicadores pueden dar lugar a entender que la interiorización de los conceptos asociados a la Web Semántica no es sencilla. Por ejemplo: su uso casi exclusivamente académico con poca penetración en el mundo empresarial, su lenta velocidad de propagación, su soporte limitado en determinadas plataformas tecnológicas o incluso el tímido interés mostrado en el ámbito público (excluyendo honrosas excepciones como el académico o universitario, las iniciativas de datos abiertos o lo relativo a la biblioteconomía). Un ejemplo muy concreto, real y tangible de esta escasa penetración es el reducido número de artículos (cuatro) presentado en \textit{workshops} como \textit{SemStats}\footnote{\textit{SemStats} es un \textit{workshop} de celebración anual centrado en el estado actual de las tecnologías de la Web Semántica aplicadas a la estadística pública. Ver \url{http://semstats.org/}}\cite{semstats2018}, de cuyo \textit{Program Comittee} este autor forma parte:
 
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.25]{semstats2018}
-	\caption{Trabajos enviados a Semstats 2018}
+	\caption{Trabajos enviados a \textit{Semstats} 2018.}
 \end{figure}
 
 En este caso, resulta cuando menos sorprendente que las Oficinas Estadísticas Públicas, encargadas de generar y publicar datos estadísticos sobre economía, población y sociedad en general, no estén mostrando mayor interés a la hora no ya de publicar sus datos en formatos enlazables, sino de construir aplicaciones semánticas para explotar y relacionar mejor estos datos.
@@ -44,7 +44,7 @@ Es esta \textbf{situación de dificultad en el aprendizaje y en la interiorizació
 
 \section{Objetivos} \label{objetivos}
 
-Si bien es cierto que existen, por una parte, varias aproximaciones gratuitas en la red a modo de \textit{playground} que permiten el lanzamiento de consultas SPARQL a determinados \textit{endpoints} y por otra, editores y herramientas de modelado del calibre de Protégé\footnote{\label{protegefn}Un editor de ontologías y marco de trabajo para construir sistemas inteligentes. Ver https://protege.stanford.edu/} (analizados con detalle en la sección \ref{trabajosprevios}), no parece haber en el mercado referencias de aplicaciones que ofrezcan simultáneamente subconjuntos reducidos de ambas funcionalidades. Llenar este hueco y \textbf{conseguir una herramienta formativa única de modelado y consulta en tecnologías de la Web Semántica }que permita a los equipos docentes de las asignaturas relacionadas con tecnologías de la Web Semántica ofrecer a los alumnos (o a cualquier no iniciado en estas tecnologías) un \textit{playground} o entorno de pruebas que les ayude a consolidar su aprendizaje teórico con una base práctica adaptada al mundo real \textbf{es el objetivo principal de este proyecto}.
+Si bien es cierto que existen, por una parte, varias aproximaciones gratuitas en la red a modo de \textit{playground} que permiten el lanzamiento de consultas \gls{SPARQL} a determinados \textit{endpoints} y por otra, editores y herramientas de modelado del calibre de \textit{Protégé}\footnote{\label{protegefn}Un editor de ontologías y marco de trabajo para construir sistemas inteligentes. Ver \url{https://protege.stanford.edu/}} (analizados con detalle en la sección \ref{trabajosprevios}), no parece haber en el mercado referencias de aplicaciones que ofrezcan simultáneamente subconjuntos reducidos de ambas funcionalidades. Llenar este hueco y \textbf{conseguir una herramienta formativa única de modelado y consulta en tecnologías de la Web Semántica }que permita a los equipos docentes de las asignaturas relacionadas con tecnologías de la Web Semántica ofrecer a los alumnos (o a cualquier no iniciado en estas tecnologías) un \textit{playground} o entorno de pruebas que les ayude a consolidar su aprendizaje teórico con una base práctica adaptada al mundo real \textbf{es el objetivo principal de este proyecto}.
 
 De forma más específica, es posible enumerar los siguientes objetivos detallados:
 
@@ -52,10 +52,10 @@ De forma más específica, es posible enumerar los siguientes objetivos detallados
 	\item  Facilitar el aprendizaje y la \textbf{familiarización con tecnologías de la Web Semántica} a usuarios inexpertos.
 	\item Reducir al máximo los requisitos de uso de la herramienta para alcanzar el mayor público objetivo posible.
 	\item Ofrecer a los equipos docentes la posibilidad de \textbf{distribuir actividades formativas} auto-contenidas para que los alumnos trabajen sobre ellas en la herramienta.
-	\item Agrupar en un solo producto \textbf{funcionalidades básicas de edición y consulta sobre grafos RDF}, de cara a cubrir las expectativas educativas en este ámbito.
-	\item Permitir a los alumnos comprobar \textit{in situ} los efectos de sus acciones sobre un grafo RDF y ofrecerles la \textbf{flexibilidad suficiente} como para permitirles dar rienda suelta a su creatividad e inquietudes.
+	\item Agrupar en un solo producto \textbf{funcionalidades básicas de edición y consulta sobre grafos \gls{RDF}}, de cara a cubrir las expectativas educativas en este ámbito.
+	\item Permitir a los alumnos comprobar \textit{in situ} los efectos de sus acciones sobre un grafo \gls{RDF} y ofrecerles la \textbf{flexibilidad suficiente} como para permitirles dar rienda suelta a su creatividad e inquietudes.
 	
 	Y por último, y no menos importante, 
 	
-	\item \textbf{Obtener un MVP} (\textit{Minimum Viable Product})\footnote{Un producto con las suficientes características como para satisfacer a sus usuarios tempranos.} que pueda ser evolucionado y poner su código a disposición de la comunidad educativa para revertir sobre ella su valor aportado.
+	\item \textbf{Obtener un \gls{MVP}}\footnote{Un producto con las suficientes características como para satisfacer a sus usuarios tempranos.} que pueda ser evolucionado y poner su código a disposición de la comunidad educativa para revertir sobre ella su valor aportado.
 \end{enumerate}
