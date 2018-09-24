@@ -27,6 +27,9 @@ module.exports = {
   //   'babel-polyfill': './src/main.js'
   // },
   entry: ['babel-polyfill', './src/main.js'],
+  // entry: {
+    // app: './src/main.js'
+  // },
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',
@@ -51,9 +54,28 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        //include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')],
-        exclude: /node_modules\/(?!(jsonld)\/).*/,
-        //exclude: /node_modules/,
+        exclude: function (modulePath) {
+          return /node_modules/.test(modulePath) &&
+            !/node_modules\/jsonld/.test(modulePath) &&
+            !/node_modules\/rdf-normalize/.test(modulePath) &&
+            !/node_modules\/rdf-canonize/.test(modulePath) &&
+            !/node_modules\/rdf-ext/.test(modulePath) &&
+            !/node_modules\/asyncjoin/.test(modulePath) &&
+            !/node_modules\/rdf-dataset-simple/.test(modulePath) &&
+            !/node_modules\/rdf-sink/.test(modulePath) &&
+            !/node_modules\/sparqlalgebrajs/.test(modulePath) &&
+            !/node_modules\/rdf-serializer-jsonld/.test(modulePath) &&
+            !/node_modules\/asynciterator-promiseproxy/.test(modulePath) &&
+            !/node_modules\/rdf-parser-n3/.test(modulePath) &&
+            !/node_modules\/asynciterator-union/.test(modulePath) &&
+            !/node_modules\/asyncreiterable/.test(modulePath) &&
+            !/node_modules\/rdf-terms/.test(modulePath) &&
+            !/node_modules\/sparqljson-parse/.test(modulePath) &&
+            !/node_modules\/graphql-to-sparql/.test(modulePath) &&
+            !/node_modules\/fetch-sparql-endpoint/.test(modulePath) &&
+            !/node_modules\/sparqljson-to-tree/.test(modulePath) &&
+            !/node_modules\/node-web-streams/.test(modulePath)
+        },
         query: {
           presets:[ 'es2015', 'stage-2' ]
         }

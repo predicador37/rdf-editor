@@ -7,7 +7,7 @@
    export default {
      name: 'markdown-viewer',
      components: {
-       VueMarkdown
+       'vue-markdown': VueMarkdown
      },
      props: {
        mdText: {
