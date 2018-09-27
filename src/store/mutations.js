@@ -166,6 +166,10 @@ const EXPORT_TURTLE = (state) => {
     document.body.appendChild(downloadAnchorNode)
     downloadAnchorNode.click()
     downloadAnchorNode.remove()
+    if (error) {
+      console.log(error.stack)
+      throw error
+    }
   })
 }
 

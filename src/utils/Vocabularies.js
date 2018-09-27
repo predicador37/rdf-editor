@@ -26,7 +26,7 @@ export default {
   },
   skos: {
     name: 'skos',
-    url: 'https://www.w3.org/2004/02/skos/core#',
+    url: 'https://gist.githubusercontent.com/predicador37/32478198e83229249e9089f4c59bfcc7/raw/175f32be7b2a2e99989bb09634f4725de9b1d54d/skos.ttl',
     active: false
   }
 }
