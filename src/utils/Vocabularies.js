@@ -11,22 +11,22 @@ export default {
   },
   rdf: {
     name: 'rdf',
-    url: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
+    url: 'https://www.w3.org/1999/02/22-rdf-syntax-ns#',
     active: false
   },
   rdfs: {
     name: 'rdfs',
-    url: 'http://www.w3.org/2000/01/rdf-schema#',
+    url: 'https://www.w3.org/2000/01/rdf-schema#',
     active: false
   },
   owl: {
     name: 'owl',
-    url: 'http://www.w3.org/2002/07/owl#',
+    url: 'https://www.w3.org/2002/07/owl#',
     active: false
   },
   skos: {
     name: 'skos',
-    url: 'http://www.w3.org/2004/02/skos/core#',
+    url: 'https://www.w3.org/2004/02/skos/core#',
     active: false
   }
 }

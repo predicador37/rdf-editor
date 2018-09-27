@@ -207,7 +207,6 @@
         this.subclassDialog = !this.subclassDialog
       },
       executeAction (action, itemValue) {
-        console.log(action.method)
         this[action.method](itemValue)
       },
       changeCurrentResource (resourceName) {
@@ -221,7 +220,6 @@
       this.headers.push({'text': this.name, 'value': this.name})
       this.defaultType = this.types[0]
       this.newResourceType = this.types[0]
-      console.log(this.headers)
     }
   }
 </script>

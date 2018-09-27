@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import VueWorker from 'vue-worker'
 import Vuex from 'vuex'
 import VeeValidate from 'vee-validate'
 import App from './App'
@@ -19,6 +20,7 @@ Object.defineProperty(Vue.prototype, '$string2stream', { value: StringStream })
 Object.defineProperty(Vue.prototype, '$rdf', { value: DataFactory })
 Object.defineProperty(Vue.prototype, '$JsonLdSerializer', { value: Serializer })
 Vue.use(VueResource)
+Vue.use(VueWorker)
 
 Vue.use(Vuetify, {
   theme: {

@@ -175,13 +175,11 @@
       openEditDialog (item, resource) {
         this.resourceToEdit = resource // object
         this.currentItem = item // predicate
-        console.log(item)
         this.dialogText = this.rdfConstructs[item].desc
         this.currentLiteral = resource
         this.editDialog = !this.editDialog
       },
       executeAction (action, item, resource) {
-        console.log(action.method)
         this[action.method](item, resource)
       },
       deleteResourceHandler (predicate, object) {
@@ -194,9 +192,6 @@
         this.currentLiteral = null
         this.resourceToEdit = ''
       }
-    },
-    beforeMount () {
-      console.log(JSON.stringify(this.relatedClasses))
     }
   }
 </script>

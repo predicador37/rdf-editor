@@ -63,7 +63,6 @@
           try {
             results = await this.executeInternalSparqlQuery(query)
           } catch (error) {
-            console.log('THERE IS AN INTERNAL ERROR')
             this.$emit('error', error.message)
           }
         }
@@ -88,22 +87,17 @@
                 // Each data object contains a mapping from variables to RDFJS terms.
                 results.push(data)
               }).on('end', function () {
-                console.log(JSON.stringify(results))
                 resolve(results)
               }).on('error', function (error) {
-                console.log('query error')
                 reject(error)
               })
             })
             .catch((error) => {
-              console.log('THIS IS THE ERROR')
               reject(error)
             })
         })
       },
       executeExternalSparqlQuery (query, url) {
-        console.log('executing new external sparql query')
-
         const newEngine = require('@comunica/actor-init-sparql').newEngine
         const myEngine = newEngine()
         let results = []
@@ -113,7 +107,6 @@
                 result.bindingsStream.on('data', function (data) {
                   results.push(data)
                 }).on('end', function () {
-                  console.log(JSON.stringify(results))
                   resolve(results)
                 })
               })

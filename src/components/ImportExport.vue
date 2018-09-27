@@ -139,7 +139,6 @@
           this.snackbar = true
         } catch (error) {
           this.loading = false
-          console.log('there is an error')
           this.handleError(error.message)
         }
       }

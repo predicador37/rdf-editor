@@ -93,7 +93,6 @@ const ADD_N3 = (state, {content, store}) => {
   const turtleParser = new N3Parser()
   let quads = turtleParser.parse(content)
   state[store].addQuads(quads)
-  // console.log(JSON.stringify(state[store].getQuads()))
 }
 
 /**
@@ -145,7 +144,6 @@ const EXPORT_JSON_LD = (state) => {
     document.body.appendChild(downloadAnchorNode)
     downloadAnchorNode.click()
     downloadAnchorNode.remove()
-    console.log(dataStr)
   })
 }
 
@@ -168,8 +166,6 @@ const EXPORT_TURTLE = (state) => {
     document.body.appendChild(downloadAnchorNode)
     downloadAnchorNode.click()
     downloadAnchorNode.remove()
-    console.log(dataStr)
-    console.log(error)
   })
 }
 

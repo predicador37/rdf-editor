@@ -34,7 +34,6 @@
       },
       watch: {
         results: function (newVal, oldVal) { // watch it
-          console.log('Prop changed: ', newVal, ' | was: ', oldVal)
           this.resultList = newVal
           this.getHeaders()
         }
@@ -50,15 +49,11 @@
               let values = []
               let result = {}
               for (let [key, value] of Object.entries(item.toObject())) {
-                console.log(key)
-                console.log(value ? Object.values(value)[0] : 'undefined')
                 values.push(value ? Object.values(value)[0] : 'undefined')
                 result[key] = value ? Object.values(value)[0] : 'undefined'
               }
               rows.push(result)
             }
-            console.log(JSON.stringify(headers))
-            console.log(JSON.stringify(rows))
             this.headers = headers
             this.values = rows
           }
