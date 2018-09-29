@@ -43,7 +43,7 @@
       <v-card-text>
         <v-data-table
           hide-headers
-          :items="resources"
+          :items="filteredResources"
           rows-per-page-text="Filas por página"
           prev-icon="mdi-menu-left"
           next-icon="mdi-menu-right"
@@ -159,7 +159,7 @@
         oldResource: '',
         newResourceName: '',
         newResourceType: '',
-        classes: [],
+        filteredResources: [],
         actions: [
           {title: 'Editar', method: 'openEditDialog'},
           {title: 'Eliminar ', method: 'openDeleteDialog'},
@@ -212,14 +212,22 @@
       changeCurrentResource (resourceName) {
         this.$emit('change-resource', resourceName)
         this.currentResourceName = resourceName
+      },
+      removeDuplicates (myArr, prop) {
+        return myArr.filter((obj, pos, arr) => {
+          return arr.map(mapObj => mapObj[prop]).indexOf(obj[prop]) === pos
+        })
       }},
-
     name: 'ResourceList',
     created () {
-      this.classes = this.resources  // Copy prop to local variable
       this.headers.push({'text': this.name, 'value': this.name})
       this.defaultType = this.types[0]
       this.newResourceType = this.types[0]
+    },
+    watch: {
+      resources (n, o) {
+        this.filteredResources = this.removeDuplicates(n, 'value')
+      }
     }
   }
 </script>

@@ -115,7 +115,7 @@
         }
       }
     },
-    computed: {...mapGetters(['rdfConstructs', 'baseUrl', 'getSubjectListByPredicateAndObject', 'getSubjectListByPredicate', 'getObjectListByPredicateAndSubject', 'getTriplesMatchingSubjectAndObject'])},
+    computed: {...mapGetters(['rdfConstructs', 'baseUrl', 'getSubjectListByPredicateAndObject', 'getSubjectListByPredicate', 'getObjectListByPredicateAndSubject', 'getTriplesMatchingSubjectAndObject', 'getTriplesMatchingSubjectAndPredicateAndObject'])},
     methods: {
       ...mapActions(['addTriple', 'addResourceLiteralProperty', 'editResourceLiteralProperty', 'removeResource', 'removeTriple', 'editResource']),
       async getResources ({predicate, object}) {
@@ -164,12 +164,23 @@
       },
       handleAddSubresource ({'resource': subject, 'parentResource': object}) {
         try {
+          let resourceType = null
           let parentType = this.getObjectListByPredicateAndSubject({
             'predicate': this.rdfConstructs.rdf_type.value,
             'subject': object
           })
-          this.handleAddResource({'newResourceName': subject, 'newResourceType': parentType._v[0].value})
-          if (parentType._v[0].value === this.rdfConstructs.owl_Class) {
+          console.log('HEY YA')
+          console.log(JSON.stringify(parentType))
+          if (parentType._v === undefined || parentType._v.length === 0) {
+            let subclass = this.getTriplesMatchingSubjectAndPredicateAndObject(subject, this.rdfConstructs.rdfs_subClassOf.value, object)
+            if (subclass != null) {
+              resourceType = this.rdfConstructs.rdfs_Class
+            }
+          } else {
+            resourceType = parentType._v[0]
+          }
+          this.handleAddResource({'newResourceName': subject, 'newResourceType': resourceType.value})
+          if (resourceType === this.rdfConstructs.owl_Class || resourceType === this.rdfConstructs.rdfs_Class) {
             this.handleAddProperty(subject, object, this.rdfConstructs.rdfs_subClassOf.value)
           } else {
             this.handleAddProperty(subject, object, this.rdfConstructs.rdfs_subPropertyOf.value)
@@ -297,6 +308,12 @@
           this.classes.push(...results)
         })
         this.getResources({
+          'predicate': this.rdfConstructs.rdfs_subClassOf.value,
+          'object': null
+        }).then((results) => {
+          this.classes.push(...results)
+        })
+        this.getResources({
           'predicate': this.rdfConstructs.rdf_type.value,
           'object': this.rdfConstructs.owl_ObjectProperty.value
         }).then((results) => {
@@ -305,6 +322,12 @@
         this.getResources({
           'predicate': this.rdfConstructs.rdf_type.value,
           'object': this.rdfConstructs.owl_DatatypeProperty.value
+        }).then((results) => {
+          this.properties.push(...results)
+        })
+        this.getResources({
+          'predicate': this.rdfConstructs.rdf_type.value,
+          'object': this.rdfConstructs.rdfs_subPropertyOf.value
         }).then((results) => {
           this.properties.push(...results)
         })

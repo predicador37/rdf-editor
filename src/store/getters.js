@@ -72,6 +72,18 @@ const getTriplesMatchingSubject = (state) => (subject) => {
 }
 
 /**
+ * Retrieves a list of triples matching a given subject, predicate and object.
+ * @param state: object with the internal store state.
+ * @param subject: a subject resource URI.
+ * @param predicate: a predicate resource URI.
+ * @param object: an object resource URI.
+ * @returns {function(*=): (*|Array)}
+ */
+const getTriplesMatchingSubjectAndPredicateAndObject = (state) => ({subject, predicate, object}) => {
+  return state.n3store.getQuads(rdf.namedNode(subject), rdf.namedNode(predicate), rdf.namedNode(object), null)
+}
+
+/**
  * Retrieves a list of triples matching a given object.
  * @param state: object with the internal store state.
  * @param object: an object resource URI.
@@ -133,6 +145,7 @@ export default {
   getSubjectListByPredicate,
   getObjectListByPredicateAndSubject,
   getTriplesMatchingSubjectAndObject,
+  getTriplesMatchingSubjectAndPredicateAndObject,
   getTriplesMatchingSubject,
   getTriplesMatchingObject,
   getStoreQuads,

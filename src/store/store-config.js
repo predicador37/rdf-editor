@@ -25,6 +25,7 @@ let quads = [ rdf.quad(rdf.namedNode(baseUrl + 'Analista'), rdf.namedNode(RdfCon
   rdf.quad(rdf.namedNode(baseUrl + 'Analista'), rdf.namedNode(RdfConstructs.rdfs_comment.value), rdf.literal('El Analista Informático desempeña un rol importante en el desarrollo de software según las metodologías tradicionales.')),
   rdf.quad(rdf.namedNode(baseUrl + 'Analista_Programador'), rdf.namedNode(RdfConstructs.rdf_type.value), rdf.namedNode(RdfConstructs.owl_Class.value)),
   rdf.quad(rdf.namedNode(baseUrl + 'Analista_Programador'), rdf.namedNode(RdfConstructs.rdfs_subClassOf.value), rdf.namedNode(baseUrl + 'Analista')),
+  rdf.quad(rdf.namedNode(baseUrl + 'Analista_BI'), rdf.namedNode(RdfConstructs.rdfs_subClassOf.value), rdf.namedNode(baseUrl + 'Analista')),
   rdf.quad(rdf.namedNode(baseUrl + 'Edad'), rdf.namedNode(RdfConstructs.rdf_type.value), rdf.namedNode(RdfConstructs.owl_DatatypeProperty.value)),
   rdf.quad(rdf.namedNode(baseUrl + 'Proyecto'), rdf.namedNode(RdfConstructs.rdf_type.value), rdf.namedNode(RdfConstructs.owl_Class.value)),
   rdf.quad(rdf.namedNode(baseUrl + 'RDFplay'), rdf.namedNode(RdfConstructs.rdf_type.value), rdf.namedNode(baseUrl + 'Proyecto')),

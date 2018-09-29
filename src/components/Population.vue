@@ -93,7 +93,11 @@
     methods: { ...mapActions(['addTriple']),
       async getSubjects ({predicate, object}) {
         let resources = await this.getSubjectListByPredicateAndObject({predicate, object})
-        return resources
+        let subjects = []
+        resources.forEach((resource) => {
+          subjects.push(resource.value)
+        })
+        return subjects
       },
       async getObjects ({predicate, subject}) {
         let resources = await this.getObjectListByPredicateAndSubject({predicate, subject})
@@ -151,6 +155,9 @@
       this.getSubjects({'predicate': this.rdfConstructs.rdf_type.value, 'object': this.rdfConstructs.rdfs_Class.value}).then((results) => {
         this.objects.push(...results)
       })
+      this.getSubjects({'predicate': this.rdfConstructs.rdfs_subClassOf.value, 'object': null}).then((results) => {
+        this.objects.push(...results)
+      })
       this.predicates = this.getDefaultResources('property')
       this.getSubjects({'predicate': this.rdfConstructs.rdf_type.value, 'object': this.rdfConstructs.owl_DatatypeProperty.value}).then((results) => {
         this.predicates.push(...results)
@@ -158,7 +165,12 @@
       this.getSubjects({'predicate': this.rdfConstructs.rdf_type.value, 'object': this.rdfConstructs.owl_ObjectProperty.value}).then((results) => {
         this.predicates.push(...results)
       })
-      console.log(JSON.stringify(this.predicates))
+      console.log(JSON.stringify(this.objects))
+    },
+    watch: {
+      objects (n, o) {
+        console.log(n)
+      }
     }
   }
 </script>
