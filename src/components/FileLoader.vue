@@ -43,16 +43,12 @@
         const file = ev.target.files[0]
         const reader = new FileReader()
         reader.onload = e => this.$emit('load', e.target.result)
-        console.log(this.extensions)
-        console.log(file.name.split('.')[1])
         if (!this.extensions.includes(file.name.split('.')[1])) {
-          console.log(file.name)
           this.loading = false
           this.$emit('load-error', 'El fichero no tiene extensión ' + this.extensions)
           return
         }
         if (file.size > this.size) {
-          console.log(file.size)
           this.loading = false
           this.$emit('load-error', 'El fichero sobrepasa el tamaño máximo de ' + this.size + ' bytes')
           return

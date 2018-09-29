@@ -169,8 +169,6 @@
             'predicate': this.rdfConstructs.rdf_type.value,
             'subject': object
           })
-          console.log('HEY YA')
-          console.log(JSON.stringify(parentType))
           if (parentType._v === undefined || parentType._v.length === 0) {
             let subclass = this.getTriplesMatchingSubjectAndPredicateAndObject(subject, this.rdfConstructs.rdfs_subClassOf.value, object)
             if (subclass != null) {

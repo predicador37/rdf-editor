@@ -20,11 +20,11 @@
     methods: {
       getFromURL () {
         console.log('getting file from url')
-        this.$http.get(this.url).then(response => {
+        this.$http.get(this.url.trim()).then(response => {
           // get body data
-          console.log(response.body)
           this.$emit('load', response.body)
         }, response => {
+          this.$emit('load-error', response.statusText)
           // error callback
         })
       }

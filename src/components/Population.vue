@@ -113,7 +113,6 @@
           this.handleSuccess('La terna ha sido añadida con éxito')
         } catch (error) {
           this.handleError(error.message)
-          console.log(error)
         } finally {
           this.subject = null
           this.predicate = null
@@ -165,12 +164,6 @@
       this.getSubjects({'predicate': this.rdfConstructs.rdf_type.value, 'object': this.rdfConstructs.owl_ObjectProperty.value}).then((results) => {
         this.predicates.push(...results)
       })
-      console.log(JSON.stringify(this.objects))
-    },
-    watch: {
-      objects (n, o) {
-        console.log(n)
-      }
     }
   }
 </script>

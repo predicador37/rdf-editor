@@ -23,8 +23,21 @@
       <file-loader title='Desde archivo' @load="loadSparqlQuery($event)" :extensions="['rq']"></file-loader>
     </div>
     <div>
-      <url-loader title='Desde URL' @load="loadSparqlQuery($event)" @url-loaded="snackbar = true"></url-loader>
+      <url-loader title='Desde URL' @load="loadSparqlQuery($event)" @load-error="handleError($event)" @url-loaded="snackbar = true"></url-loader>
     </div>
+    <v-snackbar
+      v-model="snackbar"
+      :color="color"
+    >
+      {{ snackbarMessage }}
+      <v-btn
+        dark
+        flat
+        @click="snackbar = false"
+      >
+        Cerrar
+      </v-btn>
+    </v-snackbar>
   </div>
 </template>
 
@@ -40,7 +53,11 @@
         results: [],
         endpointURL: 'https://query.wikidata.org/sparql',
         external: false,
-        loading: false
+        loading: false,
+        snackbar: false,
+        successMessage: 'Consulta importada con éxito',
+        snackbarMessage: 'Consulta importada con éxito',
+        color: 'primary'
       }
     },
     components: {
@@ -52,7 +69,6 @@
       async executeSparqlQuery (query) {
         this.loading = true
         let results = []
-        console.log(this.external)
         if (this.external) {
           try {
             results = await this.executeExternalSparqlQuery(query, this.endpointURL)
@@ -115,6 +131,11 @@
       },
       loadSparqlQuery (content) {
         this.query = content
+      },
+      handleError (event) {
+        this.snackbarMessage = event
+        this.color = 'error'
+        this.snackbar = true
       }
     },
     beforeMount () {

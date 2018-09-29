@@ -53,8 +53,6 @@
       changeVocabularyState (vocab) {
         this.$http.get(this.selectedVocabulary[vocab].url).then(response => {
           // get body data
-          console.log(this.selectedVocabulary[vocab].name)
-          console.log(this.selectedVocabulary[vocab].active)
           this.setVocabularyState({'vocabulary': this.selectedVocabulary[vocab].name, 'active': this.selectedVocabulary[vocab].active})
           this[this.selectedVocabulary[vocab].method]({'content': response.body, 'store': 'n3store'})
         }, response => {
@@ -70,7 +68,6 @@
     beforeMount () {
       this.vocabularyList = this.vocabularies
       this.selectedVocabulary = this.vocabularies
-      console.log(JSON.stringify(this.selectedVocabulary['foaf']))
     }
   }
 </script>

@@ -14,8 +14,7 @@
                            @load="handleLoadEvent({'event': $event, 'method': 'importN3'})" :size="500000000"
                            @load-error="handleError($event)" @loading="loading=true"></file-loader>
               <div>
-                <url-loader title='Desde URL' @load="handleLoadEvent({'event': $event, 'method': 'importN3'})"
-                            @url-loaded="snackbar = true"></url-loader>
+                <url-loader title='Desde URL' @load="handleLoadEvent({'event': $event, 'method': 'importN3'})" @load-error="handleError($event)" @url-loaded="snackbar = true"></url-loader>
               </div>
             </v-card-text>
             <v-snackbar
@@ -73,8 +72,7 @@
                            @load="handleLoadEvent({'event': $event, 'method': 'addN3'})" :size="500000000"
                            @load-error="handleError($event)" @loading="loading=true"></file-loader>
               <div>
-                <url-loader title="Desde URL" @load="handleLoadEvent({'event': $event, 'method': 'addN3'})"
-                            @url-loaded="snackbar = true"></url-loader>
+                <url-loader title="Desde URL" @load="handleLoadEvent({'event': $event, 'method': 'addN3'})" @load-error="handleError($event)" @url-loaded="snackbar = true"></url-loader>
               </div>
             </v-card-text>
             <v-snackbar
