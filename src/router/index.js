@@ -8,6 +8,7 @@ import Vocabulary from '@/components/Vocabulary'
 import Population from '@/components/Population'
 import Sparql from '@/components/Sparql'
 import About from '@/components/About'
+import UserGuide from '@/components/UserGuide'
 
 Vue.use(Router)
 
@@ -52,6 +53,11 @@ export default new Router({
       path: '/about',
       name: 'About',
       component: About
+    },
+    {
+      path: '/user-guide',
+      name: 'UserGuide',
+      component: UserGuide
     }
   ]
 })
