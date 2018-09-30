@@ -11,6 +11,7 @@
                   <span class="subheading">{{welcome_description}}</span>
                   <v-divider class="my-3"></v-divider>
                   <div class="title mb-3"> ¡Elige con qué quieres trabajar!</div>
+                  <v-btn large color="primary" class="mx-3" to="/activity">Actividad</v-btn>
                   <v-btn large color="primary" class="mx-3" to="/model">Modelar</v-btn>
                   <v-btn large color="primary" class="mx-3" to="/population">Poblar</v-btn>
                   <v-btn large color="primary" class="mx-3" to="/import-export">Importar</v-btn>
@@ -31,27 +32,7 @@
     data () {
       return {
         welcome_message: 'Playground para la Web Semántica',
-        welcome_description: 'Con este playground podrás modelar tu dominio de conocimiento, dotarlo de contenido semántico y lanzar consultas sobre él.',
-        triples: [],
-        msg: 'RDF editor proof of concept',
-        // rdfProperties: this.getPredicates(),
-        selectedPredicate: null,
-        selectedObject: null,
-        show: true,
-        existingTags: {
-          analisis: 'analisis',
-          pruebas: 'pruebas',
-          fase: 'fase',
-          metodologia: 'metodologia',
-          analista: 'analista',
-          usuario: 'usuario',
-          producto: 'producto',
-          artefacto: 'artefacto',
-          especificacion: 'especificacion funcional'
-        },
-        selectedTags: ['analisis', 'pruebas', 'fase', 'metodologia', 'analista', 'usuario', 'producto', 'artefacto', 'especificacion funcional'],
-        terms: ['analisis', 'pruebas', 'fase', 'metodologia', 'analista', 'usuario', 'producto', 'artefacto', 'especificacion funcional'],
-        selectedSubject: null
+        welcome_description: 'Con este playground podrás modelar tu dominio de conocimiento, dotarlo de contenido semántico y lanzar consultas sobre él.'
       }
     }
   }
