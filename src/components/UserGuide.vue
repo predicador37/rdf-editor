@@ -13,13 +13,13 @@
             <h2>Punto de entrada a la aplicación</h2>
             <p> La interfaz principal se divide en cinco bloques, como se puede comprobar en la imagen:</p>
             <p>
-              <img height="75%" width="75%" src="/static/home.png"/>
+              <img height="75%" width="75%" src="/static/home.png" alt="Captura de la interfaz principal de la aplicación."/>
             </p>
             <p>
             <ol>
               <li>Muestra u oculta el menú lateral.</li>
               <li>Muestra la actividad cargada.</li>
-              <li>Se ofrecen enlaces a la página principal de la UNED, autoría de la aplicación y este manual.</li>
+              <li>Se ofrecen enlaces a la página principal de la UNED e información sobre la autoría de la aplicación.</li>
               <li>Atajos a las funcionalidades principales de la aplicación.</li>
               <li>Menú con todas las funcionalidades de la aplicación.</li>
             </ol>
@@ -82,6 +82,8 @@
             <p>La interfaz de consulta permite lanzar consultas SPARQL al grafo local o a uno remoto. Por defecto, la aplicación está configurada para consultar el grafo local; este comportamiento puede cambiarse activando el interruptor de "Usar Endpoint SPARQL remoto" e introduciendo la URL del Endpoint en el campo de texto que aparecerá para tal efecto.</p>
             <p>Las consultas pueden introducirse en el campo de texto previsto para ello o a través de archivo pinchando en el botón "Desde archivo" o URL introduciendo la misma en el campo de texto habilitado para ello y pinchando en el icono con forma de lupa.</p>
             <p>Una vez introducida la consulta deseada, es necesario pinchar en el botón "Lanzar Consulta" para que esta se ejecute sobre el grafo; los resultados aparecerán en una tabla paginada en el área derecha de la interfaz.</p>
+            <h2>Ayuda</h2>
+            <p>Esta ayuda.</p>
                  </v-card-text>
         </v-card>
       </v-flex>

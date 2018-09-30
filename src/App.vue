@@ -71,14 +71,6 @@
           >
            Acerca de {{title}}
           </v-btn>
-          <v-btn
-            color="white"
-            flat
-            round
-            to="/user-guide"
-          >
-            Ayuda
-          </v-btn>
         </v-flex>
       </v-layout>
     </v-footer>
@@ -145,6 +137,11 @@
           icon: 'mdi-database-search',
           title: 'Consulta',
           link: '/sparql'
+        },
+        {
+          icon: 'mdi-help-circle',
+          title: 'Ayuda',
+          link: '/user-guide'
         }],
         title: 'RDFplay'
       }
