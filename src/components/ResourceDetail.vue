@@ -156,9 +156,13 @@
     },
     methods: {
       addPropertyHandler (property) {
-        this.currentLiteral = this.baseUrl
         this.currentProperty = property
         this.currentPropertyType = this.rdfConstructs[property].datatype
+        if (this.currentPropertyType === 'uri') {
+          this.currentLiteral = this.baseUrl
+        } else {
+          this.currentLiteral = ''
+        }
         this.dialogText = this.rdfConstructs[property].desc
         this.dialog = !this.dialog
       },

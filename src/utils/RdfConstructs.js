@@ -39,14 +39,16 @@ export default {
     value: 'http://www.w3.org/2000/01/rdf-schema#domain',
     desc: 'Dominio',
     desc_plural: 'Dominios',
-    type: 'property'
+    type: 'property',
+    datatype: 'uri'
   },
   rdfs_range: {
     text: 'rdfs:range',
     value: 'http://www.w3.org/2000/01/rdf-schema#range',
     desc: 'Rango',
     desc_plural: 'Rangos',
-    type: 'property'
+    type: 'property',
+    datatype: 'uri'
   },
   owl_Thing: {
     text: 'owl:Thing',

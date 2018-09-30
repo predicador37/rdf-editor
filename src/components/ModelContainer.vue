@@ -90,7 +90,7 @@
         subclasses: [],
         relatedClasses: {},
         relatedPropertyClasses: {},
-        editableClassData: ['rdfs_subClassOf', 'owl_equivalentClass', 'owl_disjointWith', 'rdfs_label', 'rdfs_comment', 'rdfs_seeAlso'],
+        editableClassData: ['rdfs_subClassOf', 'owl_equivalentClass', 'owl_disjointWith', 'rdfs_domain', 'rdfs_range', 'rdfs_label', 'rdfs_comment', 'rdfs_seeAlso'],
         editablePropertyData: ['rdfs_subPropertyOf', 'owl_equivalentProperty', 'owl_propertyDisjointWith', 'rdfs_label', 'rdfs_comment', 'rdfs_seeAlso'],
         renderDetail: false,
         currentResource: '',
