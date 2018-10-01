@@ -10,7 +10,7 @@
             <v-card-text>
               <p>Si lo deseas, puedes importar un grafo desde un archivo de texto en formato N3 o Turtle.</p>
               <file-loader title="Desde archivo" accepted="text/n3,text/ttl,application/x-trig,application/n-triples"
-                           :extensions="['ttl', 'nt', 'n3', 'trig']"
+                           :extensions="['ttl', 'nt', 'n3', 'trig', 'owl']"
                            @load="handleLoadEvent({'event': $event, 'method': 'importN3'})" :size="500000000"
                            @load-error="handleError($event)" @loading="loading=true"></file-loader>
               <div>

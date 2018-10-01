@@ -57,7 +57,8 @@
         snackbar: false,
         successMessage: 'Consulta importada con éxito',
         snackbarMessage: 'Consulta importada con éxito',
-        color: 'primary'
+        color: 'primary',
+        warningMsg: '# ADVERTENCIA: la siguiente consulta de ejemplo no debería ser lanzada contra endpoints externos como Wikidata, ya que intentaría recuperar todas sus ternas (millones) y esto produciría un overflow.\n'
       }
     },
     components: {
@@ -139,7 +140,7 @@
       }
     },
     beforeMount () {
-      this.query = this.prefixes + 'SELECT ?s ?p ?o WHERE {?s ?p ?o .} LIMIT 100'
+      this.query = this.warningMsg + this.prefixes + 'SELECT ?s ?p ?o WHERE {?s ?p ?o .} LIMIT 100'
     }
   }
 </script>
