@@ -43,7 +43,7 @@
           let headers = []
           let rows = []
           if (typeof this.resultList !== 'undefined' && this.resultList.length > 0) {
-            this.resultList[0].forEach((value, key) => headers.push({'text': key, 'value': key}))
+            this.resultList[0].forEach((value, key) => headers.push({'text': key, 'value': key})
             for (let item of this.resultList) {
               let values = []
               let result = {}
